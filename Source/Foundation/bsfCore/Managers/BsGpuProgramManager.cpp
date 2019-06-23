@@ -31,6 +31,7 @@ namespace bs
 	namespace ct
 	{
 	String sNullLang = "null";
+	String sDiligentLang = "diligent";
 
 	/** Null GPU program used in place of GPU programs we cannot create. Null programs don't do anything. */
 	class NullProgram final : public GpuProgram
@@ -65,6 +66,43 @@ namespace bs
 	{
 		auto bytecode = bs_shared_ptr_new<GpuProgramBytecode>();
 		bytecode->compilerId = "Null";
+
+		return bytecode;
+	}
+
+	/** Diligent GPU program used in place of GPU programs we cannot create. Diligent programs don't do anything. */
+	class DiligentProgram final : public GpuProgram
+	{
+	public:
+		DiligentProgram()
+			:GpuProgram(GPU_PROGRAM_DESC(), GDF_DEFAULT)
+		{ }
+
+		~DiligentProgram() = default;
+
+		bool isSupported() const override { return false; }
+	};
+
+	SPtr<GpuProgram> DiligentProgramFactory::create(const GPU_PROGRAM_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<DiligentProgram> ret = bs_shared_ptr_new<DiligentProgram>();
+		ret->_setThisPtr(ret);
+
+		return ret;
+	}
+
+	SPtr<GpuProgram> DiligentProgramFactory::create(GpuProgramType type, GpuDeviceFlags deviceMask)
+	{
+		SPtr<DiligentProgram> ret = bs_shared_ptr_new<DiligentProgram>();
+		ret->_setThisPtr(ret);
+
+		return ret;
+	}
+
+	SPtr<GpuProgramBytecode> DiligentProgramFactory::compileBytecode(const GPU_PROGRAM_DESC& desc)
+	{
+		auto bytecode = bs_shared_ptr_new<GpuProgramBytecode>();
+		bytecode->compilerId = "Diligent";
 
 		return bytecode;
 	}
