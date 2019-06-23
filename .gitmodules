@@ -1,0 +1,3 @@
+[submodule "Source/Plugins/bsfDiligentRenderAPI/DiligentCore"]
+	path = Source/Plugins/bsfDiligentRenderAPI/DiligentCore
+	url = https://github.com/DiligentGraphics/DiligentCore.git
