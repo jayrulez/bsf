@@ -176,7 +176,7 @@ else() # Otherwise include only chosen ones
 		elseif(RENDER_API_MODULE MATCHES "OpenGL")
 			add_subdirectory(Plugins/bsfGLRenderAPI)
 		elseif(RENDER_API_MODULE MATCHES "DiligentOpenGL" OR RENDER_API_MODULE MATCHES "DiligentOpenGLES" OR RENDER_API_MODULE MATCHES "DiligentD3D11" OR RENDER_API_MODULE MATCHES "DiligentD3D12" OR RENDER_API_MODULE MATCHES "DiligentVulkan")
-			add_subdirectory(Plugins/bsfGLRenderAPI)
+			add_subdirectory(Plugins/bsfDiligentRenderAPI)
 		else()
 			add_subdirectory(Plugins/bsfNullRenderAPI)
 		endif()
