@@ -12,6 +12,7 @@
 #include "BsDiligentRenderTargets.h"
 #include "BsDiligentRenderStates.h"
 #include "BsDiligentQueries.h"
+#include "Managers/BsDiligentRenderWindowManager.h"
 #include "DiligentCore/Platforms/interface/PlatformDefinitions.h"
 
 #if BS_PLATFORM == BS_PLATFORM_WIN32
@@ -291,18 +292,10 @@ namespace bs {
 		{
 			THROW_IF_NOT_CORE_THREAD;
 
-			initializeDiligentEngine(
-#if PLATFORM_LINUX
-				nullptr,
-#endif
-				nullptr);
-
 			mVideoModeInfo = bs_shared_ptr_new<VideoModeInfo>(); // fix
 
 			GPUInfo gpuInfo;
 			gpuInfo.numGPUs = 1U;
-
-
 
 			PlatformUtility::_setGPUInfo(gpuInfo);
 
@@ -334,6 +327,16 @@ namespace bs {
 		void DiligentRenderAPI::initializeWithWindow(const SPtr<RenderWindow>& primaryWindow)
 		{
 			QueryManager::startUp<DiligentQueryManager>();
+
+			UINT64 hwnd;
+			primaryWindow->getCustomAttribute("WINDOW", &hwnd);
+
+			initializeDiligentEngine(
+#if PLATFORM_LINUX
+				nullptr,
+#endif
+				(HWND)hwnd
+			);
 
 			RenderAPI::initializeWithWindow(primaryWindow);
 		}
