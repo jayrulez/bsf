@@ -12,6 +12,7 @@
 #include "BsDiligentRenderTargets.h"
 #include "BsDiligentRenderStates.h"
 #include "BsDiligentQueries.h"
+#include "Managers/BsDiligentProgramFactory.h"
 #include "Managers/BsDiligentRenderWindowManager.h"
 #include "DiligentCore/Platforms/interface/PlatformDefinitions.h"
 

@@ -111,6 +111,7 @@ namespace bs {
 
 		protected:
 			friend class DiligentRenderAPIFactory;
+			friend class DiligentGpuProgram;
 
 			/** @copydoc RenderAPI::initialize */
 			void initialize() override;
@@ -126,7 +127,7 @@ namespace bs {
 
 			DiligentProgramFactory* mDiligentProgramFactory = nullptr;
 
-			Diligent::DeviceType m_DeviceType = Diligent::DeviceType::Undefined;
+			Diligent::DeviceType m_DeviceType = Diligent::DeviceType::Vulkan;
 			Diligent::HardwareAdapterAttribs                      m_AdapterAttribs;
 			std::vector<Diligent::DisplayModeAttribs>             m_DisplayModes;
 			Diligent::RefCntAutoPtr<Diligent::IEngineFactory>               m_pEngineFactory;
