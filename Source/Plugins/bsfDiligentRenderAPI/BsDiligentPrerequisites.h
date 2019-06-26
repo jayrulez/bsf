@@ -4,6 +4,13 @@
 
 #include "BsCorePrerequisites.h"
 
+#if BS_PLATFORM == BS_PLATFORM_WIN32
+#include <Windows.h>
+#elif BS_PLATFORM == BS_PLATFORM_LINUX
+#elif BS_PLATFORM == BS_PLATFORM_ANDROID
+#elif BS_PLATFORM == BS_PLATFORM_OSX
+#endif
+
 /** @addtogroup Plugins
  *  @{
  */
@@ -13,3 +20,8 @@
  */
 
 /** @} */
+namespace bs { namespace ct {
+	class DiligentRenderAPI;
+	class Win32RenderWindow;
+	class Win32VideoMode;
+}}

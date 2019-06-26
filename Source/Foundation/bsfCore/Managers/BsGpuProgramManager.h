@@ -115,18 +115,6 @@ namespace bs
 		SPtr<GpuProgram> create(GpuProgramType type, GpuDeviceFlags deviceMask) override;
 		SPtr<GpuProgramBytecode> compileBytecode(const GPU_PROGRAM_DESC& desc) override;
 	};
-
-	/**	Factory that creates null GPU programs.  */
-	class BS_CORE_EXPORT DiligentProgramFactory : public GpuProgramFactory
-	{
-	public:
-		DiligentProgramFactory() = default;
-		~DiligentProgramFactory() = default;
-
-		SPtr<GpuProgram> create(const GPU_PROGRAM_DESC& desc, GpuDeviceFlags deviceMask) override;
-		SPtr<GpuProgram> create(GpuProgramType type, GpuDeviceFlags deviceMask) override;
-		SPtr<GpuProgramBytecode> compileBytecode(const GPU_PROGRAM_DESC& desc) override;
-	};
 	}
 	/** @} */
 }
