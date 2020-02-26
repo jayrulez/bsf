@@ -53,10 +53,13 @@ set(BS_CORE_INC_PHYSICS
 	"bsfCore/Physics/BsPhysicsCommon.h"
 )
 
+set(BS_CORE_INC_COMMON
+	"bsfCore/Common/BsCoreObjectManager.h"
+	"bsfCore/Common/BsCoreObject.h"
+)
+
 set(BS_CORE_INC_CORETHREAD
 	"bsfCore/CoreThread/BsCoreThread.h"
-	"bsfCore/CoreThread/BsCoreObjectManager.h"
-	"bsfCore/CoreThread/BsCoreObject.h"
 	"bsfCore/CoreThread/BsCommandQueue.h"
 	"bsfCore/CoreThread/BsCoreObjectCore.h"
 	"bsfCore/CoreThread/BsCoreObjectSync.h"
@@ -178,10 +181,13 @@ set(BS_CORE_INC_RENDERAPI_MANAGERS
 	"bsfCore/Managers/BsResourceListenerManager.h"
 )
 
+set(BS_CORE_SRC_COMMON
+	"bsfCore/Common/BsCoreObject.cpp"
+	"bsfCore/Common/BsCoreObjectManager.cpp"
+)
+
 set(BS_CORE_SRC_CORETHREAD
 	"bsfCore/CoreThread/BsCommandQueue.cpp"
-	"bsfCore/CoreThread/BsCoreObject.cpp"
-	"bsfCore/CoreThread/BsCoreObjectManager.cpp"
 	"bsfCore/CoreThread/BsCoreThread.cpp"
 	"bsfCore/CoreThread/BsCoreObjectCore.cpp"
 )
@@ -707,6 +713,7 @@ endif()
 
 source_group("Components" FILES ${BS_CORE_INC_COMPONENTS} ${BS_CORE_SRC_COMPONENTS})
 source_group("Physics" FILES ${BS_CORE_INC_PHYSICS} ${BS_CORE_SRC_PHYSICS})
+source_group("Common" FILES ${BS_CORE_INC_COMMON} ${BS_CORE_SRC_COMMON})
 source_group("CoreThread" FILES ${BS_CORE_INC_CORETHREAD} ${BS_CORE_SRC_CORETHREAD})
 source_group("Importer" FILES ${BS_CORE_INC_IMPORTER} ${BS_CORE_SRC_IMPORTER})
 source_group("Scene" FILES ${BS_CORE_INC_SCENE} ${BS_CORE_SRC_SCENE})
@@ -740,6 +747,7 @@ endif()
 set(BS_CORE_SRC
 	${BS_CORE_INC_COMPONENTS}
 	${BS_CORE_INC_PHYSICS}
+	${BS_CORE_INC_COMMON}
 	${BS_CORE_INC_CORETHREAD}
 	${BS_CORE_INC_IMPORTER}
 	${BS_CORE_INC_SCENE}
@@ -750,6 +758,7 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_RTTI}
 	${BS_CORE_INC_PROFILING}
 	${BS_CORE_INC_RENDERAPI}
+	${BS_CORE_SRC_COMMON}
 	${BS_CORE_SRC_CORETHREAD}
 	${BS_CORE_INC_NOFILTER}
 	${BS_CORE_INC_MATERIAL}

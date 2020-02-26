@@ -3,7 +3,7 @@
 #include "BsRenderBeast.h"
 #include "BsCoreApplication.h"
 #include "CoreThread/BsCoreThread.h"
-#include "CoreThread/BsCoreObjectManager.h"
+#include "Common/BsCoreObjectManager.h"
 #include "Material/BsMaterial.h"
 #include "Material/BsShader.h"
 #include "Material/BsPass.h"

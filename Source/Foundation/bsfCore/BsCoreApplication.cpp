@@ -8,7 +8,7 @@
 #include "Platform/BsPlatform.h"
 #include "RenderAPI/BsRenderWindow.h"
 #include "Math/BsVector2.h"
-#include "CoreThread/BsCoreObjectManager.h"
+#include "Common/BsCoreObjectManager.h"
 #include "Scene/BsGameObjectManager.h"
 #include "Utility/BsDynLib.h"
 #include "Utility/BsDynLibManager.h"

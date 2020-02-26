@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsIReflectable.h"
-#include "CoreThread/BsCoreObject.h"
+#include "Common/BsCoreObject.h"
 #include "Resources/BsIResourceListener.h"
 #include "Math/BsBounds.h"
 #include "Math/BsAABox.h"

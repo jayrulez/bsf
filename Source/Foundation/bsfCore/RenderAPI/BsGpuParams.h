@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "RenderAPI/BsGpuParam.h"
-#include "CoreThread/BsCoreObject.h"
+#include "Common/BsCoreObject.h"
 #include "Resources/BsIResourceListener.h"
 #include "Math/BsMatrixNxM.h"
 
