@@ -32,10 +32,10 @@ namespace bs { namespace ct
 
 		GPU_BUFFER_DESC desc;
 		desc.elementCount = 1;
-		desc.format = BF_UNKNOWN;
+		desc.format = BF_32X1U;//desc.format = BF_UNKNOWN;
 		desc.usage = GBU_LOADSTORE;
-		desc.type = GBT_STRUCTURED;
-		desc.elementSize = 4;
+		desc.type = GBT_STANDARD;//desc.type = GBT_STRUCTURED;
+		desc.elementSize = 0;//desc.elementSize = 4;
 
 		mLightsCounter = GpuBuffer::create(desc);
 		mLightsCounterParam.set(mLightsCounter);
@@ -59,10 +59,10 @@ namespace bs { namespace ct
 		{
 			GPU_BUFFER_DESC desc;
 			desc.elementCount = numCells;
-			desc.format = BF_UNKNOWN;
+			desc.format = BF_32X1U;//desc.format = BF_UNKNOWN;
 			desc.usage = GBU_LOADSTORE;
-			desc.type = GBT_STRUCTURED;
-			desc.elementSize = 4;
+			desc.type = GBT_STANDARD;//desc.type = GBT_STRUCTURED;
+			desc.elementSize = 0;//desc.elementSize = 4;
 
 			mLightsLLHeads = GpuBuffer::create(desc);
 			mLightsLLHeadsParam.set(mLightsLLHeads);
@@ -86,7 +86,7 @@ namespace bs { namespace ct
 		}
 
 		ClearLoadStoreMat* clearMat = ClearLoadStoreMat::getVariation(
-			ClearLoadStoreType::StructuredBuffer, ClearLoadStoreDataType::Int, 1
+			ClearLoadStoreType::Buffer, ClearLoadStoreDataType::Int, 1//ClearLoadStoreType::StructuredBuffer, ClearLoadStoreDataType::Int, 1
 		);
 
 		clearMat->execute(mLightsCounter);
@@ -149,10 +149,10 @@ namespace bs { namespace ct
 
 		GPU_BUFFER_DESC desc;
 		desc.elementCount = 2;
-		desc.format = BF_UNKNOWN;
+		desc.format = BF_32X1U;//desc.format = BF_UNKNOWN;
 		desc.usage = GBU_LOADSTORE;
-		desc.type = GBT_STRUCTURED;
-		desc.elementSize = 4;
+		desc.type = GBT_STANDARD;//desc.type = GBT_STRUCTURED;
+		desc.elementSize = 0;//desc.elementSize = 4;
 
 		mGridDataCounter = GpuBuffer::create(desc);
 		mGridDataCounterParam.set(mGridDataCounter);
@@ -199,7 +199,7 @@ namespace bs { namespace ct
 		}
 
 		ClearLoadStoreMat* clearMat = ClearLoadStoreMat::getVariation(
-			ClearLoadStoreType::StructuredBuffer, ClearLoadStoreDataType::Int, 1
+			ClearLoadStoreType::Buffer, ClearLoadStoreDataType::Int, 1//ClearLoadStoreType::StructuredBuffer, ClearLoadStoreDataType::Int, 1
 		);
 		clearMat->execute(mGridDataCounter);
 
