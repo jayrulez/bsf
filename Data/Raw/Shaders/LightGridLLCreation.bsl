@@ -18,12 +18,20 @@ shader LightGridLLCreation
 		StructuredBuffer<LightData> gLights;
 		StructuredBuffer<ReflProbeData> gReflectionProbes;
 	
-		RWStructuredBuffer<uint> gLightsCounter;
-		RWStructuredBuffer<uint> gLightsLLHeads;
+		[layout(r32ui)]
+		RWBuffer<uint> gLightsCounter;
+		[layout(r32ui)]
+		RWBuffer<uint> gLightsLLHeads;
+		//RWStructuredBuffer<uint> gLightsCounter;
+		//RWStructuredBuffer<uint> gLightsLLHeads;
 		RWBuffer<uint4> gLightsLL;
 		
-		RWStructuredBuffer<uint> gProbesCounter;
-		RWStructuredBuffer<uint> gProbesLLHeads;
+		[layout(r32ui)]
+		RWBuffer<uint> gProbesCounter;
+		[layout(r32ui)]
+		RWBuffer<uint> gProbesLLHeads;
+		//RWStructuredBuffer<uint> gProbesCounter;
+		//RWStructuredBuffer<uint> gProbesLLHeads;
 		RWBuffer<uint2> gProbesLL;
 			
 		// Generates a an axis aligned bounding box in NDC and transforms it to view space.

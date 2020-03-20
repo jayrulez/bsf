@@ -10,13 +10,15 @@ shader LightGridLLReduction
 	
 	code
 	{
-		StructuredBuffer<uint> gLightsLLHeads;
+		Buffer<uint> gLightsLLHeads;//StructuredBuffer<uint> gLightsLLHeads;
 		Buffer<uint4> gLightsLL;
 					
-		StructuredBuffer<uint> gProbesLLHeads;
+		Buffer<uint> gProbesLLHeads;//StructuredBuffer<uint> gProbesLLHeads;
 		Buffer<uint2> gProbesLL;
 		
-		RWStructuredBuffer<uint> gGridDataCounter;
+		[layout(r32ui)]
+		RWBuffer<uint> gGridDataCounter;
+		//RWStructuredBuffer<uint> gGridDataCounter;
 		
 		RWBuffer<uint4> gGridLightOffsetAndSize;
 		RWBuffer<uint> gGridLightIndices;
