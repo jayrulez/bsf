@@ -10,6 +10,7 @@
 #include "RenderAPI/BsGpuProgram.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "RenderAPI/BsGpuPipelineState.h"
 
 namespace bs

@@ -5,6 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Math/BsVector3.h"
 #include "Math/BsQuaternion.h"
 #include "Math/BsSphere.h"

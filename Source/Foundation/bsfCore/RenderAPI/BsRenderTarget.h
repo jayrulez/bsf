@@ -6,6 +6,7 @@
 #include "Image/BsPixelUtil.h"
 #include "RenderAPI/BsViewport.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Utility/BsEvent.h"
 
 namespace bs

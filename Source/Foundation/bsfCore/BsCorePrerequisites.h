@@ -245,10 +245,16 @@ namespace bs
 	namespace ct { class TYPE; }						\
 	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
 
+#define CORE_OBJECT2_FORWARD_DECLARE(TYPE)				\
+	class TYPE;
+
 #define CORE_OBJECT_FORWARD_DECLARE_STRUCT(TYPE)		\
 	struct TYPE;										\
 	namespace ct { struct TYPE; }						\
 	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
+
+#define CORE_OBJECT2_FORWARD_DECLARE_STRUCT(TYPE)		\
+	struct TYPE;
 
 	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer)
 	CORE_OBJECT_FORWARD_DECLARE(VertexBuffer)
@@ -284,9 +290,46 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(VectorField)
 	CORE_OBJECT_FORWARD_DECLARE(Skybox)
 	CORE_OBJECT_FORWARD_DECLARE(Decal)
+		//CORE_OBJECT2_FORWARD_DECLARE(IndexBuffer2)
+		//CORE_OBJECT2_FORWARD_DECLARE(VertexBuffer2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GpuBuffer2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GpuProgram2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Pass2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Technique2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Shader2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Material2)
+		//CORE_OBJECT2_FORWARD_DECLARE(RenderTarget2)
+		//CORE_OBJECT2_FORWARD_DECLARE(RenderTexture2)
+		//CORE_OBJECT2_FORWARD_DECLARE(RenderWindow2)
+		//CORE_OBJECT2_FORWARD_DECLARE(SamplerState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Viewport2)
+		//CORE_OBJECT2_FORWARD_DECLARE(VertexDeclaration2)
+		//CORE_OBJECT2_FORWARD_DECLARE(DepthStencilState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(RasterizerState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(BlendState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GpuParamBlockBuffer2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GpuParams2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GpuParamsSet2)
+		//CORE_OBJECT2_FORWARD_DECLARE(MaterialParams2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Light2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Camera2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Renderable2)
+		//CORE_OBJECT2_FORWARD_DECLARE(GraphicsPipelineState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(ComputePipelineState2)
+		//CORE_OBJECT2_FORWARD_DECLARE(ReflectionProbe2)
+		//CORE_OBJECT2_FORWARD_DECLARE(ParticleSystem2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Texture2)
+		//CORE_OBJECT2_FORWARD_DECLARE(SpriteTexture2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Mesh2)
+		//CORE_OBJECT2_FORWARD_DECLARE(VectorField2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Skybox2)
+		//CORE_OBJECT2_FORWARD_DECLARE(Decal2)
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings)
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings)
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(RenderSettings)
+		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings2)
+		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings2)
+		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(RenderSettings2)
 
 	class Collider;
 	class Rigidbody;
@@ -411,6 +454,7 @@ namespace bs
 	class Transform;
 	class SceneActor;
 	class CoreObjectManager;
+	class CoreObject2Manager;
 	struct CollisionData;
 	// Asset import
 	class SpecificImporter;

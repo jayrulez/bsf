@@ -9,6 +9,7 @@
 #include "RenderAPI/BsRenderWindow.h"
 #include "Math/BsVector2.h"
 #include "Common/BsCoreObjectManager.h"
+#include "Common/BsCoreObject2Manager.h"
 #include "Scene/BsGameObjectManager.h"
 #include "Utility/BsDynLib.h"
 #include "Utility/BsDynLibManager.h"
@@ -123,6 +124,7 @@ namespace bs
 		GpuProgramManager::shutDown();
 
 		CoreObjectManager::shutDown(); // Must shut down before DynLibManager to ensure all objects are destroyed before unloading their libraries
+		CoreObject2Manager::shutDown(); // Must shut down before DynLibManager to ensure all objects are destroyed before unloading their libraries
 		DynLibManager::shutDown();
 		Time::shutDown();
 		DeferredCallManager::shutDown();
@@ -162,6 +164,7 @@ namespace bs
 		Time::startUp();
 		DynLibManager::startUp();
 		CoreObjectManager::startUp();
+		CoreObject2Manager::startUp();
 		GameObjectManager::startUp();
 		Resources::startUp();
 		ResourceListenerManager::startUp();

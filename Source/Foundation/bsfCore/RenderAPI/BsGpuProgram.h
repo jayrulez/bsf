@@ -4,6 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Reflection/BsIReflectable.h"
 #include "Utility/BsDataBlob.h"
 #include "BsVertexDeclaration.h"

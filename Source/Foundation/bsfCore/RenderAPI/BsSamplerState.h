@@ -6,6 +6,7 @@
 #include "Image/BsColor.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 
 #include <cfloat>
 

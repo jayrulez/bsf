@@ -8,6 +8,7 @@
 #include "Math/BsRandom.h"
 #include "Scene/BsSceneActor.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Image/BsPixelData.h"
 #include "Math/BsAABox.h"
 #include "Particles/BsParticleDistribution.h"

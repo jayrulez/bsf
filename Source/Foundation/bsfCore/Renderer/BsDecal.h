@@ -5,6 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Math/BsVector2.h"
 #include "Scene/BsSceneActor.h"
 #include "Math/BsBounds.h"

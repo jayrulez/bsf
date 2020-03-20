@@ -12,6 +12,7 @@
 #include "Math/BsQuaternion.h"
 #include "Math/BsRay.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Math/BsConvexVolume.h"
 #include "Renderer/BsRenderSettings.h"
 #include "Scene/BsSceneActor.h"

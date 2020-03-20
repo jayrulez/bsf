@@ -4,6 +4,7 @@
 #include "BsCoreApplication.h"
 #include "CoreThread/BsCoreThread.h"
 #include "Common/BsCoreObjectManager.h"
+#include "Common/BsCoreObject2Manager.h"
 #include "Material/BsMaterial.h"
 #include "Material/BsShader.h"
 #include "Material/BsPass.h"

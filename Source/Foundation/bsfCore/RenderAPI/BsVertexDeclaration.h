@@ -5,6 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Image/BsColor.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 
 namespace bs
 {

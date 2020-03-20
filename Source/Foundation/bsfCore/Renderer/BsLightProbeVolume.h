@@ -4,6 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Math/BsAABox.h"
 #include "Math/BsVector3.h"
 #include "Math/BsQuaternion.h"

@@ -8,6 +8,7 @@
 #include "Renderer/BsRendererExtension.h"
 #include "Renderer/BsRendererManager.h"
 #include "Common/BsCoreObjectManager.h"
+#include "Common/BsCoreObject2Manager.h"
 #include "Scene/BsSceneManager.h"
 #include "Material/BsShader.h"
 #include "Profiling/BsProfilerGPU.h"

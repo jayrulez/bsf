@@ -6,6 +6,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Image/BsColor.h"
 #include "Math/BsRect2I.h"
 #include "Math/BsRect2.h"

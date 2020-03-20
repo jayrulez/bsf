@@ -5,6 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsIReflectable.h"
 #include "Common/BsCoreObject.h"
+#include "Common/BsCoreObject2.h"
 #include "Resources/BsIResourceListener.h"
 #include "Math/BsBounds.h"
 #include "Math/BsAABox.h"
