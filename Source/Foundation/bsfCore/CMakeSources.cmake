@@ -55,7 +55,9 @@ set(BS_CORE_INC_PHYSICS
 
 set(BS_CORE_INC_COMMON
 	"bsfCore/Common/BsCoreObjectManager.h"
+	"bsfCore/Common/BsCoreObject2Manager.h"
 	"bsfCore/Common/BsCoreObject.h"
+	"bsfCore/Common/BsCoreObject2.h"
 )
 
 set(BS_CORE_INC_CORETHREAD
@@ -183,7 +185,9 @@ set(BS_CORE_INC_RENDERAPI_MANAGERS
 
 set(BS_CORE_SRC_COMMON
 	"bsfCore/Common/BsCoreObject.cpp"
+	"bsfCore/Common/BsCoreObject2.cpp"
 	"bsfCore/Common/BsCoreObjectManager.cpp"
+	"bsfCore/Common/BsCoreObject2Manager.cpp"
 )
 
 set(BS_CORE_SRC_CORETHREAD
