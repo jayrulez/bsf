@@ -290,46 +290,46 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(VectorField)
 	CORE_OBJECT_FORWARD_DECLARE(Skybox)
 	CORE_OBJECT_FORWARD_DECLARE(Decal)
-		//CORE_OBJECT2_FORWARD_DECLARE(IndexBuffer2)
-		//CORE_OBJECT2_FORWARD_DECLARE(VertexBuffer2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GpuBuffer2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GpuProgram2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Pass2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Technique2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Shader2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Material2)
-		//CORE_OBJECT2_FORWARD_DECLARE(RenderTarget2)
-		//CORE_OBJECT2_FORWARD_DECLARE(RenderTexture2)
-		//CORE_OBJECT2_FORWARD_DECLARE(RenderWindow2)
-		//CORE_OBJECT2_FORWARD_DECLARE(SamplerState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Viewport2)
-		//CORE_OBJECT2_FORWARD_DECLARE(VertexDeclaration2)
-		//CORE_OBJECT2_FORWARD_DECLARE(DepthStencilState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(RasterizerState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(BlendState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GpuParamBlockBuffer2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GpuParams2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GpuParamsSet2)
-		//CORE_OBJECT2_FORWARD_DECLARE(MaterialParams2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Light2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Camera2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Renderable2)
-		//CORE_OBJECT2_FORWARD_DECLARE(GraphicsPipelineState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(ComputePipelineState2)
-		//CORE_OBJECT2_FORWARD_DECLARE(ReflectionProbe2)
-		//CORE_OBJECT2_FORWARD_DECLARE(ParticleSystem2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Texture2)
-		//CORE_OBJECT2_FORWARD_DECLARE(SpriteTexture2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Mesh2)
-		//CORE_OBJECT2_FORWARD_DECLARE(VectorField2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Skybox2)
-		//CORE_OBJECT2_FORWARD_DECLARE(Decal2)
+		//class IndexBuffer2;
+		//class VertexBuffer2;
+		//class GpuBuffer2;
+		//class GpuProgram2;
+		//class Pass2;
+		//class Technique2;
+		//class Shader2;
+		//class Material2;
+		//class RenderTarget2;
+		//class RenderTexture2;
+		//class RenderWindow2;
+		//class SamplerState2;
+		//class Viewport2;
+		//class VertexDeclaration2;
+		//class DepthStencilState2;
+		//class RasterizerState2;
+		//class BlendState2;
+		//class GpuParamBlockBuffer2;
+		//class GpuParams2;
+		//class GpuParamsSet2;
+		//class MaterialParams2;
+		//class Light2;
+		//class Camera2;
+		//class Renderable2;
+		//class GraphicsPipelineState2;
+		//class ComputePipelineState2;
+		//class ReflectionProbe2;
+		//class ParticleSystem2;
+		//class Texture2;
+		//class SpriteTexture2;
+		//class Mesh2;
+		//class VectorField2;
+		//class Skybox2;
+		//class Decal2;
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings)
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings)
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(RenderSettings)
-		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings2)
-		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings2)
-		//CORE_OBJECT2_FORWARD_DECLARE_STRUCT(RenderSettings2)
+		//struct DepthOfFieldSettings2;
+		//struct ChromaticAberrationSettings2;
+		//struct RenderSettings2;
 
 	class Collider;
 	class Rigidbody;
