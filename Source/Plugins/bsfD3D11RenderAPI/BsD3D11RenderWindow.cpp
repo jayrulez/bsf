@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "BsD3D11RenderWindow.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Private/Win32/BsWin32Platform.h"
 #include "BsD3D11RenderAPI.h"
 #include "BsD3D11Device.h"
@@ -222,7 +221,7 @@ namespace bs
 
 	void D3D11RenderWindow::swapBuffers(UINT32 syncMask)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if (mShowOnSwap)
 			setHidden(false);
@@ -238,7 +237,7 @@ namespace bs
 
 	void D3D11RenderWindow::move(INT32 left, INT32 top)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		RenderWindowProperties& props = mProperties;
 
@@ -261,7 +260,7 @@ namespace bs
 
 	void D3D11RenderWindow::resize(UINT32 width, UINT32 height)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		RenderWindowProperties& props = mProperties;
 
@@ -284,7 +283,7 @@ namespace bs
 
 	void D3D11RenderWindow::setActive(bool state)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		RenderWindowProperties& props = mProperties;
 		mWindow->setActive(state);
@@ -302,7 +301,7 @@ namespace bs
 
 	void D3D11RenderWindow::setHidden(bool hidden)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mShowOnSwap = false;
 		mWindow->setHidden(hidden);
@@ -312,28 +311,28 @@ namespace bs
 
 	void D3D11RenderWindow::minimize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mWindow->minimize();
 	}
 
 	void D3D11RenderWindow::maximize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mWindow->maximize();
 	}
 
 	void D3D11RenderWindow::restore()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mWindow->restore();
 	}
 
 	void D3D11RenderWindow::setFullscreen(UINT32 width, UINT32 height, float refreshRate, UINT32 monitorIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if (mIsChild)
 			return;
@@ -383,7 +382,7 @@ namespace bs
 
 	void D3D11RenderWindow::setFullscreen(const VideoMode& mode)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if (mIsChild)
 			return;
@@ -425,7 +424,7 @@ namespace bs
 
 	void D3D11RenderWindow::setWindowed(UINT32 width, UINT32 height)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mProperties.width = width;
 		mProperties.height = height;
@@ -556,7 +555,7 @@ namespace bs
 
 	void D3D11RenderWindow::copyToMemory(PixelData &dst, FrameBuffer buffer)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if(mBackBuffer == nullptr)
 			return;
@@ -626,7 +625,7 @@ namespace bs
 
 	void D3D11RenderWindow::_windowMovedOrResized()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if (!mWindow)
 			return;

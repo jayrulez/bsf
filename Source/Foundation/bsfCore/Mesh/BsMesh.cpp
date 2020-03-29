@@ -6,7 +6,6 @@
 #include "Debug/BsDebug.h"
 #include "Managers/BsHardwareBufferManager.h"
 #include "Managers/BsMeshManager.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Threading/BsAsyncOp.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "Resources/BsResources.h"
@@ -50,8 +49,13 @@ namespace bs
 
 		};
 
-		return gCoreThread().queueReturnCommand(std::bind(func, getCore(),
-			 data, discardEntireBuffer, std::placeholders::_1));
+		AsyncOp op;
+
+		func(getCore(), data, discardEntireBuffer, op);
+
+		//return gCoreThread().queueReturnCommand(std::bind(func, getCore(), data, discardEntireBuffer, std::placeholders::_1));
+
+		return op;
 	}
 
 	AsyncOp Mesh::readData(const SPtr<MeshData>& data)
@@ -70,8 +74,13 @@ namespace bs
 
 		};
 
-		return gCoreThread().queueReturnCommand(std::bind(func, getCore(),
-			data, std::placeholders::_1));
+		AsyncOp op;
+
+		func(getCore(), data, op);
+
+		//return gCoreThread().queueReturnCommand(std::bind(func, getCore(), data, std::placeholders::_1));
+
+		return op;
 	}
 
 	SPtr<MeshData> Mesh::allocBuffer() const
@@ -267,7 +276,7 @@ namespace bs
 
 	Mesh::~Mesh()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mVertexData = nullptr;
 		mIndexBuffer = nullptr;
@@ -277,7 +286,7 @@ namespace bs
 
 	void Mesh::initialize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		bool isDynamic = (mUsage & MU_DYNAMIC) != 0;
 		int usage = isDynamic ? GBU_DYNAMIC : GBU_STATIC;
@@ -320,28 +329,28 @@ namespace bs
 
 	SPtr<VertexData> Mesh::getVertexData() const
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		return mVertexData;
 	}
 
 	SPtr<IndexBuffer> Mesh::getIndexBuffer() const
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		return mIndexBuffer;
 	}
 
 	SPtr<VertexDataDesc> Mesh::getVertexDesc() const
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		return mVertexDesc;
 	}
 
 	void Mesh::writeData(const MeshData& meshData, bool discardEntireBuffer, bool performUpdateBounds, UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if (discardEntireBuffer)
 		{
@@ -423,7 +432,7 @@ namespace bs
 
 	void Mesh::readData(MeshData& meshData, UINT32 deviceIdx, UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		IndexType indexType = IT_32BIT;
 		if (mIndexBuffer)

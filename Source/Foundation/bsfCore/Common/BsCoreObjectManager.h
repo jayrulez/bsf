@@ -135,6 +135,20 @@ namespace bs
 		List<CoreStoredSyncData> mCoreSyncData;
 
 		Mutex mObjectsMutex;
+
+	public:
+
+		static const int NUM_SYNC_BUFFERS = 2;
+
+		void update();
+
+		FrameAlloc* getFrameAlloc() const;
+
+		void onStartUp() override;
+
+	private:
+		FrameAlloc* mFrameAllocs[NUM_SYNC_BUFFERS];
+		UINT32 mActiveFrameAlloc = 0;
 	};
 
 	/** @} */

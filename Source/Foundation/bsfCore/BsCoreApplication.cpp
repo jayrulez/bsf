@@ -25,7 +25,6 @@
 #include "Managers/BsRenderWindowManager.h"
 #include "Renderer/BsRenderer.h"
 #include "Utility/BsDeferredCallManager.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Localization/BsStringTableManager.h"
 #include "Profiling/BsProfilingManager.h"
 #include "Profiling/BsProfilerCPU.h"
@@ -114,8 +113,6 @@ namespace bs
 		// All CoreObject related modules should be shut down now. They have likely queued CoreObjects for destruction, so
 		// we need to wait for those objects to get destroyed before continuing.
 		CoreObjectManager::instance().syncToCore();
-		gCoreThread().update();
-		gCoreThread().submitAll(true);
 
 		unloadPlugin(mRendererPlugin);
 
@@ -129,7 +126,6 @@ namespace bs
 		Time::shutDown();
 		DeferredCallManager::shutDown();
 
-		CoreThread::shutDown();
 		RenderStats::shutDown();
 		TaskScheduler::shutDown();
 		ThreadPool::shutDown();
@@ -158,7 +154,6 @@ namespace bs
 		ThreadPool::startUp<TThreadPool<ThreadDefaultPolicy>>((numWorkerThreads));
 		TaskScheduler::startUp();
 		RenderStats::startUp();
-		CoreThread::startUp();
 		StringTableManager::startUp();
 		DeferredCallManager::startUp();
 		Time::startUp();
@@ -330,17 +325,24 @@ namespace bs
 			mIsFrameRenderingFinished = false;
 		}
 
-		gCoreThread().queueCommand(std::bind(&CoreApplication::beginCoreProfiling, this), CTQF_InternalQueue);
-		gCoreThread().queueCommand(&Platform::_coreUpdate, CTQF_InternalQueue);
-		gCoreThread().queueCommand(std::bind(&ct::RenderWindowManager::_update, ct::RenderWindowManager::instancePtr()), CTQF_InternalQueue);
+		beginCoreProfiling();
+		//gCoreThread().queueCommand(std::bind(&CoreApplication::beginCoreProfiling, this), CTQF_InternalQueue);
+		Platform::_coreUpdate();
+		//gCoreThread().queueCommand(&Platform::_coreUpdate, CTQF_InternalQueue);
+		ct::RenderWindowManager::instancePtr()->_update();
+		//gCoreThread().queueCommand(std::bind(&ct::RenderWindowManager::_update, ct::RenderWindowManager::instancePtr()), CTQF_InternalQueue);
 
-		gCoreThread().update();
-		gCoreThread().submitAll();
+		CoreObjectManager::instance().update();
 
-		gCoreThread().queueCommand(std::bind(&CoreApplication::frameRenderingFinishedCallback, this), CTQF_InternalQueue);
+		//gCoreThread().update();
+		//gCoreThread().submitAll();
+		frameRenderingFinishedCallback();
+		//gCoreThread().queueCommand(std::bind(&CoreApplication::frameRenderingFinishedCallback, this), CTQF_InternalQueue);
 
-		gCoreThread().queueCommand(std::bind(&ct::QueryManager::_update, ct::QueryManager::instancePtr()), CTQF_InternalQueue);
-		gCoreThread().queueCommand(std::bind(&CoreApplication::endCoreProfiling, this), CTQF_InternalQueue);
+		ct::QueryManager::instancePtr()->_update();
+		//gCoreThread().queueCommand(std::bind(&ct::QueryManager::_update, ct::QueryManager::instancePtr()), CTQF_InternalQueue);
+		endCoreProfiling();
+		//gCoreThread().queueCommand(std::bind(&CoreApplication::endCoreProfiling, this), CTQF_InternalQueue);
 
 		gProfilerCPU().endThread();
 		gProfiler()._update();
@@ -408,17 +410,17 @@ namespace bs
 	void CoreApplication::beginCoreProfiling()
 	{
 #if !BS_FORCE_SINGLETHREADED_RENDERING
-		gProfilerCPU().beginThread("Core");
+		//gProfilerCPU().beginThread("Core");
 #endif
 	}
 
 	void CoreApplication::endCoreProfiling()
 	{
-		ProfilerGPU::instance()._update();
+		//ProfilerGPU::instance()._update();
 
 #if !BS_FORCE_SINGLETHREADED_RENDERING
-		gProfilerCPU().endThread();
-		gProfiler()._updateCore();
+		//gProfilerCPU().endThread();
+		//gProfiler()._updateCore();
 #endif
 	}
 

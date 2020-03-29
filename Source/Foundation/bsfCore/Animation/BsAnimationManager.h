@@ -4,7 +4,6 @@
 
 #include "BsCorePrerequisites.h"
 #include "Utility/BsModule.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Math/BsConvexVolume.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 
@@ -132,7 +131,11 @@ namespace bs
 		// Animation thread
 		Vector<SPtr<AnimationProxy>> mProxies;
 		Vector<ConvexVolume> mCullFrustums;
-		EvaluatedAnimationData mAnimData[CoreThread::NUM_SYNC_BUFFERS + 1];
+
+		static const int NUM_SYNC_BUFFERS = 2;
+
+		EvaluatedAnimationData mAnimData[NUM_SYNC_BUFFERS + 1];
+		//EvaluatedAnimationData mAnimData[CoreThread::NUM_SYNC_BUFFERS + 1];
 
 		UINT32 mPoseReadBufferIdx = 2;
 		UINT32 mPoseWriteBufferIdx = 0;

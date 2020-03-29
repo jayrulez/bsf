@@ -26,7 +26,6 @@
 #include "Profiling/BsProfilerCPU.h"
 #include "Input/BsVirtualInput.h"
 #include "Platform/BsCursor.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Renderer/BsRendererManager.h"
 #include "Renderer/BsRenderer.h"
 #include "Renderer/BsCamera.h"
@@ -167,6 +166,10 @@ namespace bs
 		if(camera != nullptr)
 		{
 			auto widgetId = (UINT64)widget;
+
+			mRenderer.get()->clearDrawGroups(camera->getCore(), widgetId);
+
+			/*
 			gCoreThread().queueCommand([
 				renderer = mRenderer.get(),
 				camera = camera->getCore(),
@@ -174,6 +177,7 @@ namespace bs
 			{
 				renderer->clearDrawGroups(camera, widgetId);
 			});
+			*/
 		}
 	}
 
@@ -354,8 +358,11 @@ namespace bs
 			camera = widget->getCamera();
 			if (camera == nullptr)
 				continue;
-			
+
 			auto widgetId = (UINT64)widget;
+			mRenderer.get()->updateDrawGroups(camera->getCore(), widgetId, widget->getDepth(), widget->getWorldTfrm(), std::move(updateData));
+
+			/*
 			gCoreThread().queueCommand([
 				renderer = mRenderer.get(),
 				updateData = std::move(updateData),
@@ -366,9 +373,11 @@ namespace bs
 			{
 				renderer->updateDrawGroups(camera, widgetId, widgetDepth, worldTransform, updateData);
 			});
+			*/
 		}
 
-		gCoreThread().queueCommand([renderer = mRenderer.get(), time = gTime().getTime()](){ renderer->update(time); });
+		mRenderer.get()->update(gTime().getTime());
+		//gCoreThread().queueCommand([renderer = mRenderer.get(), time = gTime().getTime()](){ renderer->update(time); });
 	}
 
 	void GUIManager::processDestroyQueue()

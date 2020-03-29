@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Renderer/BsRendererExtension.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Renderer/BsRendererManager.h"
 #include "Renderer/BsRenderer.h"
 
@@ -15,7 +14,8 @@ namespace bs
 			obj->initialize(data);
 		};
 
-		gCoreThread().queueCommand(coreInitializer);
+		coreInitializer();
+		//gCoreThread().queueCommand(coreInitializer);
 	}
 
 	void RendererExtension::_deleter(RendererExtension* obj)
@@ -31,6 +31,7 @@ namespace bs
 		};
 
 		// Queue deletion on the core thread
-		gCoreThread().queueCommand(deleteObj);
+		deleteObj();
+		//gCoreThread().queueCommand(deleteObj);
 	}
 }

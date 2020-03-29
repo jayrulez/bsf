@@ -9,7 +9,6 @@
 #include "Importer/BsTextureImportOptions.h"
 #include "FileSystem/BsFileSystem.h"
 #include "BsCoreApplication.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Math/BsMath.h"
 #include "Math/BsVector2.h"
 #include "Math/BsVector3.h"

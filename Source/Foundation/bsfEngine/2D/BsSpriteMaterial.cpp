@@ -7,7 +7,6 @@
 #include "Material/BsShader.h"
 #include "Renderer/BsRendererUtility.h"
 #include "Material/BsGpuParamsSet.h"
-#include "CoreThread/BsCoreThread.h"
 
 namespace bs
 {
@@ -27,12 +26,14 @@ namespace bs
 
 		mMaterialStored.store(true, std::memory_order_release);
 
-		gCoreThread().queueCommand(std::bind(&SpriteMaterial::initialize, this));
+		initialize();
+		//gCoreThread().queueCommand(std::bind(&SpriteMaterial::initialize, this));
 	}
 
 	SpriteMaterial::~SpriteMaterial()
 	{
-		gCoreThread().queueCommand(std::bind(&SpriteMaterial::destroy, mMaterial, mParams, mAlphaParams));
+		destroy(mMaterial, mParams, mAlphaParams);
+		//gCoreThread().queueCommand(std::bind(&SpriteMaterial::destroy, mMaterial, mParams, mAlphaParams));
 	}
 
 	void SpriteMaterial::initialize()

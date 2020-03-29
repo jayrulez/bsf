@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Renderer/BsRenderer.h"
-#include "CoreThread/BsCoreThread.h"
 #include "RenderAPI/BsRenderAPI.h"
 #include "Mesh/BsMesh.h"
 #include "Material/BsMaterial.h"
@@ -203,8 +202,9 @@ namespace bs { namespace ct
 			gRenderer()->processTask(*this, true);
 		};
 
-		gCoreThread().queueCommand(worker);
-		gCoreThread().submit(true);
+		worker();
+		//gCoreThread().queueCommand(worker);
+		//gCoreThread().submit(true);
 
 		// Note: Tigger on complete callback and clear it from Renderer?
 	}

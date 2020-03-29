@@ -6,7 +6,6 @@
 #include "Image/BsTexture.h"
 #include "Image/BsTextureAtlasLayout.h"
 #include "BsCoreApplication.h"
-#include "CoreThread/BsCoreThread.h"
 
 #include <ft2build.h>
 #include <freetype/freetype.h>

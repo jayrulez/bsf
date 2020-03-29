@@ -5,7 +5,6 @@
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "Utility/BsShapeMeshes3D.h"
 #include "Image/BsSpriteTexture.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Material/BsMaterial.h"
 #include "RenderAPI/BsGpuParams.h"
 #include "Material/BsGpuParamsSet.h"
@@ -138,7 +137,8 @@ namespace bs
 		Vector<MeshRenderData> proxyData = createMeshProxyData(mActiveMeshes);
 
 		ct::DebugDrawRenderer* renderer = mRenderer.get();
-		gCoreThread().queueCommand(std::bind(&ct::DebugDrawRenderer::updateData, renderer, proxyData));
+		renderer->updateData(proxyData);
+		//gCoreThread().queueCommand(std::bind(&ct::DebugDrawRenderer::updateData, renderer, proxyData));
 	}
 
 	namespace ct
@@ -179,7 +179,7 @@ namespace bs
 
 	void DebugDrawRenderer::initialize(const Any& data)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		mParamBuffer = gDebugDrawParamsDef.createBuffer();
 	}

@@ -6,7 +6,6 @@
 #include "Image/BsPixelData.h"
 #include "Utility/BsModule.h"
 #include "Math/BsAABox.h"
-#include "CoreThread/BsCoreThread.h"
 #include "BsParticleSystem.h"
 
 namespace bs
@@ -155,8 +154,11 @@ namespace bs
 
 		bool mPaused = false;
 
+		static const int NUM_SYNC_BUFFERS = 2;
+
 		// Worker threads
-		ParticlePerFrameData mSimulationData[CoreThread::NUM_SYNC_BUFFERS];
+		ParticlePerFrameData mSimulationData[NUM_SYNC_BUFFERS];
+		//ParticlePerFrameData mSimulationData[CoreThread::NUM_SYNC_BUFFERS];
 
 		UINT32 mReadBufferIdx = 1;
 		UINT32 mWriteBufferIdx = 0;

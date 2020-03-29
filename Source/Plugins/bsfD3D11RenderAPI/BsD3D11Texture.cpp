@@ -5,7 +5,6 @@
 #include "BsD3D11Device.h"
 #include "BsD3D11RenderAPI.h"
 #include "BsD3D11TextureView.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Error/BsException.h"
 #include "Threading/BsAsyncOp.h"
 #include "Profiling/BsRenderStats.h"
@@ -36,7 +35,7 @@ namespace bs { namespace ct
 
 	void D3D11Texture::initialize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		switch (mProperties.getTextureType())
 		{

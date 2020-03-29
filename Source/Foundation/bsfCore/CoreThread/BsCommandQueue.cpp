@@ -2,7 +2,6 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "CoreThread/BsCommandQueue.h"
 #include "Error/BsException.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Debug/BsDebug.h"
 
 namespace bs
@@ -99,7 +98,7 @@ namespace bs
 
 	void CommandQueueBase::playbackWithNotify(bs::Queue<QueuedCommand>* commands, std::function<void(UINT32)> notifyCallback)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		if(commands == nullptr)
 			return;

@@ -3,7 +3,6 @@
 #include "Renderer/BsRendererMaterialManager.h"
 #include "Renderer/BsRendererMaterial.h"
 #include "Resources/BsBuiltinResources.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Material/BsShader.h"
 
 namespace bs
@@ -24,12 +23,14 @@ namespace bs
 				shaders.push_back(nullptr);
 		}
 
-		gCoreThread().queueCommand(std::bind(&RendererMaterialManager::initOnCore, shaders), CTQF_InternalQueue);
+		initOnCore(shaders);
+		//gCoreThread().queueCommand(std::bind(&RendererMaterialManager::initOnCore, shaders), CTQF_InternalQueue);
 	}
 
 	RendererMaterialManager::~RendererMaterialManager()
 	{
-		gCoreThread().queueCommand(std::bind(&RendererMaterialManager::destroyOnCore));
+		destroyOnCore();
+		//gCoreThread().queueCommand(std::bind(&RendererMaterialManager::destroyOnCore));
 	}
 
 	void RendererMaterialManager::_registerMaterial(ct::RendererMaterialMetaData* metaData, const char* shaderPath)

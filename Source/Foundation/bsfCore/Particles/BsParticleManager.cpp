@@ -337,8 +337,10 @@ namespace bs
 
 	struct ParticleManager::Members
 	{
+		static const int NUM_SYNC_BUFFERS = 2;
 		// TODO - Perhaps sharing one pool is better
-		ParticleSimulationDataPool simDataPool[CoreThread::NUM_SYNC_BUFFERS];
+		ParticleSimulationDataPool simDataPool[NUM_SYNC_BUFFERS];
+		//ParticleSimulationDataPool simDataPool[CoreThread::NUM_SYNC_BUFFERS];
 	};
 
 	ParticleManager::ParticleManager()
@@ -358,8 +360,11 @@ namespace bs
 		// Advance the buffers (last write buffer becomes read buffer)
 		if (mSwapBuffers)
 		{
-			mReadBufferIdx = (mReadBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
-			mWriteBufferIdx = (mWriteBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
+			static const int NUM_SYNC_BUFFERS = 2;
+			mReadBufferIdx = (mReadBufferIdx + 1) % NUM_SYNC_BUFFERS;
+			//mReadBufferIdx = (mReadBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
+			mWriteBufferIdx = (mWriteBufferIdx + 1) % NUM_SYNC_BUFFERS;
+			//mWriteBufferIdx = (mWriteBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
 
 			mSwapBuffers = false;
 		}

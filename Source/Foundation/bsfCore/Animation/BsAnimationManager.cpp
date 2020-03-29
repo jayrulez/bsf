@@ -45,8 +45,11 @@ namespace bs
 			// Advance the buffers (last write buffer becomes read buffer)
 			if(mSwapBuffers)
 			{
-				mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
-				mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
+				static const int NUM_SYNC_BUFFERS = 2;
+				mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (NUM_SYNC_BUFFERS + 1);
+				//mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
+				mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (NUM_SYNC_BUFFERS + 1);
+				//mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
 
 				mSwapBuffers = false;
 			}
@@ -199,8 +202,9 @@ namespace bs
 
 		// Evaluation
 		EvaluatedAnimationData& renderData = mAnimData[mPoseWriteBufferIdx];
-		
-		UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + CoreThread::NUM_SYNC_BUFFERS) % (CoreThread::NUM_SYNC_BUFFERS + 1);
+		static const int NUM_SYNC_BUFFERS = 2;
+		UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + NUM_SYNC_BUFFERS) % (NUM_SYNC_BUFFERS + 1);
+		//UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + CoreThread::NUM_SYNC_BUFFERS) % (CoreThread::NUM_SYNC_BUFFERS + 1);
 		EvaluatedAnimationData& prevRenderData = mAnimData[prevPoseBufferIdx];
 
 		EvaluatedAnimationData::AnimInfo animInfo;

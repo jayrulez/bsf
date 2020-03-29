@@ -61,7 +61,6 @@ set(BS_CORE_INC_COMMON
 )
 
 set(BS_CORE_INC_CORETHREAD
-	"bsfCore/CoreThread/BsCoreThread.h"
 	"bsfCore/CoreThread/BsCommandQueue.h"
 	"bsfCore/CoreThread/BsCoreObjectCore.h"
 	"bsfCore/CoreThread/BsCoreObjectSync.h"
@@ -192,7 +191,6 @@ set(BS_CORE_SRC_COMMON
 
 set(BS_CORE_SRC_CORETHREAD
 	"bsfCore/CoreThread/BsCommandQueue.cpp"
-	"bsfCore/CoreThread/BsCoreThread.cpp"
 	"bsfCore/CoreThread/BsCoreObjectCore.cpp"
 )
 

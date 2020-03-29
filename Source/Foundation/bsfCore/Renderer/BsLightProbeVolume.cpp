@@ -249,8 +249,9 @@ namespace bs
 			coreVolume->getProbeCoefficients(coeffInfo);
 		};
 
-		gCoreThread().queueCommand(getSaveData);
-		gCoreThread().submit(true);
+		getSaveData();
+		//gCoreThread().queueCommand(getSaveData);
+		//gCoreThread().submit(true);
 
 		for(auto& entry : coeffInfo)
 		{

@@ -7,7 +7,6 @@
 #include "Reflection/BsRTTIPlain.h"
 #include "Image/BsTexture.h"
 #include "Math/BsMath.h"
-#include "CoreThread/BsCoreThread.h"
 #include "RenderAPI/BsRenderAPI.h"
 #include "Managers/BsTextureManager.h"
 #include "Image/BsPixelData.h"
@@ -58,7 +57,7 @@ namespace bs
 			SPtr<PixelData> pixelData = obj->mProperties.allocBuffer(face, mipmap);
 
 			obj->readData(pixelData, face, mipmap);
-			gCoreThread().submitAll(true);
+			//gCoreThread().submitAll(true);
 
 			return pixelData;
 		}
