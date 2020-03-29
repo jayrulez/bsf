@@ -10,6 +10,7 @@
 #include "Animation/BsMorphShapes.h"
 #include "Mesh/BsMeshData.h"
 #include "Mesh/BsMeshUtility.h"
+#include "Common/BsCoreObjectManager.h"
 
 namespace bs
 {
@@ -45,10 +46,9 @@ namespace bs
 			// Advance the buffers (last write buffer becomes read buffer)
 			if(mSwapBuffers)
 			{
-				static const int NUM_SYNC_BUFFERS = 2;
-				mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (NUM_SYNC_BUFFERS + 1);
+				mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (CoreObjectManager::NUM_SYNC_BUFFERS + 1);
 				//mPoseReadBufferIdx = (mPoseReadBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
-				mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (NUM_SYNC_BUFFERS + 1);
+				mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (CoreObjectManager::NUM_SYNC_BUFFERS + 1);
 				//mPoseWriteBufferIdx = (mPoseWriteBufferIdx + 1) % (CoreThread::NUM_SYNC_BUFFERS + 1);
 
 				mSwapBuffers = false;
@@ -202,8 +202,7 @@ namespace bs
 
 		// Evaluation
 		EvaluatedAnimationData& renderData = mAnimData[mPoseWriteBufferIdx];
-		static const int NUM_SYNC_BUFFERS = 2;
-		UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + NUM_SYNC_BUFFERS) % (NUM_SYNC_BUFFERS + 1);
+		UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + CoreObjectManager::NUM_SYNC_BUFFERS) % (CoreObjectManager::NUM_SYNC_BUFFERS + 1);
 		//UINT32 prevPoseBufferIdx = (mPoseWriteBufferIdx + CoreThread::NUM_SYNC_BUFFERS) % (CoreThread::NUM_SYNC_BUFFERS + 1);
 		EvaluatedAnimationData& prevRenderData = mAnimData[prevPoseBufferIdx];
 

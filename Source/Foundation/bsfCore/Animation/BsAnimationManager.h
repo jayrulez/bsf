@@ -6,6 +6,7 @@
 #include "Utility/BsModule.h"
 #include "Math/BsConvexVolume.h"
 #include "RenderAPI/BsVertexDataDesc.h"
+#include "Common/BsCoreObjectManager.h"
 
 namespace bs
 {
@@ -132,9 +133,7 @@ namespace bs
 		Vector<SPtr<AnimationProxy>> mProxies;
 		Vector<ConvexVolume> mCullFrustums;
 
-		static const int NUM_SYNC_BUFFERS = 2;
-
-		EvaluatedAnimationData mAnimData[NUM_SYNC_BUFFERS + 1];
+		EvaluatedAnimationData mAnimData[CoreObjectManager::NUM_SYNC_BUFFERS + 1];
 		//EvaluatedAnimationData mAnimData[CoreThread::NUM_SYNC_BUFFERS + 1];
 
 		UINT32 mPoseReadBufferIdx = 2;
