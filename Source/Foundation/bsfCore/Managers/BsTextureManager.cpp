@@ -238,33 +238,34 @@ namespace bs
 		return texture;
 	}
 
-	SPtr<RenderTexture> TextureManager2::createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
+	SPtr<RenderTexture2> TextureManager2::createRenderTexture(const RENDER_TEXTURE_DESC2& desc, UINT32 deviceIdx)
 	{
-		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
+		SPtr<RenderTexture2> newRT = createRenderTextureInternal(desc, deviceIdx);
 		newRT->initialize();
 
 		return newRT;
 	}
 
-	SPtr<RenderTexture> TextureManager2::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth, PixelFormat depthStencilFormat)
+	SPtr<RenderTexture2> TextureManager2::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth, PixelFormat depthStencilFormat)
 	{
 		TEXTURE_DESC textureDesc = colorDesc;
 		textureDesc.usage = TU_RENDERTARGET;
 		textureDesc.numMips = 0;
 
-		HTexture texture = Texture::create(textureDesc);
+		SPtr<Texture2> texture = Texture2::create(textureDesc);
 
-		HTexture depthStencil;
+		SPtr<Texture2> depthStencil;
+
 		if (createDepth)
 		{
 			textureDesc.format = depthStencilFormat;
 			textureDesc.hwGamma = false;
 			textureDesc.usage = TU_DEPTHSTENCIL;
 
-			depthStencil = Texture::create(textureDesc);
+			depthStencil = Texture2::create(textureDesc);
 		}
 
-		RENDER_TEXTURE_DESC desc;
+		RENDER_TEXTURE_DESC2 desc;
 		desc.colorSurfaces[0].texture = texture;
 		desc.colorSurfaces[0].face = 0;
 		desc.colorSurfaces[0].numFaces = 1;
@@ -275,7 +276,7 @@ namespace bs
 		desc.depthStencilSurface.numFaces = 1;
 		desc.depthStencilSurface.mipLevel = 0;
 
-		SPtr<RenderTexture> newRT = createRenderTexture(desc);
+		SPtr<RenderTexture2> newRT = createRenderTexture(desc);
 
 		return newRT;
 	}

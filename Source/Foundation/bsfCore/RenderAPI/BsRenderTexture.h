@@ -177,4 +177,61 @@ namespace bs
 
 	/** @} */
 	}
+
+	struct BS_CORE_EXPORT RENDER_TEXTURE_DESC2
+	{
+		RENDER_SURFACE_DESC2 colorSurfaces[BS_MAX_MULTIPLE_RENDER_TARGETS];
+		RENDER_SURFACE_DESC2 depthStencilSurface;
+	};
+
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering)  RenderTexture2 : public RenderTarget2
+	{
+	public:
+		virtual ~RenderTexture2() = default;
+
+		static SPtr<RenderTexture2> create(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
+
+		static SPtr<RenderTexture2> create(const RENDER_TEXTURE_DESC2& desc, UINT32 deviceIdx = 0);
+
+
+		void initialize() override;
+
+		SPtr<Texture2> getColorTexture(UINT32 idx) const
+		{
+			return mDesc.colorSurfaces[idx].texture;
+		}
+
+		SPtr<Texture2> getDepthStencilTexture() const
+		{
+			return mDesc.depthStencilSurface.texture;
+		}
+
+		const RenderTextureProperties& getProperties() const;
+
+	protected:
+		friend class TextureManager2;
+
+		RenderTexture2(const RENDER_TEXTURE_DESC2& desc, UINT32 deviceIdx);
+
+
+	protected:
+		SPtr<ct::TextureView> mColorSurfaces[BS_MAX_MULTIPLE_RENDER_TARGETS];
+		SPtr<ct::TextureView> mDepthStencilSurface;
+
+		RENDER_TEXTURE_DESC2 mDesc;
+
+
+	private:
+		/**	Throws an exception of the color and depth/stencil buffers aren't compatible. */
+		void throwIfBuffersDontMatch() const;
+
+	//	/************************************************************************/
+	//	/* 								SERIALIZATION                      		*/
+	//	/************************************************************************/
+	//public:
+	//	friend class RenderTextureRTTI;
+	//	static RTTITypeBase* getRTTIStatic();
+	//	RTTITypeBase* getRTTI() const override;
+
+	};
 }

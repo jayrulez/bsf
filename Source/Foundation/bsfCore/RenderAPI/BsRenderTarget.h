@@ -115,6 +115,27 @@ namespace bs
 		UINT32 multisampleCount = 0;
 	};
 
+	struct BS_CORE_EXPORT RENDER_SURFACE_DESC2
+	{
+		RENDER_SURFACE_DESC2()
+		{
+		}
+
+		SPtr<Texture2> texture;
+
+		/** First face of the texture to bind (array index in texture arrays, or Z slice in 3D textures). */
+		UINT32 face = 0;
+
+		/**
+		 * Number of faces to bind (entries in a texture array, or Z slices in 3D textures). When zero the entire resource
+		 * will be bound.
+		 */
+		UINT32 numFaces = 0;
+
+		/** If the texture has multiple mips, which one to bind (only one can be bound for rendering). */
+		UINT32 mipLevel = 0;
+	};
+
 	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m :Rendering) RenderTarget2 : public IReflectable, public CoreObject
 	{
 	public:

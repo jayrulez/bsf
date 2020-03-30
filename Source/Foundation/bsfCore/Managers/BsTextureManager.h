@@ -30,22 +30,22 @@ namespace bs
 
 		SPtr<Texture2> _createEmpty();
 
-		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
+		SPtr<RenderTexture2> createRenderTexture(const RENDER_TEXTURE_DESC2& desc, UINT32 deviceIdx = 0);
 
-		virtual SPtr<RenderTexture> createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
+		virtual SPtr<RenderTexture2> createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
 
 		virtual PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) = 0;
 
 	protected:
 		friend class Texture2;
 
-		virtual SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
+		virtual SPtr<RenderTexture2> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
 
 		mutable HTexture2 mDummyTexture;
 
 		virtual SPtr<Texture2> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
 
-		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) = 0;
+		virtual SPtr<RenderTexture2> createRenderTextureInternal(const RENDER_TEXTURE_DESC2& desc, UINT32 deviceIdx = 0) = 0;
 	};
 
 
