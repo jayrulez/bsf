@@ -82,4 +82,28 @@ namespace bs
 			BS_EXCEPT(InvalidParametersException, "Attribute not found.");
 		}
 	}
+
+
+	RenderTarget2::RenderTarget2()
+	{
+		// We never sync from sim to core, so mark it clean to avoid overwriting core thread changes
+		markCoreClean();
+	}
+
+	void RenderTarget2::setPriority(INT32 priority)
+	{
+		RenderTargetProperties& props = const_cast<RenderTargetProperties&>(getProperties());
+
+		props.priority = priority;
+	}
+
+	void RenderTarget2::getCustomAttribute(const String& name, void* pData) const
+	{
+		BS_EXCEPT(InvalidParametersException, "Attribute not found.");
+	}
+
+	const RenderTargetProperties& RenderTarget2::getProperties() const
+	{
+		return getPropertiesInternal();
+	}
 }

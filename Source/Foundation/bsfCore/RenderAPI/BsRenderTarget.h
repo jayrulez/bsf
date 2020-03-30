@@ -115,9 +115,54 @@ namespace bs
 		UINT32 multisampleCount = 0;
 	};
 
-	class RenderTarget2 : public IReflectable, public CoreObject
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m :Rendering) RenderTarget2 : public IReflectable, public CoreObject
 	{
+	public:
+		enum FrameBuffer
+		{
+			FB_FRONT,
+			FB_BACK,
+			FB_AUTO
+		};
 
+		RenderTarget2();
+		virtual ~RenderTarget2() = default;
+
+		virtual void getCustomAttribute(const String & name, void* pData) const;
+
+		void setPriority(INT32 priority);
+
+		const RenderTargetProperties& getProperties() const;
+
+		mutable Event<void()> onResized;
+
+		virtual void swapBuffers(UINT32 syncMask = 0xFFFFFFFF)
+		{
+		}
+
+		UINT64 getUpdateCount() const
+		{
+			return mUpdateCount;
+		}
+
+		void _tickUpdateCount()
+		{
+			mUpdateCount++;
+		}
+
+	protected:
+		virtual const RenderTargetProperties& getPropertiesInternal() const = 0;
+
+	private:
+		UINT64 mUpdateCount = 0;
+
+	//	/************************************************************************/
+	//	/* 								SERIALIZATION                      		*/
+	//	/************************************************************************/
+	//public:
+	//	friend class RenderTargetRTTI;
+	//	static RTTITypeBase* getRTTIStatic();
+	//	RTTITypeBase* getRTTI() const override;
 	};
 
 	/**
@@ -252,4 +297,5 @@ namespace bs
 
 	/** @} */
 	}
+
 }
