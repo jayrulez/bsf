@@ -147,13 +147,136 @@ namespace bs
 		return newTex;
 	}
 
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc,
-																	UINT32 deviceIdx)
+	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
 		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
 		newRT->initialize();
 
 		return newRT;
 	}
+	}
+
+	void TextureManager2::onStartUp()
+	{
+		TEXTURE_DESC desc;
+		desc.type = TEX_TYPE_2D;
+		desc.width = 2;
+		desc.height = 2;
+		desc.format = PF_RGBA8;
+		desc.usage = TU_STATIC;
+
+		// White built-in texture
+		SPtr<Texture2> whiteTexture = createTexture(desc);
+
+		SPtr<PixelData> whitePixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+		whitePixelData->setColorAt(Color::White, 0, 0);
+		whitePixelData->setColorAt(Color::White, 0, 1);
+		whitePixelData->setColorAt(Color::White, 1, 0);
+		whitePixelData->setColorAt(Color::White, 1, 1);
+
+		whiteTexture->writeData(*whitePixelData);
+		Texture2::WHITE = whiteTexture;
+
+		// Black built-in texture
+		SPtr<Texture2> blackTexture = createTexture(desc);
+
+		SPtr<PixelData> blackPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+		blackPixelData->setColorAt(Color::ZERO, 0, 0);
+		blackPixelData->setColorAt(Color::ZERO, 0, 1);
+		blackPixelData->setColorAt(Color::ZERO, 1, 0);
+		blackPixelData->setColorAt(Color::ZERO, 1, 1);
+
+		blackTexture->writeData(*blackPixelData);
+		Texture2::BLACK = blackTexture;
+
+		// Normal (Y = Up) built-in texture
+		SPtr<Texture2> normalTexture = createTexture(desc);
+		SPtr<PixelData> normalPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+
+		Color encodedNormal(0.5f, 0.5f, 1.0f);
+		normalPixelData->setColorAt(encodedNormal, 0, 0);
+		normalPixelData->setColorAt(encodedNormal, 0, 1);
+		normalPixelData->setColorAt(encodedNormal, 1, 0);
+		normalPixelData->setColorAt(encodedNormal, 1, 1);
+
+		normalTexture->writeData(*normalPixelData);
+		Texture2::NORMAL = normalTexture;
+	}
+
+	void TextureManager2::onShutDown()
+	{
+		Texture2::WHITE = nullptr;
+		Texture2::BLACK = nullptr;
+		Texture2::NORMAL = nullptr;
+	}
+
+	SPtr<Texture2> TextureManager2::createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture2> newTex = createTextureInternal(desc, nullptr, deviceMask);
+		newTex->initialize();
+
+		return newTex;
+	}
+
+	SPtr<Texture2> TextureManager2::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
+	{
+		Texture2* tex = new (bs_alloc<Texture2>()) Texture2(desc, pixelData);
+		SPtr<Texture2> ret = bs_core_ptr<Texture2>(tex);
+
+		ret->_setThisPtr(ret);
+		ret->initialize();
+
+		return ret;
+	}
+
+	SPtr<Texture2> TextureManager2::_createEmpty()
+	{
+		Texture2* tex = new (bs_alloc<Texture2>()) Texture2();
+		SPtr<Texture2> texture = bs_core_ptr<Texture2>(tex);
+		texture->_setThisPtr(texture);
+
+		return texture;
+	}
+
+	SPtr<RenderTexture> TextureManager2::createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
+	{
+		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
+		newRT->initialize();
+
+		return newRT;
+	}
+
+	SPtr<RenderTexture> TextureManager2::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth, PixelFormat depthStencilFormat)
+	{
+		TEXTURE_DESC textureDesc = colorDesc;
+		textureDesc.usage = TU_RENDERTARGET;
+		textureDesc.numMips = 0;
+
+		HTexture texture = Texture::create(textureDesc);
+
+		HTexture depthStencil;
+		if (createDepth)
+		{
+			textureDesc.format = depthStencilFormat;
+			textureDesc.hwGamma = false;
+			textureDesc.usage = TU_DEPTHSTENCIL;
+
+			depthStencil = Texture::create(textureDesc);
+		}
+
+		RENDER_TEXTURE_DESC desc;
+		desc.colorSurfaces[0].texture = texture;
+		desc.colorSurfaces[0].face = 0;
+		desc.colorSurfaces[0].numFaces = 1;
+		desc.colorSurfaces[0].mipLevel = 0;
+
+		desc.depthStencilSurface.texture = depthStencil;
+		desc.depthStencilSurface.face = 0;
+		desc.depthStencilSurface.numFaces = 1;
+		desc.depthStencilSurface.mipLevel = 0;
+
+		SPtr<RenderTexture> newRT = createRenderTexture(desc);
+
+		return newRT;
 	}
 }

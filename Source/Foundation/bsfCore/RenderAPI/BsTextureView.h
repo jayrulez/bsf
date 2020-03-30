@@ -88,6 +88,7 @@ namespace bs
 
 	protected:
 		friend class Texture;
+		friend class Texture2;
 
 		TEXTURE_VIEW_DESC mDesc;
 	};

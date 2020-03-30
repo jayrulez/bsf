@@ -115,6 +115,11 @@ namespace bs
 		UINT32 multisampleCount = 0;
 	};
 
+	class RenderTarget2 : public IReflectable, public CoreObject
+	{
+
+	};
+
 	/**
 	 * Render target is a frame buffer or a texture that the render system renders the scene to.
 	 *

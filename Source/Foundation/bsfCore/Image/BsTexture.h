@@ -179,6 +179,7 @@ namespace bs
 	protected:
 		friend class TextureRTTI;
 		friend class Texture;
+		friend class Texture2;
 
 		/**
 		 * Maps a sub-resource index to an exact face and mip level. Sub-resource indexes are used when reading or writing
@@ -192,6 +193,105 @@ namespace bs
 		UINT32 mapToSubresourceIdx(UINT32 face, UINT32 mip) const;
 
 		TEXTURE_DESC mDesc;
+	};
+
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m :Rendering) Texture2 : public Resource
+	{
+	public:
+		virtual ~Texture2() { }
+
+		static SPtr<Texture2> create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		static SPtr<Texture2> create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
+		static SPtr<Texture2> _createPtr(const TEXTURE_DESC& desc);
+		static SPtr<Texture2> _createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
+
+		PixelData lock(GpuLockOptions options, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0);
+
+		void unlock();
+
+		void copy(const SPtr<Texture2>& target, const TEXTURE_COPY_DESC& desc = TEXTURE_COPY_DESC::DEFAULT, const SPtr<ct::CommandBuffer>& commandBuffer = nullptr);
+
+		void clear(const Color& value, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 queueIdx = 0);
+
+
+		void writeData(const PixelData& src, UINT32 mipLevel = 0, UINT32 face = 0, bool discardWholeBuffer = false, UINT32 queueIdx = 0);//ct
+		AsyncOp writeData(const SPtr<PixelData>& data, UINT32 face = 0, UINT32 mipLevel = 0, bool discardEntireBuffer = false);
+
+		void readData(PixelData& dest, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0);//ct
+		AsyncOp readData(const SPtr<PixelData>& data, UINT32 face = 0, UINT32 mipLevel = 0);
+
+
+		BS_SCRIPT_EXPORT(n:GetGPUPixels)
+		TAsyncOp<SPtr<PixelData>> readData(UINT32 face = 0, UINT32 mipLevel = 0);
+
+		void readCachedData(PixelData& data, UINT32 face = 0, UINT32 mipLevel = 0);
+
+		const TextureProperties& getProperties() const
+		{
+			return mProperties;
+		}
+
+
+		SPtr<ct::TextureView> requestView(UINT32 mostDetailMip, UINT32 numMips, UINT32 firstArraySlice, UINT32 numArraySlices, GpuViewUsage usage);
+
+		static SPtr<Texture2> WHITE;
+		static SPtr<Texture2> BLACK;
+		static SPtr<Texture2> NORMAL;
+	protected:
+		friend class TextureManager2;
+
+		Texture2(const TEXTURE_DESC& desc);
+		Texture2(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
+		void initialize() override;
+
+		UINT32 calculateSize() const;
+
+		void createCPUBuffers();
+
+		void updateCPUBuffers(UINT32 subresourceIdx, const PixelData& data);
+
+		virtual PixelData lockImpl(GpuLockOptions options, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0)
+		{
+			return PixelData();
+		}
+		virtual void unlockImpl()
+		{
+		}
+		virtual void copyImpl(const SPtr<Texture2>& target, const TEXTURE_COPY_DESC& desc, const SPtr<ct::CommandBuffer>& commandBuffer)
+		{
+		}
+		virtual void clearImpl(const Color& value, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 queueIdx = 0);
+		virtual void readDataImpl(PixelData& dest, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0)
+		{
+		}
+		virtual void writeDataImpl(const PixelData& src, UINT32 mipLevel = 0, UINT32 face = 0, bool discardWholeBuffer = false, UINT32 queueIdx = 0)
+		{
+		}
+
+
+		virtual SPtr<ct::TextureView> createView(const ct::TEXTURE_VIEW_DESC& desc);
+
+		void clearBufferViews();
+
+		UnorderedMap<ct::TEXTURE_VIEW_DESC, SPtr<ct::TextureView>, ct::TextureView::HashFunction, ct::TextureView::EqualFunction> mTextureViews;
+		TextureProperties mProperties;
+		Vector<SPtr<PixelData>> mCPUSubresourceData;
+		mutable SPtr<PixelData> mInitData;
+
+	public:
+		Texture2() = default;
+
+	//	/************************************************************************/
+	//	/* 								SERIALIZATION                      		*/
+	//	/************************************************************************/
+	//public:
+	//	Texture() = default; // Serialization only
+
+	//	friend class TextureRTTI;
+	//	static RTTITypeBase* getRTTIStatic();
+	//	RTTITypeBase* getRTTI() const override;
 	};
 
 	/**

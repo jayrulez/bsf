@@ -318,7 +318,7 @@ namespace bs
 		//class ComputePipelineState2;
 		//class ReflectionProbe2;
 		//class ParticleSystem2;
-		//class Texture2;
+		class Texture2;
 		//class SpriteTexture2;
 		//class Mesh2;
 		//class VectorField2;
@@ -397,6 +397,7 @@ namespace bs
 	class RenderAPICapabilities;
 	class RenderTargetProperties;
 	class TextureManager;
+	class TextureManager2;
 	class Input;
 	struct PointerEvent;
 	class RendererFactory;
@@ -738,6 +739,7 @@ namespace bs
 
 	typedef ResourceHandle<Resource> HResource;
 	typedef ResourceHandle<Texture> HTexture;
+	typedef ResourceHandle<Texture2> HTexture2;
 	typedef ResourceHandle<Mesh> HMesh;
 	typedef ResourceHandle<Material> HMaterial;
 	typedef ResourceHandle<ShaderInclude> HShaderInclude;

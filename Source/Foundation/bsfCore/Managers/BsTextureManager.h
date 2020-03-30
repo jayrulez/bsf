@@ -13,6 +13,42 @@ namespace bs
 	 *  @{
 	 */
 
+
+
+	class BS_CORE_EXPORT TextureManager2 : public Module<TextureManager2>
+	{
+	public:
+		virtual ~TextureManager2() = default;
+
+		void onStartUp() override;
+
+		void onShutDown() override;
+
+		SPtr<Texture2> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
+		SPtr<Texture2> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
+
+		SPtr<Texture2> _createEmpty();
+
+		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
+
+		virtual SPtr<RenderTexture> createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
+
+		virtual PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) = 0;
+
+	protected:
+		friend class Texture2;
+
+		virtual SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
+
+		mutable HTexture2 mDummyTexture;
+
+		virtual SPtr<Texture2> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
+
+		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) = 0;
+	};
+
+
 	/**
 	 * Defines interface for creation of textures. Render systems provide their own implementations.
 	 *
