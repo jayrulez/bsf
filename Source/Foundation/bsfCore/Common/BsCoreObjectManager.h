@@ -140,6 +140,12 @@ namespace bs
 
 		static const int NUM_SYNC_BUFFERS = 2;
 
+	};
+
+	class CoreObjectFrameManager : public Module<CoreObjectFrameManager>
+	{
+	public:
+		virtual ~CoreObjectFrameManager();
 		void update();
 
 		FrameAlloc* getFrameAlloc() const;
@@ -147,7 +153,7 @@ namespace bs
 		void onStartUp() override;
 
 	private:
-		FrameAlloc* mFrameAllocs[NUM_SYNC_BUFFERS];
+		FrameAlloc* mFrameAllocs[CoreObjectManager::NUM_SYNC_BUFFERS];
 		UINT32 mActiveFrameAlloc = 0;
 	};
 

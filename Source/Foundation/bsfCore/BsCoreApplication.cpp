@@ -126,6 +126,7 @@ namespace bs
 		Time::shutDown();
 		DeferredCallManager::shutDown();
 
+		CoreObjectFrameManager::shutDown();
 		RenderStats::shutDown();
 		TaskScheduler::shutDown();
 		ThreadPool::shutDown();
@@ -154,6 +155,7 @@ namespace bs
 		ThreadPool::startUp<TThreadPool<ThreadDefaultPolicy>>((numWorkerThreads));
 		TaskScheduler::startUp();
 		RenderStats::startUp();
+		CoreObjectFrameManager::startUp();
 		StringTableManager::startUp();
 		DeferredCallManager::startUp();
 		Time::startUp();
@@ -332,7 +334,7 @@ namespace bs
 		ct::RenderWindowManager::instancePtr()->_update();
 		//gCoreThread().queueCommand(std::bind(&ct::RenderWindowManager::_update, ct::RenderWindowManager::instancePtr()), CTQF_InternalQueue);
 
-		CoreObjectManager::instance().update();
+		CoreObjectFrameManager::instance().update();
 
 		//gCoreThread().update();
 		//gCoreThread().submitAll();

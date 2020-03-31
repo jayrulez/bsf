@@ -29,11 +29,6 @@ namespace bs
 				"engine objects before shutdown.");
 		}
 #endif
-		for (UINT32 i = 0; i < NUM_SYNC_BUFFERS; i++)
-		{
-			mFrameAllocs[i]->setOwnerThread(BS_THREAD_CURRENT_ID); // Sim thread
-			bs_delete(mFrameAllocs[i]);
-		}
 	}
 
 	UINT64 CoreObjectManager::generateId()
@@ -68,7 +63,7 @@ namespace bs
 				SPtr<ct::CoreObject> coreObject = object->getCore();
 				if (coreObject != nullptr)
 				{
-					CoreSyncData objSyncData = object->syncToCore(getFrameAlloc());
+					CoreSyncData objSyncData = object->syncToCore(CoreObjectFrameManager::instance().getFrameAlloc());
 				
 					mDestroyedSyncData.push_back(CoreStoredSyncObjData(coreObject, internalId, objSyncData));
 
@@ -220,7 +215,7 @@ namespace bs
 
 	void CoreObjectManager::syncToCore()
 	{
-		syncDownload(getFrameAlloc());
+		syncDownload(CoreObjectFrameManager::instance().getFrameAlloc());
 		syncUpload();
 		//gCoreThread().queueCommand(std::bind(&CoreObjectManager::syncUpload, this));
 	}
@@ -236,7 +231,7 @@ namespace bs
 
 		Lock lock(mObjectsMutex);
 
-		FrameAlloc* allocator = getFrameAlloc();
+		FrameAlloc* allocator = CoreObjectFrameManager::instance().getFrameAlloc();
 		Vector<IndividualCoreSyncData> syncData;
 
 		std::function<void(CoreObject*)> syncObject = [&](CoreObject* curObj)
@@ -427,9 +422,9 @@ namespace bs
 		mCoreSyncData.pop_front();
 	}
 
-	void CoreObjectManager::update()
+	void CoreObjectFrameManager::update()
 	{
-		for (UINT32 i = 0; i < NUM_SYNC_BUFFERS; i++)
+		for (UINT32 i = 0; i < CoreObjectManager::NUM_SYNC_BUFFERS; i++)
 			mFrameAllocs[i]->setOwnerThread(BS_THREAD_CURRENT_ID);
 
 		mActiveFrameAlloc = (mActiveFrameAlloc + 1) % 2;
@@ -437,17 +432,26 @@ namespace bs
 		mFrameAllocs[mActiveFrameAlloc]->clear();
 	}
 
-	FrameAlloc* CoreObjectManager::getFrameAlloc() const
+	FrameAlloc* CoreObjectFrameManager::getFrameAlloc() const
 	{
 		return mFrameAllocs[mActiveFrameAlloc];
 	}
 
-	void CoreObjectManager::onStartUp()
+	void CoreObjectFrameManager::onStartUp()
 	{
-		for (UINT32 i = 0; i < NUM_SYNC_BUFFERS; i++)
+		for (UINT32 i = 0; i < CoreObjectManager::NUM_SYNC_BUFFERS; i++)
 		{
 			mFrameAllocs[i] = bs_new<FrameAlloc>();
 			mFrameAllocs[i]->setOwnerThread(BS_THREAD_CURRENT_ID); // Sim thread
+		}
+	}
+
+	CoreObjectFrameManager::~CoreObjectFrameManager()
+	{
+		for (UINT32 i = 0; i < CoreObjectManager::NUM_SYNC_BUFFERS; i++)
+		{
+			mFrameAllocs[i]->setOwnerThread(BS_THREAD_CURRENT_ID); // Sim thread
+			bs_delete(mFrameAllocs[i]);
 		}
 	}
 }
