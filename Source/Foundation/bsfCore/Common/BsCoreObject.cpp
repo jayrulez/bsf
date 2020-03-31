@@ -121,7 +121,12 @@ namespace bs
 		// reference to the obj (saved in the bound function).
 		// We could have called the function directly using "this" pointer but then we couldn't have used a shared_ptr for the object,
 		// in which case there is a possibility that the object would be released and deleted while still being in the command queue.
-		executeGpuCommand(obj, func);
+		//executeGpuCommand(obj, func);
+
+		std::function<void()> exec = std::bind(&CoreObject::executeGpuCommand, obj, func);
+
+		exec();
+
 		//gCoreThread().queueCommand(std::bind(&CoreObject::executeGpuCommand, obj, func));
 	}
 
@@ -136,9 +141,12 @@ namespace bs
 
 	void CoreObject::queueInitializeGpuCommand(const SPtr<ct::CoreObject>& obj)
 	{
-		std::function<void()> func = std::bind(&ct::CoreObject::initialize, obj.get());
+		obj->initialize();
+		//std::function<void()> func = std::bind(&ct::CoreObject::initialize, obj.get());
 
-		executeGpuCommand(obj, func);
+		//std::function<void()> exec = std::bind(&CoreObject::executeGpuCommand, obj, func);
+
+		//exec();
 
 		//CoreThread::instance().queueCommand(std::bind(&CoreObject::executeGpuCommand, obj, func));
 	}
@@ -147,7 +155,9 @@ namespace bs
 	{
 		std::function<void()> func = [&](){}; // Do nothing function. We just need the shared pointer to stay alive until it reaches the core thread
 
-		executeGpuCommand(obj, func);
+		std::function<void()> exec = std::bind(&CoreObject::executeGpuCommand, obj, func);
+
+		exec();
 		//gCoreThread().queueCommand(std::bind(&CoreObject::executeGpuCommand, obj, func));
 	}
 

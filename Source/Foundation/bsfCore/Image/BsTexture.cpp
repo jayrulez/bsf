@@ -310,14 +310,14 @@ namespace bs
 	/************************************************************************/
 	/* 								STATICS	                      			*/
 	/************************************************************************/
-	HTexture Texture::create(const TEXTURE_DESC& desc)
+	HTexture Texture::createHandle(const TEXTURE_DESC& desc)
 	{
 		SPtr<Texture> texturePtr = _createPtr(desc);
 
 		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
 	}
 	
-	HTexture Texture::create(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
+	HTexture Texture::createHandle(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
 	{
 		SPtr<Texture> texturePtr = _createPtr(pixelData, usage, hwGammaCorrection);
 

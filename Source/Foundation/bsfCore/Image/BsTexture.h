@@ -279,7 +279,7 @@ namespace bs
 		 *
 		 * @param[in]	desc  	Description of the texture to create.
 		 */
-		static HTexture create(const TEXTURE_DESC& desc);
+		static HTexture createHandle(const TEXTURE_DESC& desc);
 
 		/**
 		 * Creates a new 2D or 3D texture initialized using the provided pixel data. Texture will not have any mipmaps.
@@ -289,7 +289,7 @@ namespace bs
 		 * @param[in]	hwGammaCorrection	If true the texture data is assumed to have been gamma corrected and will be
 		 *									converted back to linear space when sampled on GPU.
 		 */
-		static HTexture create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
+		static HTexture createHandle(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
 
 		/** @name Internal
 		 *  @{
@@ -299,8 +299,7 @@ namespace bs
 		static SPtr<Texture> _createPtr(const TEXTURE_DESC& desc);
 
 		/** Same as create() excepts it creates a pointer to the texture instead of a texture handle. */
-		static SPtr<Texture> _createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
-			bool hwGammaCorrection = false);
+		static SPtr<Texture> _createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
 
 		/** @} */
 
@@ -460,8 +459,7 @@ namespace bs
 		 * @copydoc bs::Texture::create(const SPtr<PixelData>&, int, bool)
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		static SPtr<Texture> create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
-			bool hwGammaCorrection = false, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		static SPtr<Texture> create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/************************************************************************/
 		/* 								TEXTURE VIEW                      		*/

@@ -125,7 +125,7 @@ namespace bs
 		dummyPixelData->setColorAt(Color::Red, 1, 0);
 		dummyPixelData->setColorAt(Color::Red, 1, 1);
 
-		mDummyTexture = Texture::create(dummyPixelData);
+		mDummyTexture = Texture::createHandle(dummyPixelData);
 
 		mWhiteSpriteTexture = getSkinTexture(WhiteTex);
 		mDummySpriteTexture = SpriteTexture::create(mDummyTexture);

@@ -393,7 +393,7 @@ namespace bs
 		{
 			TEXTURE_DESC texDesc; // Default
 
-			HTexture newTex = Texture::create(texDesc);
+			HTexture newTex = Texture::createHandle(texDesc);
 			mCaretTexture = SpriteTexture::create(newTex);
 		}
 
@@ -410,7 +410,7 @@ namespace bs
 		{
 			TEXTURE_DESC texDesc; // Default
 
-			HTexture newTex = Texture::create(texDesc);
+			HTexture newTex = Texture::createHandle(texDesc);
 			mTextSelectionTexture = SpriteTexture::create(newTex);
 		}
 

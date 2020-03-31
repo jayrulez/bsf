@@ -326,7 +326,7 @@ namespace bs
 				texDesc.height = pageIter->height;
 				texDesc.format = PF_RG8;
 
-				HTexture newTex = Texture::create(texDesc);
+				HTexture newTex = Texture::createHandle(texDesc);
 
 				// It's possible the formats no longer match
 				if (newTex->getProperties().getFormat() != pixelData->getFormat())
