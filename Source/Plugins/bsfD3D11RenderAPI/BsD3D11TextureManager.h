@@ -30,8 +30,8 @@ namespace bs
 	{
 	protected:
 		/** @copydoc TextureManager::createTextureInternal */
-		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc,
-			const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
+		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
+		SPtr<Texture2> createTextureInternal2(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
 
 		/** @copydoc TextureManager::createRenderTextureInternal */
 		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,

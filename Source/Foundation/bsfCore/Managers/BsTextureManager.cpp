@@ -147,6 +147,14 @@ namespace bs
 		return newTex;
 	}
 
+	SPtr<Texture2> TextureManager::createTexture2(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture2> newTex = createTextureInternal2(desc, nullptr, deviceMask);
+		newTex->initialize();
+
+		return newTex;
+	}
+
 	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc,
 																	UINT32 deviceIdx)
 	{

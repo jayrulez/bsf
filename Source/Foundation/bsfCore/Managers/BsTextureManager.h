@@ -102,6 +102,7 @@ namespace bs
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
 		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		SPtr<Texture2> createTexture2(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * @copydoc bs::TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC&)
@@ -111,6 +112,7 @@ namespace bs
 
 	protected:
 		friend class bs::Texture;
+		friend class bs::Texture2;
 		friend class Texture;
 		friend class bs::RenderTexture;
 
@@ -118,8 +120,8 @@ namespace bs
 		 * Creates an empty and uninitialized texture of a specific type. This is to be implemented	by render systems with
 		 * their own implementations.
 		 */
-		virtual SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc,
-			const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
+		virtual SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
+		virtual SPtr<Texture2> createTextureInternal2(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
 
 		/** @copydoc createRenderTexture */
 		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
