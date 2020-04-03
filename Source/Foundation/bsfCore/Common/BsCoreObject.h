@@ -82,6 +82,7 @@ namespace bs
 		 */
 		SPtr<ct::CoreObject> getCore() const { return mCoreSpecific; }
 
+
 		/**
 		 * Ensures all dirty syncable data is send to the core thread counterpart of this object (if any).
 		 *

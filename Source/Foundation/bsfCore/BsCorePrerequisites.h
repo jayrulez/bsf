@@ -240,7 +240,8 @@ namespace bs
 	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
 
 #define CORE_OBJECT2_FORWARD_DECLARE(TYPE)				\
-	class TYPE;
+	class TYPE;											\
+	template<> struct CoreThreadType<TYPE> { typedef TYPE Type; };
 
 #define CORE_OBJECT_FORWARD_DECLARE_STRUCT(TYPE)		\
 	struct TYPE;										\
@@ -248,7 +249,8 @@ namespace bs
 	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
 
 #define CORE_OBJECT2_FORWARD_DECLARE_STRUCT(TYPE)		\
-	struct TYPE;
+	struct TYPE;						                \
+	template<> struct CoreThreadType<TYPE> { typedef TYPE Type; };
 
 	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer)
 	CORE_OBJECT_FORWARD_DECLARE(VertexBuffer)
@@ -278,7 +280,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ComputePipelineState)
 	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe)
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem)
-	CORE_OBJECT_FORWARD_DECLARE(Texture)
+	//CORE_OBJECT_FORWARD_DECLARE(Texture)
 	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture)
 	CORE_OBJECT_FORWARD_DECLARE(Mesh)
 	CORE_OBJECT_FORWARD_DECLARE(VectorField)
@@ -312,7 +314,7 @@ namespace bs
 		//class ComputePipelineState2;
 		//class ReflectionProbe2;
 		//class ParticleSystem2;
-		class Texture2;
+		CORE_OBJECT2_FORWARD_DECLARE(Texture);
 		//class SpriteTexture2;
 		//class Mesh2;
 		//class VectorField2;
@@ -732,7 +734,6 @@ namespace bs
 
 	typedef ResourceHandle<Resource> HResource;
 	typedef ResourceHandle<Texture> HTexture;
-	typedef ResourceHandle<Texture2> HTexture2;
 	typedef ResourceHandle<Mesh> HMesh;
 	typedef ResourceHandle<Material> HMaterial;
 	typedef ResourceHandle<ShaderInclude> HShaderInclude;

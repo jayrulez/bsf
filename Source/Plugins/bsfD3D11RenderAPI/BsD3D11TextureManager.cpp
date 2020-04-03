@@ -23,6 +23,16 @@ namespace bs
 		return ct::D3D11Mappings::getPF(d3dPF);
 	}
 
+	SPtr<Texture> D3D11TextureManager::_createEmpty()
+	{
+		ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture();
+
+		SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
+		texPtr->_setThisPtr(texPtr);
+
+		return texPtr;
+	}
+
 	namespace ct
 	{
 	SPtr<Texture> D3D11TextureManager::createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask)
@@ -33,11 +43,6 @@ namespace bs
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
-	}
-
-	SPtr<Texture2> D3D11TextureManager::createTextureInternal2(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask)
-	{
-		return SPtr<Texture2>();
 	}
 
 	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,

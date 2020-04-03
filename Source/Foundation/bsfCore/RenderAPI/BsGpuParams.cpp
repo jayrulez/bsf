@@ -627,8 +627,8 @@ namespace bs
 		UINT32 sampledSurfacesSize = numTextures * sizeof(TextureSurface);
 		UINT32 loadStoreSurfacesSize = numStorageTextures * sizeof(TextureSurface);
 		UINT32 paramBufferSize = numParamBlocks * sizeof(SPtr<ct::GpuParamBlockBuffer>);
-		UINT32 textureArraySize = numTextures * sizeof(SPtr<ct::Texture>);
-		UINT32 loadStoreTextureArraySize = numStorageTextures * sizeof(SPtr<ct::Texture>);
+		UINT32 textureArraySize = numTextures * sizeof(SPtr<Texture>);
+		UINT32 loadStoreTextureArraySize = numStorageTextures * sizeof(SPtr<Texture>);
 		UINT32 bufferArraySize = numBuffers * sizeof(SPtr<ct::GpuBuffer>);
 		UINT32 samplerArraySize = numSamplers * sizeof(SPtr<ct::SamplerState>);
 
@@ -648,8 +648,8 @@ namespace bs
 		TextureSurface* sampledSurfaces = (TextureSurface*)(data + sampledSurfaceOffset);
 		TextureSurface* loadStoreSurfaces = (TextureSurface*)(data + loadStoreSurfaceOffset);
 		SPtr<ct::GpuParamBlockBuffer>* paramBuffers = (SPtr<ct::GpuParamBlockBuffer>*)(data + paramBufferOffset);
-		SPtr<ct::Texture>* textures = (SPtr<ct::Texture>*)(data + textureArrayOffset);
-		SPtr<ct::Texture>* loadStoreTextures = (SPtr<ct::Texture>*)(data + loadStoreTextureArrayOffset);
+		SPtr<Texture>* textures = (SPtr<Texture>*)(data + textureArrayOffset);
+		SPtr<Texture>* loadStoreTextures = (SPtr<Texture>*)(data + loadStoreTextureArrayOffset);
 		SPtr<ct::GpuBuffer>* buffers = (SPtr<ct::GpuBuffer>*)(data + bufferArrayOffset);
 		SPtr<ct::SamplerState>* samplers = (SPtr<ct::SamplerState>*)(data + samplerArrayOffset);
 
@@ -667,10 +667,10 @@ namespace bs
 			new (&sampledSurfaces[i]) TextureSurface();
 			sampledSurfaces[i] = mSampledTextureData[i].surface;
 
-			new (&textures[i]) SPtr<ct::Texture>();
+			new (&textures[i]) SPtr<Texture>();
 
 			if (mSampledTextureData[i].texture.isLoaded())
-				textures[i] = mSampledTextureData[i].texture->getCore();
+				textures[i] = mSampledTextureData[i].texture.getInternalPtr();
 			else
 				textures[i] = nullptr;
 		}
@@ -680,10 +680,10 @@ namespace bs
 			new (&loadStoreSurfaces[i]) TextureSurface();
 			loadStoreSurfaces[i] = mLoadStoreTextureData[i].surface;
 
-			new (&loadStoreTextures[i]) SPtr<ct::Texture>();
+			new (&loadStoreTextures[i]) SPtr<Texture>();
 
 			if (mLoadStoreTextureData[i].texture.isLoaded())
-				loadStoreTextures[i] = mLoadStoreTextureData[i].texture->getCore();
+				loadStoreTextures[i] = mLoadStoreTextureData[i].texture.getInternalPtr();
 			else
 				loadStoreTextures[i] = nullptr;
 		}

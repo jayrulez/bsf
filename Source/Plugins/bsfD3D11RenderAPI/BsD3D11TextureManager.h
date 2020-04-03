@@ -18,6 +18,8 @@ namespace bs
 		/** @copydoc TextureManager::getNativeFormat */
 		PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) override;
 
+		SPtr<Texture> _createEmpty() override;
+
 	protected:		
 		/** @copydoc TextureManager::createRenderTextureImpl */
 		SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) override;
@@ -31,7 +33,6 @@ namespace bs
 	protected:
 		/** @copydoc TextureManager::createTextureInternal */
 		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
-		SPtr<Texture2> createTextureInternal2(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
 
 		/** @copydoc TextureManager::createRenderTextureInternal */
 		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,

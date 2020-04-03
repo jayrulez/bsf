@@ -15,7 +15,7 @@ namespace bs
 {
 	namespace impl
 	{
-		SPtr<ct::Texture> getSpriteTextureAtlas(const SPtr<ct::SpriteTexture>& spriteTexture)
+		SPtr<Texture> getSpriteTextureAtlas(const SPtr<ct::SpriteTexture>& spriteTexture)
 		{
 			if(spriteTexture)
 				return spriteTexture->getTexture();
@@ -1015,7 +1015,7 @@ namespace bs
 				coreTexData->surface = textureData.surface;
 
 				if (textureData.texture.isLoaded())
-					coreTexData->texture = textureData.texture->getCore();
+					coreTexData->texture = textureData.texture.getInternalPtr();
 
 				if (textureData.spriteTexture.isLoaded())
 					coreTexData->spriteTexture = textureData.spriteTexture->getCore();
@@ -1178,7 +1178,7 @@ namespace bs
 				HTexture texture = params->mTextureParams[param.index].texture;
 				SPtr<Texture> textureCore;
 				if (texture.isLoaded())
-					textureCore = texture->getCore();
+					textureCore = texture.getInternalPtr();
 
 				mTextureParams[param.index].texture = textureCore;
 

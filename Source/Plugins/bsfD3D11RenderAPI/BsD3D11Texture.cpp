@@ -13,6 +13,10 @@
 
 namespace bs { namespace ct
 {
+	D3D11Texture::D3D11Texture(): Texture()
+	{
+	}
+
 	D3D11Texture::D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData,
 		GpuDeviceFlags deviceMask)
 		: Texture(desc, initialData, deviceMask)

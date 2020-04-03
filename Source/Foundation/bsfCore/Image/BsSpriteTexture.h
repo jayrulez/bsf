@@ -280,10 +280,10 @@ namespace bs
 		{
 		public:
 			/**	Determines the internal texture that the sprite texture references. */
-			void setTexture(const SPtr<ct::Texture>& texture) { mAtlasTexture = texture; }
+			void setTexture(const SPtr<Texture>& texture) { mAtlasTexture = texture; }
 
 			/**	@copydoc setTexture() */
-			const SPtr<ct::Texture>& getTexture() const { return mAtlasTexture; }
+			const SPtr<Texture>& getTexture() const { return mAtlasTexture; }
 
 		private:
 			friend class bs::SpriteTexture;

@@ -23,7 +23,7 @@ namespace bs
 	struct GUIMeshRenderData
 	{
 		SubMesh subMesh;
-		SPtr<ct::Texture> texture;
+		SPtr<Texture> texture;
 		SPtr<ct::SpriteTexture> spriteTexture;
 		SpriteMaterial* material;
 		Color tint;

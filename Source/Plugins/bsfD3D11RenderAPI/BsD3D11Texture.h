@@ -15,6 +15,7 @@ namespace bs { namespace ct
 	class D3D11Texture : public Texture
 	{
 	public:
+		D3D11Texture();
 		~D3D11Texture();
 
 		/**	Returns internal DX11 texture resource object. */

@@ -7,37 +7,6 @@
 
 namespace bs
 {
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc)
-	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
-
-		ret->_setThisPtr(ret);
-		ret->initialize();
-
-		return ret;
-	}
-
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
-	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc, pixelData);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
-
-		ret->_setThisPtr(ret);
-		ret->initialize();
-
-		return ret;
-	}
-
-	SPtr<Texture> TextureManager::_createEmpty()
-	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture();
-		SPtr<Texture> texture = bs_core_ptr<Texture>(tex);
-		texture->_setThisPtr(texture);
-
-		return texture;
-	}
-
 	SPtr<RenderTexture> TextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth,
 		PixelFormat depthStencilFormat)
 	{
@@ -147,16 +116,7 @@ namespace bs
 		return newTex;
 	}
 
-	SPtr<Texture2> TextureManager::createTexture2(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
-	{
-		SPtr<Texture2> newTex = createTextureInternal2(desc, nullptr, deviceMask);
-		newTex->initialize();
-
-		return newTex;
-	}
-
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc,
-																	UINT32 deviceIdx)
+	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
 		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
 		newRT->initialize();
