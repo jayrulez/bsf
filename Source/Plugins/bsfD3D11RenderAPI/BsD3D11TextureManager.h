@@ -23,22 +23,12 @@ namespace bs
 	protected:		
 		/** @copydoc TextureManager::createRenderTextureImpl */
 		SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) override;
-	};
-
-	namespace ct
-	{
-	/**	Handles creation of DirectX 11 textures. */
-	class D3D11TextureManager : public TextureManager
-	{
-	protected:
 		/** @copydoc TextureManager::createTextureInternal */
 		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
 
 		/** @copydoc TextureManager::createRenderTextureInternal */
-		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
-			UINT32 deviceIdx = 0) override;
+		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) override;
 	};
-	}
 
 	/** @} */
 }

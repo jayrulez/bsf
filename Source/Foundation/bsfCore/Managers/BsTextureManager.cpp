@@ -7,52 +7,6 @@
 
 namespace bs
 {
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth,
-		PixelFormat depthStencilFormat)
-	{
-		TEXTURE_DESC textureDesc = colorDesc;
-		textureDesc.usage = TU_RENDERTARGET;
-		textureDesc.numMips = 0;
-
-		HTexture texture = Texture::createHandle(textureDesc);
-
-		HTexture depthStencil;
-		if(createDepth)
-		{
-			textureDesc.format = depthStencilFormat;
-			textureDesc.hwGamma = false;
-			textureDesc.usage = TU_DEPTHSTENCIL;
-
-			depthStencil = Texture::createHandle(textureDesc);
-		}
-
-		RENDER_TEXTURE_DESC desc;
-		desc.colorSurfaces[0].texture = texture.getInternalPtr();
-		desc.colorSurfaces[0].face = 0;
-		desc.colorSurfaces[0].numFaces = 1;
-		desc.colorSurfaces[0].mipLevel = 0;
-
-		desc.depthStencilSurface.texture = depthStencil.getInternalPtr();
-		desc.depthStencilSurface.face = 0;
-		desc.depthStencilSurface.numFaces = 1;
-		desc.depthStencilSurface.mipLevel = 0;
-
-		SPtr<RenderTexture> newRT = createRenderTexture(desc);
-
-		return newRT;
-	}
-
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc)
-	{
-		SPtr<RenderTexture> newRT = createRenderTextureImpl(desc);
-		newRT->_setThisPtr(newRT);
-		newRT->initialize();
-
-		return newRT;
-	}
-
-	namespace ct
-	{
 	void TextureManager::onStartUp()
 	{
 		TEXTURE_DESC desc;
@@ -116,12 +70,54 @@ namespace bs
 		return newTex;
 	}
 
+	SPtr<RenderTexture> TextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth, PixelFormat depthStencilFormat)
+	{
+		TEXTURE_DESC textureDesc = colorDesc;
+		textureDesc.usage = TU_RENDERTARGET;
+		textureDesc.numMips = 0;
+
+		HTexture texture = Texture::createHandle(textureDesc);
+
+		HTexture depthStencil;
+		if(createDepth)
+		{
+			textureDesc.format = depthStencilFormat;
+			textureDesc.hwGamma = false;
+			textureDesc.usage = TU_DEPTHSTENCIL;
+
+			depthStencil = Texture::createHandle(textureDesc);
+		}
+
+		RENDER_TEXTURE_DESC desc;
+		desc.colorSurfaces[0].texture = texture.getInternalPtr();
+		desc.colorSurfaces[0].face = 0;
+		desc.colorSurfaces[0].numFaces = 1;
+		desc.colorSurfaces[0].mipLevel = 0;
+
+		desc.depthStencilSurface.texture = depthStencil.getInternalPtr();
+		desc.depthStencilSurface.face = 0;
+		desc.depthStencilSurface.numFaces = 1;
+		desc.depthStencilSurface.mipLevel = 0;
+
+		SPtr<RenderTexture> newRT = createRenderTexture(desc);
+
+		return newRT;
+	}
+
+	//SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc)
+	//{
+	//	SPtr<RenderTexture> newRT = createRenderTextureImpl(desc);
+	//	newRT->_setThisPtr(newRT);
+	//	newRT->initialize();
+
+	//	return newRT;
+	//}
+
 	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
 		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
 		newRT->initialize();
 
 		return newRT;
-	}
 	}
 }

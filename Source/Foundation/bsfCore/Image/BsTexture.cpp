@@ -96,7 +96,7 @@ namespace bs
 
 	SPtr<Texture> Texture::create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
 	{
-		return ct::TextureManager::instance().createTexture(desc, deviceMask);
+		return TextureManager::instance().createTexture(desc, deviceMask);
 	}
 
 	SPtr<Texture> Texture::create(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection, GpuDeviceFlags deviceMask)
@@ -110,7 +110,7 @@ namespace bs
 		desc.usage = usage;
 		desc.hwGamma = hwGammaCorrection;
 
-		SPtr<Texture> newTex = ct::TextureManager::instance().createTextureInternal(desc, pixelData, deviceMask);
+		SPtr<Texture> newTex = TextureManager::instance().createTextureInternal(desc, pixelData, deviceMask);
 		newTex->initialize();
 
 		return newTex;

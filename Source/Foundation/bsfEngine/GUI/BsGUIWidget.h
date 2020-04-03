@@ -49,7 +49,7 @@ namespace bs
 	struct GUIDrawGroupRenderData
 	{
 		INT32 id = 0;
-		SPtr<ct::RenderTexture> destination;
+		SPtr<RenderTexture> destination;
 		Rect2I bounds;
 		SubMesh subMesh;
 		bool requiresRedraw = true;

@@ -23,14 +23,27 @@ namespace bs
 	public:
 		virtual ~TextureManager() = default;
 
+		/** @copydoc Module::onStartUp */
+		void onStartUp() override;
+
+		/** @copydoc Module::onShutDown */
+		void onShutDown() override;
+
 		/**
 		 * Creates a completely empty and uninitialized Texture.
 		 *
-		 * @note	
+		 * @note
 		 * Internal method. Should only be used for very specific purposes, like deserialization, as it requires additional
 		 * manual initialization that is not required normally.
 		 */
 		virtual SPtr<Texture> _createEmpty() = 0;
+
+		/**
+		 * @copydoc	bs::TextureManager::createTexture(const TEXTURE_DESC&)
+		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
+		 */
+		SPtr<Texture> createTexture(const TEXTURE_DESC & desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
 
 		/**
 		 * Creates a new RenderTexture and automatically generates a single color surface and (optionally) a depth/stencil
@@ -43,12 +56,13 @@ namespace bs
 		 */
 		virtual SPtr<RenderTexture> createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
 
+		//SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc);
+
 		/**
-		 * Creates a RenderTexture using the description struct.
-		 *
-		 * @param[in]	desc	Description of the render texture to create.
+		 * @copydoc bs::TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC&)
+		 * @param[in]	deviceIdx		Index of the GPU device to create the object on.
 		 */
-		virtual SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc);
+		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC & desc, UINT32 deviceIdx = 0);
 
 		/**
 		 * Gets the format which will be natively used for a requested format given the constraints of the current device.
@@ -58,6 +72,8 @@ namespace bs
 		virtual PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) = 0;
 
 	protected:
+		friend class Texture;
+		friend class RenderTexture;
 		/**
 		 * Creates an empty and uninitialized render texture of a specific type. This is to be implemented by render
 		 * systems with their own implementations.
@@ -65,41 +81,7 @@ namespace bs
 		virtual SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
 
 		mutable HTexture mDummyTexture;
-	};
 
-	namespace ct
-	{
-	/**
-	 * Defines interface for creation of textures. Render systems provide their own implementations.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT TextureManager : public Module<TextureManager>
-	{
-	public:
-		virtual ~TextureManager() = default;
-
-		/** @copydoc Module::onStartUp */
-		void onStartUp() override;
-
-		/** @copydoc Module::onShutDown */
-		void onShutDown() override;
-
-		/**
-		 * @copydoc	bs::TextureManager::createTexture(const TEXTURE_DESC&)
-		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
-		 */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
-
-		/**
-		 * @copydoc bs::TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC&)
-		 * @param[in]	deviceIdx		Index of the GPU device to create the object on.
-		 */
-		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
-
-	protected:
-		friend class bs::Texture;
-		friend class bs::RenderTexture;
 
 		/**
 		 * Creates an empty and uninitialized texture of a specific type. This is to be implemented	by render systems with
@@ -109,8 +91,8 @@ namespace bs
 
 		/** @copydoc createRenderTexture */
 		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) = 0;
+
 	};
-		}
 
 	/** @} */
 }

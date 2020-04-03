@@ -33,25 +33,21 @@ namespace bs
 		return texPtr;
 	}
 
-	namespace ct
-	{
 	SPtr<Texture> D3D11TextureManager::createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask)
 	{
-		D3D11Texture* tex = new (bs_alloc<D3D11Texture>()) D3D11Texture(desc, initialData, deviceMask);
+		ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture(desc, initialData, deviceMask);
 
-		SPtr<D3D11Texture> texPtr = bs_shared_ptr<D3D11Texture>(tex);
+		SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
 	}
 
-	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
-																				 UINT32 deviceIdx)
+	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
 		SPtr<D3D11RenderTexture> texPtr = bs_shared_ptr_new<D3D11RenderTexture>(desc, deviceIdx);
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
-	}
 	}
 }
