@@ -252,7 +252,7 @@ namespace bs
 			return mProperties;
 		}
 
-		HTexture getHandle() const;
+		//HTexture getHandle() const;
 
 		/************************************************************************/
 		/* 								TEXTURE VIEW                      		*/

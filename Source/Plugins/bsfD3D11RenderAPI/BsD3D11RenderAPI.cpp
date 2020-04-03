@@ -99,7 +99,7 @@ namespace bs { namespace ct
 
 		// Create the texture manager for use by others		
 		bs::TextureManager::startUp<bs::D3D11TextureManager>();
-		TextureManager::startUp<D3D11TextureManager>();
+		//TextureManager::startUp<D3D11TextureManager>();
 
 		// Create hardware buffer manager		
 		bs::HardwareBufferManager::startUp();
