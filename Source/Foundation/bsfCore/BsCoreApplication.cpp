@@ -331,7 +331,7 @@ namespace bs
 		//gCoreThread().queueCommand(std::bind(&CoreApplication::beginCoreProfiling, this), CTQF_InternalQueue);
 		Platform::_coreUpdate();
 		//gCoreThread().queueCommand(&Platform::_coreUpdate, CTQF_InternalQueue);
-		ct::RenderWindowManager::instancePtr()->_update();
+		RenderWindowManager::instancePtr()->_update();
 		//gCoreThread().queueCommand(std::bind(&ct::RenderWindowManager::_update, ct::RenderWindowManager::instancePtr()), CTQF_InternalQueue);
 
 		CoreObjectFrameManager::instance().update();

@@ -23,42 +23,45 @@
  *  @{
  */
 
-/** @defgroup D3D11 bsfD3D11RenderAPI
- *	Wrapper around the DirectX 11 render API.
- */
+ /** @defgroup D3D11 bsfD3D11RenderAPI
+  *	Wrapper around the DirectX 11 render API.
+  */
 
-/** @} */
+  /** @} */
 
-namespace bs { namespace ct
+namespace bs
 {
-	class D3D11RenderAPI;
-	class D3D11Driver;
-	class D3D11DriverList;
-	class D3D11VideoMode;
-	class D3D11VideoModeList;
-	class D3D11HLSLProgramFactory;
-	class D3D11Device;
-	class D3D11HardwareBuffer;
-	class D3D11DepthStencilState;
-	class D3D11InputLayoutManager;
-	class D3D11GpuBuffer;
-	class D3D11RenderUtility;
-	class D3D11GpuProgram;
-	class D3D11TextureView;
 	class D3D11RenderWindow;
-	class GpuBufferView;
-
-	/**	DirectX 11 specific types to track resource statistics for. */
-	enum D3D11RenderStatResourceType
+	namespace ct
 	{
-		RenderStatObject_DepthStencilState = 100,
-		RenderStatObject_RasterizerState,
-		RenderStatObject_BlendState,
-		RenderStatObject_SamplerState,
-		RenderStatObject_InputLayout,
-		RenderStatObject_ResourceView,
-		RenderStatObject_SwapChain
-	};
+		class D3D11RenderAPI;
+		class D3D11Driver;
+		class D3D11DriverList;
+		class D3D11VideoMode;
+		class D3D11VideoModeList;
+		class D3D11HLSLProgramFactory;
+		class D3D11Device;
+		class D3D11HardwareBuffer;
+		class D3D11DepthStencilState;
+		class D3D11InputLayoutManager;
+		class D3D11GpuBuffer;
+		class D3D11RenderUtility;
+		class D3D11GpuProgram;
+		class D3D11TextureView;
+		class GpuBufferView;
 
-	typedef Vector<char*> HLSLMicroCode;
-}}
+		/**	DirectX 11 specific types to track resource statistics for. */
+		enum D3D11RenderStatResourceType
+		{
+			RenderStatObject_DepthStencilState = 100,
+			RenderStatObject_RasterizerState,
+			RenderStatObject_BlendState,
+			RenderStatObject_SamplerState,
+			RenderStatObject_InputLayout,
+			RenderStatObject_ResourceView,
+			RenderStatObject_SwapChain
+		};
+
+		typedef Vector<char*> HLSLMicroCode;
+	}
+}

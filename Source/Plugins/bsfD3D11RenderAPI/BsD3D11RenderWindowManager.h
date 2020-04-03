@@ -19,8 +19,7 @@ namespace bs
 
 	protected:
 		/** @copydoc RenderWindowManager::createImpl */
-		SPtr<RenderWindow> createImpl(RENDER_WINDOW_DESC& desc, UINT32 windowId,
-			const SPtr<RenderWindow>& parentWindow) override;
+		SPtr<RenderWindow> createImpl(RENDER_WINDOW_DESC& desc, UINT32 windowId, const SPtr<RenderWindow>& parentWindow) override;
 
 	private:
 		ct::D3D11RenderAPI* mRenderSystem;

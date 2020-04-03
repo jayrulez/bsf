@@ -17,7 +17,7 @@ namespace bs
 	class BS_CORE_EXPORT RenderWindowManager : public Module<RenderWindowManager>
 	{
 	public:
-		RenderWindowManager() = default;
+		RenderWindowManager();
 		~RenderWindowManager() = default;
 
 		/**
@@ -29,29 +29,26 @@ namespace bs
 		/** Called once per frame. Dispatches events. */
 		void _update();
 
+		/**	Returns a list of all open render windows. */
+		Vector<RenderWindow*> getRenderWindows() const;
+
 		/** Called by the core thread when window is destroyed. */
 		void notifyWindowDestroyed(RenderWindow* window);
 
 		/**	Called by the core thread when window receives focus. */
-		void notifyFocusReceived(ct::RenderWindow* window);
+		void notifyFocusReceived(RenderWindow* window);
 
 		/**	Called by the core thread when window loses focus. */
-		void notifyFocusLost(ct::RenderWindow* window);
+		void notifyFocusLost(RenderWindow* window);
 
 		/**	Called by the core thread when window is moved or resized. */
-		void notifyMovedOrResized(ct::RenderWindow* window);
+		void notifyMovedOrResized(RenderWindow* window);
 
 		/**	Called by the core thread when mouse leaves a window. */
-		void notifyMouseLeft(ct::RenderWindow* window);
+		void notifyMouseLeft(RenderWindow* window);
 
 		/** Called by the core thread when the user requests for the window to close. */
-		void notifyCloseRequested(ct::RenderWindow* coreWindow);
-
-		/**	Called by the sim thread when window properties change. */
-		void notifySyncDataDirty(ct::RenderWindow* coreWindow);
-
-		/**	Returns a list of all open render windows. */
-		Vector<RenderWindow*> getRenderWindows() const;
+		void notifyCloseRequested(RenderWindow* coreWindow);
 
 		/** Returns the window that is currently the top-most modal window. Returns null if no modal windows are active. */
 		RenderWindow* getTopMostModal() const;
@@ -67,16 +64,24 @@ namespace bs
 	protected:
 		friend class RenderWindow;
 
-		/**	Finds a sim thread equivalent of the provided core thread window implementation. */
-		RenderWindow* getNonCore(const ct::RenderWindow* window) const;
+		/**	Called whenever a window is created. */
+		void windowCreated(RenderWindow* window);
+
+		/**	Called by the core thread when window is destroyed. */
+		void windowDestroyed(RenderWindow* window);
 
 		/** @copydoc create */
 		virtual SPtr<RenderWindow> createImpl(RENDER_WINDOW_DESC& desc, UINT32 windowId, const SPtr<RenderWindow>& parentWindow) = 0;
 
 	protected:
+		friend class RenderWindow;
+
 		mutable Mutex mWindowMutex;
 		Map<UINT32, RenderWindow*> mWindows;
 		Vector<RenderWindow*> mModalWindowStack;
+
+		Vector<RenderWindow*> mCreatedWindows;
+		std::atomic_uint mNextWindowId;
 
 		RenderWindow* mWindowInFocus = nullptr;
 		RenderWindow* mNewWindowInFocus = nullptr;
@@ -85,45 +90,6 @@ namespace bs
 		Vector<RenderWindow*> mCloseRequestedWindows;
 		UnorderedSet<RenderWindow*> mDirtyProperties;
 	};
-
-	namespace ct
-	{
-	/**
-	 * Handles creation and internal updates relating to render windows.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT RenderWindowManager : public Module<RenderWindowManager>
-	{
-	public:
-		RenderWindowManager();
-
-		/** Called once per frame. Dispatches events. */
-		void _update();
-
-		/**	Called by the core thread when window properties change. */
-		void notifySyncDataDirty(RenderWindow* window);
-
-		/**	Returns a list of all open render windows. */
-		Vector<RenderWindow*> getRenderWindows() const;
-
-	protected:
-		friend class RenderWindow;
-		friend class bs::RenderWindow;
-		friend class bs::RenderWindowManager;
-
-		/**	Called whenever a window is created. */
-		void windowCreated(RenderWindow* window);
-
-		/**	Called by the core thread when window is destroyed. */
-		void windowDestroyed(RenderWindow* window);
-
-		mutable Mutex mWindowMutex;
-		Vector<RenderWindow*> mCreatedWindows;
-		UnorderedSet<RenderWindow*> mDirtyProperties;
-		std::atomic_uint mNextWindowId;
-	};
-	}
 
 	/** @} */
 }

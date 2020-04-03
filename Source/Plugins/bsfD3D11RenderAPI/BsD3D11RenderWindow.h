@@ -18,54 +18,6 @@ namespace bs {
 	class D3D11RenderWindow : public RenderWindow
 	{
 	public:
-		~D3D11RenderWindow() = default;
-
-		/** @copydoc RenderWindow::screenToWindowPos */
-		void getCustomAttribute(const String& name, void* pData) const override;
-
-		/** @copydoc RenderWindow::screenToWindowPos */
-		Vector2I screenToWindowPos(const Vector2I& screenPos) const override;
-
-		/** @copydoc RenderWindow::windowToScreenPos */
-		Vector2I windowToScreenPos(const Vector2I& windowPos) const override;
-
-		/** @copydoc RenderWindow::getCore */
-		SPtr<ct::D3D11RenderWindow> getCore() const;
-
-	protected:
-		friend class D3D11RenderWindowManager;
-		friend class ct::D3D11RenderWindow;
-
-		D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId);
-
-		/** @copydoc RenderWindow::getProperties */
-		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
-
-		/** @copydoc RenderWindow::syncProperties */
-		void syncProperties() override;
-
-		/** @copydoc RenderWindow::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-		/**	Retrieves internal window handle. */
-		HWND getHWnd() const;
-
-	private:
-		RenderWindowProperties mProperties;
-	};
-
-	namespace ct
-	{
-	/**
-	 * Render window implementation for Windows and DirectX 11.
-	 *
-	 * @note	Core thread only.
-	 */
-	class D3D11RenderWindow : public RenderWindow
-	{
-	public:
-		D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId,
-			D3D11Device& device, IDXGIFactory1* DXGIFactory);
 		~D3D11RenderWindow();
 
 		/** @copydoc RenderWindow::move */
@@ -101,13 +53,20 @@ namespace bs {
 		/** @copydoc RenderWindow::setVSync */
 		void setVSync(bool enabled, UINT32 interval = 1) override;
 
+		/** @copydoc RenderWindow::screenToWindowPos */
+		Vector2I screenToWindowPos(const Vector2I& screenPos) const override;
+
+		/** @copydoc RenderWindow::windowToScreenPos */
+		Vector2I windowToScreenPos(const Vector2I& windowPos) const override;
+
+
 		/**
 		 * Copies the contents of a frame buffer into the pre-allocated buffer.
 		 *
 		 * @param[out]	dst		Previously allocated buffer to read the contents into. Must be of valid size.
 		 * @param[in]	buffer	Frame buffer to read the contents from.
 		 */
-		void copyToMemory(PixelData &dst, FrameBuffer buffer);
+		void copyToMemory(PixelData& dst, FrameBuffer buffer);
 
 		/** @copydoc RenderWindow::swapBuffers */
 		void swapBuffers(UINT32 syncMask = 0xFFFFFFFF) override;
@@ -118,11 +77,36 @@ namespace bs {
 		/** @copydoc RenderWindow::_windowMovedOrResized */
 		void _windowMovedOrResized() override;
 
+
+
+		/** @copydoc RenderWindow::getCore */
+		SPtr<D3D11RenderWindow> getCore() const;
+
+
 		/**	Returns presentation parameters used for creating the window swap chain. */
-		DXGI_SWAP_CHAIN_DESC* _getPresentationParameters() { return &mSwapChainDesc; }
+		DXGI_SWAP_CHAIN_DESC* _getPresentationParameters()
+		{
+			return &mSwapChainDesc;
+		}
 
 		/**	Returns internal window handle. */
 		HWND _getWindowHandle() const;
+
+	protected:
+		friend class D3D11RenderWindowManager;
+
+		D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, ct::D3D11Device& device, IDXGIFactory1* DXGIFactory);
+
+		/** @copydoc RenderWindow::getProperties */
+		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
+
+
+		/** @copydoc RenderWindow::createCore */
+		SPtr<ct::CoreObject> createCore() const override;
+
+		/**	Retrieves internal window handle. */
+		HWND getHWnd() const;
+
 
 	protected:
 		friend class bs::D3D11RenderWindow;
@@ -145,17 +129,8 @@ namespace bs {
 		/**	Resizes all buffers attached to the swap chain to the specified size. */
 		void resizeSwapChainBuffers(UINT32 width, UINT32 height);
 
-		/** @copydoc RenderWindow::getProperties */
-		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
-
-		/** @copydoc RenderWindow::getSyncedProperties */
-		RenderWindowProperties& getSyncedProperties() override { return mSyncedProperties; }
-
-		/** @copydoc RenderWindow::syncProperties */
-		void syncProperties() override;
-
 	protected:
-		D3D11Device& mDevice;
+		ct::D3D11Device& mDevice;
 		IDXGIFactory1* mDXGIFactory;
 		bool mSizing = false;
 		bool mIsChild = false;
@@ -167,16 +142,14 @@ namespace bs {
 
 		ID3D11Texture2D* mBackBuffer = nullptr;
 		ID3D11RenderTargetView* mRenderTargetView = nullptr;
-		SPtr<TextureView> mDepthStencilView = nullptr;
+		SPtr<ct::TextureView> mDepthStencilView = nullptr;
 		SPtr<Texture> mDepthStencilBuffer;
 
 		IDXGISwapChain* mSwapChain = nullptr;
 		DXGI_SWAP_CHAIN_DESC mSwapChainDesc;
 		Win32Window* mWindow = nullptr;
 
+	private:
 		RenderWindowProperties mProperties;
-		RenderWindowProperties mSyncedProperties;
 	};
-	
-	/** @} */
-}}
+}

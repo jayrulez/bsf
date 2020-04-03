@@ -169,7 +169,7 @@ namespace bs
 		// Make sure render window initialization is submitted to the internal queue
 		//gCoreThread().submitAll();
 
-		initializeWithWindow(renderWindow->getCore());
+		initializeWithWindow(renderWindow);
 
 		//gCoreThread().queueCommand(std::bind(&RenderAPI::initializeWithWindow, this, renderWindow->getCore()), CTQF_InternalQueue | CTQF_BlockUntilComplete);
 
