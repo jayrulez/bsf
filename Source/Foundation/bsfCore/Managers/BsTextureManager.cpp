@@ -27,12 +27,12 @@ namespace bs
 		}
 
 		RENDER_TEXTURE_DESC desc;
-		desc.colorSurfaces[0].texture = texture;
+		desc.colorSurfaces[0].texture = texture.getInternalPtr();
 		desc.colorSurfaces[0].face = 0;
 		desc.colorSurfaces[0].numFaces = 1;
 		desc.colorSurfaces[0].mipLevel = 0;
 
-		desc.depthStencilSurface.texture = depthStencil;
+		desc.depthStencilSurface.texture = depthStencil.getInternalPtr();
 		desc.depthStencilSurface.face = 0;
 		desc.depthStencilSurface.numFaces = 1;
 		desc.depthStencilSurface.mipLevel = 0;

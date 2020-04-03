@@ -20,32 +20,6 @@ namespace bs
 	{
 		RENDER_SURFACE_DESC() { }
 
-		HTexture texture;
-
-		/** First face of the texture to bind (array index in texture arrays, or Z slice in 3D textures). */
-		UINT32 face = 0;
-
-		/**
-		 * Number of faces to bind (entries in a texture array, or Z slices in 3D textures). When zero the entire resource
-		 * will be bound.
-		 */
-		UINT32 numFaces = 0;
-
-		/** If the texture has multiple mips, which one to bind (only one can be bound for rendering). */
-		UINT32 mipLevel = 0;
-	};
-
-	namespace ct
-	{
-	/**
-	 * @see		bs::RENDER_SURFACE_DESC
-	 *
-	 * @note	References core textures instead of texture handles.
-	 */
-	struct BS_CORE_EXPORT RENDER_SURFACE_DESC
-	{
-		RENDER_SURFACE_DESC() { }
-
 		SPtr<Texture> texture;
 
 		/** First face of the texture to bind (array index in texture arrays, or Z slice in 3D textures). */
@@ -60,7 +34,6 @@ namespace bs
 		/** If the texture has multiple mips, which one to bind (only one can be bound for rendering). */
 		UINT32 mipLevel = 0;
 	};
-	}
 
 	/** Contains various properties that describe a render target. */
 	class BS_CORE_EXPORT RenderTargetProperties
@@ -124,67 +97,6 @@ namespace bs
 	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) RenderTarget : public IReflectable, public CoreObject
 	{
 	public:
-		RenderTarget();
-		virtual ~RenderTarget() = default;
-
-		/** Queries the render target for a custom attribute. This may be anything and is implementation specific. */
-		virtual void getCustomAttribute(const String& name, void* pData) const;
-
-		/**
-		 * @copydoc ct::RenderTarget::setPriority
-		 *
-		 * @note This is an @ref asyncMethod "asynchronous method".
-		 */
-		void setPriority(INT32 priority);
-
-		/**
-		 * Returns properties that describe the render target.
-		 *
-		 * @note	Sim thread only.
-		 */
-		const RenderTargetProperties& getProperties() const;
-
-		/** Retrieves a core implementation of a render target usable only from the core thread. */
-		SPtr<ct::RenderTarget> getCore() const;
-
-		/**
-		 * Event that gets triggered whenever the render target is resized.
-		 *
-		 * @note	Sim thread only.
-		 */
-		mutable Event<void()> onResized;
-
-	protected:
-		friend class ct::RenderTarget;
-
-		/**	Returns properties that describe the render target. */
-		virtual const RenderTargetProperties& getPropertiesInternal() const = 0;
-		
-		/************************************************************************/
-		/* 								SERIALIZATION                      		*/
-		/************************************************************************/
-	public:
-		friend class RenderTargetRTTI;
-		static RTTITypeBase* getRTTIStatic();
-		RTTITypeBase* getRTTI() const override;
-	};
-
-	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Provides access to internal render target implementation usable only from the core thread.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT RenderTarget : public CoreObject
-	{
-	public:
 		/** Frame buffer type when double-buffering is used. */
 		enum FrameBuffer
 		{
@@ -196,12 +108,18 @@ namespace bs
 		RenderTarget();
 		virtual ~RenderTarget() = default;
 
+		/** Queries the render target for a custom attribute. This may be anything and is implementation specific. */
+		virtual void getCustomAttribute(const String& name, void* pData) const;
+
 		/**
 		 * Sets a priority that determines in which orders the render targets the processed.
-		 * 			
+		 *
 		 * @param[in]	priority	The priority. Higher value means the target will be rendered sooner.
 		 */
 		void setPriority(INT32 priority);
+
+		/**	Returns properties that describe the render target. */
+		const RenderTargetProperties& getProperties() const;
 
 		/**
 		 * Swaps the frame buffers to display the next frame.
@@ -212,39 +130,57 @@ namespace bs
 		 *							related to this render target, you can exclude them from the sync mask for potentially
 		 *							better performance. You can use CommandSyncMask to generate a valid sync mask.
 		 */
-		virtual void swapBuffers(UINT32 syncMask = 0xFFFFFFFF) {}
-
-		/** Queries the render target for a custom attribute. This may be anything and is implementation specific. */
-		virtual void getCustomAttribute(const String& name, void* pData) const;
-
-		/**	Returns properties that describe the render target. */
-		const RenderTargetProperties& getProperties() const;
+		virtual void swapBuffers(UINT32 syncMask = 0xFFFFFFFF)
+		{
+		}
 
 		/**
 		 * Returns a number that increments each time the target is rendered to. External systems can use this to
 		 * determine when the target's contents changed.
 		 */
-		UINT64 getUpdateCount() const { return mUpdateCount; }
+		UINT64 getUpdateCount() const
+		{
+			return mUpdateCount;
+		}
 
 		/**
 		 * @name Internal
 		 * @{
 		 */
 
-		/** Increments the update count, letting other code know that the contents of the render target changed. */
-		void _tickUpdateCount() { mUpdateCount++; }
+		 /** Increments the update count, letting other code know that the contents of the render target changed. */
+		void _tickUpdateCount()
+		{
+			mUpdateCount++;
+		}
+
+		/** Retrieves a core implementation of a render target usable only from the core thread. */
+		SPtr<RenderTarget> getCore() const;
+
+		/**
+		 * Event that gets triggered whenever the render target is resized.
+		 *
+		 * @note	Sim thread only.
+		 */
+		mutable Event<void()> onResized;
 
 		/** @} */
 	protected:
-		friend class bs::RenderTarget;
 
 		/**	Returns properties that describe the render target. */
 		virtual const RenderTargetProperties& getPropertiesInternal() const = 0;
 
 	private:
 		UINT64 mUpdateCount = 0;
+		
+		/************************************************************************/
+		/* 								SERIALIZATION                      		*/
+		/************************************************************************/
+	public:
+		friend class RenderTargetRTTI;
+		static RTTITypeBase* getRTTIStatic();
+		RTTITypeBase* getRTTI() const override;
 	};
 
 	/** @} */
-	}
 }

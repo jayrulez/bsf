@@ -160,7 +160,7 @@ namespace bs
 
 	protected:
 		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
+		void syncToCore(const CoreSyncData& data);
 
 	private:
 		/**	Throws an exception of the color and depth/stencil buffers aren't compatible. */

@@ -369,7 +369,7 @@ namespace bs
 					HTexture texture = Texture::createHandle(texDesc);
 
 					RENDER_TEXTURE_DESC rtDesc;
-					rtDesc.colorSurfaces[0].texture = texture;
+					rtDesc.colorSurfaces[0].texture = texture.getInternalPtr();
 
 					entry.outputTexture = RenderTexture::create(rtDesc);
 				}

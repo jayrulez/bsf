@@ -130,7 +130,7 @@ namespace bs
 
 	SPtr<ct::CoreObject> Viewport::createCore() const
 	{
-		SPtr<ct::RenderTarget> targetCore;
+		SPtr<RenderTarget> targetCore;
 		if (mTarget != nullptr)
 			targetCore = mTarget->getCore();
 

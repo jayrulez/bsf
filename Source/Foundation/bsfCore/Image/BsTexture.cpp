@@ -556,4 +556,10 @@ namespace bs
 	{
 		return Texture::getRTTIStatic();
 	}
+
+	HTexture Texture::getHandle() const
+	{
+		SPtr<Texture> texturePtr = std::static_pointer_cast<Texture>(getThisPtr());// fix this, just for compilation
+		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
+	}
 }

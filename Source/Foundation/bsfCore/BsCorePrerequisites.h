@@ -260,7 +260,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(Technique)
 	CORE_OBJECT_FORWARD_DECLARE(Shader)
 	CORE_OBJECT_FORWARD_DECLARE(Material)
-	CORE_OBJECT_FORWARD_DECLARE(RenderTarget)
+	//CORE_OBJECT_FORWARD_DECLARE(RenderTarget)
 	CORE_OBJECT_FORWARD_DECLARE(RenderTexture)
 	CORE_OBJECT_FORWARD_DECLARE(RenderWindow)
 	CORE_OBJECT_FORWARD_DECLARE(SamplerState)
@@ -294,7 +294,7 @@ namespace bs
 		//class Technique2;
 		//class Shader2;
 		//class Material2;
-		//class RenderTarget2;
+	CORE_OBJECT2_FORWARD_DECLARE(RenderTarget)
 		//class RenderTexture2;
 		//class RenderWindow2;
 		//class SamplerState2;

@@ -15,7 +15,7 @@ namespace bs
 		bool requiresHwGamma = false;
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
-			HTexture texture = desc.colorSurfaces[i].texture;
+			HTexture texture = desc.colorSurfaces[i].texture->getHandle();
 
 			if (!texture.isLoaded())
 				continue;
@@ -28,7 +28,7 @@ namespace bs
 
 		if (firstIdx == (UINT32)-1)
 		{
-			HTexture texture = desc.depthStencilSurface.texture;
+			HTexture texture = desc.depthStencilSurface.texture->getHandle();
 			if (texture.isLoaded())
 			{
 				const TextureProperties& texProps = texture->getProperties();
@@ -38,7 +38,7 @@ namespace bs
 		}
 		else
 		{
-			HTexture texture = desc.colorSurfaces[firstIdx].texture;
+			HTexture texture = desc.colorSurfaces[firstIdx].texture->getHandle();
 
 			const TextureProperties& texProps = texture->getProperties();
 			construct(&texProps, desc.colorSurfaces[firstIdx].numFaces, desc.colorSurfaces[firstIdx].mipLevel,
@@ -113,7 +113,8 @@ namespace bs
 
 	SPtr<ct::RenderTexture> RenderTexture::getCore() const
 	{
-		return std::static_pointer_cast<ct::RenderTexture>(mCoreSpecific);
+		//return std::static_pointer_cast<ct::RenderTexture>(mCoreSpecific);
+		return nullptr;
 	}
 
 	RenderTexture::RenderTexture(const RENDER_TEXTURE_DESC& desc)
@@ -122,38 +123,40 @@ namespace bs
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
 			if (desc.colorSurfaces[i].texture != nullptr)
-				mBindableColorTex[i] = desc.colorSurfaces[i].texture;
+				mBindableColorTex[i] = desc.colorSurfaces[i].texture->getHandle();
 		}
 
 		if (desc.depthStencilSurface.texture != nullptr)
-			mBindableDepthStencilTex = desc.depthStencilSurface.texture;
+			mBindableDepthStencilTex = desc.depthStencilSurface.texture->getHandle();
 	}
 
 	SPtr<ct::CoreObject> RenderTexture::createCore() const
 	{
-		ct::RENDER_TEXTURE_DESC coreDesc;
+		//ct::RENDER_TEXTURE_DESC coreDesc;
 
-		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
-		{
-			ct::RENDER_SURFACE_DESC surfaceDesc;
-			if (mDesc.colorSurfaces[i].texture.isLoaded())
-				surfaceDesc.texture = mDesc.colorSurfaces[i].texture.getInternalPtr();
+		//for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
+		//{
+		//	RENDER_SURFACE_DESC surfaceDesc;
+		//	if (mDesc.colorSurfaces[i].texture->getHandle().isLoaded())
+		//		surfaceDesc.texture = mDesc.colorSurfaces[i].texture;
 
-			surfaceDesc.face = mDesc.colorSurfaces[i].face;
-			surfaceDesc.numFaces = mDesc.colorSurfaces[i].numFaces;
-			surfaceDesc.mipLevel = mDesc.colorSurfaces[i].mipLevel;
+		//	surfaceDesc.face = mDesc.colorSurfaces[i].face;
+		//	surfaceDesc.numFaces = mDesc.colorSurfaces[i].numFaces;
+		//	surfaceDesc.mipLevel = mDesc.colorSurfaces[i].mipLevel;
 
-			coreDesc.colorSurfaces[i] = surfaceDesc;
-		}
+		//	coreDesc.colorSurfaces[i] = surfaceDesc;
+		//}
 
-		if (mDesc.depthStencilSurface.texture.isLoaded())
-			coreDesc.depthStencilSurface.texture = mDesc.depthStencilSurface.texture.getInternalPtr();
+		//if (mDesc.depthStencilSurface.texture->getHandle().isLoaded())
+		//	coreDesc.depthStencilSurface.texture = mDesc.depthStencilSurface.texture;
 
-		coreDesc.depthStencilSurface.face = mDesc.depthStencilSurface.face;
-		coreDesc.depthStencilSurface.numFaces = mDesc.depthStencilSurface.numFaces;
-		coreDesc.depthStencilSurface.mipLevel = mDesc.depthStencilSurface.mipLevel;
+		//coreDesc.depthStencilSurface.face = mDesc.depthStencilSurface.face;
+		//coreDesc.depthStencilSurface.numFaces = mDesc.depthStencilSurface.numFaces;
+		//coreDesc.depthStencilSurface.mipLevel = mDesc.depthStencilSurface.mipLevel;
 
-		return ct::TextureManager::instance().createRenderTextureInternal(coreDesc);
+		//return ct::TextureManager::instance().createRenderTextureInternal(coreDesc);
+
+		return nullptr;
 	}
 
 	CoreSyncData RenderTexture::syncToCore(FrameAlloc* allocator)

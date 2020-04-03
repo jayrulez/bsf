@@ -57,7 +57,9 @@ namespace bs
 
 	SPtr<ct::D3D11RenderWindow> D3D11RenderWindow::getCore() const
 	{
-		return std::static_pointer_cast<ct::D3D11RenderWindow>(mCoreSpecific);
+		//return std::static_pointer_cast<ct::D3D11RenderWindow>(mCoreSpecific);
+
+		return nullptr;
 	}
 
 	HWND D3D11RenderWindow::getHWnd() const
@@ -79,11 +81,13 @@ namespace bs
 
 		// Create the window
 		RENDER_WINDOW_DESC desc = mDesc;
-		SPtr<ct::CoreObject> coreObj = bs_shared_ptr_new<ct::D3D11RenderWindow>(desc, mWindowId,
-			d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
-		coreObj->_setThisPtr(coreObj);
+		//SPtr<ct::CoreObject> coreObj = bs_shared_ptr_new<ct::D3D11RenderWindow>(desc, mWindowId,
+		//	d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
+		//coreObj->_setThisPtr(coreObj);
 
-		return coreObj;
+		//return coreObj;
+
+		return nullptr;
 	}
 
 	namespace ct

@@ -235,7 +235,9 @@ namespace bs
 
 	SPtr<ct::RenderWindow> RenderWindow::getCore() const
 	{
-		return std::static_pointer_cast<ct::RenderWindow>(mCoreSpecific);
+		//return std::static_pointer_cast<ct::RenderWindow>(mCoreSpecific);
+
+		return nullptr;
 	}
 
 	SPtr<RenderWindow> RenderWindow::create(RENDER_WINDOW_DESC& desc, SPtr<RenderWindow> parentWindow)
