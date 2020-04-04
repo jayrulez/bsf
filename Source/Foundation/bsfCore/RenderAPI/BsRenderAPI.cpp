@@ -87,10 +87,9 @@ namespace bs
 		//gCoreThread().queueCommand(std::bind(&ct::RenderAPI::setScissorRect, ct::RenderAPI::instancePtr(), left, top, right, bottom, nullptr));
 	}
 
-	void RenderAPI::setRenderTarget(const SPtr<RenderTarget>& target, UINT32 readOnlyFlags,
-									RenderSurfaceMask loadMask)
+	void RenderAPI::setRenderTarget(const SPtr<RenderTarget>& target, UINT32 readOnlyFlags, RenderSurfaceMask loadMask)
 	{
-		ct::RenderAPI::instancePtr()->setRenderTarget(target->getCore(), readOnlyFlags, loadMask, nullptr);
+		ct::RenderAPI::instancePtr()->setRenderTarget(target, readOnlyFlags, loadMask, nullptr);
 		//gCoreThread().queueCommand(std::bind(&ct::RenderAPI::setRenderTarget, ct::RenderAPI::instancePtr(), target->getCore(), readOnlyFlags, loadMask, nullptr));
 	}
 
@@ -110,7 +109,7 @@ namespace bs
 
 	void RenderAPI::swapBuffers(const SPtr<RenderTarget>& target)
 	{
-		ct::RenderAPI::instancePtr()->swapBuffers(target->getCore(), 1);
+		ct::RenderAPI::instancePtr()->swapBuffers(target, 1);
 		//gCoreThread().queueCommand(std::bind(&ct::RenderAPI::swapBuffers, ct::RenderAPI::instancePtr(), target->getCore(), 1));
 	}
 

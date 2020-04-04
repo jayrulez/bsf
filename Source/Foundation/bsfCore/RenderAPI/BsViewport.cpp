@@ -132,7 +132,7 @@ namespace bs
 	{
 		SPtr<RenderTarget> targetCore;
 		if (mTarget != nullptr)
-			targetCore = mTarget->getCore();
+			targetCore = mTarget;
 
 		ct::Viewport* viewport = new (bs_alloc<ct::Viewport>())
 			ct::Viewport(targetCore, mNormArea.x, mNormArea.y, mNormArea.width, mNormArea.height);

@@ -77,20 +77,11 @@ namespace bs {
 		/** @copydoc RenderWindow::_windowMovedOrResized */
 		void _windowMovedOrResized() override;
 
-
-
-		/** @copydoc RenderWindow::getCore */
-		SPtr<D3D11RenderWindow> getCore() const;
-
-
 		/**	Returns presentation parameters used for creating the window swap chain. */
 		DXGI_SWAP_CHAIN_DESC* _getPresentationParameters()
 		{
 			return &mSwapChainDesc;
 		}
-
-		/**	Returns internal window handle. */
-		HWND _getWindowHandle() const;
 
 	protected:
 		friend class D3D11RenderWindowManager;
@@ -99,10 +90,6 @@ namespace bs {
 
 		/** @copydoc RenderWindow::getProperties */
 		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
-
-
-		/** @copydoc RenderWindow::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
 
 		/**	Retrieves internal window handle. */
 		HWND getHWnd() const;

@@ -10,6 +10,7 @@ namespace bs
 {
 	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc)
 	{
+		//return bs_core_ptr_new<D3D11RenderTexture>(desc);
 		D3D11RenderTexture* tex = new (bs_alloc<D3D11RenderTexture>()) D3D11RenderTexture(desc);
 
 		return bs_core_ptr<D3D11RenderTexture>(tex);

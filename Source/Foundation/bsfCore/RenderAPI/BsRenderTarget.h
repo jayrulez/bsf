@@ -154,9 +154,6 @@ namespace bs
 			mUpdateCount++;
 		}
 
-		/** Retrieves a core implementation of a render target usable only from the core thread. */
-		SPtr<RenderTarget> getCore() const;
-
 		/**
 		 * Event that gets triggered whenever the render target is resized.
 		 *

@@ -14,13 +14,6 @@ namespace bs
 		markCoreClean();
 	}
 
-	SPtr<RenderTarget> RenderTarget::getCore() const
-	{
-		//return std::static_pointer_cast<RenderTarget>(mCoreSpecific);
-		return nullptr;
-	}
-
-
 	void RenderTarget::setPriority(INT32 priority)
 	{
 		RenderTargetProperties& props = const_cast<RenderTargetProperties&>(getProperties());

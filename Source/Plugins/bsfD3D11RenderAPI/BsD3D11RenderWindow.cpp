@@ -379,20 +379,7 @@ namespace bs
 		return Vector2I(pos.x, pos.y);
 	}
 
-	SPtr<D3D11RenderWindow> D3D11RenderWindow::getCore() const
-	{
-		//return std::static_pointer_cast<ct::D3D11RenderWindow>(mCoreSpecific);
-
-		return nullptr;
-	}
-
 	HWND D3D11RenderWindow::getHWnd() const
-	{
-		blockUntilCoreInitialized();
-		return getCore()->_getWindowHandle();
-	}
-
-	HWND D3D11RenderWindow::_getWindowHandle() const
 	{
 		return mWindow->getHWnd();
 	}
@@ -712,21 +699,5 @@ namespace bs
 			BS_EXCEPT(RenderingAPIException, "Unable to query a DXGIDevice.");
 
 		return pDXGIDevice;
-	}
-
-	SPtr<ct::CoreObject> D3D11RenderWindow::createCore() const
-	{
-		ct::RenderAPI* rs = ct::RenderAPI::instancePtr();
-		auto d3d11rs = static_cast<ct::D3D11RenderAPI*>(rs);
-
-		// Create the window
-		RENDER_WINDOW_DESC desc = mDesc;
-		//SPtr<ct::CoreObject> coreObj = bs_shared_ptr_new<ct::D3D11RenderWindow>(desc, mWindowId,
-		//	d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
-		//coreObj->_setThisPtr(coreObj);
-
-		//return coreObj;
-
-		return nullptr;
 	}
 }

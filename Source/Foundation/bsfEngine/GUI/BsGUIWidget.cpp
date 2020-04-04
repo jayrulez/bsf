@@ -425,7 +425,7 @@ namespace bs
 						if (group.id != groupId)
 							continue;
 
-						group.renderTargetElements.push_back(target->getCore());
+						group.renderTargetElements.push_back(target);
 					}
 				}
 			}
@@ -817,7 +817,7 @@ namespace bs
 	{
 		GUIDrawGroupRenderData output;
 		output.id = drawGroup.id;
-		output.destination = drawGroup.outputTexture->getCore();
+		output.destination = drawGroup.outputTexture;
 		output.bounds = drawGroup.bounds;
 		output.requiresRedraw = true;
 		

@@ -50,16 +50,6 @@ namespace bs
 		/** @copydoc TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC&, UINT32) */
 		static SPtr<RenderTexture> create(const RENDER_TEXTURE_DESC & desc, UINT32 deviceIdx = 0);
 
-		/**
-		 * Retrieves a core implementation of a render texture usable only from the core thread.
-		 *
-		 * @note	Core thread only.
-		 */
-		SPtr<RenderTexture> getCore() const
-		{
-			return nullptr;
-		}
-
 		/**	Returns properties that describe the render texture. */
 		const RenderTextureProperties& getProperties() const;
 

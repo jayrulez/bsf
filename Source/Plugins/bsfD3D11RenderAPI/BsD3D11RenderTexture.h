@@ -20,6 +20,8 @@ namespace bs
 	class D3D11RenderTexture : public RenderTexture
 	{
 	public:
+
+		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc);
 		virtual ~D3D11RenderTexture() { }
 		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx);
 
@@ -28,8 +30,6 @@ namespace bs
 
 	protected:
 		friend class D3D11TextureManager;
-
-		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc);
 
 		/** @copydoc RenderTexture::getProperties */
 		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }

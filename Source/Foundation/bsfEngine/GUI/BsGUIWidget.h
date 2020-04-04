@@ -37,11 +37,11 @@ namespace bs
 	struct GUIRenderTargetRenderData
 	{
 		GUIRenderTargetRenderData() = default;
-		GUIRenderTargetRenderData(SPtr<RenderTarget> target)
+		GUIRenderTargetRenderData(SPtr<const RenderTarget> target)
 			:target(std::move(target))
 		{ }
 		
-		SPtr<RenderTarget> target;
+		SPtr<const RenderTarget> target;
 		UINT64 lastUpdateCount = (UINT64)-1;
 	};
 
