@@ -10,10 +10,10 @@ namespace bs
 {
 	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc)
 	{
-		//return bs_core_ptr_new<D3D11RenderTexture>(desc);
-		D3D11RenderTexture* tex = new (bs_alloc<D3D11RenderTexture>()) D3D11RenderTexture(desc);
+		return bs_core_ptr_new<D3D11RenderTexture>(desc);
+		//D3D11RenderTexture* tex = new (bs_alloc<D3D11RenderTexture>()) D3D11RenderTexture(desc);
 
-		return bs_core_ptr<D3D11RenderTexture>(tex);
+		//return bs_core_ptr<D3D11RenderTexture>(tex);
 	}
 
 	PixelFormat D3D11TextureManager::getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma)
@@ -26,9 +26,10 @@ namespace bs
 
 	SPtr<Texture> D3D11TextureManager::_createEmpty()
 	{
-		ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture();
+		//ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture();
 
-		SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
+		//SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
+		SPtr<ct::D3D11Texture> texPtr = bs_core_ptr_new<ct::D3D11Texture>();
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
@@ -36,9 +37,10 @@ namespace bs
 
 	SPtr<Texture> D3D11TextureManager::createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask)
 	{
-		ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture(desc, initialData, deviceMask);
+		//ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture(desc, initialData, deviceMask);
 
-		SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
+		//SPtr<ct::D3D11Texture> texPtr = bs_shared_ptr<ct::D3D11Texture>(tex);
+		SPtr<ct::D3D11Texture> texPtr = bs_core_ptr_new<ct::D3D11Texture>(desc, initialData, deviceMask);
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
@@ -46,7 +48,7 @@ namespace bs
 
 	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
-		SPtr<D3D11RenderTexture> texPtr = bs_shared_ptr_new<D3D11RenderTexture>(desc, deviceIdx);
+		SPtr<D3D11RenderTexture> texPtr = bs_core_ptr_new<D3D11RenderTexture>(desc, deviceIdx);
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;

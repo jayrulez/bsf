@@ -269,8 +269,10 @@ namespace bs
 		/*****/
 		Texture(const TEXTURE_DESC& desc);
 		Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask = GDF_DEFAULT);
-
-		SPtr<ct::CoreObject> createCore() const override;
+		virtual SPtr<ct::CoreObject> createCore() const
+		{
+			return nullptr;
+		}
 
 		UINT32 calculateSize() const;
 

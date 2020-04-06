@@ -18,6 +18,8 @@ namespace bs {
 	class D3D11RenderWindow : public RenderWindow
 	{
 	public:
+
+		D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, ct::D3D11Device& device, IDXGIFactory1* DXGIFactory);
 		~D3D11RenderWindow();
 
 		/** @copydoc RenderWindow::move */
@@ -85,8 +87,6 @@ namespace bs {
 
 	protected:
 		friend class D3D11RenderWindowManager;
-
-		D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, ct::D3D11Device& device, IDXGIFactory1* DXGIFactory);
 
 		/** @copydoc RenderWindow::getProperties */
 		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }

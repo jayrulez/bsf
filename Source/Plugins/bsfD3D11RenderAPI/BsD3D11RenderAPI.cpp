@@ -968,8 +968,12 @@ namespace bs { namespace ct
 		{
 			//THROW_IF_NOT_CORE_THREAD;
 
+			auto old = mActiveRenderTarget;
+
 			mActiveRenderTarget = target;
 			mActiveRenderTargetModified = false;
+
+			
 
 			UINT32 maxRenderTargets = mCurrentCapabilities[0].numMultiRenderTargets;
 			ID3D11RenderTargetView** views = bs_newN<ID3D11RenderTargetView*>(maxRenderTargets);

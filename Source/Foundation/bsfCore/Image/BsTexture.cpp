@@ -148,13 +148,8 @@ namespace bs
 				mInitData = nullptr;
 		}
 
+		//CoreObject::initialize();
 		Resource::initialize();
-		CoreObject::initialize();
-	}
-
-	SPtr<ct::CoreObject> Texture::createCore() const
-	{
-		return nullptr;
 	}
 
 	AsyncOp Texture::writeData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel, bool discardEntireBuffer)

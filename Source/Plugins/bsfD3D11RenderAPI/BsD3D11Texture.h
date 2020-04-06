@@ -17,6 +17,7 @@ namespace bs { namespace ct
 	public:
 		D3D11Texture();
 		~D3D11Texture();
+		D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask);
 
 		/**	Returns internal DX11 texture resource object. */
 		ID3D11Resource* getDX11Resource() const { return mTex; }
@@ -36,7 +37,6 @@ namespace bs { namespace ct
 	protected:
 		friend class D3D11TextureManager;
 
-		D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask);
 
 		/** @copydoc CoreObject::initialize() */
 		void initialize() override;

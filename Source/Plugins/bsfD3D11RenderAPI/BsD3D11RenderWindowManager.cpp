@@ -26,8 +26,10 @@ namespace bs
 		}
 
 		// Create the window
-		D3D11RenderWindow* renderWindow = new (bs_alloc<D3D11RenderWindow>()) D3D11RenderWindow(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
+		//D3D11RenderWindow* renderWindow = new (bs_alloc<D3D11RenderWindow>()) D3D11RenderWindow(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
 
-		return bs_core_ptr<D3D11RenderWindow>(renderWindow);
+		//return bs_core_ptr<D3D11RenderWindow>(renderWindow);
+
+		return bs_core_ptr_new<D3D11RenderWindow>(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
 	}
 }
