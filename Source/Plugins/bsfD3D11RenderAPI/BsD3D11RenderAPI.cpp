@@ -176,11 +176,9 @@ namespace bs { namespace ct
 
 		RenderStateManager::shutDown();
 		RenderWindowManager::shutDown();
-		bs::RenderWindowManager::shutDown();
 		HardwareBufferManager::shutDown();
 		bs::HardwareBufferManager::shutDown();
 		TextureManager::shutDown();
-		bs::TextureManager::shutDown();
 		CommandBufferManager::shutDown();
 
 		SAFE_RELEASE(mDXGIFactory);
@@ -968,12 +966,8 @@ namespace bs { namespace ct
 		{
 			//THROW_IF_NOT_CORE_THREAD;
 
-			auto old = mActiveRenderTarget;
-
 			mActiveRenderTarget = target;
 			mActiveRenderTargetModified = false;
-
-			
 
 			UINT32 maxRenderTargets = mCurrentCapabilities[0].numMultiRenderTargets;
 			ID3D11RenderTargetView** views = bs_newN<ID3D11RenderTargetView*>(maxRenderTargets);
