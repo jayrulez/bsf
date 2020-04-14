@@ -58,9 +58,9 @@ namespace bs
 			std::string uuidStr;
 
 			if (mode == AssetType::Normal)
-				uuidStr = entry["UUID"];
+				uuidStr = entry["UUID"].get<std::string>();
 			else if (mode == AssetType::Sprite)
-				uuidStr = entry["TextureUUID"];
+				uuidStr = entry["TextureUUID"].get<std::string>();
 
 			String fileName = name.c_str();
 			UUID UUID(uuidStr.c_str());
@@ -253,19 +253,19 @@ namespace bs
 
 						if (mode == AssetType::Normal)
 						{
-							iconData.TextureUUIDs[0] = entry["UUID48"];
-							iconData.TextureUUIDs[1] = entry["UUID32"];
-							iconData.TextureUUIDs[2] = entry["UUID16"];
+							iconData.TextureUUIDs[0] = entry["UUID48"].get<std::string>();
+							iconData.TextureUUIDs[1] = entry["UUID32"].get<std::string>();
+							iconData.TextureUUIDs[2] = entry["UUID16"].get<std::string>();
 						}
 						else if (mode == AssetType::Sprite)
 						{
-							iconData.TextureUUIDs[0] = entry["TextureUUID48"];
-							iconData.TextureUUIDs[1] = entry["TextureUUID32"];
-							iconData.TextureUUIDs[2] = entry["TextureUUID16"];
+							iconData.TextureUUIDs[0] = entry["TextureUUID48"].get<std::string>();
+							iconData.TextureUUIDs[1] = entry["TextureUUID32"].get<std::string>();
+							iconData.TextureUUIDs[2] = entry["TextureUUID16"].get<std::string>();
 
-							iconData.SpriteUUIDs[0] = entry["SpriteUUID48"];
-							iconData.SpriteUUIDs[1] = entry["SpriteUUID32"];
-							iconData.SpriteUUIDs[2] = entry["SpriteUUID16"];
+							iconData.SpriteUUIDs[0] = entry["SpriteUUID48"].get<std::string>();
+							iconData.SpriteUUIDs[1] = entry["SpriteUUID32"].get<std::string>();
+							iconData.SpriteUUIDs[2] = entry["SpriteUUID16"].get<std::string>();
 						}
 
 						iconsToGenerate.push_back(iconData);
@@ -505,12 +505,12 @@ namespace bs
 			bool isIcon = false;
 			if (type == AssetType::Normal)
 			{
-				uuid = entry["UUID"];
+				uuid = entry["UUID"].get<std::string>();
 				isIcon = entry.find("UUID16") != entry.end();
 			}
 			else if (type == AssetType::Sprite)
 			{
-				uuid = entry["TextureUUID"];
+				uuid = entry["TextureUUID"].get<std::string>();
 				isIcon = entry.find("TextureUUID16") != entry.end();
 			}
 
@@ -535,15 +535,15 @@ namespace bs
 
 				if (type == AssetType::Normal)
 				{
-					texUUIDs[0] = entry["UUID48"];
-					texUUIDs[1] = entry["UUID32"];
-					texUUIDs[2] = entry["UUID16"];
+					texUUIDs[0] = entry["UUID48"].get<std::string>();
+					texUUIDs[1] = entry["UUID32"].get<std::string>();
+					texUUIDs[2] = entry["UUID16"].get<std::string>();
 				}
 				else if (type == AssetType::Sprite)
 				{
-					texUUIDs[0] = entry["TextureUUID48"];
-					texUUIDs[1] = entry["TextureUUID32"];
-					texUUIDs[2] = entry["TextureUUID16"];
+					texUUIDs[0] = entry["TextureUUID48"].get<std::string>();
+					texUUIDs[1] = entry["TextureUUID32"].get<std::string>();
+					texUUIDs[2] = entry["TextureUUID16"].get<std::string>();
 				}
 
 				Path texPath = folder + name.c_str();
@@ -561,9 +561,9 @@ namespace bs
 				{
 					std::string spriteUUIDs[3];
 
-					spriteUUIDs[0] = entry["SpriteUUID48"];
-					spriteUUIDs[1] = entry["SpriteUUID32"];
-					spriteUUIDs[2] = entry["SpriteUUID16"];
+					spriteUUIDs[0] = entry["SpriteUUID48"].get<std::string>();
+					spriteUUIDs[1] = entry["SpriteUUID32"].get<std::string>();
+					spriteUUIDs[2] = entry["SpriteUUID16"].get<std::string>();
 					
 					Path spritePath = folder + "/Sprites/";
 
