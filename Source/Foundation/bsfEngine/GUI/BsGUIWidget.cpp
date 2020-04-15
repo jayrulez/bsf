@@ -366,7 +366,7 @@ namespace bs
 					texDesc.format = PF_RGBA8;
 					texDesc.usage = TU_RENDERTARGET;
 
-					HTexture texture = Texture::create(texDesc);
+					HTexture texture = Texture::createHandle(texDesc);
 
 					RENDER_TEXTURE_DESC rtDesc;
 					rtDesc.colorSurfaces[0].texture = texture;

@@ -45,7 +45,7 @@ namespace bs
 		textureDesc.usage = TU_RENDERTARGET;
 		textureDesc.numMips = 0;
 
-		HTexture texture = Texture::create(textureDesc);
+		HTexture texture = Texture::createHandle(textureDesc);
 
 		HTexture depthStencil;
 		if(createDepth)
@@ -54,7 +54,7 @@ namespace bs
 			textureDesc.hwGamma = false;
 			textureDesc.usage = TU_DEPTHSTENCIL;
 
-			depthStencil = Texture::create(textureDesc);
+			depthStencil = Texture::createHandle(textureDesc);
 		}
 
 		RENDER_TEXTURE_DESC desc;
