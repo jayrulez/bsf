@@ -63,22 +63,74 @@ namespace bs
 		return dst;
 	}
 
+	SPtr<Texture> Texture::WHITE;
+	SPtr<Texture> Texture::BLACK;
+	SPtr<Texture> Texture::NORMAL;
+
 	Texture::Texture(const TEXTURE_DESC& desc)
 		:mProperties(desc)
 	{
-		
+
 	}
 
-	Texture::Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
+	Texture::Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask)
 		: mProperties(desc), mInitData(pixelData)
 	{
 		if (mInitData != nullptr)
 			mInitData->_lock();
 	}
 
+	/************************************************************************/
+	/* 								STATICS	                      			*/
+	/************************************************************************/
+
+	HTexture Texture::createHandle(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture> tex = create(desc, deviceMask);
+		return static_resource_cast<Texture>(gResources()._createResourceHandle(tex));
+	}
+
+	HTexture Texture::createHandle(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture> tex = create(pixelData, usage, hwGammaCorrection, deviceMask);
+		return static_resource_cast<Texture>(gResources()._createResourceHandle(tex));
+	}
+
+	SPtr<Texture> Texture::create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture> tex = TextureManager::instance().createTexture(desc, deviceMask);
+
+		return tex;
+	}
+
+	SPtr<Texture> Texture::create(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection, GpuDeviceFlags deviceMask)
+	{
+		TEXTURE_DESC desc;
+		desc.type = pixelData->getDepth() > 1 ? TEX_TYPE_3D : TEX_TYPE_2D;
+		desc.width = pixelData->getWidth();
+		desc.height = pixelData->getHeight();
+		desc.depth = pixelData->getDepth();
+		desc.format = pixelData->getFormat();
+		desc.usage = usage;
+		desc.hwGamma = hwGammaCorrection;
+
+		SPtr<Texture> tex = TextureManager::instance().createTexture(desc, pixelData, deviceMask);
+
+		return tex;
+	}
+
 	void Texture::initialize()
 	{
+		// consider move to create texture internal
+
 		mSize = calculateSize();
+
+		if (mInitData != nullptr)
+		{
+			writeData(*mInitData, 0, 0, true);
+			mInitData->_unlock();
+			mInitData = nullptr;
+		}
 
 		// Allocate CPU buffers if needed
 		if ((mProperties.getUsage() & TU_CPUCACHED) != 0)
@@ -88,20 +140,14 @@ namespace bs
 			if (mInitData != nullptr)
 				updateCPUBuffers(0, *mInitData);
 		}
+		else
+		{
+			mInitData = nullptr;
+		}
+
+		CoreObject::initialize();
 
 		Resource::initialize();
-	}
-
-	SPtr<ct::CoreObject> Texture::createCore() const
-	{
-		const TextureProperties& props = getProperties();
-
-		SPtr<ct::CoreObject> coreObj = ct::TextureManager::instance().createTextureInternal(props.mDesc, mInitData);
-
-		if ((mProperties.getUsage() & TU_CPUCACHED) == 0)
-			mInitData = nullptr;
-
-		return coreObj;
 	}
 
 	AsyncOp Texture::writeData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel, bool discardEntireBuffer)
@@ -111,11 +157,11 @@ namespace bs
 
 		data->_lock();
 
-		std::function<void(const SPtr<ct::Texture>&, UINT32, UINT32, const SPtr<PixelData>&, bool, AsyncOp&)> func =
-			[&](const SPtr<ct::Texture>& texture, UINT32 _face, UINT32 _mipLevel, const SPtr<PixelData>& _pixData,
+		std::function<void( UINT32, UINT32, const SPtr<PixelData>&, bool, AsyncOp&)> func =
+			[&](UINT32 _face, UINT32 _mipLevel, const SPtr<PixelData>& _pixData,
 				bool _discardEntireBuffer, AsyncOp& asyncOp)
 		{
-			texture->writeData(*_pixData, _mipLevel, _face, _discardEntireBuffer);
+			writeData(*_pixData, _mipLevel, _face, _discardEntireBuffer);
 			_pixData->_unlock();
 			asyncOp._completeOperation();
 
@@ -123,7 +169,7 @@ namespace bs
 
 		AsyncOp op;
 
-		func(getCore(), face, mipLevel, data, discardEntireBuffer, op);
+		func(face, mipLevel, data, discardEntireBuffer, op);
 
 		return op;
 	}
@@ -132,14 +178,14 @@ namespace bs
 	{
 		data->_lock();
 
-		std::function<void(const SPtr<ct::Texture>&, UINT32, UINT32, const SPtr<PixelData>&, AsyncOp&)> func =
-			[&](const SPtr<ct::Texture>& texture, UINT32 _face, UINT32 _mipLevel, const SPtr<PixelData>& _pixData,
+		std::function<void(UINT32, UINT32, const SPtr<PixelData>&, AsyncOp&)> func =
+			[&](UINT32 _face, UINT32 _mipLevel, const SPtr<PixelData>& _pixData,
 				AsyncOp& asyncOp)
 		{
 			// Make sure any queued command start executing before reading
 			ct::RenderAPI::instance().submitCommandBuffer(nullptr);
 
-			texture->readData(*_pixData, _mipLevel, _face);
+			readData(*_pixData, _mipLevel, _face);
 			_pixData->_unlock();
 			asyncOp._completeOperation();
 
@@ -147,7 +193,7 @@ namespace bs
 
 		AsyncOp op;
 
-		func(getCore(), face, mipLevel, data, op);
+		func(face, mipLevel, data, op);
 
 		return op;
 	}
@@ -156,13 +202,13 @@ namespace bs
 	{
 		TAsyncOp<SPtr<PixelData>> op;
 
-		auto func = [texture = getCore(), face, mipLevel, op]() mutable
+		auto func = [&, face, mipLevel, op]() mutable
 		{
 			// Make sure any queued command start executing before reading
 			ct::RenderAPI::instance().submitCommandBuffer(nullptr);
 
-			SPtr<PixelData> output = texture->getProperties().allocBuffer(face, mipLevel);
-			texture->readData(*output, mipLevel, face);
+			SPtr<PixelData> output = getProperties().allocBuffer(face, mipLevel);
+			readData(*output, mipLevel, face);
 
 			op._completeOperation(output);
 
@@ -284,89 +330,13 @@ namespace bs
 		}
 	}
 
-	SPtr<ct::Texture> Texture::getCore() const
-	{
-		return std::static_pointer_cast<ct::Texture>(mCoreSpecific);
-	}
-
-	/************************************************************************/
-	/* 								SERIALIZATION                      		*/
-	/************************************************************************/
-
-	RTTITypeBase* Texture::getRTTIStatic()
-	{
-		return TextureRTTI::instance();
-	}
-
-	RTTITypeBase* Texture::getRTTI() const
-	{
-		return Texture::getRTTIStatic();
-	}
-
-	/************************************************************************/
-	/* 								STATICS	                      			*/
-	/************************************************************************/
-	HTexture Texture::createHandle(const TEXTURE_DESC& desc)
-	{
-		SPtr<Texture> texturePtr = _createPtr(desc);
-
-		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
-	}
-	
-	HTexture Texture::createHandle(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
-	{
-		SPtr<Texture> texturePtr = _createPtr(pixelData, usage, hwGammaCorrection);
-
-		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
-	}
-
-	SPtr<Texture> Texture::_createPtr(const TEXTURE_DESC& desc)
-	{
-		return TextureManager::instance().createTexture(desc);
-	}
-
-	SPtr<Texture> Texture::_createPtr(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
-	{
-		TEXTURE_DESC desc;
-		desc.type = pixelData->getDepth() > 1 ? TEX_TYPE_3D : TEX_TYPE_2D;
-		desc.width = pixelData->getWidth();
-		desc.height = pixelData->getHeight();
-		desc.depth = pixelData->getDepth();
-		desc.format = pixelData->getFormat();
-		desc.usage = usage;
-		desc.hwGamma = hwGammaCorrection;
-
-		return TextureManager::instance().createTexture(desc, pixelData);
-	}
-
-	namespace ct
-	{
-	SPtr<Texture> Texture::WHITE;
-	SPtr<Texture> Texture::BLACK;
-	SPtr<Texture> Texture::NORMAL;
-
-	Texture::Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initData, GpuDeviceFlags deviceMask)
-		:mProperties(desc), mInitData(initData)
-	{ }
-
-	void Texture::initialize()
-	{
-		if (mInitData != nullptr)
-		{
-			writeData(*mInitData, 0, 0, true);
-			mInitData->_unlock();
-			mInitData = nullptr;
-		}
-
-		CoreObject::initialize();
-	}
 
 	void Texture::writeData(const PixelData& src, UINT32 mipLevel, UINT32 face, bool discardEntireBuffer,
 		UINT32 queueIdx)
 	{
-		if(discardEntireBuffer)
+		if (discardEntireBuffer)
 		{
-			if((mProperties.getUsage() & TU_DYNAMIC) == 0)
+			if ((mProperties.getUsage() & TU_DYNAMIC) == 0)
 			{
 				// Buffer discard is enabled but buffer was not created as dynamic. Disabling discard.
 				discardEntireBuffer = false;
@@ -417,7 +387,7 @@ namespace bs
 		unlockImpl();
 	}
 
-	void Texture::copy(const SPtr<Texture>& target, const TEXTURE_COPY_DESC& desc, const SPtr<CommandBuffer>& commandBuffer)
+	void Texture::copy(const SPtr<Texture>& target, const TEXTURE_COPY_DESC& desc, const SPtr<ct::CommandBuffer>& commandBuffer)
 	{
 		if (target->mProperties.getTextureType() != mProperties.getTextureType())
 		{
@@ -483,7 +453,7 @@ namespace bs
 			dstHeight,
 			dstDepth);
 
-		if(desc.dstPosition.x < 0 || desc.dstPosition.x >= (INT32)dstWidth ||
+		if (desc.dstPosition.x < 0 || desc.dstPosition.x >= (INT32)dstWidth ||
 			desc.dstPosition.y < 0 || desc.dstPosition.y >= (INT32)dstHeight ||
 			desc.dstPosition.z < 0 || desc.dstPosition.z >= (INT32)dstDepth)
 		{
@@ -498,9 +468,9 @@ namespace bs
 		UINT32 dstRight = (UINT32)desc.dstPosition.x;
 		UINT32 dstBottom = (UINT32)desc.dstPosition.y;
 		UINT32 dstBack = (UINT32)desc.dstPosition.z;
-		if(!entireSurface)
+		if (!entireSurface)
 		{
-			if(desc.srcVolume.left >= srcWidth || desc.srcVolume.right > srcWidth ||
+			if (desc.srcVolume.left >= srcWidth || desc.srcVolume.right > srcWidth ||
 				desc.srcVolume.top >= srcHeight || desc.srcVolume.bottom > srcHeight ||
 				desc.srcVolume.front >= srcDepth || desc.srcVolume.back > srcDepth)
 			{
@@ -519,7 +489,7 @@ namespace bs
 			dstBack += srcDepth;
 		}
 
-		if(dstRight > dstWidth || dstBottom > dstHeight || dstBack > dstDepth)
+		if (dstRight > dstWidth || dstBottom > dstHeight || dstBack > dstDepth)
 		{
 			BS_LOG(Error, Texture, "Destination volume falls outside the destination texture.");
 			return;
@@ -549,17 +519,18 @@ namespace bs
 	{
 		SPtr<PixelData> data = mProperties.allocBuffer(face, mipLevel);
 		data->setColors(value);
-		
+
 		writeData(*data, mipLevel, face, true, queueIdx);
 	}
+
 
 	/************************************************************************/
 	/* 								TEXTURE VIEW                      		*/
 	/************************************************************************/
 
-	SPtr<TextureView> Texture::createView(const TEXTURE_VIEW_DESC& desc)
+	SPtr<ct::TextureView> Texture::createView(const ct::TEXTURE_VIEW_DESC& desc)
 	{
-		return bs_shared_ptr<TextureView>(new (bs_alloc<TextureView>()) TextureView(desc));
+		return bs_shared_ptr<ct::TextureView>(new (bs_alloc<ct::TextureView>()) ct::TextureView(desc));
 	}
 
 	void Texture::clearBufferViews()
@@ -567,12 +538,12 @@ namespace bs
 		mTextureViews.clear();
 	}
 
-	SPtr<TextureView> Texture::requestView(UINT32 mostDetailMip, UINT32 numMips, UINT32 firstArraySlice,
-										   UINT32 numArraySlices, GpuViewUsage usage)
+	SPtr<ct::TextureView> Texture::requestView(UINT32 mostDetailMip, UINT32 numMips, UINT32 firstArraySlice,
+		UINT32 numArraySlices, GpuViewUsage usage)
 	{
 		const TextureProperties& texProps = getProperties();
 
-		TEXTURE_VIEW_DESC key;
+		ct::TEXTURE_VIEW_DESC key;
 		key.mostDetailMip = mostDetailMip;
 		key.numMips = numMips == 0 ? (texProps.getNumMipmaps() + 1) : numMips;
 		key.firstArraySlice = firstArraySlice;
@@ -591,29 +562,16 @@ namespace bs
 	}
 
 	/************************************************************************/
-	/* 								STATICS	                      			*/
+	/* 								SERIALIZATION                      		*/
 	/************************************************************************/
-	SPtr<Texture> Texture::create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+
+	RTTITypeBase* Texture::getRTTIStatic()
 	{
-		return TextureManager::instance().createTexture(desc, deviceMask);
+		return TextureRTTI::instance();
 	}
 
-	SPtr<Texture> Texture::create(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection,
-		GpuDeviceFlags deviceMask)
+	RTTITypeBase* Texture::getRTTI() const
 	{
-		TEXTURE_DESC desc;
-		desc.type = pixelData->getDepth() > 1 ? TEX_TYPE_3D : TEX_TYPE_2D;
-		desc.width = pixelData->getWidth();
-		desc.height = pixelData->getHeight();
-		desc.depth = pixelData->getDepth();
-		desc.format = pixelData->getFormat();
-		desc.usage = usage;
-		desc.hwGamma = hwGammaCorrection;
-
-		SPtr<Texture> newTex = TextureManager::instance().createTextureInternal(desc, pixelData, deviceMask);
-		newTex->initialize();
-
-		return newTex;
-	}
+		return Texture::getRTTIStatic();
 	}
 }

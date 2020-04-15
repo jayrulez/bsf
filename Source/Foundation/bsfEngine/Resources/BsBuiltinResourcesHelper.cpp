@@ -287,7 +287,7 @@ namespace bs
 
 		auto saveTexture = [&](auto& pixelData, auto& path, std::string& uuid)
 		{
-			SPtr<Texture> texturePtr = Texture::_createPtr(pixelData);
+			SPtr<Texture> texturePtr = Texture::create(pixelData);
 			HResource texture = gResources()._createResourceHandle(texturePtr, UUID(uuid.c_str()));
 
 			Resources::instance().save(texture, path, true, compress);

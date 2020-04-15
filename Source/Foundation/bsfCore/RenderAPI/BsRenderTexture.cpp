@@ -52,7 +52,7 @@ namespace bs
 		bool requiresHwGamma = false;
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
-			SPtr<ct::Texture> texture = desc.colorSurfaces[i].texture;
+			SPtr<Texture> texture = desc.colorSurfaces[i].texture;
 
 			if (texture == nullptr)
 				continue;
@@ -65,7 +65,7 @@ namespace bs
 
 		if(firstIdx == (UINT32)-1)
 		{
-			SPtr<ct::Texture> texture = desc.depthStencilSurface.texture;
+			SPtr<Texture> texture = desc.depthStencilSurface.texture;
 			if(texture != nullptr)
 			{
 				const TextureProperties& texProps = texture->getProperties();
@@ -75,7 +75,7 @@ namespace bs
 		}
 		else
 		{
-			SPtr<ct::Texture> texture = desc.colorSurfaces[firstIdx].texture;
+			SPtr<Texture> texture = desc.colorSurfaces[firstIdx].texture;
 
 			const TextureProperties& texProps = texture->getProperties();
 			construct(&texProps, desc.colorSurfaces[firstIdx].numFaces, desc.colorSurfaces[firstIdx].mipLevel,
@@ -137,7 +137,7 @@ namespace bs
 		{
 			ct::RENDER_SURFACE_DESC surfaceDesc;
 			if (mDesc.colorSurfaces[i].texture.isLoaded())
-				surfaceDesc.texture = mDesc.colorSurfaces[i].texture->getCore();
+				surfaceDesc.texture = mDesc.colorSurfaces[i].texture.getInternalPtr();//XXXTEX
 
 			surfaceDesc.face = mDesc.colorSurfaces[i].face;
 			surfaceDesc.numFaces = mDesc.colorSurfaces[i].numFaces;
@@ -147,7 +147,7 @@ namespace bs
 		}
 
 		if (mDesc.depthStencilSurface.texture.isLoaded())
-			coreDesc.depthStencilSurface.texture = mDesc.depthStencilSurface.texture->getCore();
+			coreDesc.depthStencilSurface.texture = mDesc.depthStencilSurface.texture.getInternalPtr();//XXXTEX
 
 		coreDesc.depthStencilSurface.face = mDesc.depthStencilSurface.face;
 		coreDesc.depthStencilSurface.numFaces = mDesc.depthStencilSurface.numFaces;

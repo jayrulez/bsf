@@ -87,7 +87,7 @@ namespace bs
 		TextureView(const TEXTURE_VIEW_DESC& _desc);
 
 	protected:
-		friend class Texture;
+		friend class bs::Texture;
 
 		TEXTURE_VIEW_DESC mDesc;
 	};

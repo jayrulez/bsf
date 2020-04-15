@@ -7,101 +7,84 @@
 
 namespace bs
 {
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc)
+	void TextureManager::onStartUp()
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
+		TEXTURE_DESC desc;
+		desc.type = TEX_TYPE_2D;
+		desc.width = 2;
+		desc.height = 2;
+		desc.format = PF_RGBA8;
+		desc.usage = TU_STATIC;
 
-		ret->_setThisPtr(ret);
-		ret->initialize();
+		// White built-in texture
+		SPtr<Texture> whiteTexture = createTexture(desc);
 
-		return ret;
+		SPtr<PixelData> whitePixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+		whitePixelData->setColorAt(Color::White, 0, 0);
+		whitePixelData->setColorAt(Color::White, 0, 1);
+		whitePixelData->setColorAt(Color::White, 1, 0);
+		whitePixelData->setColorAt(Color::White, 1, 1);
+
+		whiteTexture->writeData(*whitePixelData);
+		Texture::WHITE = whiteTexture;
+
+		// Black built-in texture
+		SPtr<Texture> blackTexture = createTexture(desc);
+
+		SPtr<PixelData> blackPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+		blackPixelData->setColorAt(Color::ZERO, 0, 0);
+		blackPixelData->setColorAt(Color::ZERO, 0, 1);
+		blackPixelData->setColorAt(Color::ZERO, 1, 0);
+		blackPixelData->setColorAt(Color::ZERO, 1, 1);
+
+		blackTexture->writeData(*blackPixelData);
+		Texture::BLACK = blackTexture;
+
+		// Normal (Y = Up) built-in texture
+		SPtr<Texture> normalTexture = createTexture(desc);
+		SPtr<PixelData> normalPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
+
+		Color encodedNormal(0.5f, 0.5f, 1.0f);
+		normalPixelData->setColorAt(encodedNormal, 0, 0);
+		normalPixelData->setColorAt(encodedNormal, 0, 1);
+		normalPixelData->setColorAt(encodedNormal, 1, 0);
+		normalPixelData->setColorAt(encodedNormal, 1, 1);
+
+		normalTexture->writeData(*normalPixelData);
+		Texture::NORMAL = normalTexture;
 	}
 
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
+	void TextureManager::onShutDown()
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc, pixelData);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
+		// Need to make sure these are freed while still on the core thread
+		Texture::WHITE = nullptr;
+		Texture::BLACK = nullptr;
+		Texture::NORMAL = nullptr;
+	}
 
-		ret->_setThisPtr(ret);
-		ret->initialize();
+	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture> newTex = createTextureInternal(desc, pixelData, deviceMask);
 
-		return ret;
+		newTex->initialize();
+
+		return newTex;
+	}
+
+	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Texture> newTex = createTextureInternal(desc, nullptr, deviceMask);
+
+		newTex->initialize();
+
+		return newTex;
 	}
 
 	SPtr<Texture> TextureManager::_createEmpty()
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture();
-		SPtr<Texture> texture = bs_core_ptr<Texture>(tex);
-		texture->_setThisPtr(texture);
+		SPtr<Texture> empty = _createEmptyImpl();
 
-		return texture;
-	}
-
-	namespace ct
-	{
-		void TextureManager::onStartUp()
-		{
-			TEXTURE_DESC desc;
-			desc.type = TEX_TYPE_2D;
-			desc.width = 2;
-			desc.height = 2;
-			desc.format = PF_RGBA8;
-			desc.usage = TU_STATIC;
-
-			// White built-in texture
-			SPtr<Texture> whiteTexture = createTexture(desc);
-
-			SPtr<PixelData> whitePixelData = PixelData::create(2, 2, 1, PF_RGBA8);
-			whitePixelData->setColorAt(Color::White, 0, 0);
-			whitePixelData->setColorAt(Color::White, 0, 1);
-			whitePixelData->setColorAt(Color::White, 1, 0);
-			whitePixelData->setColorAt(Color::White, 1, 1);
-
-			whiteTexture->writeData(*whitePixelData);
-			Texture::WHITE = whiteTexture;
-
-			// Black built-in texture
-			SPtr<Texture> blackTexture = createTexture(desc);
-
-			SPtr<PixelData> blackPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
-			blackPixelData->setColorAt(Color::ZERO, 0, 0);
-			blackPixelData->setColorAt(Color::ZERO, 0, 1);
-			blackPixelData->setColorAt(Color::ZERO, 1, 0);
-			blackPixelData->setColorAt(Color::ZERO, 1, 1);
-
-			blackTexture->writeData(*blackPixelData);
-			Texture::BLACK = blackTexture;
-
-			// Normal (Y = Up) built-in texture
-			SPtr<Texture> normalTexture = createTexture(desc);
-			SPtr<PixelData> normalPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
-
-			Color encodedNormal(0.5f, 0.5f, 1.0f);
-			normalPixelData->setColorAt(encodedNormal, 0, 0);
-			normalPixelData->setColorAt(encodedNormal, 0, 1);
-			normalPixelData->setColorAt(encodedNormal, 1, 0);
-			normalPixelData->setColorAt(encodedNormal, 1, 1);
-
-			normalTexture->writeData(*normalPixelData);
-			Texture::NORMAL = normalTexture;
-		}
-
-		void TextureManager::onShutDown()
-		{
-			// Need to make sure these are freed while still on the core thread
-			Texture::WHITE = nullptr;
-			Texture::BLACK = nullptr;
-			Texture::NORMAL = nullptr;
-		}
-
-		SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
-		{
-			SPtr<Texture> newTex = createTextureInternal(desc, nullptr, deviceMask);
-			newTex->initialize();
-
-			return newTex;
-		}
+		return empty;
 	}
 
 	SPtr<RenderTexture> RenderTextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth,

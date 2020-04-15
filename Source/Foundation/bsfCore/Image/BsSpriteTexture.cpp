@@ -137,9 +137,9 @@ namespace bs
 
 	SPtr<ct::CoreObject> SpriteTexture::createCore() const
 	{
-		SPtr<ct::Texture> texturePtr;
+		SPtr<Texture> texturePtr;
 		if(mAtlasTexture.isLoaded())
-			texturePtr = mAtlasTexture->getCore();
+			texturePtr = mAtlasTexture.getInternalPtr();//XXXTEX
 
 		ct::SpriteTexture* spriteTexture = new (bs_alloc<ct::SpriteTexture>()) ct::SpriteTexture(mUVOffset, mUVScale,
 			std::move(texturePtr), mAnimation, mPlayback);

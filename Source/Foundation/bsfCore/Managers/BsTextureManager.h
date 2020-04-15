@@ -23,8 +23,11 @@ namespace bs
 	public:
 		virtual ~TextureManager() = default;
 
-		/** @copydoc Texture::create(const TEXTURE_DESC&) */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc);
+		/** @copydoc Module::onStartUp */
+		void onStartUp() override;
+
+		/** @copydoc Module::onShutDown */
+		void onShutDown() override;
 			
 		/**
 		 * Creates a new 2D or 3D texture initialized using the provided pixel data. Texture will not have any mipmaps.
@@ -32,7 +35,13 @@ namespace bs
 		 * @param[in]	desc  		Description of the texture to create. Must match the pixel data.
 		 * @param[in]	pixelData	Data to initialize the texture width.
 		 */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
+		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
+		/**
+		 * @copydoc	bs::TextureManager::createTexture(const TEXTURE_DESC&)
+		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
+		 */
+		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * Creates a completely empty and uninitialized Texture.
@@ -42,6 +51,7 @@ namespace bs
 		 * manual initialization that is not required normally.
 		 */
 		SPtr<Texture> _createEmpty();
+		virtual SPtr<Texture> _createEmptyImpl() = 0;
 
 		/**
 		 * Gets the format which will be natively used for a requested format given the constraints of the current device.
@@ -50,8 +60,17 @@ namespace bs
 		 */
 		virtual PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) = 0;
 
-	protected:
 
+	protected:
+		friend class Texture;
+
+		/**
+		 * Creates an empty and uninitialized texture of a specific type. This is to be implemented	by render systems with
+		 * their own implementations.
+		 */
+		virtual SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
+
+	protected:
 		mutable HTexture mDummyTexture;
 	};
 
@@ -95,40 +114,6 @@ namespace bs
 
 	namespace ct
 	{
-	/**
-	 * Defines interface for creation of textures. Render systems provide their own implementations.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT TextureManager : public Module<TextureManager>
-	{
-	public:
-		virtual ~TextureManager() = default;
-
-		/** @copydoc Module::onStartUp */
-		void onStartUp() override;
-
-		/** @copydoc Module::onShutDown */
-		void onShutDown() override;
-
-		/**
-		 * @copydoc	bs::TextureManager::createTexture(const TEXTURE_DESC&)
-		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
-		 */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
-
-	protected:
-		friend class bs::Texture;
-		friend class Texture;
-
-		/**
-		 * Creates an empty and uninitialized texture of a specific type. This is to be implemented	by render systems with
-		 * their own implementations.
-		 */
-		virtual SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc,
-			const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
-	};
-
 
 	/**
 	 * Defines interface for creation of textures. Render systems provide their own implementations.

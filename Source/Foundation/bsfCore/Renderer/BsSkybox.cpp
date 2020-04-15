@@ -51,7 +51,7 @@ namespace bs
 			cubemapDesc.numMips = PixelUtil::getMaxMipmaps(cubemapDesc.width, cubemapDesc.height, 1, cubemapDesc.format);
 			cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			mFilteredRadiance = Texture::_createPtr(cubemapDesc);
+			mFilteredRadiance = Texture::create(cubemapDesc);
 		}
 
 		{
@@ -63,7 +63,7 @@ namespace bs
 			irradianceCubemapDesc.numMips = 0;
 			irradianceCubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			mIrradiance = Texture::_createPtr(irradianceCubemapDesc);
+			mIrradiance = Texture::create(irradianceCubemapDesc);
 		}
 
 		auto renderComplete = [this]()
@@ -72,8 +72,8 @@ namespace bs
 		};
 
 		SPtr<ct::Skybox> coreSkybox = getCore();
-		SPtr<ct::Texture> coreFilteredRadiance = mFilteredRadiance->getCore();
-		SPtr<ct::Texture> coreIrradiance = mIrradiance->getCore();
+		SPtr<Texture> coreFilteredRadiance = mFilteredRadiance;
+		SPtr<Texture> coreIrradiance = mIrradiance;
 
 		auto filterSkybox = [coreFilteredRadiance, coreIrradiance, coreSkybox]()
 		{
@@ -133,17 +133,17 @@ namespace bs
 
 	SPtr<ct::CoreObject> Skybox::createCore() const
 	{
-		SPtr<ct::Texture> radiance;
+		SPtr<Texture> radiance;
 		if (mTexture.isLoaded(false))
-			radiance = mTexture->getCore();
+			radiance = mTexture.getInternalPtr();//XXXTEX
 
-		SPtr<ct::Texture> filteredRadiance;
+		SPtr<Texture> filteredRadiance;
 		if (mFilteredRadiance)
-			filteredRadiance = mFilteredRadiance->getCore();
+			filteredRadiance = mFilteredRadiance;
 
-		SPtr<ct::Texture> irradiance;
+		SPtr<Texture> irradiance;
 		if (mIrradiance)
-			irradiance = mIrradiance->getCore();
+			irradiance = mIrradiance;
 
 		ct::Skybox* skybox = new (bs_alloc<ct::Skybox>()) ct::Skybox(radiance, filteredRadiance, irradiance);
 		SPtr<ct::Skybox> skyboxPtr = bs_shared_ptr<ct::Skybox>(skybox);

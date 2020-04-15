@@ -784,9 +784,9 @@ namespace bs
 
 	GUIMeshRenderData GUIDrawGroups::getRenderData(const GUIMesh& guiMesh)
 	{
-		SPtr<ct::Texture> textureCore;
+		SPtr<Texture> textureCore;
 		if (guiMesh.matInfo.texture.isLoaded())
-			textureCore = guiMesh.matInfo.texture->getCore();
+			textureCore = guiMesh.matInfo.texture.getInternalPtr();//XXXTEX
 		else
 			textureCore = nullptr;
 

@@ -56,7 +56,7 @@ namespace bs { namespace ct
 		LoadedRendererTextures textures;
 		HTexture bokehFlare = gBuiltinResources().getTexture(BuiltinTexture::BokehFlare);
 		if(bokehFlare.isLoaded(false))
-			textures.bokehFlare = bokehFlare->getCore();
+			textures.bokehFlare = bokehFlare.getInternalPtr();//XXXTEX
 
 		initializeCore(textures);
 	}

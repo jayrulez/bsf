@@ -401,17 +401,17 @@ namespace bs
 	void CoreApplication::beginCoreProfiling()
 	{
 #if !BS_FORCE_SINGLETHREADED_RENDERING
-		gProfilerCPU().beginThread("Core");
+		//gProfilerCPU().beginThread("Core");
 #endif
 	}
 
 	void CoreApplication::endCoreProfiling()
 	{
-		ProfilerGPU::instance()._update();
+		//ProfilerGPU::instance()._update();
 
 #if !BS_FORCE_SINGLETHREADED_RENDERING
-		gProfilerCPU().endThread();
-		gProfiler()._updateCore();
+		//gProfilerCPU().endThread();
+		//gProfiler()._updateCore();
 #endif
 	}
 

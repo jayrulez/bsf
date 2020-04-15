@@ -93,7 +93,7 @@ namespace bs
 		cubemapDesc.numMips = PixelUtil::getMaxMipmaps(cubemapDesc.width, cubemapDesc.height, 1, cubemapDesc.format);
 		cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-		mFilteredTexture = Texture::_createPtr(cubemapDesc);
+		mFilteredTexture = Texture::create(cubemapDesc);
 
 		auto renderComplete = [this]()
 		{
@@ -101,7 +101,7 @@ namespace bs
 		};
 
 		SPtr<ct::ReflectionProbe> coreProbe = getCore();
-		SPtr<ct::Texture> coreTexture = mFilteredTexture->getCore();
+		SPtr<Texture> coreTexture = mFilteredTexture;
 
 		if (mCustomTexture == nullptr)
 		{
@@ -128,7 +128,7 @@ namespace bs
 		}
 		else
 		{
-			SPtr<ct::Texture> coreCustomTex = mCustomTexture->getCore();
+			SPtr<Texture> coreCustomTex = mCustomTexture.getInternalPtr();//XXXTEX
 			auto filterReflProbe = [coreCustomTex, coreTexture, coreProbe]()
 			{
 				ct::gIBLUtility().scaleCubemap(coreCustomTex, 0, coreTexture, 0);
@@ -183,9 +183,9 @@ namespace bs
 
 	SPtr<ct::CoreObject> ReflectionProbe::createCore() const
 	{
-		SPtr<ct::Texture> filteredTexture;
+		SPtr<Texture> filteredTexture;
 		if (mFilteredTexture != nullptr)
-			filteredTexture = mFilteredTexture->getCore();
+			filteredTexture = mFilteredTexture;
 
 		ct::ReflectionProbe* probe = new (bs_alloc<ct::ReflectionProbe>()) ct::ReflectionProbe(mType, mRadius, mExtents,
 			filteredTexture);

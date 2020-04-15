@@ -60,12 +60,12 @@ namespace bs
 			}
 		}
 
-		mTexture = Texture::_createPtr(pixelData);
+		mTexture = Texture::create(pixelData);
 	}
 
 	SPtr<ct::CoreObject> VectorField::createCore() const
 	{
-		ct::VectorField* vectorField = new (bs_alloc<ct::VectorField>()) ct::VectorField(mDesc, mTexture->getCore());
+		ct::VectorField* vectorField = new (bs_alloc<ct::VectorField>()) ct::VectorField(mDesc, mTexture);
 
 		SPtr<ct::VectorField> vectorFieldPtr = bs_shared_ptr<ct::VectorField>(vectorField);
 		vectorFieldPtr->_setThisPtr(vectorFieldPtr);

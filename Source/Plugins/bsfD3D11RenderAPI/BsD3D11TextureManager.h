@@ -17,6 +17,11 @@ namespace bs
 	public:
 		/** @copydoc TextureManager::getNativeFormat */
 		PixelFormat getNativeFormat(TextureType ttype, PixelFormat format, int usage, bool hwGamma) override;
+		SPtr<Texture> _createEmptyImpl() override;
+	protected:
+		/** @copydoc TextureManager::createTextureInternal */
+		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc,
+			const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
 	};
 
 	/**	Handles creation of DirectX 11 textures. */
@@ -29,15 +34,6 @@ namespace bs
 
 	namespace ct
 	{
-	/**	Handles creation of DirectX 11 textures. */
-	class D3D11TextureManager : public TextureManager
-	{
-	protected:
-		/** @copydoc TextureManager::createTextureInternal */
-		SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc,
-			const SPtr<PixelData>& initialData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) override;
-	};
-
 	/**	Handles creation of DirectX 11 textures. */
 	class D3D11RenderTextureManager : public RenderTextureManager
 	{

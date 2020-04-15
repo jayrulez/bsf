@@ -485,7 +485,7 @@ namespace bs
 		for (UINT32 i = 0; i < (UINT32)desc.textureDefaultValues.size(); i++)
 		{
 			if (desc.textureDefaultValues[i].isLoaded())
-				output.textureDefaultValues[i] = desc.textureDefaultValues[i]->getCore();
+				output.textureDefaultValues[i] = desc.textureDefaultValues[i].getInternalPtr();//XXXTEX
 			else
 				output.textureDefaultValues[i] = nullptr;
 		}

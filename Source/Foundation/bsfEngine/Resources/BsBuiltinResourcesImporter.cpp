@@ -118,7 +118,7 @@ namespace bs
 		blackPixelData->setColorAt(Color::Black, 1, 0);
 		blackPixelData->setColorAt(Color::Black, 1, 1);
 
-		SPtr<Texture> blackTexture = Texture::_createPtr(blackPixelData);
+		SPtr<Texture> blackTexture = Texture::create(blackPixelData);
 
 		SPtr<PixelData> whitePixelData = PixelData::create(2, 2, 1, PF_RGBA8);
 		whitePixelData->setColorAt(Color::White, 0, 0);
@@ -126,7 +126,7 @@ namespace bs
 		whitePixelData->setColorAt(Color::White, 1, 0);
 		whitePixelData->setColorAt(Color::White, 1, 1);
 
-		SPtr<Texture> whiteTexture = Texture::_createPtr(whitePixelData);
+		SPtr<Texture> whiteTexture = Texture::create(whitePixelData);
 
 		SPtr<PixelData> normalPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
 
@@ -136,7 +136,7 @@ namespace bs
 		normalPixelData->setColorAt(encodedNormal, 1, 0);
 		normalPixelData->setColorAt(encodedNormal, 1, 1);
 
-		SPtr<Texture> normalTexture = Texture::_createPtr(normalPixelData);
+		SPtr<Texture> normalTexture = Texture::create(normalPixelData);
 
 		// Save all textures
 		Path outputDir = sOutputFolder + BuiltinResources::TEXTURE_FOLDER;

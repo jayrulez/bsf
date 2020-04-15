@@ -250,6 +250,14 @@ namespace bs
 	namespace ct { struct TYPE; }						\
 	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
 
+#define CORE_OBJECT_NEW_FORWARD_DECLARE(TYPE)				\
+	class TYPE;											\
+	template<> struct CoreThreadType<TYPE> { typedef TYPE Type; };
+
+#define CORE_OBJECT_NEW_FORWARD_DECLARE_STRUCT(TYPE)		\
+	struct TYPE;										\
+	template<> struct CoreThreadType<TYPE> { typedef TYPE Type; };
+
 	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer)
 	CORE_OBJECT_FORWARD_DECLARE(VertexBuffer)
 	CORE_OBJECT_FORWARD_DECLARE(GpuBuffer)
@@ -278,7 +286,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ComputePipelineState)
 	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe)
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem)
-	CORE_OBJECT_FORWARD_DECLARE(Texture)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(Texture)
 	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture)
 	CORE_OBJECT_FORWARD_DECLARE(Mesh)
 	CORE_OBJECT_FORWARD_DECLARE(VectorField)

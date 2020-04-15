@@ -98,7 +98,6 @@ namespace bs { namespace ct
 		CommandBufferManager::startUp<D3D11CommandBufferManager>();
 
 		// Create the texture manager for use by others		
-		bs::TextureManager::startUp<bs::D3D11TextureManager>();
 		TextureManager::startUp<D3D11TextureManager>();
 
 		bs::RenderTextureManager::startUp<bs::D3D11RenderTextureManager>();
@@ -185,7 +184,6 @@ namespace bs { namespace ct
 		RenderTextureManager::shutDown();
 		bs::RenderTextureManager::shutDown();
 		TextureManager::shutDown();
-		bs::TextureManager::shutDown();
 		CommandBufferManager::shutDown();
 
 		SAFE_RELEASE(mDXGIFactory);

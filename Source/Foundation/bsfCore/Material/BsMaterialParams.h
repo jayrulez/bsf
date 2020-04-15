@@ -436,7 +436,7 @@ namespace bs
 	class BS_CORE_EXPORT MaterialParamTextureDataCore
 	{
 	public:
-		SPtr<ct::Texture> texture;
+		SPtr<Texture> texture;
 		SPtr<ct::SpriteTexture> spriteTexture;
 		bool isLoadStore;
 		TextureSurface surface;

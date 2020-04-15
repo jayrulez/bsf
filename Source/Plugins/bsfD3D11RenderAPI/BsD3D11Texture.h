@@ -37,6 +37,8 @@ namespace bs { namespace ct
 
 		D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask);
 
+		D3D11Texture() = default; // For serialization only
+
 		/** @copydoc CoreObject::initialize() */
 		void initialize() override;
 
