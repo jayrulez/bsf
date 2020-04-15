@@ -5,7 +5,6 @@
 #include "FileSystem/BsDataStream.h"
 #include "Error/BsException.h"
 #include "Debug/BsDebug.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Threading/BsAsyncOp.h"
 #include "Resources/BsResources.h"
 #include "Image/BsPixelUtil.h"
@@ -122,8 +121,11 @@ namespace bs
 
 		};
 
-		return gCoreThread().queueReturnCommand(std::bind(func, getCore(), face, mipLevel,
-			data, discardEntireBuffer, std::placeholders::_1));
+		AsyncOp op;
+
+		func(getCore(), face, mipLevel, data, discardEntireBuffer, op);
+
+		return op;
 	}
 
 	AsyncOp Texture::readData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel)
@@ -143,8 +145,11 @@ namespace bs
 
 		};
 
-		return gCoreThread().queueReturnCommand(std::bind(func, getCore(), face, mipLevel,
-			data, std::placeholders::_1));
+		AsyncOp op;
+
+		func(getCore(), face, mipLevel, data, op);
+
+		return op;
 	}
 
 	TAsyncOp<SPtr<PixelData>> Texture::readData(UINT32 face, UINT32 mipLevel)
@@ -163,7 +168,8 @@ namespace bs
 
 		};
 
-		gCoreThread().queueCommand(func);
+		func();
+
 		return op;
 	}
 
@@ -358,8 +364,6 @@ namespace bs
 	void Texture::writeData(const PixelData& src, UINT32 mipLevel, UINT32 face, bool discardEntireBuffer,
 		UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		if(discardEntireBuffer)
 		{
 			if((mProperties.getUsage() & TU_DYNAMIC) == 0)
@@ -374,8 +378,6 @@ namespace bs
 
 	void Texture::readData(PixelData& dest, UINT32 mipLevel, UINT32 face, UINT32 deviceIdx, UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		PixelData& pixelData = static_cast<PixelData&>(dest);
 
 		UINT32 mipWidth, mipHeight, mipDepth;
@@ -395,8 +397,6 @@ namespace bs
 
 	PixelData Texture::lock(GpuLockOptions options, UINT32 mipLevel, UINT32 face, UINT32 deviceIdx, UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		if (mipLevel > mProperties.getNumMipmaps())
 		{
 			BS_LOG(Error, Texture, "Invalid mip level: {0}. Min is 0, max is {1}", mipLevel, mProperties.getNumMipmaps());
@@ -414,15 +414,11 @@ namespace bs
 
 	void Texture::unlock()
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		unlockImpl();
 	}
 
 	void Texture::copy(const SPtr<Texture>& target, const TEXTURE_COPY_DESC& desc, const SPtr<CommandBuffer>& commandBuffer)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		if (target->mProperties.getTextureType() != mProperties.getTextureType())
 		{
 			BS_LOG(Error, Texture, "Source and destination textures must be of same type.");
@@ -534,8 +530,6 @@ namespace bs
 
 	void Texture::clear(const Color& value, UINT32 mipLevel, UINT32 face, UINT32 queueIdx)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		if (face >= mProperties.getNumFaces())
 		{
 			BS_LOG(Error, Texture, "Invalid face index.");
@@ -576,8 +570,6 @@ namespace bs
 	SPtr<TextureView> Texture::requestView(UINT32 mostDetailMip, UINT32 numMips, UINT32 firstArraySlice,
 										   UINT32 numArraySlices, GpuViewUsage usage)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		const TextureProperties& texProps = getProperties();
 
 		TEXTURE_VIEW_DESC key;

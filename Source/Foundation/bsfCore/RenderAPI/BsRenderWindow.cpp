@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "RenderAPI/BsRenderWindow.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Managers/BsRenderWindowManager.h"
 #include "RenderAPI/BsViewport.h"
 #include "Platform/BsPlatform.h"
@@ -47,8 +46,7 @@ namespace bs
 			renderWindow->resize(width, height);
 		};
 
-		gCoreThread().queueCommand(std::bind(resizeFunc, getCore(), width, height));
-		gCoreThread().submit(true);
+		resizeFunc(getCore(), width, height);
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -68,8 +66,7 @@ namespace bs
 			renderWindow->move(left, top);
 		};
 
-		gCoreThread().queueCommand(std::bind(moveFunc, getCore(), left, top));
-		gCoreThread().submit(true);
+		moveFunc(getCore(), left, top);
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -91,7 +88,7 @@ namespace bs
 
 		getMutableProperties().isHidden = true;
 
-		gCoreThread().queueCommand(std::bind(hideFunc, getCore()));
+		hideFunc(getCore());
 	}
 
 	void RenderWindow::show()
@@ -104,7 +101,7 @@ namespace bs
 
 		getMutableProperties().isHidden = false;
 
-		gCoreThread().queueCommand(std::bind(showFunc, getCore()));
+		showFunc(getCore());
 	}
 
 	void RenderWindow::minimize()
@@ -117,7 +114,7 @@ namespace bs
 
 		getMutableProperties().isMaximized = false;
 
-		gCoreThread().queueCommand(std::bind(minimizeFunc, getCore()));
+		minimizeFunc(getCore());
 	}
 
 	void RenderWindow::maximize()
@@ -130,8 +127,7 @@ namespace bs
 
 		getMutableProperties().isMaximized = true;
 
-		gCoreThread().queueCommand(std::bind(maximizeFunc, getCore()));
-		gCoreThread().submit(true);
+		maximizeFunc(getCore());
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -153,8 +149,7 @@ namespace bs
 
 		getMutableProperties().isMaximized = false;
 
-		gCoreThread().queueCommand(std::bind(restoreFunc, getCore()));
-		gCoreThread().submit(true);
+		restoreFunc(getCore());
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -174,8 +169,7 @@ namespace bs
 			renderWindow->setFullscreen(width, height, refreshRate, monitorIdx);
 		};
 
-		gCoreThread().queueCommand(std::bind(fullscreenFunc, getCore(), width, height, refreshRate, monitorIdx));
-		gCoreThread().submit(true);
+		fullscreenFunc(getCore(), width, height, refreshRate, monitorIdx);
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -195,8 +189,7 @@ namespace bs
 			renderWindow->setFullscreen(mode);
 		};
 
-		gCoreThread().queueCommand(std::bind(fullscreenFunc, getCore(), std::cref(mode)));
-		gCoreThread().submit(true);
+		fullscreenFunc(getCore(), std::cref(mode));
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -216,8 +209,7 @@ namespace bs
 			renderWindow->setWindowed(width, height);
 		};
 
-		gCoreThread().queueCommand(std::bind(windowedFunc, getCore(), width, height));
-		gCoreThread().submit(true);
+		windowedFunc(getCore(), width, height);
 
 		{
 			ScopedSpinLock lock(getCore()->mLock);
@@ -251,8 +243,6 @@ namespace bs
 
 	void RenderWindow::_notifyWindowEvent(WindowEventType type)
 	{
-		THROW_IF_CORE_THREAD;
-
 		ct::RenderWindow* coreWindow = getCore().get();
 		RenderWindowProperties& syncProps = coreWindow->getSyncedProperties();
 		RenderWindowProperties& props = const_cast<RenderWindowProperties&>(getProperties());
@@ -433,8 +423,6 @@ namespace bs
 
 	void RenderWindow::setHidden(bool hidden)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		RenderWindowProperties& props = const_cast<RenderWindowProperties&>(getProperties());
 
 		props.isHidden = hidden;
@@ -448,13 +436,10 @@ namespace bs
 
 	void RenderWindow::setActive(bool state)
 	{
-		THROW_IF_NOT_CORE_THREAD;
 	}
 
 	void RenderWindow::_notifyWindowEvent(WindowEventType type)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		RenderWindowProperties& syncProps = getSyncedProperties();
 		RenderWindowProperties& props = const_cast<RenderWindowProperties&>(getProperties());
 

@@ -135,6 +135,21 @@ namespace bs
 		List<CoreStoredSyncData> mCoreSyncData;
 
 		Mutex mObjectsMutex;
+
+	};
+
+	class CoreObjectFrameManager : public Module<CoreObjectFrameManager>
+	{
+	public:
+		static const int NUM_SYNC_BUFFERS = 2;
+	public:
+		virtual ~CoreObjectFrameManager();
+		void update();
+		FrameAlloc* getFrameAlloc() const;
+		void onStartUp() override;
+	private:
+		FrameAlloc* mFrameAllocs[CoreObjectFrameManager::NUM_SYNC_BUFFERS];
+		UINT32 mActiveFrameAlloc = 0;
 	};
 
 	/** @} */

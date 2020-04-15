@@ -10,7 +10,6 @@
 #include "Scene/BsSceneManager.h"
 #include "Scene/BsSceneObject.h"
 #include "Platform/BsCursor.h"
-#include "CoreThread/BsCoreThread.h"
 #include "FileSystem/BsFileSystem.h"
 #include "Resources/BsPlainTextImporter.h"
 #include "Importer/BsImporter.h"
@@ -35,8 +34,8 @@ namespace bs
 	{
 		// Cleanup any new objects queued for destruction by unloaded scripts
 		CoreObjectManager::instance().syncToCore();
-		gCoreThread().update();
-		gCoreThread().submitAll(true);
+		//gCoreThread().update();
+		//gCoreThread().submitAll(true);
 
 		Cursor::shutDown();
 

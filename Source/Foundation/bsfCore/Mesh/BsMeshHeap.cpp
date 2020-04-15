@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Mesh/BsMeshHeap.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Mesh/BsTransientMesh.h"
 #include "Managers/BsHardwareBufferManager.h"
 #include "RenderAPI/BsVertexDataDesc.h"
@@ -95,8 +94,6 @@ namespace bs
 
 	MeshHeap::~MeshHeap()
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		for (auto& cpuVertBuffer : mCPUVertexData)
 			bs_free(cpuVertBuffer);
 
@@ -110,8 +107,6 @@ namespace bs
 
 	void MeshHeap::initialize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		growVertexBuffer(mNumVertices);
 		growIndexBuffer(mNumIndices);
 

@@ -5,7 +5,6 @@
 #include "Private/RTTI/BsRenderTargetRTTI.h"
 #include "Error/BsException.h"
 #include "RenderAPI/BsRenderAPI.h"
-#include "CoreThread/BsCoreThread.h"
 
 namespace bs
 {
@@ -23,7 +22,7 @@ namespace bs
 			renderTarget->setPriority(priority);
 		};
 
-		gCoreThread().queueCommand(std::bind(windowedFunc, getCore(), priority));
+		windowedFunc(getCore(), priority);
 	}
 
 	SPtr<ct::RenderTarget> RenderTarget::getCore() const
@@ -33,8 +32,6 @@ namespace bs
 
 	const RenderTargetProperties& RenderTarget::getProperties() const
 	{
-		THROW_IF_CORE_THREAD;
-
 		return getPropertiesInternal();
 	}
 

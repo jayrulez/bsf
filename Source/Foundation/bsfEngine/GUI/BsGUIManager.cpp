@@ -26,7 +26,6 @@
 #include "Profiling/BsProfilerCPU.h"
 #include "Input/BsVirtualInput.h"
 #include "Platform/BsCursor.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Renderer/BsRendererManager.h"
 #include "Renderer/BsRenderer.h"
 #include "Renderer/BsCamera.h"
@@ -167,13 +166,8 @@ namespace bs
 		if(camera != nullptr)
 		{
 			auto widgetId = (UINT64)widget;
-			gCoreThread().queueCommand([
-				renderer = mRenderer.get(),
-				camera = camera->getCore(),
-				widgetId]()
-			{
-				renderer->clearDrawGroups(camera, widgetId);
-			});
+
+			mRenderer.get()->clearDrawGroups(camera->getCore(), widgetId);
 		}
 	}
 
@@ -356,19 +350,9 @@ namespace bs
 				continue;
 			
 			auto widgetId = (UINT64)widget;
-			gCoreThread().queueCommand([
-				renderer = mRenderer.get(),
-				updateData = std::move(updateData),
-				camera = camera->getCore(),
-				widgetId,
-				widgetDepth = widget->getDepth(),
-				worldTransform = widget->getWorldTfrm()]()
-			{
-				renderer->updateDrawGroups(camera, widgetId, widgetDepth, worldTransform, updateData);
-			});
+			mRenderer.get()->updateDrawGroups(camera->getCore(), widgetId, widget->getDepth(), widget->getWorldTfrm(), std::move(updateData));
 		}
-
-		gCoreThread().queueCommand([renderer = mRenderer.get(), time = gTime().getTime()](){ renderer->update(time); });
+		mRenderer.get()->update(gTime().getTime());
 	}
 
 	void GUIManager::processDestroyQueue()

@@ -15,7 +15,6 @@
 #include "FileSystem/BsDataStream.h"
 #include "Resources/BsResourceManifest.h"
 #include "FileSystem/BsFileSystem.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Utility/BsUUID.h"
 #include "Material/BsShader.h"
 #include "Material/BsPass.h"
@@ -284,7 +283,7 @@ namespace bs
 			data.source->readData(data.srcData);
 		}
 
-		gCoreThread().submit(true);
+		//gCoreThread().submit(true);
 
 		auto saveTexture = [&](auto& pixelData, auto& path, std::string& uuid)
 		{

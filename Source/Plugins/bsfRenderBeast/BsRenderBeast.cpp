@@ -2,7 +2,6 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "BsRenderBeast.h"
 #include "BsCoreApplication.h"
-#include "CoreThread/BsCoreThread.h"
 #include "CoreThread/BsCoreObjectManager.h"
 #include "Material/BsMaterial.h"
 #include "Material/BsShader.h"
@@ -59,15 +58,14 @@ namespace bs { namespace ct
 		if(bokehFlare.isLoaded(false))
 			textures.bokehFlare = bokehFlare->getCore();
 
-		gCoreThread().queueCommand([this, textures]() { initializeCore(textures); }, CTQF_InternalQueue);
+		initializeCore(textures);
 	}
 
 	void RenderBeast::destroy()
 	{
 		Renderer::destroy();
 
-		gCoreThread().queueCommand(std::bind(&RenderBeast::destroyCore, this));
-		gCoreThread().submit(true);
+		destroyCore();
 	}
 
 	void RenderBeast::initializeCore(const LoadedRendererTextures& rendererTextures)
@@ -344,8 +342,8 @@ namespace bs { namespace ct
 			else if(name == "StandardDeferredDirDirectLighting")
 				DeferredDirectionalLightMat::setOverride(shaderCore);
 		};
-	
-		gCoreThread().queueCommand(setShaderOverride);
+
+		setShaderOverride();
 	}
 
 	void RenderBeast::renderAll(PerFrameData perFrameData)
@@ -355,7 +353,7 @@ namespace bs { namespace ct
 
 		if (mOptionsDirty)
 		{
-			gCoreThread().queueCommand(std::bind(&RenderBeast::syncOptions, this, *mOptions));
+			syncOptions(*mOptions);
 			mOptionsDirty = false;
 		}
 
@@ -363,14 +361,12 @@ namespace bs { namespace ct
 		timings.time = gTime().getTime();
 		timings.timeDelta = gTime().getFrameDelta();
 		timings.frameIdx = gTime().getFrameIdx();
-		
-		gCoreThread().queueCommand(std::bind(&RenderBeast::renderAllCore, this, timings, perFrameData));
+
+		renderAllCore(timings, perFrameData);
 	}
 
 	void RenderBeast::renderAllCore(FrameTimings timings, PerFrameData perFrameData)
 	{
-		THROW_IF_NOT_CORE_THREAD;
-
 		gProfilerGPU().beginFrame();
 		gProfilerCPU().beginSample("Render");
 

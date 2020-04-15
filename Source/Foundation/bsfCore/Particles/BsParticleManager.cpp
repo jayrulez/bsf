@@ -8,6 +8,7 @@
 #include "Private/Particles/BsParticleSet.h"
 #include "Animation/BsAnimationManager.h"
 #include "Image/BsPixelUtil.h"
+#include "CoreThread/BsCoreObjectManager.h"
 
 namespace bs
 {
@@ -338,7 +339,7 @@ namespace bs
 	struct ParticleManager::Members
 	{
 		// TODO - Perhaps sharing one pool is better
-		ParticleSimulationDataPool simDataPool[CoreThread::NUM_SYNC_BUFFERS];
+		ParticleSimulationDataPool simDataPool[CoreObjectFrameManager::NUM_SYNC_BUFFERS];
 	};
 
 	ParticleManager::ParticleManager()
@@ -358,8 +359,8 @@ namespace bs
 		// Advance the buffers (last write buffer becomes read buffer)
 		if (mSwapBuffers)
 		{
-			mReadBufferIdx = (mReadBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
-			mWriteBufferIdx = (mWriteBufferIdx + 1) % CoreThread::NUM_SYNC_BUFFERS;
+			mReadBufferIdx = (mReadBufferIdx + 1) % CoreObjectFrameManager::NUM_SYNC_BUFFERS;
+			mWriteBufferIdx = (mWriteBufferIdx + 1) % CoreObjectFrameManager::NUM_SYNC_BUFFERS;
 
 			mSwapBuffers = false;
 		}

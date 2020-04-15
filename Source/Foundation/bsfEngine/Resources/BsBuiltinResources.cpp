@@ -13,7 +13,6 @@
 #include "Material/BsMaterial.h"
 #include "Reflection/BsRTTIType.h"
 #include "FileSystem/BsFileSystem.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Utility/BsShapeMeshes3D.h"
 #include "Mesh/BsMesh.h"
 
@@ -191,8 +190,6 @@ namespace bs
 
 		mFrameworkIcon = iconTex->getProperties().allocBuffer(0, 0);
 		iconTex->readData(mFrameworkIcon);
-
-		gCoreThread().submit(true);
 	}
 
 	HSpriteTexture BuiltinResources::getSkinTexture(const String& name) const

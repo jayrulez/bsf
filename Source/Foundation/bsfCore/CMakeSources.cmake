@@ -54,10 +54,8 @@ set(BS_CORE_INC_PHYSICS
 )
 
 set(BS_CORE_INC_CORETHREAD
-	"bsfCore/CoreThread/BsCoreThread.h"
 	"bsfCore/CoreThread/BsCoreObjectManager.h"
 	"bsfCore/CoreThread/BsCoreObject.h"
-	"bsfCore/CoreThread/BsCommandQueue.h"
 	"bsfCore/CoreThread/BsCoreObjectCore.h"
 	"bsfCore/CoreThread/BsCoreObjectSync.h"
 )
@@ -179,10 +177,8 @@ set(BS_CORE_INC_RENDERAPI_MANAGERS
 )
 
 set(BS_CORE_SRC_CORETHREAD
-	"bsfCore/CoreThread/BsCommandQueue.cpp"
 	"bsfCore/CoreThread/BsCoreObject.cpp"
 	"bsfCore/CoreThread/BsCoreObjectManager.cpp"
-	"bsfCore/CoreThread/BsCoreThread.cpp"
 	"bsfCore/CoreThread/BsCoreObjectCore.cpp"
 )
 

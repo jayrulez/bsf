@@ -766,7 +766,7 @@ namespace bs
 				mMeshData = mesh->allocBuffer();
 				mesh->readData(mMeshData);
 
-				gCoreThread().submit(true);
+				//gCoreThread().submit(true);
 			}
 		}
 

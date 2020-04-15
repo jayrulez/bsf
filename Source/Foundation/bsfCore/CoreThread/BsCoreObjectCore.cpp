@@ -1,7 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "CoreThread/BsCoreObjectCore.h"
-#include "CoreThread/BsCoreThread.h"
 
 namespace bs
 {
@@ -16,7 +15,6 @@ namespace bs
 
 	CoreObject::~CoreObject()
 	{
-		THROW_IF_NOT_CORE_THREAD;
 	}
 
 	void CoreObject::initialize()
@@ -36,11 +34,11 @@ namespace bs
 		if (!isInitialized())
 		{
 #if BS_DEBUG_MODE
-			if (BS_THREAD_CURRENT_ID == CoreThread::instance().getCoreThreadId())
-				BS_EXCEPT(InternalErrorException, "You cannot call this method on the core thread. It will cause a deadlock!");
+			//if (BS_THREAD_CURRENT_ID == CoreThread::instance().getCoreThreadId())
+			//	BS_EXCEPT(InternalErrorException, "You cannot call this method on the core thread. It will cause a deadlock!");
 #endif
 
-			gCoreThread().submitAll(true);
+			//gCoreThread().submitAll(true);
 
 			Lock lock(mCoreGpuObjectLoadedMutex);
 			while (!isInitialized())

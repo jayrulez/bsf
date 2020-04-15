@@ -3,7 +3,6 @@
 #pragma once
 #include "BsCorePrerequisites.h"
 #include "RenderAPI/BsSamplerState.h"
-#include "CoreThread/BsCommandQueue.h"
 #include "RenderAPI/BsRenderAPICapabilities.h"
 #include "RenderAPI/BsRenderTarget.h"
 #include "RenderAPI/BsRenderTexture.h"

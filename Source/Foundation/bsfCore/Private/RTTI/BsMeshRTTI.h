@@ -9,7 +9,6 @@
 #include "Mesh/BsMesh.h"
 #include "Animation/BsSkeleton.h"
 #include "Animation/BsMorphShapes.h"
-#include "CoreThread/BsCoreThread.h"
 
 namespace bs
 {
@@ -33,7 +32,7 @@ namespace bs
 			SPtr<MeshData> meshData = obj->allocBuffer();
 
 			obj->readData(meshData);
-			gCoreThread().submitAll(true);
+			//gCoreThread().submitAll(true);
 
 			return meshData;
 		}

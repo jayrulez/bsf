@@ -3,7 +3,6 @@
 #pragma once
 
 #include "BsApplication.h"
-#include "CoreThread/BsCoreThread.h"
 
 /** Provides an entry point for executables. */
 int bs_main(int argc, char* argv[]);
@@ -22,12 +21,7 @@ int main(int __argc, char* __argv[])
 #endif
 {
 	using namespace bs;
-#if BS_CORE_THREAD_IS_MAIN
-	Thread thread([argc = __argc, argv = __argv](){ bs_main(argc, argv); });
-	CoreThread::_run();
-	thread.join();
-#else
+
 	bs_main(__argc, __argv);
-#endif
 	return 0;
 }

@@ -23,7 +23,6 @@
 #include "BsD3D11TextureView.h"
 #include "BsD3D11RenderUtility.h"
 #include "RenderAPI/BsGpuParams.h"
-#include "CoreThread/BsCoreThread.h"
 #include "BsD3D11QueryManager.h"
 #include "Debug/BsDebug.h"
 #include "Error/BsException.h"
@@ -43,7 +42,7 @@ namespace bs { namespace ct
 
 	void D3D11RenderAPI::initialize()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		HRESULT hr = CreateDXGIFactory1(__uuidof(IDXGIFactory1), (void**)&mDXGIFactory);
 		if(FAILED(hr))
@@ -144,7 +143,7 @@ namespace bs { namespace ct
 
 	void D3D11RenderAPI::destroyCore()
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		// Ensure that all GPU commands finish executing before shutting down the device. If we don't do this a crash
 		// on shutdown may occurr as the driver is still executing the commands, and we unload this library.
@@ -213,7 +212,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<GraphicsPipelineState>& pipelineState)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			D3D11BlendState* d3d11BlendState;
 			D3D11RasterizerState* d3d11RasterizerState;
@@ -305,7 +304,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<ComputePipelineState>& pipelineState)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			SPtr<GpuProgram> program;
 			if (pipelineState != nullptr)
@@ -332,7 +331,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<GpuParams>& gpuParams)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			ID3D11DeviceContext* context = mDevice->getImmediateContext();
 
@@ -612,7 +611,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const Rect2& vp)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mViewportNorm = vp;
 			applyViewport();
@@ -629,7 +628,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 index, const SmallVector<SPtr<VertexBuffer>, 8>& buffers, UINT32 numBuffers)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			UINT32 maxBoundVertexBuffers = mCurrentCapabilities[0].maxBoundVertexBuffers;
 			if (index < 0 || (index + numBuffers) >= maxBoundVertexBuffers)
@@ -673,7 +672,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<IndexBuffer>& buffer)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			SPtr<D3D11IndexBuffer> indexBuffer = std::static_pointer_cast<D3D11IndexBuffer>(buffer);
 
@@ -701,7 +700,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<VertexDeclaration>& vertexDeclaration)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mActiveVertexDeclaration = vertexDeclaration;
 		};
@@ -716,7 +715,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](DrawOperationType op)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mDevice->getImmediateContext()->IASetPrimitiveTopology(D3D11Mappings::getPrimitiveType(op));
 			mActiveDrawOp = op;
@@ -733,7 +732,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 vertexOffset, UINT32 vertexCount, UINT32 instanceCount)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			applyInputLayout();
 
@@ -768,7 +767,7 @@ namespace bs { namespace ct
 		auto executeRef = [&](UINT32 startIndex, UINT32 indexCount, UINT32 vertexOffset, UINT32 vertexCount,
 			UINT32 instanceCount)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			applyInputLayout();
 
@@ -802,7 +801,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 numGroupsX, UINT32 numGroupsY, UINT32 numGroupsZ)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mDevice->getImmediateContext()->Dispatch(numGroupsX, numGroupsY, numGroupsZ);
 
@@ -825,7 +824,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 left, UINT32 top, UINT32 right, UINT32 bottom)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mScissorRect.left = static_cast<LONG>(left);
 			mScissorRect.top = static_cast<LONG>(top);
@@ -845,7 +844,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 value)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mStencilRef = value;
 
@@ -866,7 +865,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 buffers, const Color& color, float depth, UINT16 stencil, UINT8 targetMask)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			if (mActiveRenderTarget == nullptr)
 				return;
@@ -902,7 +901,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](UINT32 buffers, const Color& color, float depth, UINT16 stencil, UINT8 targetMask)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			if (mActiveRenderTarget == nullptr)
 				return;
@@ -972,7 +971,7 @@ namespace bs { namespace ct
 	{
 		auto executeRef = [&](const SPtr<RenderTarget>& target, UINT32 readOnlyFlags)
 		{
-			THROW_IF_NOT_CORE_THREAD;
+			//THROW_IF_NOT_CORE_THREAD;
 
 			mActiveRenderTarget = target;
 			mActiveRenderTargetModified = false;
@@ -1022,7 +1021,7 @@ namespace bs { namespace ct
 
 	void D3D11RenderAPI::swapBuffers(const SPtr<RenderTarget>& target, UINT32 syncMask)
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		submitCommandBuffer(mMainCommandBuffer, syncMask);
 		target->swapBuffers();
@@ -1095,7 +1094,7 @@ namespace bs { namespace ct
 
 	void D3D11RenderAPI::initCapabilites(IDXGIAdapter* adapter, RenderAPICapabilities& caps) const
 	{
-		THROW_IF_NOT_CORE_THREAD;
+		//THROW_IF_NOT_CORE_THREAD;
 
 		// This must query for DirectX 10 interface as this is unsupported for DX11
 		LARGE_INTEGER driverVersionNum;

@@ -412,6 +412,7 @@ namespace bs
 	class Transform;
 	class SceneActor;
 	class CoreObjectManager;
+	class CoreObjectFrameManager;
 	struct CollisionData;
 	// Asset import
 	class SpecificImporter;

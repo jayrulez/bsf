@@ -9,7 +9,6 @@
 #include "RTTI/BsMathRTTI.h"
 #include "Renderer/BsLightProbeVolume.h"
 #include "Renderer/BsRenderer.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Private/RTTI/BsTextureRTTI.h"
 
 namespace bs

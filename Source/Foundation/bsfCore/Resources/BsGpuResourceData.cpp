@@ -2,7 +2,6 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Resources/BsGpuResourceData.h"
 #include "Private/RTTI/BsGpuResourceDataRTTI.h"
-#include "CoreThread/BsCoreThread.h"
 #include "Error/BsException.h"
 
 namespace
@@ -13,8 +12,8 @@ namespace
 #if !BS_FORCE_SINGLETHREADED_RENDERING
 		if(data->isLocked())
 		{
-			if(BS_THREAD_CURRENT_ID != CoreThread::instance().getCoreThreadId())
-				BS_EXCEPT(InternalErrorException, "You are not allowed to access buffer data from non-core thread when the buffer is locked.");
+			//if(BS_THREAD_CURRENT_ID != CoreThread::instance().getCoreThreadId())
+			//	BS_EXCEPT(InternalErrorException, "You are not allowed to access buffer data from non-core thread when the buffer is locked.");
 		}
 #endif
 	}
