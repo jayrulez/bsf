@@ -78,21 +78,6 @@ namespace bs
 	{
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
-			if (desc.colorSurfaces[i].texture != nullptr)
-				mBindableColorTex[i] = static_resource_cast<Texture>(gResources()._createResourceHandle(desc.colorSurfaces[i].texture));
-		}
-
-		if (desc.depthStencilSurface.texture != nullptr)
-			mBindableDepthStencilTex = static_resource_cast<Texture>(gResources()._createResourceHandle(desc.depthStencilSurface.texture));
-	}
-
-
-	void RenderTexture::initialize()
-	{
-		RenderTarget::initialize();
-
-		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
-		{
 			if (mDesc.colorSurfaces[i].texture != nullptr)
 			{
 				SPtr<Texture> texture = mDesc.colorSurfaces[i].texture;
@@ -117,6 +102,12 @@ namespace bs
 		}
 
 		throwIfBuffersDontMatch();
+	}
+
+
+	void RenderTexture::initialize()
+	{
+		RenderTarget::initialize();
 	}
 
 	const RenderTextureProperties& RenderTexture::getProperties() const

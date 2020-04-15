@@ -145,7 +145,7 @@ namespace bs
 			mInitData = nullptr;
 		}
 
-		CoreObject::initialize();
+		//CoreObject::initialize();
 
 		Resource::initialize();
 	}

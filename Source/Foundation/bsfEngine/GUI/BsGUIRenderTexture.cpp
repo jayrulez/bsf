@@ -4,6 +4,7 @@
 #include "GUI/BsGUIManager.h"
 #include "RenderAPI/BsRenderTexture.h"
 #include "Image/BsSpriteTexture.h"
+#include "Resources/BsResources.h"
 
 namespace bs
 {
@@ -62,7 +63,9 @@ namespace bs
 				mDesc.uvScale = Vector2(1.0f, -1.0f);
 			}
 
-			setTexture(SpriteTexture::create(texture->getColorTextureHandle(0)));
+			HTexture textureHandle = static_resource_cast<Texture>(gResources()._createResourceHandle(texture->getColorTexture(0)));
+
+			setTexture(SpriteTexture::create(textureHandle));
 
 			GUIManager::instance().setInputBridge(mSourceTexture, this);
 		}

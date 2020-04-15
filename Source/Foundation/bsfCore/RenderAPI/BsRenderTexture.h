@@ -54,21 +54,6 @@ namespace bs
 		 *
 		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
 		 */
-		const HTexture& getColorTextureHandle(UINT32 idx) const { return mBindableColorTex[idx]; }
-
-		/**
-		 * Returns a depth/stencil surface texture you may bind as an input to an GPU program.
-		 *
-		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
-		 */
-		const HTexture& getDepthStencilTextureHandle() const { return mBindableDepthStencilTex; }
-
-
-		/**
-		 * Returns a color surface texture you may bind as an input to an GPU program.
-		 *
-		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
-		 */
 		SPtr<Texture> getColorTexture(UINT32 idx) const
 		{
 			return mDesc.colorSurfaces[idx].texture;
@@ -82,16 +67,6 @@ namespace bs
 		SPtr<Texture> getDepthStencilTexture() const
 		{
 			return mDesc.depthStencilSurface.texture;
-		}
-
-		/**
-		 * Retrieves a core implementation of a render texture usable only from the core thread.
-		 *
-		 * @note	Core thread only.
-		 */
-		SPtr<ct::CoreObject> getCore() const
-		{
-			return nullptr;
 		}
 
 		/**	Returns properties that describe the render texture. */
@@ -112,9 +87,6 @@ namespace bs
 		}
 
 	protected:
-		HTexture mBindableColorTex[BS_MAX_MULTIPLE_RENDER_TARGETS];
-		HTexture mBindableDepthStencilTex;
-
 		SPtr<ct::TextureView> mColorSurfaces[BS_MAX_MULTIPLE_RENDER_TARGETS];
 		SPtr<ct::TextureView> mDepthStencilSurface;
 

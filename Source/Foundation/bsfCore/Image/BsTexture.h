@@ -459,12 +459,6 @@ namespace bs
 			return nullptr;
 		}
 
-		/**	Retrieves a core implementation of a texture usable only from the core thread. */
-		SPtr<ct::CoreObject> getCore() const
-		{
-			return nullptr;
-		}
-
 		/************************************************************************/
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/

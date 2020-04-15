@@ -151,7 +151,7 @@ namespace bs
 		/**	Converts window local position to screen position. */
 		virtual Vector2I windowToScreenPos(const Vector2I& windowPos) const = 0;
 
-
+		virtual void initialize() override;
 
 		/**
 		 * Switches the window to fullscreen mode. Child windows cannot go into fullscreen mode.
@@ -242,13 +242,6 @@ namespace bs
 		 * @note This is an @ref asyncMethod "asynchronous method".
 		 */
 		virtual void show();
-
-
-		/**	Retrieves a core implementation of a render window usable only from the core thread. */
-		SPtr<ct::CoreObject> getCore() const
-		{
-			return nullptr;
-		}
 
 		/**	Returns properties that describe the render window. */
 		const RenderWindowProperties& getProperties() const;

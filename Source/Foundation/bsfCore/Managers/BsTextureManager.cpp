@@ -95,14 +95,14 @@ namespace bs
 
 		SPtr<Texture> texture = Texture::create(textureDesc);
 
-		HTexture depthStencil;
+		SPtr<Texture> depthStencil;
 		if (createDepth)
 		{
 			textureDesc.format = depthStencilFormat;
 			textureDesc.hwGamma = false;
 			textureDesc.usage = TU_DEPTHSTENCIL;
 
-			depthStencil = Texture::createHandle(textureDesc);
+			depthStencil = Texture::create(textureDesc);
 		}
 
 		RENDER_TEXTURE_DESC desc;
@@ -111,7 +111,7 @@ namespace bs
 		desc.colorSurfaces[0].numFaces = 1;
 		desc.colorSurfaces[0].mipLevel = 0;
 
-		desc.depthStencilSurface.texture = depthStencil.getInternalPtr();//XXXTEX
+		desc.depthStencilSurface.texture = depthStencil;
 		desc.depthStencilSurface.face = 0;
 		desc.depthStencilSurface.numFaces = 1;
 		desc.depthStencilSurface.mipLevel = 0;

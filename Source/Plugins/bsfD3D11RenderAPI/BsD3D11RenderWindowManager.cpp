@@ -30,9 +30,6 @@ namespace bs
 		//return bs_core_ptr<D3D11RenderWindow>(renderWindow);
 
 		//// Create the window
-		SPtr<D3D11RenderWindow> renderWindow = bs_core_ptr_new<D3D11RenderWindow>(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
-		//renderWindow->_setThisPtr(renderWindow);
-
-		return renderWindow;
+		return bs_core_ptr_new<D3D11RenderWindow>(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
 	}
 }
