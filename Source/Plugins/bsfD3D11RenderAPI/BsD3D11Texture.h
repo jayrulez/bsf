@@ -15,6 +15,9 @@ namespace bs { namespace ct
 	class D3D11Texture : public Texture
 	{
 	public:
+
+		D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask);
+		D3D11Texture() = default; // For serialization only
 		~D3D11Texture();
 
 		/**	Returns internal DX11 texture resource object. */
@@ -35,9 +38,6 @@ namespace bs { namespace ct
 	protected:
 		friend class D3D11TextureManager;
 
-		D3D11Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask);
-
-		D3D11Texture() = default; // For serialization only
 
 		/** @copydoc CoreObject::initialize() */
 		void initialize() override;

@@ -37,11 +37,11 @@ namespace bs
 	struct GUIRenderTargetRenderData
 	{
 		GUIRenderTargetRenderData() = default;
-		GUIRenderTargetRenderData(SPtr<ct::RenderTarget> target)
+		GUIRenderTargetRenderData(SPtr<RenderTarget> target)
 			:target(std::move(target))
 		{ }
 		
-		SPtr<ct::RenderTarget> target;
+		SPtr<RenderTarget> target;
 		UINT64 lastUpdateCount = (UINT64)-1;
 	};
 
@@ -49,7 +49,7 @@ namespace bs
 	struct GUIDrawGroupRenderData
 	{
 		INT32 id = 0;
-		SPtr<ct::RenderTexture> destination;
+		SPtr<RenderTexture> destination;
 		Rect2I bounds;
 		SubMesh subMesh;
 		bool requiresRedraw = true;

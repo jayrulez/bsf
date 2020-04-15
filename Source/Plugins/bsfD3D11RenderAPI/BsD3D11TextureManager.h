@@ -28,21 +28,9 @@ namespace bs
 	class D3D11RenderTextureManager : public RenderTextureManager
 	{
 	protected:
-		/** @copydoc TextureManager::createRenderTextureImpl */
-		SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) override;
-	};
-
-	namespace ct
-	{
-	/**	Handles creation of DirectX 11 textures. */
-	class D3D11RenderTextureManager : public RenderTextureManager
-	{
-	protected:
 		/** @copydoc TextureManager::createRenderTextureInternal */
-		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
-			UINT32 deviceIdx = 0) override;
+		SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) override;
 	};
-	}
 
 	/** @} */
 }

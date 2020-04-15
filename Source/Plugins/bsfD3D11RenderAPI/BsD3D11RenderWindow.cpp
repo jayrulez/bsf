@@ -19,20 +19,29 @@
 
 namespace bs
 {
-	D3D11RenderWindow::D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId)
-		:RenderWindow(desc, windowId), mProperties(desc)
+	D3D11RenderWindow::D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, ct::D3D11Device& device, IDXGIFactory1* DXGIFactory)
+		: RenderWindow(desc, windowId), mProperties(desc), mDevice(device), mDXGIFactory(DXGIFactory)
 	{
-
 	}
 
-	void D3D11RenderWindow::getCustomAttribute(const String& name, void* pData) const
+	D3D11RenderWindow::~D3D11RenderWindow()
 	{
-		if (name == "WINDOW")
+		RenderWindowProperties& props = mProperties;
+
+		if (props.isFullScreen)
+			mSwapChain->SetFullscreenState(false, nullptr);
+
+		SAFE_RELEASE(mSwapChain);
+		BS_INC_RENDER_STAT_CAT(ResDestroyed, ct::RenderStatObject_SwapChain);
+
+		if (mWindow != nullptr)
 		{
-			UINT64 *pHwnd = (UINT64*)pData;
-			*pHwnd = (UINT64)getHWnd();
-			return;
+			bs_delete(mWindow);
+			mWindow = nullptr;
 		}
+
+		destroySizeDependedD3DResources();
+		Platform::resetNonClientAreas(*this);
 	}
 
 	Vector2I D3D11RenderWindow::screenToWindowPos(const Vector2I& screenPos) const
@@ -55,63 +64,11 @@ namespace bs
 		return Vector2I(pos.x, pos.y);
 	}
 
-	SPtr<ct::D3D11RenderWindow> D3D11RenderWindow::getCore() const
-	{
-		return std::static_pointer_cast<ct::D3D11RenderWindow>(mCoreSpecific);
-	}
-
 	HWND D3D11RenderWindow::getHWnd() const
 	{
-		blockUntilCoreInitialized();
-		return getCore()->_getWindowHandle();
+		return mWindow->getHWnd();
 	}
 
-	void D3D11RenderWindow::syncProperties()
-	{
-		ScopedSpinLock lock(getCore()->mLock);
-		mProperties = getCore()->mSyncedProperties;
-	}
-
-	SPtr<ct::CoreObject> D3D11RenderWindow::createCore() const
-	{
-		ct::RenderAPI* rs = ct::RenderAPI::instancePtr();
-		auto d3d11rs = static_cast<ct::D3D11RenderAPI*>(rs);
-
-		// Create the window
-		RENDER_WINDOW_DESC desc = mDesc;
-		SPtr<ct::CoreObject> coreObj = bs_shared_ptr_new<ct::D3D11RenderWindow>(desc, mWindowId,
-			d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
-		coreObj->_setThisPtr(coreObj);
-
-		return coreObj;
-	}
-
-	namespace ct
-	{
-	D3D11RenderWindow::D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, D3D11Device& device,
-		IDXGIFactory1* DXGIFactory)
-		: RenderWindow(desc, windowId), mProperties(desc), mSyncedProperties(desc), mDevice(device), mDXGIFactory(DXGIFactory)
-	{ }
-
-	D3D11RenderWindow::~D3D11RenderWindow()
-	{
-		RenderWindowProperties& props = mProperties;
-
-		if (props.isFullScreen)
-			mSwapChain->SetFullscreenState(false, nullptr);
-
-		SAFE_RELEASE(mSwapChain);
-		BS_INC_RENDER_STAT_CAT(ResDestroyed, RenderStatObject_SwapChain);
-
-		if (mWindow != nullptr)
-		{
-			bs_delete(mWindow);
-			mWindow = nullptr;
-		}
-
-		destroySizeDependedD3DResources();
-		Platform::resetNonClientAreas(*this);
-	}
 
 	void D3D11RenderWindow::initialize()
 	{
@@ -164,19 +121,19 @@ namespace bs
 		}
 		else
 		{
-			const D3D11VideoMode& d3d11videoMode = static_cast<const D3D11VideoMode&>(mDesc.videoMode);
+			const ct::D3D11VideoMode& d3d11videoMode = static_cast<const ct::D3D11VideoMode&>(mDesc.videoMode);
 			mRefreshRateNumerator = d3d11videoMode.getRefreshRateNumerator();
 			mRefreshRateDenominator = d3d11videoMode.getRefreshRateDenominator();
 		}
 
-		const D3D11VideoOutputInfo* outputInfo = nullptr;
+		const ct::D3D11VideoOutputInfo* outputInfo = nullptr;
 
-		const D3D11VideoModeInfo& videoModeInfo = static_cast<const D3D11VideoModeInfo&>(RenderAPI::instance().getVideoModeInfo());
+		const ct::D3D11VideoModeInfo& videoModeInfo = static_cast<const ct::D3D11VideoModeInfo&>(ct::RenderAPI::instance().getVideoModeInfo());
 		UINT32 numOutputs = videoModeInfo.getNumOutputs();
 		if (numOutputs > 0)
 		{
 			UINT32 actualMonitorIdx = std::min(mDesc.videoMode.outputIdx, numOutputs - 1);
-			outputInfo = static_cast<const D3D11VideoOutputInfo*>(&videoModeInfo.getOutputInfo(actualMonitorIdx));
+			outputInfo = static_cast<const ct::D3D11VideoOutputInfo*>(&videoModeInfo.getOutputInfo(actualMonitorIdx));
 
 			DXGI_OUTPUT_DESC desc;
 			outputInfo->getDXGIOutput()->GetDesc(&desc);
@@ -212,10 +169,8 @@ namespace bs
 
 		{
 			ScopedSpinLock lock(mLock);
-			mSyncedProperties = props;
 		}
 
-		bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		RenderWindow::initialize();
 	}
 
@@ -246,11 +201,7 @@ namespace bs
 
 			{
 				ScopedSpinLock lock(mLock);
-				mSyncedProperties.top = props.top;
-				mSyncedProperties.left = props.left;
 			}
-
-			bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		}
 	}
 
@@ -267,11 +218,7 @@ namespace bs
 
 			{
 				ScopedSpinLock lock(mLock);
-				mSyncedProperties.width = props.width;
-				mSyncedProperties.height = props.height;
 			}
-
-			bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		}
 	}
 
@@ -319,13 +266,13 @@ namespace bs
 		if (mIsChild)
 			return;
 
-		const D3D11VideoModeInfo& videoModeInfo = static_cast<const D3D11VideoModeInfo&>(RenderAPI::instance().getVideoModeInfo());
+		const ct::D3D11VideoModeInfo& videoModeInfo = static_cast<const ct::D3D11VideoModeInfo&>(ct::RenderAPI::instance().getVideoModeInfo());
 		UINT32 numOutputs = videoModeInfo.getNumOutputs();
 		if (numOutputs == 0)
 			return;
 
 		UINT32 actualMonitorIdx = std::min(monitorIdx, numOutputs - 1);
-		const D3D11VideoOutputInfo& outputInfo = static_cast<const D3D11VideoOutputInfo&>(videoModeInfo.getOutputInfo(actualMonitorIdx));
+		const ct::D3D11VideoOutputInfo& outputInfo = static_cast<const ct::D3D11VideoOutputInfo&>(videoModeInfo.getOutputInfo(actualMonitorIdx));
 
 		DXGI_MODE_DESC modeDesc;
 		ZeroMemory(&modeDesc, sizeof(modeDesc));
@@ -352,13 +299,8 @@ namespace bs
 
 		{
 			ScopedSpinLock lock(mLock);
-			mSyncedProperties.top = mProperties.top;
-			mSyncedProperties.left = mProperties.left;
-			mSyncedProperties.width = mProperties.width;
-			mSyncedProperties.height = mProperties.height;
 		}
 
-		bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		bs::RenderWindowManager::instance().notifyMovedOrResized(this);
 	}
 
@@ -373,15 +315,15 @@ namespace bs
 			return;
 		}
 
-		const D3D11VideoModeInfo& videoModeInfo = static_cast<const D3D11VideoModeInfo&>(RenderAPI::instance().getVideoModeInfo());
+		const ct::D3D11VideoModeInfo& videoModeInfo = static_cast<const ct::D3D11VideoModeInfo&>(ct::RenderAPI::instance().getVideoModeInfo());
 		UINT32 numOutputs = videoModeInfo.getNumOutputs();
 		if (numOutputs == 0)
 			return;
 
 		UINT32 actualMonitorIdx = std::min(mode.outputIdx, numOutputs - 1);
-		const D3D11VideoOutputInfo& outputInfo = static_cast<const D3D11VideoOutputInfo&>(videoModeInfo.getOutputInfo(actualMonitorIdx));
+		const ct::D3D11VideoOutputInfo& outputInfo = static_cast<const ct::D3D11VideoOutputInfo&>(videoModeInfo.getOutputInfo(actualMonitorIdx));
 
-		const D3D11VideoMode& videoMode = static_cast<const D3D11VideoMode&>(mode);
+		const ct::D3D11VideoMode& videoMode = static_cast<const ct::D3D11VideoMode&>(mode);
 
 		mProperties.isFullScreen = true;
 		mProperties.width = mode.width;
@@ -392,13 +334,8 @@ namespace bs
 
 		{
 			ScopedSpinLock lock(mLock);
-			mSyncedProperties.top = mProperties.top;
-			mSyncedProperties.left = mProperties.left;
-			mSyncedProperties.width = mProperties.width;
-			mSyncedProperties.height = mProperties.height;
 		}
 
-		bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		bs::RenderWindowManager::instance().notifyMovedOrResized(this);
 	}
 
@@ -428,13 +365,8 @@ namespace bs
 
 		{
 			ScopedSpinLock lock(mLock);
-			mSyncedProperties.top = mProperties.top;
-			mSyncedProperties.left = mProperties.left;
-			mSyncedProperties.width = mProperties.width;
-			mSyncedProperties.height = mProperties.height;
 		}
 
-		bs::RenderWindowManager::instance().notifySyncDataDirty(this);
 		bs::RenderWindowManager::instance().notifyMovedOrResized(this);
 	}
 
@@ -445,16 +377,7 @@ namespace bs
 
 		{
 			ScopedSpinLock lock(mLock);
-			mSyncedProperties.vsync = enabled;
-			mSyncedProperties.vsyncInterval = interval;
 		}
-
-		bs::RenderWindowManager::instance().notifySyncDataDirty(this);
-	}
-
-	HWND D3D11RenderWindow::_getWindowHandle() const
-	{
-		return mWindow->getHWnd();
 	}
 
 	void D3D11RenderWindow::getCustomAttribute(const String& name, void* pData) const
@@ -475,7 +398,7 @@ namespace bs
 		{
 			if (mDepthStencilView != nullptr)
 			{
-				D3D11TextureView* d3d11TextureView = static_cast<D3D11TextureView*>(mDepthStencilView.get());
+				ct::D3D11TextureView* d3d11TextureView = static_cast<ct::D3D11TextureView*>(mDepthStencilView.get());
 				*static_cast<ID3D11DepthStencilView**>(pData) = d3d11TextureView->getDSV(false, false);
 			}
 			else
@@ -489,7 +412,7 @@ namespace bs
 		{
 			if (mDepthStencilView != nullptr)
 			{
-				D3D11TextureView* d3d11TextureView = static_cast<D3D11TextureView*>(mDepthStencilView.get());
+				ct::D3D11TextureView* d3d11TextureView = static_cast<ct::D3D11TextureView*>(mDepthStencilView.get());
 				*static_cast<ID3D11DepthStencilView**>(pData) = d3d11TextureView->getDSV(true, true);
 			}
 			else
@@ -503,7 +426,7 @@ namespace bs
 		{
 			if (mDepthStencilView != nullptr)
 			{
-				D3D11TextureView* d3d11TextureView = static_cast<D3D11TextureView*>(mDepthStencilView.get());
+				ct::D3D11TextureView* d3d11TextureView = static_cast<ct::D3D11TextureView*>(mDepthStencilView.get());
 				*static_cast<ID3D11DepthStencilView**>(pData) = d3d11TextureView->getDSV(true, false);
 			}
 			else
@@ -517,7 +440,7 @@ namespace bs
 		{
 			if (mDepthStencilView != nullptr)
 			{
-				D3D11TextureView* d3d11TextureView = static_cast<D3D11TextureView*>(mDepthStencilView.get());
+				ct::D3D11TextureView* d3d11TextureView = static_cast<ct::D3D11TextureView*>(mDepthStencilView.get());
 				*static_cast<ID3D11DepthStencilView**>(pData) = d3d11TextureView->getDSV(false, true);
 			}
 			else
@@ -657,7 +580,7 @@ namespace bs
 
 		mSwapChainDesc.Windowed	= true;
 
-		D3D11RenderAPI* rs = static_cast<D3D11RenderAPI*>(RenderAPI::instancePtr());
+		ct::D3D11RenderAPI* rs = static_cast<ct::D3D11RenderAPI*>(ct::RenderAPI::instancePtr());
 		rs->determineMultisampleSettings(props.multisampleCount, format, &mMultisampleType);
 		mSwapChainDesc.SampleDesc.Count = mMultisampleType.Count;
 		mSwapChainDesc.SampleDesc.Quality = mMultisampleType.Quality;
@@ -679,7 +602,7 @@ namespace bs
 		if (FAILED(hr))
 			BS_EXCEPT(RenderingAPIException, "Unable to create swap chain. Error code: " + toString(hr));
 
-		BS_INC_RENDER_STAT_CAT(ResCreated, RenderStatObject_SwapChain);
+		BS_INC_RENDER_STAT_CAT(ResCreated, ct::RenderStatObject_SwapChain);
 	}
 
 	void D3D11RenderWindow::createSizeDependedD3DResources()
@@ -770,12 +693,5 @@ namespace bs
 			BS_EXCEPT(RenderingAPIException, "Unable to query a DXGIDevice.");
 
 		return pDXGIDevice;
-	}
-
-	void D3D11RenderWindow::syncProperties()
-	{
-		ScopedSpinLock lock(mLock);
-		mProperties = mSyncedProperties;
-	}		
 	}
 }

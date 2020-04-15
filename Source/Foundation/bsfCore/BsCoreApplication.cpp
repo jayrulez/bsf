@@ -325,7 +325,7 @@ namespace bs
 
 		beginCoreProfiling();
 		Platform::_coreUpdate();
-		ct::RenderWindowManager::instancePtr()->_update();
+		//RenderWindowManager::instancePtr()->_update();
 
 		//gCoreThread().update();
 		//gCoreThread().submitAll();

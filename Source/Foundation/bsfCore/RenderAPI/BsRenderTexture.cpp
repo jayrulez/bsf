@@ -15,43 +15,6 @@ namespace bs
 		bool requiresHwGamma = false;
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
-			HTexture texture = desc.colorSurfaces[i].texture;
-
-			if (!texture.isLoaded())
-				continue;
-
-			if (firstIdx == (UINT32)-1)
-				firstIdx = i;
-
-			requiresHwGamma |= texture->getProperties().isHardwareGammaEnabled();
-		}
-
-		if (firstIdx == (UINT32)-1)
-		{
-			HTexture texture = desc.depthStencilSurface.texture;
-			if (texture.isLoaded())
-			{
-				const TextureProperties& texProps = texture->getProperties();
-				construct(&texProps, desc.depthStencilSurface.numFaces, desc.depthStencilSurface.mipLevel,
-						  requiresFlipping, false);
-			}
-		}
-		else
-		{
-			HTexture texture = desc.colorSurfaces[firstIdx].texture;
-
-			const TextureProperties& texProps = texture->getProperties();
-			construct(&texProps, desc.colorSurfaces[firstIdx].numFaces, desc.colorSurfaces[firstIdx].mipLevel,
-					  requiresFlipping, requiresHwGamma);
-		}
-	}
-
-	RenderTextureProperties::RenderTextureProperties(const ct::RENDER_TEXTURE_DESC& desc, bool requiresFlipping)
-	{
-		UINT32 firstIdx = (UINT32)-1;
-		bool requiresHwGamma = false;
-		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
-		{
 			SPtr<Texture> texture = desc.colorSurfaces[i].texture;
 
 			if (texture == nullptr)
@@ -63,14 +26,14 @@ namespace bs
 			requiresHwGamma |= texture->getProperties().isHardwareGammaEnabled();
 		}
 
-		if(firstIdx == (UINT32)-1)
+		if (firstIdx == (UINT32)-1)
 		{
 			SPtr<Texture> texture = desc.depthStencilSurface.texture;
-			if(texture != nullptr)
+			if (texture != nullptr)
 			{
 				const TextureProperties& texProps = texture->getProperties();
 				construct(&texProps, desc.depthStencilSurface.numFaces, desc.depthStencilSurface.mipLevel,
-						  requiresFlipping, false);
+					requiresFlipping, false);
 			}
 		}
 		else
@@ -79,7 +42,7 @@ namespace bs
 
 			const TextureProperties& texProps = texture->getProperties();
 			construct(&texProps, desc.colorSurfaces[firstIdx].numFaces, desc.colorSurfaces[firstIdx].mipLevel,
-					  requiresFlipping, requiresHwGamma);
+				requiresFlipping, requiresHwGamma);
 		}
 	}
 
@@ -100,97 +63,29 @@ namespace bs
 		this->hwGamma = hwGamma;
 	}
 
-	SPtr<RenderTexture> RenderTexture::create(const TEXTURE_DESC& desc,
-		bool createDepth, PixelFormat depthStencilFormat)
+	SPtr<RenderTexture> RenderTexture::create(const TEXTURE_DESC& desc, bool createDepth, PixelFormat depthStencilFormat)
 	{
 		return RenderTextureManager::instance().createRenderTexture(desc, createDepth, depthStencilFormat);
 	}
 
-	SPtr<RenderTexture> RenderTexture::create(const RENDER_TEXTURE_DESC& desc)
+	SPtr<RenderTexture> RenderTexture::create(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
-		return RenderTextureManager::instance().createRenderTexture(desc);
+		return RenderTextureManager::instance().createRenderTexture(desc, deviceIdx);
 	}
 
-	SPtr<ct::RenderTexture> RenderTexture::getCore() const
-	{
-		return std::static_pointer_cast<ct::RenderTexture>(mCoreSpecific);
-	}
-
-	RenderTexture::RenderTexture(const RENDER_TEXTURE_DESC& desc)
+	RenderTexture::RenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 		:mDesc(desc)
 	{
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
 			if (desc.colorSurfaces[i].texture != nullptr)
-				mBindableColorTex[i] = desc.colorSurfaces[i].texture;
+				mBindableColorTex[i] = static_resource_cast<Texture>(gResources()._createResourceHandle(desc.colorSurfaces[i].texture));
 		}
 
 		if (desc.depthStencilSurface.texture != nullptr)
-			mBindableDepthStencilTex = desc.depthStencilSurface.texture;
+			mBindableDepthStencilTex = static_resource_cast<Texture>(gResources()._createResourceHandle(desc.depthStencilSurface.texture));
 	}
 
-	SPtr<ct::CoreObject> RenderTexture::createCore() const
-	{
-		ct::RENDER_TEXTURE_DESC coreDesc;
-
-		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
-		{
-			ct::RENDER_SURFACE_DESC surfaceDesc;
-			if (mDesc.colorSurfaces[i].texture.isLoaded())
-				surfaceDesc.texture = mDesc.colorSurfaces[i].texture.getInternalPtr();//XXXTEX
-
-			surfaceDesc.face = mDesc.colorSurfaces[i].face;
-			surfaceDesc.numFaces = mDesc.colorSurfaces[i].numFaces;
-			surfaceDesc.mipLevel = mDesc.colorSurfaces[i].mipLevel;
-
-			coreDesc.colorSurfaces[i] = surfaceDesc;
-		}
-
-		if (mDesc.depthStencilSurface.texture.isLoaded())
-			coreDesc.depthStencilSurface.texture = mDesc.depthStencilSurface.texture.getInternalPtr();//XXXTEX
-
-		coreDesc.depthStencilSurface.face = mDesc.depthStencilSurface.face;
-		coreDesc.depthStencilSurface.numFaces = mDesc.depthStencilSurface.numFaces;
-		coreDesc.depthStencilSurface.mipLevel = mDesc.depthStencilSurface.mipLevel;
-
-		return ct::RenderTextureManager::instance().createRenderTextureInternal(coreDesc);
-	}
-
-	CoreSyncData RenderTexture::syncToCore(FrameAlloc* allocator)
-	{
-		UINT32 size = sizeof(RenderTextureProperties);
-		UINT8* buffer = allocator->alloc(size);
-
-		RenderTextureProperties& props = const_cast<RenderTextureProperties&>(getProperties());
-
-		memcpy(buffer, (void*)&props, size);
-		return CoreSyncData(buffer, size);
-	}
-
-	const RenderTextureProperties& RenderTexture::getProperties() const
-	{
-		return static_cast<const RenderTextureProperties&>(getPropertiesInternal());
-	}
-
-	/************************************************************************/
-	/* 								SERIALIZATION                      		*/
-	/************************************************************************/
-
-	RTTITypeBase* RenderTexture::getRTTIStatic()
-	{
-		return RenderTextureRTTI::instance();
-	}
-
-	RTTITypeBase* RenderTexture::getRTTI() const
-	{
-		return RenderTexture::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	RenderTexture::RenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
-		:mDesc(desc)
-	{ }
 
 	void RenderTexture::initialize()
 	{
@@ -222,17 +117,6 @@ namespace bs
 		}
 
 		throwIfBuffersDontMatch();
-	}
-
-	SPtr<RenderTexture> RenderTexture::create(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
-	{
-		return RenderTextureManager::instance().createRenderTexture(desc, deviceIdx);
-	}
-
-	void RenderTexture::syncToCore(const CoreSyncData& data)
-	{
-		RenderTextureProperties& props = const_cast<RenderTextureProperties&>(getProperties());
-		props = data.getData<RenderTextureProperties>();
 	}
 
 	const RenderTextureProperties& RenderTexture::getProperties() const
@@ -288,7 +172,7 @@ namespace bs
 		if (firstSurfaceIdx != (UINT32)-1)
 		{
 			const TextureProperties& firstTexProps = mDesc.colorSurfaces[firstSurfaceIdx].texture->getProperties();
-			SPtr<TextureView> firstSurfaceView = mColorSurfaces[firstSurfaceIdx];
+			SPtr<ct::TextureView> firstSurfaceView = mColorSurfaces[firstSurfaceIdx];
 
 			UINT32 numSlices;
 			if (firstTexProps.getTextureType() == TEX_TYPE_3D)
@@ -333,5 +217,18 @@ namespace bs
 			}
 		}
 	}
+
+	/************************************************************************/
+	/* 								SERIALIZATION                      		*/
+	/************************************************************************/
+
+	RTTITypeBase* RenderTexture::getRTTIStatic()
+	{
+		return RenderTextureRTTI::instance();
+	}
+
+	RTTITypeBase* RenderTexture::getRTTI() const
+	{
+		return RenderTexture::getRTTIStatic();
 	}
 }

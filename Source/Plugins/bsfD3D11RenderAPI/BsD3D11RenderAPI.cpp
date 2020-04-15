@@ -100,7 +100,6 @@ namespace bs { namespace ct
 		// Create the texture manager for use by others		
 		TextureManager::startUp<D3D11TextureManager>();
 
-		bs::RenderTextureManager::startUp<bs::D3D11RenderTextureManager>();
 		RenderTextureManager::startUp<D3D11RenderTextureManager>();
 
 		// Create hardware buffer manager		
@@ -109,7 +108,6 @@ namespace bs { namespace ct
 
 		// Create render window manager
 		bs::RenderWindowManager::startUp<bs::D3D11RenderWindowManager>(this);
-		RenderWindowManager::startUp();
 
 		// Create & register HLSL factory		
 		mHLSLFactory = bs_new<D3D11HLSLProgramFactory>();
@@ -178,11 +176,9 @@ namespace bs { namespace ct
 
 		RenderStateManager::shutDown();
 		RenderWindowManager::shutDown();
-		bs::RenderWindowManager::shutDown();
 		HardwareBufferManager::shutDown();
 		bs::HardwareBufferManager::shutDown();
 		RenderTextureManager::shutDown();
-		bs::RenderTextureManager::shutDown();
 		TextureManager::shutDown();
 		CommandBufferManager::shutDown();
 

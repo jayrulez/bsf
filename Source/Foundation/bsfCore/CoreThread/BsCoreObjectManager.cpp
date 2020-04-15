@@ -49,7 +49,8 @@ namespace bs
 
 	void CoreObjectManager::unregisterObject(CoreObject* object)
 	{
-		assert(object != nullptr && !object->isDestroyed());
+		assert(object != nullptr);
+		assert(!object->isDestroyed());
 
 		UINT64 internalId = object->getInternalID();
 

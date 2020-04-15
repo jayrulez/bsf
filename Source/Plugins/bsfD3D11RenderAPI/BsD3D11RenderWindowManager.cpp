@@ -13,8 +13,7 @@ namespace bs
 		assert(mRenderSystem != nullptr);
 	}
 
-	SPtr<RenderWindow> D3D11RenderWindowManager::createImpl(RENDER_WINDOW_DESC& desc, UINT32 windowId,
-		const SPtr<RenderWindow>& parentWindow)
+	SPtr<RenderWindow> D3D11RenderWindowManager::createImpl(RENDER_WINDOW_DESC& desc, UINT32 windowId, const SPtr<RenderWindow>& parentWindow)
 	{
 		ct::RenderAPI* rs = ct::RenderAPI::instancePtr();
 		ct::D3D11RenderAPI* d3d11rs = static_cast<ct::D3D11RenderAPI*>(rs);
@@ -27,7 +26,13 @@ namespace bs
 		}
 
 		// Create the window
-		D3D11RenderWindow* renderWindow = new (bs_alloc<D3D11RenderWindow>()) D3D11RenderWindow(desc, windowId);
-		return bs_core_ptr<D3D11RenderWindow>(renderWindow);
+		//D3D11RenderWindow* renderWindow = new (bs_alloc<D3D11RenderWindow>()) D3D11RenderWindow(desc, windowId);
+		//return bs_core_ptr<D3D11RenderWindow>(renderWindow);
+
+		//// Create the window
+		SPtr<D3D11RenderWindow> renderWindow = bs_core_ptr_new<D3D11RenderWindow>(desc, windowId, d3d11rs->getPrimaryDevice(), d3d11rs->getDXGIFactory());
+		//renderWindow->_setThisPtr(renderWindow);
+
+		return renderWindow;
 	}
 }

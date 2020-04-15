@@ -82,7 +82,7 @@ namespace bs
 	void RenderAPI::setRenderTarget(const SPtr<RenderTarget>& target, UINT32 readOnlyFlags,
 									RenderSurfaceMask loadMask)
 	{
-		ct::RenderAPI::instancePtr()->setRenderTarget(target->getCore(), readOnlyFlags, loadMask, nullptr);
+		ct::RenderAPI::instancePtr()->setRenderTarget(target, readOnlyFlags, loadMask, nullptr);
 	}
 
 	void RenderAPI::clearRenderTarget(UINT32 buffers, const Color& color, float depth,
@@ -101,7 +101,7 @@ namespace bs
 
 	void RenderAPI::swapBuffers(const SPtr<RenderTarget>& target)
 	{
-		ct::RenderAPI::instancePtr()->swapBuffers(target->getCore(), 1);
+		ct::RenderAPI::instancePtr()->swapBuffers(target, 1);
 	}
 
 	void RenderAPI::draw(UINT32 vertexOffset, UINT32 vertexCount, UINT32 instanceCount)
@@ -153,7 +153,7 @@ namespace bs
 		RENDER_WINDOW_DESC windowDesc = primaryWindowDesc;
 		SPtr<bs::RenderWindow> renderWindow = bs::RenderWindow::create(windowDesc, nullptr);
 
-		initializeWithWindow(renderWindow->getCore());
+		initializeWithWindow(renderWindow);
 
 		return renderWindow;
 	}

@@ -266,9 +266,9 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(Technique)
 	CORE_OBJECT_FORWARD_DECLARE(Shader)
 	CORE_OBJECT_FORWARD_DECLARE(Material)
-	CORE_OBJECT_FORWARD_DECLARE(RenderTarget)
-	CORE_OBJECT_FORWARD_DECLARE(RenderTexture)
-	CORE_OBJECT_FORWARD_DECLARE(RenderWindow)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(RenderTarget)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(RenderTexture)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(RenderWindow)
 	CORE_OBJECT_FORWARD_DECLARE(SamplerState)
 	CORE_OBJECT_FORWARD_DECLARE(Viewport)
 	CORE_OBJECT_FORWARD_DECLARE(VertexDeclaration)
@@ -470,6 +470,7 @@ namespace bs
 	class CommandQueueNoSync;
 	class CommandQueueSync;
 
+	class RenderWindowManager;
 	namespace ct
 	{
 		class Renderer;
@@ -486,7 +487,6 @@ namespace bs
 		class OcclusionQuery;
 		class TextureView;
 		class RenderElement;
-		class RenderWindowManager;
 		class RenderStateManager;
 		class HardwareBufferManager;
 	}

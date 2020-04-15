@@ -16,18 +16,9 @@ namespace bs
 
 	void RenderTarget::setPriority(INT32 priority)
 	{
-		std::function<void(SPtr<ct::RenderTarget>, INT32)> windowedFunc =
-			[](SPtr<ct::RenderTarget> renderTarget, INT32 priority)
-		{
-			renderTarget->setPriority(priority);
-		};
+		RenderTargetProperties& props = const_cast<RenderTargetProperties&>(getProperties());
 
-		windowedFunc(getCore(), priority);
-	}
-
-	SPtr<ct::RenderTarget> RenderTarget::getCore() const
-	{
-		return std::static_pointer_cast<ct::RenderTarget>(mCoreSpecific);
+		props.priority = priority;
 	}
 
 	const RenderTargetProperties& RenderTarget::getProperties() const
@@ -52,30 +43,5 @@ namespace bs
 	RTTITypeBase* RenderTarget::getRTTI() const
 	{
 		return RenderTarget::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-		RenderTarget::RenderTarget()
-		{
-
-		}
-
-		void RenderTarget::setPriority(INT32 priority)
-		{
-			RenderTargetProperties& props = const_cast<RenderTargetProperties&>(getProperties());
-
-			props.priority = priority;
-		}
-
-		const RenderTargetProperties& RenderTarget::getProperties() const
-		{
-			return getPropertiesInternal();
-		}
-
-		void RenderTarget::getCustomAttribute(const String& name, void* pData) const
-		{
-			BS_EXCEPT(InvalidParametersException, "Attribute not found.");
-		}
 	}
 }

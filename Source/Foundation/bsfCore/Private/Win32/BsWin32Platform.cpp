@@ -34,7 +34,7 @@ namespace bs
 		bool mIsCursorHidden = false;
 		NativeCursorData mCursor;
 		bool mUsingCustomCursor = false;
-		Map<const ct::RenderWindow*, WindowNonClientAreaData> mNonClientAreas;
+		Map<const RenderWindow*, WindowNonClientAreaData> mNonClientAreas;
 
 		bool mIsTrackingMouse = false;
 		NativeDropTargetData mDropTargets;
@@ -288,21 +288,21 @@ namespace bs
 		PostMessage((HWND)hwnd, WM_SETICON, WPARAM(ICON_BIG), (LPARAM)icon);
 	}
 
-	void Platform::setCaptionNonClientAreas(const ct::RenderWindow& window, const Vector<Rect2I>& nonClientAreas)
+	void Platform::setCaptionNonClientAreas(const RenderWindow& window, const Vector<Rect2I>& nonClientAreas)
 	{
 		Lock lock(mData->mSync);
 
 		mData->mNonClientAreas[&window].moveAreas = nonClientAreas;
 	}
 
-	void Platform::setResizeNonClientAreas(const ct::RenderWindow& window, const Vector<NonClientResizeArea>& nonClientAreas)
+	void Platform::setResizeNonClientAreas(const RenderWindow& window, const Vector<NonClientResizeArea>& nonClientAreas)
 	{
 		Lock lock(mData->mSync);
 
 		mData->mNonClientAreas[&window].resizeAreas = nonClientAreas;
 	}
 
-	void Platform::resetNonClientAreas(const ct::RenderWindow& window)
+	void Platform::resetNonClientAreas(const RenderWindow& window)
 	{
 		Lock lock(mData->mSync);
 
@@ -630,7 +630,7 @@ namespace bs
 		{	// Store pointer to Win32Window in user data area
 			SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)(((LPCREATESTRUCT)lParam)->lpCreateParams));
 
-			ct::RenderWindow* newWindow = (ct::RenderWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+			RenderWindow* newWindow = (RenderWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 			if (newWindow != nullptr)
 			{
 				const RenderWindowProperties& props = newWindow->getProperties();
@@ -643,7 +643,7 @@ namespace bs
 			return 0;
 		}
 
-		ct::RenderWindow* win = (ct::RenderWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+		RenderWindow* win = (RenderWindow*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
 		if (!win)
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 

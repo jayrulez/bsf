@@ -94,57 +94,22 @@ namespace bs
 		 *									created for the render texture.
 		 * @param[in]	depthStencilFormat	Format of the depth/stencil buffer if enabled.
 		 */
-		virtual SPtr<RenderTexture> createRenderTexture(const TEXTURE_DESC& colorDesc,
-			bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
+		virtual SPtr<RenderTexture> createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth = true, PixelFormat depthStencilFormat = PF_D32);
 
 		/**
 		 * Creates a RenderTexture using the description struct.
 		 *
 		 * @param[in]	desc	Description of the render texture to create.
-		 */
-		virtual SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc);
-
-	protected:
-		/**
-		 * Creates an empty and uninitialized render texture of a specific type. This is to be implemented by render
-		 * systems with their own implementations.
-		 */
-		virtual SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
-	};
-
-	namespace ct
-	{
-
-	/**
-	 * Defines interface for creation of textures. Render systems provide their own implementations.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT RenderTextureManager : public Module<RenderTextureManager>
-	{
-	public:
-		virtual ~RenderTextureManager() = default;
-
-		/** @copydoc Module::onStartUp */
-		void onStartUp() override;
-
-		/** @copydoc Module::onShutDown */
-		void onShutDown() override;
-
-		/**
-		 * @copydoc bs::TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC&)
 		 * @param[in]	deviceIdx		Index of the GPU device to create the object on.
 		 */
-		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
+		virtual SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
 
 	protected:
-		friend class bs::RenderTexture;
+		friend class RenderTexture;
 
 		/** @copydoc createRenderTexture */
-		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
-			UINT32 deviceIdx = 0) = 0;
+		virtual SPtr<RenderTexture> createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0) = 0;
 	};
-	}
 
 	/** @} */
 }

@@ -20,29 +20,6 @@ namespace bs
 	class D3D11RenderTexture : public RenderTexture
 	{
 	public:
-		virtual ~D3D11RenderTexture() { }
-
-	protected:
-		friend class D3D11RenderTextureManager;
-
-		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc);
-
-		/** @copydoc RenderTexture::getProperties */
-		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
-
-		RenderTextureProperties mProperties;
-	};
-
-	namespace ct
-	{
-	/**
-	 * DirectX 11 implementation of a render texture.
-	 *
-	 * @note	Core thread only.
-	 */
-	class D3D11RenderTexture : public RenderTexture
-	{
-	public:
 		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx);
 		virtual ~D3D11RenderTexture() { }
 
@@ -50,12 +27,13 @@ namespace bs
 		void getCustomAttribute(const String& name, void* data) const override;
 
 	protected:
+		friend class D3D11RenderTextureManager;
+
 		/** @copydoc RenderTexture::getProperties */
 		const RenderTargetProperties& getPropertiesInternal() const override { return mProperties; }
 
 		RenderTextureProperties mProperties;
 	};
-	}
 
 	/** @} */
 }
