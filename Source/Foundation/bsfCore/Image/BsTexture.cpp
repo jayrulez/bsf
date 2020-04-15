@@ -624,4 +624,8 @@ namespace bs
 		return newTex;
 	}
 	}
+
+	namespace sed
+	{
+	}
 }

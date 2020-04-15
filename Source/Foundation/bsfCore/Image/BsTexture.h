@@ -524,4 +524,135 @@ namespace bs
 
 	/** @} */
 	}
+
+	namespace sed
+	{
+		class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Texture : public Resource
+		{
+		public:
+			ResourceHandle<Texture> GetHandle() const
+			{
+				return mResourceHandle;
+			}
+			AsyncOp writeData(const SPtr<PixelData> & data, UINT32 face = 0, UINT32 mipLevel = 0, bool discardEntireBuffer = false);
+			AsyncOp readData(const SPtr<PixelData> & data, UINT32 face = 0, UINT32 mipLevel = 0);
+			BS_SCRIPT_EXPORT(n:GetGPUPixels) TAsyncOp<SPtr<PixelData>> readData(UINT32 face = 0, UINT32 mipLevel = 0);
+			void readCachedData(PixelData & data, UINT32 face = 0, UINT32 mipLevel = 0);
+
+			static SPtr<Texture> create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT)
+			{
+				SPtr<Texture> tex = TextureManager::instance().createTexture(desc, deviceMask);
+
+				tex->setResourceHandle(static_resource_cast<Texture>(gResources()._createResourceHandle(tex)));
+
+				return tex;
+			}
+
+			static SPtr<Texture> create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false, GpuDeviceFlags deviceMask = GDF_DEFAULT)
+			{
+				TEXTURE_DESC desc;
+				desc.type = pixelData->getDepth() > 1 ? TEX_TYPE_3D : TEX_TYPE_2D;
+				desc.width = pixelData->getWidth();
+				desc.height = pixelData->getHeight();
+				desc.depth = pixelData->getDepth();
+				desc.format = pixelData->getFormat();
+				desc.usage = usage;
+				desc.hwGamma = hwGammaCorrection;
+
+				SPtr<Texture> tex = TextureManager::instance().createTexture(desc, pixelData, deviceMask);
+
+				tex->setResourceHandle(static_resource_cast<Texture>(gResources()._createResourceHandle(tex)));
+
+				return tex;
+			}
+
+			void initialize() override;
+
+			const TextureProperties& getProperties() const
+			{
+				return mProperties;
+			}
+
+			//GPU
+
+			PixelData lock(GpuLockOptions options, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0);
+			void unlock();
+			void copy(const SPtr<Texture>& target, const TEXTURE_COPY_DESC& desc = TEXTURE_COPY_DESC::DEFAULT, const SPtr<bs::ct::CommandBuffer>& commandBuffer = nullptr);
+			void clear(const Color& value, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 queueIdx = 0);
+			void readData(PixelData& dest, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0);
+			void writeData(const PixelData& src, UINT32 mipLevel = 0, UINT32 face = 0, bool discardWholeBuffer = false, UINT32 queueIdx = 0);
+
+			SPtr<bs::ct::TextureView> requestView(UINT32 mostDetailMip, UINT32 numMips, UINT32 firstArraySlice, UINT32 numArraySlices, GpuViewUsage usage);
+			static SPtr<Texture> WHITE;
+			static SPtr<Texture> BLACK;
+			static SPtr<Texture> NORMAL;
+		protected:
+			Texture(const TEXTURE_DESC& desc);
+			Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask);
+			virtual ~Texture()
+			{
+			}
+
+			void initialize() override;
+			UINT32 calculateSize() const;
+			void createCPUBuffers();
+			void updateCPUBuffers(UINT32 subresourceIdx, const PixelData& data);
+
+			// GPU
+			virtual PixelData lockImpl(GpuLockOptions options, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0) = 0;
+			virtual void unlockImpl() = 0;
+			virtual void copyImpl(const SPtr<Texture>& target, const TEXTURE_COPY_DESC& desc, const SPtr<bs::ct::CommandBuffer>& commandBuffer) = 0;
+			virtual void readDataImpl(PixelData& dest, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 deviceIdx = 0, UINT32 queueIdx = 0) = 0;
+			virtual void writeDataImpl(const PixelData& src, UINT32 mipLevel = 0, UINT32 face = 0, bool discardWholeBuffer = false, UINT32 queueIdx = 0) = 0;
+			virtual void clearImpl(const Color& value, UINT32 mipLevel = 0, UINT32 face = 0, UINT32 queueIdx = 0);
+
+			virtual SPtr<bs::ct::TextureView> createView(const bs::ct::TEXTURE_VIEW_DESC& desc);
+			void clearBufferViews();
+
+		protected:
+			// GPU
+			UnorderedMap<bs::ct::TEXTURE_VIEW_DESC, SPtr<bs::ct::TextureView>, bs::ct::TextureView::HashFunction, bs::ct::TextureView::EqualFunction> mTextureViews;
+
+		protected:
+			Vector<SPtr<PixelData>> mCPUSubresourceData;
+			TextureProperties mProperties;
+			mutable SPtr<PixelData> mInitData;
+		private:
+			ResourceHandle<Texture> mResourceHandle;
+			void setResourceHandle(ResourceHandle<Texture> handle)
+			{
+				mResourceHandle = handle;
+			}
+		};
+
+		class TextureManager : public Module<TextureManager>
+		{
+		public:
+			virtual ~TextureManager() = default;
+			void onStartUp() override;
+			void onShutDown() override;
+
+			SPtr<Texture> createTexture(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT)
+			{
+				SPtr<Texture> newTex = createTextureInternal(desc, nullptr, deviceMask);
+
+				newTex->initialize();
+
+				return newTex;
+			}
+
+			SPtr<Texture> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask = GDF_DEFAULT)
+			{
+				SPtr<Texture> newTex = createTextureInternal(desc, pixelData, deviceMask);
+
+				newTex->initialize();
+
+				return newTex;
+			}
+
+		protected:
+			friend class Texture;
+			virtual SPtr<Texture> createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData = nullptr, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
+		};
+	}
 }
