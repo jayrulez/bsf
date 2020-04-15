@@ -104,12 +104,12 @@ namespace bs
 	SPtr<RenderTexture> RenderTexture::create(const TEXTURE_DESC& desc,
 		bool createDepth, PixelFormat depthStencilFormat)
 	{
-		return TextureManager::instance().createRenderTexture(desc, createDepth, depthStencilFormat);
+		return RenderTextureManager::instance().createRenderTexture(desc, createDepth, depthStencilFormat);
 	}
 
 	SPtr<RenderTexture> RenderTexture::create(const RENDER_TEXTURE_DESC& desc)
 	{
-		return TextureManager::instance().createRenderTexture(desc);
+		return RenderTextureManager::instance().createRenderTexture(desc);
 	}
 
 	SPtr<ct::RenderTexture> RenderTexture::getCore() const
@@ -154,7 +154,7 @@ namespace bs
 		coreDesc.depthStencilSurface.numFaces = mDesc.depthStencilSurface.numFaces;
 		coreDesc.depthStencilSurface.mipLevel = mDesc.depthStencilSurface.mipLevel;
 
-		return ct::TextureManager::instance().createRenderTextureInternal(coreDesc);
+		return ct::RenderTextureManager::instance().createRenderTextureInternal(coreDesc);
 	}
 
 	CoreSyncData RenderTexture::syncToCore(FrameAlloc* allocator)
@@ -227,7 +227,7 @@ namespace bs
 
 	SPtr<RenderTexture> RenderTexture::create(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
-		return TextureManager::instance().createRenderTexture(desc, deviceIdx);
+		return RenderTextureManager::instance().createRenderTexture(desc, deviceIdx);
 	}
 
 	void RenderTexture::syncToCore(const CoreSyncData& data)

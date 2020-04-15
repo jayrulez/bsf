@@ -354,6 +354,7 @@ namespace bs
 	class RenderAPICapabilities;
 	class RenderTargetProperties;
 	class TextureManager;
+	class RenderTextureManager;
 	class Input;
 	struct PointerEvent;
 	class RendererFactory;

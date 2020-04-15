@@ -8,7 +8,7 @@
 
 namespace bs
 {
-	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc)
+	SPtr<RenderTexture> D3D11RenderTextureManager::createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc)
 	{
 		D3D11RenderTexture* tex = new (bs_alloc<D3D11RenderTexture>()) D3D11RenderTexture(desc);
 
@@ -36,7 +36,7 @@ namespace bs
 		return texPtr;
 	}
 
-	SPtr<RenderTexture> D3D11TextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
+	SPtr<RenderTexture> D3D11RenderTextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc,
 																				 UINT32 deviceIdx)
 	{
 		SPtr<D3D11RenderTexture> texPtr = bs_shared_ptr_new<D3D11RenderTexture>(desc, deviceIdx);

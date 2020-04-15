@@ -80,7 +80,7 @@ namespace bs
 		const RenderTextureProperties& getProperties() const;
 
 	protected:
-		friend class TextureManager;
+		friend class RenderTextureManager;
 
 		RenderTexture(const RENDER_TEXTURE_DESC& desc);
 

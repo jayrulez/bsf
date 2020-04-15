@@ -23,7 +23,7 @@ namespace bs
 		virtual ~D3D11RenderTexture() { }
 
 	protected:
-		friend class D3D11TextureManager;
+		friend class D3D11RenderTextureManager;
 
 		D3D11RenderTexture(const RENDER_TEXTURE_DESC& desc);
 

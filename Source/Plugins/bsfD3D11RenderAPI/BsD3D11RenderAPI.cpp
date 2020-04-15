@@ -102,6 +102,9 @@ namespace bs { namespace ct
 		bs::TextureManager::startUp<bs::D3D11TextureManager>();
 		TextureManager::startUp<D3D11TextureManager>();
 
+		bs::RenderTextureManager::startUp<bs::D3D11RenderTextureManager>();
+		RenderTextureManager::startUp<D3D11RenderTextureManager>();
+
 		// Create hardware buffer manager		
 		bs::HardwareBufferManager::startUp();
 		HardwareBufferManager::startUp<D3D11HardwareBufferManager>(std::ref(*mDevice));
@@ -180,6 +183,8 @@ namespace bs { namespace ct
 		bs::RenderWindowManager::shutDown();
 		HardwareBufferManager::shutDown();
 		bs::HardwareBufferManager::shutDown();
+		RenderTextureManager::shutDown();
+		bs::RenderTextureManager::shutDown();
 		TextureManager::shutDown();
 		bs::TextureManager::shutDown();
 		CommandBufferManager::shutDown();

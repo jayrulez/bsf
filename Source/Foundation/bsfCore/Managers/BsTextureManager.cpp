@@ -38,7 +38,7 @@ namespace bs
 		return texture;
 	}
 
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth,
+	SPtr<RenderTexture> RenderTextureManager::createRenderTexture(const TEXTURE_DESC& colorDesc, bool createDepth,
 		PixelFormat depthStencilFormat)
 	{
 		TEXTURE_DESC textureDesc = colorDesc;
@@ -73,7 +73,7 @@ namespace bs
 		return newRT;
 	}
 
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc)
+	SPtr<RenderTexture> RenderTextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc)
 	{
 		SPtr<RenderTexture> newRT = createRenderTextureImpl(desc);
 		newRT->_setThisPtr(newRT);
@@ -147,7 +147,15 @@ namespace bs
 		return newTex;
 	}
 
-	SPtr<RenderTexture> TextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc,
+	void RenderTextureManager::onStartUp()
+	{
+	}
+
+	void RenderTextureManager::onShutDown()
+	{
+	}
+
+	SPtr<RenderTexture> RenderTextureManager::createRenderTexture(const RENDER_TEXTURE_DESC& desc,
 																	UINT32 deviceIdx)
 	{
 		SPtr<RenderTexture> newRT = createRenderTextureInternal(desc, deviceIdx);
