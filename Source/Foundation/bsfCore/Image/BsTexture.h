@@ -527,6 +527,8 @@ namespace bs
 
 	namespace sed
 	{
+		class TextureManager;
+
 		class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Texture : public Resource
 		{
 		public:
@@ -566,8 +568,6 @@ namespace bs
 				return tex;
 			}
 
-			void initialize() override;
-
 			const TextureProperties& getProperties() const
 			{
 				return mProperties;
@@ -587,6 +587,7 @@ namespace bs
 			static SPtr<Texture> BLACK;
 			static SPtr<Texture> NORMAL;
 		protected:
+			friend class TextureManager;
 			Texture(const TEXTURE_DESC& desc);
 			Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData, GpuDeviceFlags deviceMask);
 			virtual ~Texture()
