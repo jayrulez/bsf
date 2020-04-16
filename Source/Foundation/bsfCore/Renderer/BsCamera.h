@@ -458,42 +458,6 @@ namespace bs
 		mutable AABox mBoundingBox; /**< Frustum bounding box. */
 	};
 
-	/** Templated common base class for both sim and core thread implementations of Camera. */
-	template<bool Core>
-	class BS_CORE_EXPORT TCamera : public CameraBase
-	{
-		using ViewportType = CoreVariantType<Viewport, false>;
-		using RenderSettingsType = CoreVariantType<RenderSettings, false>;
-
-	public:
-		TCamera();
-		virtual ~TCamera() = default;
-
-		/**	Returns the viewport used by the camera. */	
-		SPtr<ViewportType> getViewport() const { return mViewport; }
-
-		/**
-		 * Settings that control rendering for this view. They determine how will the renderer process this view, which
-		 * effects will be enabled, and what properties will those effects use.
-		 */
-		void setRenderSettings(const SPtr<RenderSettingsType>& settings)
-			{ mRenderSettings = settings; _markCoreDirty((ActorDirtyFlag)CameraDirtyFlag::RenderSettings); }
-
-		/** @copydoc setRenderSettings() */
-		const SPtr<RenderSettingsType>& getRenderSettings() const { return mRenderSettings; }
-
-		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
-		template<class P>
-		void rttiEnumFields(P p);
-
-	protected:
-		/** Viewport that describes a 2D rendering surface. */
-		SPtr<ViewportType> mViewport;
-
-		/** Settings used to control rendering for this camera. */
-		SPtr<RenderSettingsType> mRenderSettings;
-	};
-
 	/** @} */
 
 	/** @addtogroup Renderer-Internal
@@ -504,10 +468,37 @@ namespace bs
 	 * Camera determines how is world geometry projected onto a 2D surface. You may position and orient it in space, set
 	 * options like aspect ratio and field or view and it outputs view and projection matrices required for rendering.
 	 */
-	class BS_CORE_EXPORT Camera : public IReflectable, public CoreObject, public TCamera<false>
+	class BS_CORE_EXPORT Camera : public IReflectable, public CoreObject, public CameraBase
 	{
+		using ViewportType = CoreVariantType<Viewport, false>;
+		using RenderSettingsType = CoreVariantType<RenderSettings, false>;
+
 	public:
 		~Camera();
+
+		/**	Returns the viewport used by the camera. */
+		SPtr<ViewportType> getViewport() const
+		{
+			return mViewport;
+		}
+
+		/**
+		 * Settings that control rendering for this view. They determine how will the renderer process this view, which
+		 * effects will be enabled, and what properties will those effects use.
+		 */
+		void setRenderSettings(const SPtr<RenderSettingsType>& settings)
+		{
+			mRenderSettings = settings;
+			_markCoreDirty((ActorDirtyFlag)CameraDirtyFlag::RenderSettings);
+		}
+
+		/** @copydoc setRenderSettings() */
+		const SPtr<RenderSettingsType>& getRenderSettings() const
+		{
+			return mRenderSettings;
+		}
+
+	public:
 
 		/**
 		 * Determines whether this is the main application camera. Main camera controls the final render surface that is
@@ -556,6 +547,8 @@ namespace bs
 		/** @copydoc CameraBase */
 		Rect2I getViewportRect() const override;
 
+		void notifyUpdated(UINT32 dirtyFlag);
+
 		/** @copydoc CoreObject::createCore */
 		SPtr<ct::CoreObject> createCore() const override
 		{
@@ -572,8 +565,13 @@ namespace bs
 		static SPtr<Camera> createEmpty();
 
 	protected:
-
 		UINT32 mRendererId;
+
+		/** Viewport that describes a 2D rendering surface. */
+		SPtr<ViewportType> mViewport;
+
+		/** Settings used to control rendering for this camera. */
+		SPtr<RenderSettingsType> mRenderSettings;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -582,6 +580,10 @@ namespace bs
 		friend class CameraRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
+
+		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
+		template<class P>
+		void rttiEnumFields(P p);
 	};
 
 	/** @} */

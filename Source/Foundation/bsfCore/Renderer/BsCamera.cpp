@@ -661,15 +661,8 @@ namespace bs
 		return Vector3(0.0f, 0.0f, 0.0f);
 	}
 
-	template <bool Core>
-	TCamera<Core>::TCamera()
-	{
-		mRenderSettings = bs_shared_ptr_new<RenderSettingsType>();
-	}
-
-	template <bool Core>
 	template <class P>
-	void TCamera<Core>::rttiEnumFields(P p)
+	void Camera::rttiEnumFields(P p)
 	{
 		p(mLayers);
 		p(mProjType);
@@ -688,24 +681,42 @@ namespace bs
 		p(mCameraFlags);
 	}
 
-	template class TCamera<false>;
-	template class TCamera<true>;
+	void Camera::notifyUpdated(UINT32 dirtyFlag)
+	{
+		UINT32 size = rtti_size(dirtyFlag).bytes;
 
+		if ((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
+		{
+			size += csync_size((SceneActor&)*this);
+
+			if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
+				size += csync_size(*this);
+		}
+
+		RendererManager::instance().getActive()->notifyCameraUpdated(this, dirtyFlag);
+	}
 
 	Camera::~Camera()
 	{
 		RendererManager::instance().getActive()->notifyCameraRemoved(this);
 	}
 
+	//Camera::Camera()
+	//{
+	//	mRenderSettings = bs_shared_ptr_new<RenderSettingsType>();
+	//}
+
 	Camera::Camera(SPtr<RenderTarget> target, float left, float top, float width, float height)
 		: mRendererId(0)
 	{
+		mRenderSettings = bs_shared_ptr_new<RenderSettingsType>();
 		mViewport = Viewport::create(target, left, top, width, height);
 	}
 
 	Camera::Camera(const SPtr<Viewport>& viewport)
 		: mRendererId(0)
 	{
+		mRenderSettings = bs_shared_ptr_new<RenderSettingsType>();
 		if (viewport == nullptr)
 			mViewport = Viewport::create(nullptr);
 
@@ -719,10 +730,10 @@ namespace bs
 
 	void Camera::initialize()
 	{
-		RendererManager::instance().getActive()->notifyCameraAdded(this);
 		CoreObject::initialize();
-
 		gSceneManager()._registerCamera(std::static_pointer_cast<Camera>(getThisPtr()));
+
+		RendererManager::instance().getActive()->notifyCameraAdded(this);
 	}
 
 	SPtr<Camera> Camera::create()
@@ -766,6 +777,7 @@ namespace bs
 	void Camera::_markCoreDirty(ActorDirtyFlag flag)
 	{
 		markCoreDirty((UINT32)flag);
+		notifyUpdated((UINT32)flag);
 	}
 
 	RTTITypeBase* Camera::getRTTIStatic()
