@@ -38,8 +38,7 @@ namespace bs
 
 	void RenderAPI::setIndexBuffer(const SPtr<IndexBuffer>& buffer)
 	{
-		ct::RenderAPI::instancePtr()->setIndexBuffer(buffer->getCore(),
-			nullptr);
+		ct::RenderAPI::instancePtr()->setIndexBuffer(buffer, nullptr);
 	}
 
 	void RenderAPI::setVertexDeclaration(const SPtr<VertexDeclaration>& vertexDeclaration)

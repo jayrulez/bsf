@@ -258,7 +258,7 @@ namespace bs
 	struct TYPE;										\
 	template<> struct CoreThreadType<TYPE> { typedef TYPE Type; };
 
-	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(IndexBuffer)
 	CORE_OBJECT_NEW_FORWARD_DECLARE(VertexBuffer)
 	CORE_OBJECT_NEW_FORWARD_DECLARE(GpuBuffer)
 	CORE_OBJECT_FORWARD_DECLARE(GpuProgram)

@@ -30,38 +30,8 @@ namespace bs
 		:mIndexType(idxType), mNumIndices(numIndices), mIndexSize(calcIndexSize(idxType))
 	{ }
 
-	IndexBuffer::IndexBuffer(const INDEX_BUFFER_DESC& desc)
-		:mProperties(desc.indexType, desc.numIndices), mUsage(desc.usage)
-	{
-#if BS_DEBUG_MODE
-		checkValidDesc(desc);
-#endif
-	}
-
-	SPtr<ct::IndexBuffer> IndexBuffer::getCore() const
-	{
-		return std::static_pointer_cast<ct::IndexBuffer>(mCoreSpecific);
-	}
-
-	SPtr<ct::CoreObject> IndexBuffer::createCore() const
-	{
-		INDEX_BUFFER_DESC desc;
-		desc.indexType = mProperties.mIndexType;
-		desc.numIndices = mProperties.mNumIndices;
-		desc.usage = mUsage;
-
-		return ct::HardwareBufferManager::instance().createIndexBufferInternal(desc);
-	}
-
-	SPtr<IndexBuffer> IndexBuffer::create(const INDEX_BUFFER_DESC& desc)
-	{
-		return HardwareBufferManager::instance().createIndexBuffer(desc);
-	}
-
-	namespace ct
-	{
 	IndexBuffer::IndexBuffer(const INDEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
-		: HardwareBuffer(calcIndexSize(desc.indexType) * desc.numIndices, desc.usage, deviceMask)
+		: HardwareBuffer(calcIndexSize(desc.indexType)* desc.numIndices, desc.usage, deviceMask)
 		, mProperties(desc.indexType, desc.numIndices)
 	{
 #if BS_DEBUG_MODE
@@ -71,7 +41,7 @@ namespace bs
 
 	IndexBuffer::~IndexBuffer()
 	{
-		if(mBuffer && !mSharedBuffer)
+		if (mBuffer && !mSharedBuffer)
 			mBufferDeleter(mBuffer);
 
 		BS_INC_RENDER_STAT_CAT(ResDestroyed, RenderStatObject_IndexBuffer);
@@ -82,6 +52,7 @@ namespace bs
 		BS_INC_RENDER_STAT_CAT(ResCreated, RenderStatObject_IndexBuffer);
 		CoreObject::initialize();
 	}
+
 
 	void* IndexBuffer::map(UINT32 offset, UINT32 length, GpuLockOptions options, UINT32 deviceIdx, UINT32 queueIdx)
 	{
@@ -121,7 +92,7 @@ namespace bs
 	}
 
 	void IndexBuffer::copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
-		bool discardWholeBuffer, const SPtr<CommandBuffer>& commandBuffer)
+		bool discardWholeBuffer, const SPtr<ct::CommandBuffer>& commandBuffer)
 	{
 		auto& srcIndexBuffer = static_cast<IndexBuffer&>(srcBuffer);
 		mBuffer->copyData(*srcIndexBuffer.mBuffer, srcOffset, dstOffset, length, discardWholeBuffer, commandBuffer);
@@ -129,24 +100,24 @@ namespace bs
 
 	SPtr<GpuBuffer> IndexBuffer::getLoadStore(GpuBufferType type, GpuBufferFormat format, UINT32 elementSize)
 	{
-		if((mUsage & GBU_LOADSTORE) != GBU_LOADSTORE)
+		if ((mUsage & GBU_LOADSTORE) != GBU_LOADSTORE)
 			return nullptr;
 
-		for(const auto& entry : mLoadStoreViews)
+		for (const auto& entry : mLoadStoreViews)
 		{
 			const GpuBufferProperties& props = entry->getProperties();
-			if(props.getType() == type)
+			if (props.getType() == type)
 			{
-				if(type == GBT_STANDARD && props.getFormat() == format)
+				if (type == GBT_STANDARD && props.getFormat() == format)
 					return entry;
 
-				if(type == GBT_STRUCTURED && props.getElementSize() == elementSize)
+				if (type == GBT_STRUCTURED && props.getElementSize() == elementSize)
 					return entry;
 			}
 		}
 
 		UINT32 elemSize = type == GBT_STANDARD ? bs::GpuBuffer::getFormatSize(format) : elementSize;
-		if((mBuffer->getSize() % elemSize) != 0)
+		if ((mBuffer->getSize() % elemSize) != 0)
 		{
 			BS_LOG(Error, RenderBackend,
 				"Size of the buffer isn't divisible by individual element size provided for the buffer view.");
@@ -160,18 +131,17 @@ namespace bs
 		desc.elementSize = elementSize;
 		desc.elementCount = mBuffer->getSize() / elemSize;
 
-		if(!mSharedBuffer)
+		if (!mSharedBuffer)
 			mSharedBuffer = bs_shared_ptr(mBuffer, mBufferDeleter);
 
 		SPtr<GpuBuffer> newView = GpuBuffer::create(desc, mSharedBuffer);
 		mLoadStoreViews.push_back(newView);
-		
+
 		return newView;
 	}
 
 	SPtr<IndexBuffer> IndexBuffer::create(const INDEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
 	{
-		return HardwareBufferManager::instance().createIndexBuffer(desc, deviceMask);
-	}
+		return ct::HardwareBufferManager::instance().createIndexBuffer(desc, deviceMask);
 	}
 }

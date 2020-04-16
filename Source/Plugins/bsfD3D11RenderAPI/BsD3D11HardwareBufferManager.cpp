@@ -23,7 +23,7 @@ namespace bs { namespace ct
 
 	SPtr<IndexBuffer> D3D11HardwareBufferManager::createIndexBufferInternal(const INDEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
 	{
-		SPtr<D3D11IndexBuffer> ret = bs_shared_ptr_new<D3D11IndexBuffer>(mDevice, desc, deviceMask);
+		SPtr<D3D11IndexBuffer> ret = bs_core_ptr_new<D3D11IndexBuffer>(mDevice, desc, deviceMask);
 		ret->_setThisPtr(ret);
 
 		return ret;

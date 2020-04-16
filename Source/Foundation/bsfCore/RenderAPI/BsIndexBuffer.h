@@ -37,7 +37,6 @@ namespace bs
 
 	protected:
 		friend class IndexBuffer;
-		friend class ct::IndexBuffer;
 
 		IndexType mIndexType;
 		UINT32 mNumIndices;
@@ -45,52 +44,15 @@ namespace bs
 	};
 
 	/** Hardware buffer that hold indices that reference vertices in a vertex buffer. */
-	class BS_CORE_EXPORT IndexBuffer : public CoreObject
-	{
-	public:
-		virtual ~IndexBuffer() { }
-
-		/** Returns information about the index buffer. */
-		const IndexBufferProperties& getProperties() const { return mProperties; }
-
-		/**
-		 * Retrieves a core implementation of an index buffer usable only from the core thread.
-		 *
-		 * @note	Core thread only.
-		 */
-		SPtr<ct::IndexBuffer> getCore() const;
-
-		/** @copydoc HardwareBufferManager::createIndexBuffer */
-		static SPtr<IndexBuffer> create(const INDEX_BUFFER_DESC& desc);
-
-	protected:
-		friend class HardwareBufferManager;
-
-		IndexBuffer(const INDEX_BUFFER_DESC& desc);
-
-		/** @copydoc CoreObject::createCore */
-		virtual SPtr<ct::CoreObject> createCore() const;
-
-		IndexBufferProperties mProperties;
-		GpuBufferUsage mUsage;
-	};
-
-	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/** Core thread specific implementation of an bs::IndexBuffer. */
 	class BS_CORE_EXPORT IndexBuffer : public CoreObject, public HardwareBuffer
 	{
 	public:
-		IndexBuffer(const INDEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 		virtual ~IndexBuffer();
 
-		/**	Returns information about the index buffer. */
+		/** @copydoc CoreObject::initialize */
+		void initialize() override;
+
+		/** Returns information about the index buffer. */
 		const IndexBufferProperties& getProperties() const { return mProperties; }
 
 		/** @copydoc HardwareBuffer::readData */
@@ -102,7 +64,17 @@ namespace bs
 
 		/** @copydoc HardwareBuffer::copyData */
 		void copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
-			bool discardWholeBuffer = false, const SPtr<CommandBuffer>& commandBuffer = nullptr) override;
+			bool discardWholeBuffer = false, const SPtr<ct::CommandBuffer>& commandBuffer = nullptr) override;
+
+		/**
+		 * Retrieves a core implementation of an index buffer usable only from the core thread.
+		 *
+		 * @note	Core thread only.
+		 */
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/**
 		* Returns a view of this buffer that can be used for load-store operations. Buffer must have been created with
@@ -127,6 +99,9 @@ namespace bs
 
 	protected:
 		friend class HardwareBufferManager;
+		friend class ct::HardwareBufferManager;
+
+		IndexBuffer(const INDEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/** @copydoc HardwareBuffer::map */
 		void* map(UINT32 offset, UINT32 length, GpuLockOptions options, UINT32 deviceIdx, UINT32 queueIdx) override;
@@ -134,8 +109,13 @@ namespace bs
 		/** @copydoc HardwareBuffer::unmap */
 		void unmap() override;
 
-		/** @copydoc CoreObject::initialize */
-		void initialize() override;
+		/** @copydoc CoreObject::createCore */
+		virtual SPtr<ct::CoreObject> createCore() const
+		{
+			return nullptr;
+		}
+
+		GpuBufferUsage mUsage;
 
 		IndexBufferProperties mProperties;
 
@@ -148,5 +128,4 @@ namespace bs
 	};
 
 	/** @} */
-		}
 }
