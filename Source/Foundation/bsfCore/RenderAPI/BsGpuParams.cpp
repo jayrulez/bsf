@@ -629,7 +629,7 @@ namespace bs
 		UINT32 paramBufferSize = numParamBlocks * sizeof(SPtr<ct::GpuParamBlockBuffer>);
 		UINT32 textureArraySize = numTextures * sizeof(SPtr<Texture>);
 		UINT32 loadStoreTextureArraySize = numStorageTextures * sizeof(SPtr<Texture>);
-		UINT32 bufferArraySize = numBuffers * sizeof(SPtr<ct::GpuBuffer>);
+		UINT32 bufferArraySize = numBuffers * sizeof(SPtr<GpuBuffer>);
 		UINT32 samplerArraySize = numSamplers * sizeof(SPtr<ct::SamplerState>);
 
 		UINT32 totalSize = sampledSurfacesSize + loadStoreSurfacesSize + paramBufferSize + textureArraySize
@@ -650,7 +650,7 @@ namespace bs
 		SPtr<ct::GpuParamBlockBuffer>* paramBuffers = (SPtr<ct::GpuParamBlockBuffer>*)(data + paramBufferOffset);
 		SPtr<Texture>* textures = (SPtr<Texture>*)(data + textureArrayOffset);
 		SPtr<Texture>* loadStoreTextures = (SPtr<Texture>*)(data + loadStoreTextureArrayOffset);
-		SPtr<ct::GpuBuffer>* buffers = (SPtr<ct::GpuBuffer>*)(data + bufferArrayOffset);
+		SPtr<GpuBuffer>* buffers = (SPtr<GpuBuffer>*)(data + bufferArrayOffset);
 		SPtr<ct::SamplerState>* samplers = (SPtr<ct::SamplerState>*)(data + samplerArrayOffset);
 
 		// Construct & copy
@@ -690,10 +690,10 @@ namespace bs
 
 		for (UINT32 i = 0; i < numBuffers; i++)
 		{
-			new (&buffers[i]) SPtr<ct::GpuBuffer>();
+			new (&buffers[i]) SPtr<GpuBuffer>();
 
 			if (mBuffers[i] != nullptr)
-				buffers[i] = mBuffers[i]->getCore();
+				buffers[i] = mBuffers[i];
 			else
 				buffers[i] = nullptr;
 		}

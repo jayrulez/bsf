@@ -21,10 +21,9 @@ namespace bs
 		return declPtr;
 	}
 
-	SPtr<VertexBuffer> HardwareBufferManager::createVertexBuffer(const VERTEX_BUFFER_DESC& desc)
+	SPtr<VertexBuffer> HardwareBufferManager::createVertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
 	{
-		SPtr<VertexBuffer> vbuf = bs_core_ptr<VertexBuffer>(new (bs_alloc<VertexBuffer>()) VertexBuffer(desc));
-		vbuf->_setThisPtr(vbuf);
+		SPtr<VertexBuffer> vbuf = ct::HardwareBufferManager::instance().createVertexBufferInternal(desc, deviceMask);
 		vbuf->initialize();
 		return vbuf;
 	}
@@ -44,15 +43,6 @@ namespace bs
 		paramBlockPtr->_setThisPtr(paramBlockPtr);
 		paramBlockPtr->initialize();
 		return paramBlockPtr;
-	}
-
-	SPtr<GpuBuffer> HardwareBufferManager::createGpuBuffer(const GPU_BUFFER_DESC& desc)
-	{
-		SPtr<GpuBuffer> gbuf = bs_core_ptr<GpuBuffer>(new (bs_alloc<GpuBuffer>()) GpuBuffer(desc));
-		gbuf->_setThisPtr(gbuf);
-		gbuf->initialize();
-
-		return gbuf;
 	}
 
 	SPtr<GpuParams> HardwareBufferManager::createGpuParams(const SPtr<GpuPipelineParamInfo>& paramInfo)
@@ -110,14 +100,6 @@ namespace bs
 		ibuf->initialize();
 		return ibuf;
 
-	}
-
-	SPtr<VertexBuffer> HardwareBufferManager::createVertexBuffer(const VERTEX_BUFFER_DESC& desc,
-		GpuDeviceFlags deviceMask)
-	{
-		SPtr<VertexBuffer> vbuf = createVertexBufferInternal(desc, deviceMask);
-		vbuf->initialize();
-		return vbuf;
 	}
 
 	SPtr<VertexDeclaration> HardwareBufferManager::createVertexDeclaration(const SPtr<VertexDataDesc>& desc,

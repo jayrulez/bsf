@@ -1033,7 +1033,7 @@ namespace bs
 				new (coreBufferData) MaterialParamBufferDataCore();
 
 				if(bufferData.value != nullptr)
-					coreBufferData->value = bufferData.value->getCore();
+					coreBufferData->value = bufferData.value;
 
 				dirtyBufferParamIdx++;
 			}
@@ -1198,7 +1198,7 @@ namespace bs
 				SPtr<bs::GpuBuffer> buffer = params->mBufferParams[param.index].value;
 				SPtr<GpuBuffer> bufferCore;
 				if (buffer != nullptr)
-					bufferCore = buffer->getCore();
+					bufferCore = buffer;
 
 				mBufferParams[param.index].value = bufferCore;
 			}

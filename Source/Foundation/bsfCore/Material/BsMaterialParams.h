@@ -460,7 +460,7 @@ namespace bs
 	class BS_CORE_EXPORT MaterialParamBufferDataCore
 	{
 	public:
-		SPtr<ct::GpuBuffer> value;
+		SPtr<GpuBuffer> value;
 	};
 
 	/** Data for a single buffer parameter. */

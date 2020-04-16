@@ -73,54 +73,10 @@ namespace bs
 	 *
 	 * @note	Sim thread only.
 	 */
-	class BS_CORE_EXPORT GpuBuffer : public CoreObject
-	{
-	public:
-		virtual ~GpuBuffer() = default;
-
-		/** Returns properties describing the buffer. */
-		const GpuBufferProperties& getProperties() const { return mProperties; }
-
-		/** Retrieves a core implementation of a GPU buffer usable only from the core thread. */
-		SPtr<ct::GpuBuffer> getCore() const;
-
-		/** Returns the size of a single element in the buffer, of the provided format, in bytes. */
-		static UINT32 getFormatSize(GpuBufferFormat format);
-
-		/** @copydoc HardwareBufferManager::createGpuBuffer */
-		static SPtr<GpuBuffer> create(const GPU_BUFFER_DESC& desc);
-
-	protected:
-		friend class HardwareBufferManager;
-
-		GpuBuffer(const GPU_BUFFER_DESC& desc);
-
-		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-		GpuBufferProperties mProperties;
-	};
-
-	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Core thread version of a bs::GpuBuffer.
-	 *
-	 * @note	Core thread only.
-	 */
 	class BS_CORE_EXPORT GpuBuffer : public CoreObject, public HardwareBuffer
 	{
 	public:
 		virtual ~GpuBuffer();
-
-		/** Returns properties describing the buffer. */
-		const GpuBufferProperties& getProperties() const { return mProperties; }
 
 		/** @copydoc HardwareBuffer::readData */
 		void readData(UINT32 offset, UINT32 length, void* dest, UINT32 deviceIdx = 0, UINT32 queueIdx = 0) override;
@@ -130,8 +86,8 @@ namespace bs
 			BufferWriteType writeFlags = BWT_NORMAL, UINT32 queueIdx = 0) override;
 
 		/** @copydoc HardwareBuffer::copyData */
-		void copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
-			bool discardWholeBuffer = false, const SPtr<CommandBuffer>& commandBuffer = nullptr) override;
+		void copyData(HardwareBuffer & srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
+			bool discardWholeBuffer = false, const SPtr<ct::CommandBuffer> & commandBuffer = nullptr) override;
 
 		/**
 		 * Returns a view of this buffer with specified format/type.
@@ -148,6 +104,20 @@ namespace bs
 		 */
 		SPtr<GpuBuffer> getView(GpuBufferType type, GpuBufferFormat format, UINT32 elementSize = 0);
 
+		/** Returns properties describing the buffer. */
+		const GpuBufferProperties& getProperties() const { return mProperties; }
+
+		/** Retrieves a core implementation of a GPU buffer usable only from the core thread. */
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
+
+		/** Returns the size of a single element in the buffer, of the provided format, in bytes. */
+		static UINT32 getFormatSize(GpuBufferFormat format);
+
+
+
 		/** @copydoc bs::HardwareBufferManager::createGpuBuffer */
 		static SPtr<GpuBuffer> create(const GPU_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
@@ -157,10 +127,12 @@ namespace bs
 		 * count) must match the provided @p underlyingBuffer.
 		 */
 		static SPtr<GpuBuffer> create(const GPU_BUFFER_DESC& desc, SPtr<HardwareBuffer> underlyingBuffer);
+
 	protected:
 		friend class HardwareBufferManager;
+		friend class ct::HardwareBufferManager;
 
-		GpuBuffer(const GPU_BUFFER_DESC& desc, GpuDeviceFlags deviceMask);
+		GpuBuffer(const GPU_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 		GpuBuffer(const GPU_BUFFER_DESC& desc, SPtr<HardwareBuffer> underlyingBuffer);
 
 		/** @copydoc HardwareBuffer::map */
@@ -171,6 +143,12 @@ namespace bs
 
 		/** @copydoc CoreObject::initialize */
 		void initialize() override;
+
+		/** @copydoc CoreObject::createCore */
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		GpuBufferProperties mProperties;
 
@@ -183,5 +161,4 @@ namespace bs
 	};
 
 	/** @} */
-	}
 }

@@ -35,59 +35,36 @@ namespace bs
 
 	protected:
 		friend class VertexBuffer;
-		friend class ct::VertexBuffer;
 
 		UINT32 mNumVertices;
 		UINT32 mVertexSize;
 	};
 
 	/**	Specialization of a hardware buffer used for holding vertex data. */
-	class BS_CORE_EXPORT VertexBuffer : public CoreObject
+	class BS_CORE_EXPORT VertexBuffer : public CoreObject, public HardwareBuffer
 	{
 	public:
-		virtual ~VertexBuffer() = default;
+		virtual ~VertexBuffer();
 
 		/**
 		 * Retrieves a core implementation of a vertex buffer usable only from the core thread.
 		 *
 		 * @note	Core thread only.
 		 */
-		SPtr<ct::VertexBuffer> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
+
 
 		/** @copydoc HardwareBufferManager::createVertexBuffer */
-		static SPtr<VertexBuffer> create(const VERTEX_BUFFER_DESC& desc);
-
-		static const int MAX_SEMANTIC_IDX = 8;
-	protected:
-		friend class HardwareBufferManager;
-
-		VertexBuffer(const VERTEX_BUFFER_DESC& desc);
-
-		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-		VertexBufferProperties mProperties;
-		GpuBufferUsage mUsage;
-		bool mStreamOut;
-	};
-
-	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/** Core thread specific implementation of a bs::VertexBuffer. */
-	class BS_CORE_EXPORT VertexBuffer : public CoreObject, public HardwareBuffer
-	{
-	public:
-		VertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
-		virtual ~VertexBuffer();
+		static SPtr<VertexBuffer> create(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**	Returns information about the vertex buffer. */
-		const VertexBufferProperties& getProperties() const { return mProperties; }
+		const VertexBufferProperties& getProperties() const
+		{
+			return mProperties;
+		}
 
 		/** @copydoc HardwareBuffer::readData */
 		void readData(UINT32 offset, UINT32 length, void* dest, UINT32 deviceIdx = 0, UINT32 queueIdx = 0) override;
@@ -98,7 +75,7 @@ namespace bs
 
 		/** @copydoc HardwareBuffer::copyData */
 		void copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
-			bool discardWholeBuffer = false, const SPtr<CommandBuffer>& commandBuffer = nullptr) override;
+			bool discardWholeBuffer = false, const SPtr<ct::CommandBuffer>& commandBuffer = nullptr) override;
 
 		/**
 		 * Returns a view of this buffer that can be used for load-store operations. Buffer must have been created with
@@ -118,11 +95,12 @@ namespace bs
 		 */
 		SPtr<GpuBuffer> getLoadStore(GpuBufferType type, GpuBufferFormat format, UINT32 elementSize = 0);
 
-		/** @copydoc HardwareBufferManager::createVertexBuffer */
-		static SPtr<VertexBuffer> create(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
+		static const int MAX_SEMANTIC_IDX = 8;
 	protected:
 		friend class HardwareBufferManager;
+
+		VertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/** @copydoc HardwareBuffer::map */
 		void* map(UINT32 offset, UINT32 length, GpuLockOptions options, UINT32 deviceIdx, UINT32 queueIdx) override;
@@ -133,7 +111,15 @@ namespace bs
 		/** @copydoc CoreObject::initialize */
 		void initialize() override;
 
+		/** @copydoc CoreObject::createCore */
+		SPtr<ct::CoreObject> createCore() const
+		{
+			return nullptr;
+		}
+
 		VertexBufferProperties mProperties;
+		GpuBufferUsage mUsage;
+		bool mStreamOut;
 
 		HardwareBuffer* mBuffer = nullptr;
 		SPtr<HardwareBuffer> mSharedBuffer;
@@ -144,5 +130,4 @@ namespace bs
 	};
 
 	/** @} */
-		}
 }

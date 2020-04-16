@@ -33,8 +33,9 @@ namespace bs
 		 * to the pipeline and its data can be passed to the active vertex GPU program.
 		 *
 		 * @param[in]	desc	Description of the buffer to create.
+		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		SPtr<VertexBuffer> createVertexBuffer(const VERTEX_BUFFER_DESC& desc);
+		SPtr<VertexBuffer> createVertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * Creates a new index buffer that holds indices referencing vertices in a vertex buffer. Indices are interpreted
@@ -86,11 +87,8 @@ namespace bs
 	public:
 		virtual ~HardwareBufferManager() { }
 
-		/**
-		 * @copydoc bs::HardwareBufferManager::createVertexBuffer
-		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
-		 */
-		SPtr<VertexBuffer> createVertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		/** @copydoc createVertexBuffer */
+		virtual SPtr<VertexBuffer> createVertexBufferInternal(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
 
 		/**
 		 * @copydoc bs::HardwareBufferManager::createIndexBuffer
@@ -162,10 +160,6 @@ namespace bs
 
 			Vector<VertexElement> elements;
 		};
-
-		/** @copydoc createVertexBuffer */
-		virtual SPtr<VertexBuffer> createVertexBufferInternal(const VERTEX_BUFFER_DESC& desc,
-			GpuDeviceFlags deviceMask = GDF_DEFAULT) = 0;
 
 		/** @copydoc createIndexBuffer */
 		virtual SPtr<IndexBuffer> createIndexBufferInternal(const INDEX_BUFFER_DESC& desc,

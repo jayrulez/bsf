@@ -20,39 +20,12 @@ namespace bs
 		:mNumVertices(numVertices), mVertexSize(vertexSize)
 	{ }
 
-	VertexBuffer::VertexBuffer(const VERTEX_BUFFER_DESC& desc)
-		: mProperties(desc.numVerts, desc.vertexSize), mUsage(desc.usage), mStreamOut(desc.streamOut)
-	{
-#if BS_DEBUG_MODE
-		checkValidDesc(desc);
-#endif
-	}
 
-	SPtr<ct::CoreObject> VertexBuffer::createCore() const
-	{
-		VERTEX_BUFFER_DESC desc;
-		desc.vertexSize = mProperties.mVertexSize;
-		desc.numVerts = mProperties.mNumVertices;
-		desc.usage = mUsage;
-		desc.streamOut = mStreamOut;
-
-		return ct::HardwareBufferManager::instance().createVertexBufferInternal(desc);
-	}
-
-	SPtr<ct::VertexBuffer> VertexBuffer::getCore() const
-	{
-		return std::static_pointer_cast<ct::VertexBuffer>(mCoreSpecific);
-	}
-
-	SPtr<VertexBuffer> VertexBuffer::create(const VERTEX_BUFFER_DESC& desc)
-	{
-		return HardwareBufferManager::instance().createVertexBuffer(desc);
-	}
-
-	namespace ct
-	{
 	VertexBuffer::VertexBuffer(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
-		:HardwareBuffer(desc.vertexSize * desc.numVerts, desc.usage, deviceMask), mProperties(desc.numVerts, desc.vertexSize)
+		: HardwareBuffer(desc.vertexSize* desc.numVerts, desc.usage, deviceMask),
+		mProperties(desc.numVerts, desc.vertexSize),
+		mUsage(desc.usage),
+		mStreamOut(desc.streamOut)
 	{
 #if BS_DEBUG_MODE
 		checkValidDesc(desc);
@@ -61,10 +34,15 @@ namespace bs
 
 	VertexBuffer::~VertexBuffer()
 	{
-		if(mBuffer && !mSharedBuffer)
+		if (mBuffer && !mSharedBuffer)
 			mBufferDeleter(mBuffer);
 
 		BS_INC_RENDER_STAT_CAT(ResDestroyed, RenderStatObject_VertexBuffer);
+	}
+
+	SPtr<VertexBuffer> VertexBuffer::create(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		return HardwareBufferManager::instance().createVertexBuffer(desc, deviceMask);
 	}
 
 	void VertexBuffer::initialize()
@@ -109,7 +87,7 @@ namespace bs
 	}
 
 	void VertexBuffer::copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset,
-		UINT32 dstOffset, UINT32 length, bool discardWholeBuffer, const SPtr<CommandBuffer>& commandBuffer)
+		UINT32 dstOffset, UINT32 length, bool discardWholeBuffer, const SPtr<ct::CommandBuffer>& commandBuffer)
 	{
 		auto& srcVertexBuffer = static_cast<VertexBuffer&>(srcBuffer);
 		mBuffer->copyData(*srcVertexBuffer.mBuffer, srcOffset, dstOffset, length, discardWholeBuffer, commandBuffer);
@@ -117,24 +95,24 @@ namespace bs
 
 	SPtr<GpuBuffer> VertexBuffer::getLoadStore(GpuBufferType type, GpuBufferFormat format, UINT32 elementSize)
 	{
-		if((mUsage & GBU_LOADSTORE) != GBU_LOADSTORE)
+		if ((mUsage & GBU_LOADSTORE) != GBU_LOADSTORE)
 			return nullptr;
 
-		for(const auto& entry : mLoadStoreViews)
+		for (const auto& entry : mLoadStoreViews)
 		{
 			const GpuBufferProperties& props = entry->getProperties();
-			if(props.getType() == type)
+			if (props.getType() == type)
 			{
-				if(type == GBT_STANDARD && props.getFormat() == format)
+				if (type == GBT_STANDARD && props.getFormat() == format)
 					return entry;
 
-				if(type == GBT_STRUCTURED && props.getElementSize() == elementSize)
+				if (type == GBT_STRUCTURED && props.getElementSize() == elementSize)
 					return entry;
 			}
 		}
 
 		UINT32 elemSize = type == GBT_STANDARD ? bs::GpuBuffer::getFormatSize(format) : elementSize;
-		if((mBuffer->getSize() % elemSize) != 0)
+		if ((mBuffer->getSize() % elemSize) != 0)
 		{
 			BS_LOG(Error, RenderBackend,
 				"Size of the buffer isn't divisible by individual element size provided for the buffer view.");
@@ -148,18 +126,12 @@ namespace bs
 		desc.elementSize = elementSize;
 		desc.elementCount = mBuffer->getSize() / elemSize;
 
-		if(!mSharedBuffer)
+		if (!mSharedBuffer)
 			mSharedBuffer = bs_shared_ptr(mBuffer, mBufferDeleter);
 
 		SPtr<GpuBuffer> newView = GpuBuffer::create(desc, mSharedBuffer);
 		mLoadStoreViews.push_back(newView);
-		
-		return newView;
-	}
 
-	SPtr<VertexBuffer> VertexBuffer::create(const VERTEX_BUFFER_DESC& desc, GpuDeviceFlags deviceMask)
-	{
-		return HardwareBufferManager::instance().createVertexBuffer(desc, deviceMask);
-	}
+		return newView;
 	}
 }
