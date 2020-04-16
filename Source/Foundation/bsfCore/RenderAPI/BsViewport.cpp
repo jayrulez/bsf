@@ -102,11 +102,6 @@ namespace bs
 		_markCoreDirty();
 	}
 
-	SPtr<ct::Viewport> Viewport::getCore() const
-	{
-		return std::static_pointer_cast<ct::Viewport>(mCoreSpecific);
-	}
-
 	void Viewport::_markCoreDirty()
 	{
 		markCoreDirty();
@@ -128,33 +123,6 @@ namespace bs
 		return 0;
 	}
 
-	SPtr<ct::CoreObject> Viewport::createCore() const
-	{
-		SPtr<RenderTarget> targetCore;
-		if (mTarget != nullptr)
-			targetCore = mTarget;
-
-		ct::Viewport* viewport = new (bs_alloc<ct::Viewport>())
-			ct::Viewport(targetCore, mNormArea.x, mNormArea.y, mNormArea.width, mNormArea.height);
-
-		SPtr<ct::Viewport> viewportPtr = bs_shared_ptr<ct::Viewport>(viewport);
-		viewportPtr->_setThisPtr(viewportPtr);
-
-		return viewportPtr;
-	}
-
-	CoreSyncData Viewport::syncToCore(FrameAlloc* allocator)
-	{
-		UINT32 size = csync_size(*this);
-
-		UINT8* buffer = allocator->alloc(size);
-		Bitstream stream(buffer, size);
-
-		csync_write(*this, stream);
-
-		return CoreSyncData(buffer, size);
-	}
-
 	void Viewport::getCoreDependencies(Vector<CoreObject*>& dependencies)
 	{
 		if (mTarget != nullptr)
@@ -164,6 +132,7 @@ namespace bs
 	SPtr<Viewport> Viewport::create(const SPtr<RenderTarget>& target, float x, float y, float width, float height)
 	{
 		Viewport* viewport = new (bs_alloc<Viewport>()) Viewport(target, x, y, width, height);
+
 		SPtr<Viewport> viewportPtr = bs_core_ptr<Viewport>(viewport);
 		viewportPtr->_setThisPtr(viewportPtr);
 		viewportPtr->initialize();
@@ -188,45 +157,5 @@ namespace bs
 	RTTITypeBase* Viewport::getRTTI() const
 	{
 		return Viewport::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	Viewport::Viewport(const SPtr<RenderTarget>& target, float x, float y, float width, float height)
-		:TViewport(target, x, y, width, height)
-	{ }
-
-	SPtr<Viewport> Viewport::create(const SPtr<RenderTarget>& target, float x, float y, float width, float height)
-	{
-		Viewport* viewport = new (bs_alloc<Viewport>()) Viewport(target, x, y, width, height);
-
-		SPtr<Viewport> viewportPtr = bs_shared_ptr<Viewport>(viewport);
-		viewportPtr->_setThisPtr(viewportPtr);
-		viewportPtr->initialize();
-
-		return viewportPtr;
-	}
-
-	UINT32 Viewport::getTargetWidth() const
-	{
-		if (mTarget != nullptr)
-			return mTarget->getProperties().width;
-
-		return 0;
-	}
-
-	UINT32 Viewport::getTargetHeight() const
-	{
-		if (mTarget != nullptr)
-			return mTarget->getProperties().height;
-
-		return 0;
-	}
-
-	void Viewport::syncToCore(const CoreSyncData& data)
-	{
-		Bitstream stream(data.getBuffer(), data.getBufferSize());
-		csync_read(*this, stream);
-	}
 	}
 }

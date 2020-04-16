@@ -717,7 +717,7 @@ namespace bs
 
 	SPtr<ct::CoreObject> Camera::createCore() const
 	{
-		ct::Camera* handler = new (bs_alloc<ct::Camera>()) ct::Camera(mViewport->getCore());
+		ct::Camera* handler = new (bs_alloc<ct::Camera>()) ct::Camera(mViewport);
 		SPtr<ct::Camera> handlerPtr = bs_shared_ptr<ct::Camera>(handler);
 		handlerPtr->_setThisPtr(handlerPtr);
 

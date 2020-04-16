@@ -114,8 +114,7 @@ namespace bs
 	public:
 		using RenderTargetType = CoreVariantType<RenderTarget, Core>;
 
-		TViewport(SPtr<RenderTargetType> target = nullptr, float x = 0.0f, float y = 0.0f, float width = 1.0f,
-			float height = 1.0f)
+		TViewport(SPtr<RenderTargetType> target = nullptr, float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f)
 			:ViewportBase(x, y, width, height), mTarget(std::move(target))
 		{ }
 		virtual ~TViewport() = default;
@@ -149,17 +148,13 @@ namespace bs
 		BS_SCRIPT_EXPORT(n:Target,pr:getter)
 		SPtr<RenderTarget> getTarget() const { return mTarget; }
 
-		/**	Retrieves a core implementation of a viewport usable only from the core thread. */
-		SPtr<ct::Viewport> getCore() const;
-
 		/**
 		 * Creates a new viewport.
 		 *
 		 * @note	Viewport coordinates are normalized in [0, 1] range.
 		 */
 		BS_SCRIPT_EXPORT(ec:Viewport)
-		static SPtr<Viewport> create(const SPtr<RenderTarget>& target, float x = 0.0f, float y = 0.0f,
-			float width = 1.0f, float height = 1.0f);
+		static SPtr<Viewport> create(const SPtr<RenderTarget>& target, float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f);
 
 	protected:
 		Viewport(const SPtr<RenderTarget>& target, float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f);
@@ -173,14 +168,14 @@ namespace bs
 		/** @copydoc ViewportBase::getTargetHeight */
 		UINT32 getTargetHeight() const override;
 
-		/** @copydoc CoreObject::syncToCore */
-		CoreSyncData syncToCore(FrameAlloc* allocator) override;
-
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
 
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -196,42 +191,4 @@ namespace bs
 	};
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/** @copydoc bs::Viewport */
-	class BS_CORE_EXPORT Viewport : public CoreObject, public TViewport<true>
-	{
-	public:
-		/**	Returns the render target the viewport is associated with. */
-		SPtr<RenderTarget> getTarget() const { return mTarget; }
-
-		/**	Sets the render target the viewport will be associated with. */
-		void setTarget(const SPtr<RenderTarget>& target) { mTarget = target; }
-
-		/** @copydoc bs::Viewport::create() */
-		static SPtr<Viewport> create(const SPtr<RenderTarget>& target, float x = 0.0f, float y = 0.0f,
-			float width = 1.0f, float height = 1.0f);
-
-	protected:
-		friend class bs::Viewport;
-
-		Viewport(const SPtr<RenderTarget>& target, float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f);
-
-		/** @copydoc ViewportBase::getTargetWidth */
-		UINT32 getTargetWidth() const override;
-
-		/** @copydoc ViewportBase::getTargetHeight */
-		UINT32 getTargetHeight() const override;
-
-		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
-	};
-
-	/** @} */
-		}
 }

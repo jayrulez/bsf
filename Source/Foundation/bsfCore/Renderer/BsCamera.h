@@ -582,8 +582,7 @@ namespace bs
 	protected:
 		friend class bs::Camera;
 
-		Camera(SPtr<RenderTarget> target = nullptr,
-			float left = 0.0f, float top = 0.0f, float width = 1.0f, float height = 1.0f);
+		Camera(SPtr<RenderTarget> target = nullptr, float left = 0.0f, float top = 0.0f, float width = 1.0f, float height = 1.0f);
 
 		Camera(const SPtr<Viewport>& viewport);
 
