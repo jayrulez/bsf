@@ -691,9 +691,38 @@ namespace bs
 	template class TCamera<false>;
 	template class TCamera<true>;
 
-	SPtr<ct::Camera> Camera::getCore() const
+
+	Camera::~Camera()
 	{
-		return std::static_pointer_cast<ct::Camera>(mCoreSpecific);
+		RendererManager::instance().getActive()->notifyCameraRemoved(this);
+	}
+
+	Camera::Camera(SPtr<RenderTarget> target, float left, float top, float width, float height)
+		: mRendererId(0)
+	{
+		mViewport = Viewport::create(target, left, top, width, height);
+	}
+
+	Camera::Camera(const SPtr<Viewport>& viewport)
+		: mRendererId(0)
+	{
+		if (viewport == nullptr)
+			mViewport = Viewport::create(nullptr);
+
+		mViewport = viewport;
+	}
+
+	Rect2I Camera::getViewportRect() const
+	{
+		return mViewport->getPixelArea();
+	}
+
+	void Camera::initialize()
+	{
+		RendererManager::instance().getActive()->notifyCameraAdded(this);
+		CoreObject::initialize();
+
+		gSceneManager()._registerCamera(std::static_pointer_cast<Camera>(getThisPtr()));
 	}
 
 	SPtr<Camera> Camera::create()
@@ -715,24 +744,6 @@ namespace bs
 		return handlerPtr;
 	}
 
-	SPtr<ct::CoreObject> Camera::createCore() const
-	{
-		ct::Camera* handler = new (bs_alloc<ct::Camera>()) ct::Camera(mViewport);
-		SPtr<ct::Camera> handlerPtr = bs_shared_ptr<ct::Camera>(handler);
-		handlerPtr->_setThisPtr(handlerPtr);
-
-		return handlerPtr;
-	}
-
-	void Camera::initialize()
-	{
-		mViewport = Viewport::create(nullptr);
-
-		CoreObject::initialize();
-
-		gSceneManager()._registerCamera(std::static_pointer_cast<Camera>(getThisPtr()));
-	}
-
 	void Camera::destroy()
 	{
 		if(isInitialized())
@@ -745,41 +756,6 @@ namespace bs
 	{
 		mMain = main;
 		gSceneManager()._notifyMainCameraStateChanged(std::static_pointer_cast<Camera>(getThisPtr()));
-	}
-
-	Rect2I Camera::getViewportRect() const
-	{
-		return mViewport->getPixelArea();
-	}
-
-	CoreSyncData Camera::syncToCore(FrameAlloc* allocator)
-	{
-		UINT32 dirtyFlag = getCoreDirtyFlags();
-
-		UINT32 size = rtti_size(dirtyFlag).bytes;
-		
-		if((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
-		{
-			size += csync_size((SceneActor&)*this);
-
-			if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
-				size += csync_size(*this);
-		}
-
-		UINT8* buffer = allocator->alloc(size);
-		Bitstream stream(buffer, size);
-
-		rtti_write(dirtyFlag, stream);
-
-		if ((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
-		{
-			csync_write((SceneActor&)* this, stream);
-
-			if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
-				csync_write(*this, stream);
-		}
-
-		return CoreSyncData(buffer, size);
 	}
 
 	void Camera::getCoreDependencies(Vector<CoreObject*>& dependencies)
@@ -800,59 +776,5 @@ namespace bs
 	RTTITypeBase* Camera::getRTTI() const
 	{
 		return Camera::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	Camera::~Camera()
-	{
-		RendererManager::instance().getActive()->notifyCameraRemoved(this);
-	}
-
-	Camera::Camera(SPtr<RenderTarget> target, float left, float top, float width, float height)
-		: mRendererId(0)
-	{
-		mViewport = Viewport::create(target, left, top, width, height);
-	}
-
-	Camera::Camera(const SPtr<Viewport>& viewport)
-		: mRendererId(0)
-	{
-		mViewport = viewport;
-	}
-
-	void Camera::initialize()
-	{
-		RendererManager::instance().getActive()->notifyCameraAdded(this);
-
-		CoreObject::initialize();
-	}
-
-	Rect2I Camera::getViewportRect() const
-	{
-		return mViewport->getPixelArea();
-	}
-
-	void Camera::syncToCore(const CoreSyncData& data)
-	{
-		Bitstream stream(data.getBuffer(), data.getBufferSize());
-
-		UINT32 dirtyFlag;
-		rtti_read(dirtyFlag, stream);
-
-		if ((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
-		{
-			csync_read((SceneActor&)* this, stream);
-
-			if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
-				csync_read(*this, stream);
-
-			mRecalcFrustum = true;
-			mRecalcFrustumPlanes = true;
-			mRecalcView = true;
-		}
-
-		RendererManager::instance().getActive()->notifyCameraUpdated(this, (UINT32)dirtyFlag);
-	}
 	}
 }

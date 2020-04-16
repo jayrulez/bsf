@@ -462,8 +462,8 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TCamera : public CameraBase
 	{
-		using ViewportType = CoreVariantType<Viewport, Core>;
-		using RenderSettingsType = CoreVariantType<RenderSettings, Core>;
+		using ViewportType = CoreVariantType<Viewport, false>;
+		using RenderSettingsType = CoreVariantType<RenderSettings, false>;
 
 	public:
 		TCamera();
@@ -507,17 +507,31 @@ namespace bs
 	class BS_CORE_EXPORT Camera : public IReflectable, public CoreObject, public TCamera<false>
 	{
 	public:
+		~Camera();
+
 		/**
 		 * Determines whether this is the main application camera. Main camera controls the final render surface that is
 		 * displayed to the user.
-		 */	
+		 */
 		void setMain(bool main);
 
-		/** @copydoc setMain() */
-		bool isMain() const { return mMain; }
+		/** @copydoc bs::Camera::setMain() */
+		bool isMain() const
+		{
+			return mMain;
+		}
 
-		/** Retrieves an implementation of a camera handler usable only from the core thread. */
-		SPtr<ct::Camera> getCore() const;
+		/**	Sets an ID that can be used for uniquely identifying this object by the renderer. */
+		void setRendererId(UINT32 id)
+		{
+			mRendererId = id;
+		}
+
+		/**	Retrieves an ID that can be used for uniquely identifying this object by the renderer. */
+		UINT32 getRendererId() const
+		{
+			return mRendererId;
+		}
 
 		/**	Creates a new camera that renders to the specified portion of the provided render target. */
 		static SPtr<Camera> create();
@@ -535,23 +549,31 @@ namespace bs
 
 		/** @} */
 	protected:
+		Camera(SPtr<RenderTarget> target = nullptr, float left = 0.0f, float top = 0.0f, float width = 1.0f, float height = 1.0f);
+
+		Camera(const SPtr<Viewport>& viewport);
+
 		/** @copydoc CameraBase */
 		Rect2I getViewportRect() const override;
 
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/** @copydoc CameraBase::_markCoreDirty */
 		void _markCoreDirty(ActorDirtyFlag flag = ActorDirtyFlag::Everything) override;
-
-		/** @copydoc CoreObject::syncToCore */
-		CoreSyncData syncToCore(FrameAlloc* allocator) override;
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
 
 		/**	Creates a new camera without initializing it. */
 		static SPtr<Camera> createEmpty();
+
+	protected:
+
+		UINT32 mRendererId;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -561,43 +583,6 @@ namespace bs
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
-
-	namespace ct
-	{
-	/** @copydoc bs::Camera */
-	class BS_CORE_EXPORT Camera : public CoreObject, public TCamera<true>
-	{
-	public:
-		~Camera();
-
-		/** @copydoc bs::Camera::setMain() */
-		bool isMain() const { return mMain; }
-
-		/**	Sets an ID that can be used for uniquely identifying this object by the renderer. */
-		void setRendererId(UINT32 id) { mRendererId = id; }
-
-		/**	Retrieves an ID that can be used for uniquely identifying this object by the renderer. */
-		UINT32 getRendererId() const { return mRendererId; }
-		
-	protected:
-		friend class bs::Camera;
-
-		Camera(SPtr<RenderTarget> target = nullptr, float left = 0.0f, float top = 0.0f, float width = 1.0f, float height = 1.0f);
-
-		Camera(const SPtr<Viewport>& viewport);
-
-		/** @copydoc CoreObject::initialize */
-		void initialize() override;
-
-		/** @copydoc CameraBase */
-		Rect2I getViewportRect() const override;
-
-		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
-
-		UINT32 mRendererId;
-	};
-	}
 
 	/** @} */
 }

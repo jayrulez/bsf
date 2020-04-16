@@ -180,8 +180,7 @@ namespace bs
 		return gbuf;
 	}
 
-	SPtr<VertexDeclaration> HardwareBufferManager::createVertexDeclarationInternal(
-		const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask)
+	SPtr<VertexDeclaration> HardwareBufferManager::createVertexDeclarationInternal(const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask)
 	{
 		VertexDeclaration* decl = new (bs_alloc<VertexDeclaration>()) VertexDeclaration(elements, deviceMask);
 

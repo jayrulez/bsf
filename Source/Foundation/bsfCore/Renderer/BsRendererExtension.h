@@ -111,7 +111,7 @@ namespace bs
 		virtual void destroy() {}
 
 		/** Returns true if the render() method should be called for the provided camera. */
-		virtual RendererExtensionRequest check(const ct::Camera& camera) = 0;
+		virtual RendererExtensionRequest check(const Camera& camera) = 0;
 
 		/**
 		 * Called at the point at which rendering should be performed for the provided camera. Relevant render targets
@@ -121,7 +121,7 @@ namespace bs
 		 * @param[in]	camera			Camera through which the renderer is currently rendering.
 		 * @param[in]	viewContext		Additional information about the currently rendered view.
 		 */
-		virtual void render(const ct::Camera& camera, const ct::RendererViewContext& viewContext) = 0;
+		virtual void render(const Camera& camera, const ct::RendererViewContext& viewContext) = 0;
 
 		/**
 		 * Determines when will the render() method execute, compared to other plugins using the same RenderLocation.

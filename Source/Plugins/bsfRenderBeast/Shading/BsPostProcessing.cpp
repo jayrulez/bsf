@@ -764,7 +764,7 @@ namespace bs { namespace ct
 		
 		SPtr<Texture> fringeTex;
 		if (settings.fringeTexture)
-			fringeTex = settings.fringeTexture;
+			fringeTex = settings.fringeTexture.getInternalPtr();
 		else
 			fringeTex = RendererTextures::chromaticAberrationFringe;
 		
@@ -1360,7 +1360,7 @@ namespace bs { namespace ct
 		mInputTextureVS.set(input);
 		mInputTextureFS.set(input);
 
-		SPtr<Texture> bokehTexture = settings.bokehShape;
+		SPtr<Texture> bokehTexture = settings.bokehShape.getInternalPtr();
 		if(bokehTexture == nullptr)
 			bokehTexture = RendererTextures::bokehFlare;
 

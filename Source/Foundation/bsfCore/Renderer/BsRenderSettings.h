@@ -452,33 +452,18 @@ namespace bs
 		~DepthOfFieldSettingsBase() = default;
 	};
 
-	/** Template version of DepthOfFieldSettings that can be specialized for either core or simulation thread. */
-	template<bool Core>
-	struct BS_CORE_EXPORT TDepthOfFieldSettings : DepthOfFieldSettingsBase
+	/** Settings that control the depth-of-field effect. */
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT() DepthOfFieldSettings : DepthOfFieldSettingsBase, IReflectable
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<Texture, false>;
 
 		/** Texture to use for the bokeh shape. Only relevant when using Bokeh depth of field. */
 		BS_SCRIPT_EXPORT()
 		TextureType bokehShape;
 
-		/************************************************************************/
-		/* 								RTTI		                     		*/
-		/************************************************************************/
-
-		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
-		template<class P>
-		void rttiEnumFields(P processor);
-
-	protected:
-		~TDepthOfFieldSettings() = default;
-	};
-
-	/** Settings that control the depth-of-field effect. */
-	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT() DepthOfFieldSettings : TDepthOfFieldSettings<false>, IReflectable
-	{
 		BS_SCRIPT_EXPORT()
 		DepthOfFieldSettings() = default;
+		~DepthOfFieldSettings() = default;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -487,16 +472,11 @@ namespace bs
 		friend class DepthOfFieldSettingsRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
-	};
 
-	namespace ct
-	{
-		/** Core thread variant of DepthOfFieldSettings. */
-		struct BS_CORE_EXPORT BS_SCRIPT_EXPORT() DepthOfFieldSettings : TDepthOfFieldSettings<true>
-		{
-			DepthOfFieldSettings() = default;
-		};
-	}
+		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
+		template<class P>
+		void rttiEnumFields(P processor);
+	};
 
 	/** Determines which parts of the scene will trigger motion blur. */
 	enum class BS_SCRIPT_EXPORT(m:Rendering) MotionBlurDomain
@@ -880,11 +860,10 @@ namespace bs
 		~ChromaticAberrationSettingsBase() = default;
 	};
 
-	/** Template version of ChromaticAberrationSettings that can be specialized for either core or simulation thread. */
-	template<bool Core>
-	struct BS_CORE_EXPORT TChromaticAberrationSettings : ChromaticAberrationSettingsBase 
+	/** Settings that control the chromatic aberration effect. */
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT() ChromaticAberrationSettings : ChromaticAberrationSettingsBase, IReflectable
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<Texture, false>;
 
 		/**
 		 * Optional texture to apply to generate the channel shift fringe, allowing you to modulate the shifted colors.
@@ -894,23 +873,9 @@ namespace bs
 		BS_SCRIPT_EXPORT()
 		TextureType fringeTexture;
 
-		/************************************************************************/
-		/* 								RTTI		                     		*/
-		/************************************************************************/
-
-		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
-		template<class P>
-		void rttiEnumFields(P processor);
-
-	protected:
-		~TChromaticAberrationSettings() = default;
-	};
-
-	/** Settings that control the chromatic aberration effect. */
-	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT() ChromaticAberrationSettings : TChromaticAberrationSettings<false>, IReflectable
-	{
 		BS_SCRIPT_EXPORT()
 		ChromaticAberrationSettings() = default;
+		~ChromaticAberrationSettings() = default;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -919,16 +884,11 @@ namespace bs
 		friend class ChromaticAberrationSettingsRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
-	};
 
-	namespace ct
-	{
-		/** Core thread variant of ChromaticAberrationSettings. */
-		struct BS_CORE_EXPORT ChromaticAberrationSettings : TChromaticAberrationSettings<true>
-		{
-			ChromaticAberrationSettings() = default;
-		};
-	}
+		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
+		template<class P>
+		void rttiEnumFields(P processor);
+	};
 
 	/** Settings that control the film grain effect. Film grains adds a time-varying noise effect over the entire image. */
 	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) FilmGrainSettings : public IReflectable
@@ -1177,37 +1137,23 @@ namespace bs
 	protected:
 		~RenderSettingsBase() = default;
 	};
-
-	/** Template version of RenderSettings that can be specialized for either core or simulation thread. */
-	template<bool Core>
-	struct BS_CORE_EXPORT TRenderSettings : RenderSettingsBase
-	{
-		/** Parameters used for customizing the gaussian depth of field effect. */
-		BS_SCRIPT_EXPORT()
-		CoreVariantType<DepthOfFieldSettings, Core> depthOfField;
-
-		/** Parameters used for customizing the chromatic aberration effect. */
-		BS_SCRIPT_EXPORT()
-		CoreVariantType<ChromaticAberrationSettings, Core> chromaticAberration;
-
-		/************************************************************************/
-		/* 								RTTI		                     		*/
-		/************************************************************************/
-
-		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
-		template<class P>
-		void rttiEnumFields(P processor);
-
-	protected:
-		~TRenderSettings() = default;
-	};
 	
 	/** Settings that control rendering for a specific camera (view). */
-	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) RenderSettings : TRenderSettings<false>, IReflectable
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) RenderSettings : RenderSettingsBase, IReflectable
 	{
 		BS_SCRIPT_EXPORT()
 		RenderSettings() = default;
-		virtual ~RenderSettings() = default;
+		virtual ~RenderSettings()
+		{
+		}
+
+		/** Parameters used for customizing the gaussian depth of field effect. */
+		BS_SCRIPT_EXPORT()
+			CoreVariantType<DepthOfFieldSettings, false> depthOfField;
+
+		/** Parameters used for customizing the chromatic aberration effect. */
+		BS_SCRIPT_EXPORT()
+			CoreVariantType<ChromaticAberrationSettings, false> chromaticAberration;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
@@ -1217,17 +1163,15 @@ namespace bs
 		friend class RenderSettingsRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
-	};
 
-	namespace ct
-	{
-		/** Core thread variant of RenderSettings. */
-		struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m :Rendering) RenderSettings : TRenderSettings<true>
-		{
-			RenderSettings() = default;
-			virtual ~RenderSettings() = default;
-		};
-	}
+		/************************************************************************/
+		/* 								RTTI		                     		*/
+		/************************************************************************/
+
+		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
+		template<class P>
+		void rttiEnumFields(P processor);
+	};
 
 	/** @} */
 }

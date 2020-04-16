@@ -111,9 +111,8 @@ namespace bs
 		return getRTTIStatic();
 	}
 
-	template <bool Core>
 	template <class Processor>
-	void TDepthOfFieldSettings<Core>::rttiEnumFields(Processor p)
+	void DepthOfFieldSettings::rttiEnumFields(Processor p)
 	{
 		p(enabled);
 		p(focalDistance);
@@ -134,8 +133,7 @@ namespace bs
 		p(occlusionDepthRange);
 	}
 
-	template struct TDepthOfFieldSettings<false>;
-	template struct TDepthOfFieldSettings<true>;
+	//template struct DepthOfFieldSettings;
 
 	RTTITypeBase* DepthOfFieldSettings::getRTTIStatic()
 	{
@@ -255,9 +253,8 @@ namespace bs
 		return getRTTIStatic();
 	}
 
-	template <bool Core>
 	template <class Processor>
-	void TChromaticAberrationSettings<Core>::rttiEnumFields(Processor p)
+	void ChromaticAberrationSettings::rttiEnumFields(Processor p)
 	{
 		p(enabled);
 		p(type);
@@ -265,8 +262,7 @@ namespace bs
 		p(fringeTexture);
 	}
 
-	template struct TChromaticAberrationSettings<false>;
-	template struct TChromaticAberrationSettings<true>;
+	//template struct ChromaticAberrationSettings;
 
 	RTTITypeBase* ChromaticAberrationSettings::getRTTIStatic()
 	{
@@ -315,9 +311,8 @@ namespace bs
 		return getRTTIStatic();
 	}
 
-	template <bool Core>
 	template <class Processor>
-	void TRenderSettings<Core>::rttiEnumFields(Processor p)
+	void RenderSettings::rttiEnumFields(Processor p)
 	{
 		p(enableAutoExposure);
 		p(autoExposure);
@@ -347,14 +342,8 @@ namespace bs
 		p(enableVelocityBuffer);
 	}
 
-	template struct TRenderSettings<false>;
-	template struct TRenderSettings<true>;
-
-	template void TRenderSettings<false>::rttiEnumFields(RttiCoreSyncSize);
-	template void TRenderSettings<false>::rttiEnumFields(RttiCoreSyncWriter);
-
-	template void TRenderSettings<true>::rttiEnumFields(RttiCoreSyncSize);
-	template void TRenderSettings<true>::rttiEnumFields(RttiCoreSyncReader);
+	template void RenderSettings::rttiEnumFields(RttiCoreSyncSize);
+	template void RenderSettings::rttiEnumFields(RttiCoreSyncWriter);
 
 	RTTITypeBase* RenderSettings::getRTTIStatic()
 	{

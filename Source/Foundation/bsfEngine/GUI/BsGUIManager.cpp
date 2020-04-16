@@ -167,7 +167,7 @@ namespace bs
 		{
 			auto widgetId = (UINT64)widget;
 
-			mRenderer.get()->clearDrawGroups(camera->getCore(), widgetId);
+			mRenderer.get()->clearDrawGroups(camera, widgetId);
 		}
 	}
 
@@ -350,7 +350,7 @@ namespace bs
 				continue;
 			
 			auto widgetId = (UINT64)widget;
-			mRenderer.get()->updateDrawGroups(camera->getCore(), widgetId, widget->getDepth(), widget->getWorldTfrm(), std::move(updateData));
+			mRenderer.get()->updateDrawGroups(camera, widgetId, widget->getDepth(), widget->getWorldTfrm(), std::move(updateData));
 		}
 		mRenderer.get()->update(gTime().getTime());
 	}
