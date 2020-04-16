@@ -117,7 +117,7 @@ namespace bs
 		 *								after which the stencil value will be incremented by one. (i.e. only first element that
 		 *								writes to a pixel stores its alpha value).
 		 */
-		virtual void render(const SPtr<ct::MeshBase>& mesh, const SubMesh& subMesh, const SPtr<Texture>& texture,
+		virtual void render(const SPtr<MeshBase>& mesh, const SubMesh& subMesh, const SPtr<Texture>& texture,
 			const SPtr<ct::SamplerState>& sampler, const SPtr<ct::GpuParamBlockBuffer>& paramBuffer,
 			const SPtr<SpriteMaterialExtraInfo>& additionalData, bool alphaOnly) const;
 

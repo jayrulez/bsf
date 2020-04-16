@@ -114,11 +114,11 @@ namespace bs
 		for (auto& entry : meshData)
 		{
 			if (entry.type == DrawHelper::MeshType::Solid)
-				proxyData.push_back(MeshRenderData(entry.mesh->getCore(), entry.subMesh, DebugDrawMaterial::Solid));
+				proxyData.push_back(MeshRenderData(entry.mesh, entry.subMesh, DebugDrawMaterial::Solid));
 			else if (entry.type == DrawHelper::MeshType::Wire)
-				proxyData.push_back(MeshRenderData(entry.mesh->getCore(), entry.subMesh, DebugDrawMaterial::Wire));
+				proxyData.push_back(MeshRenderData(entry.mesh, entry.subMesh, DebugDrawMaterial::Wire));
 			else if (entry.type == DrawHelper::MeshType::Line)
-				proxyData.push_back(MeshRenderData(entry.mesh->getCore(), entry.subMesh, DebugDrawMaterial::Line));
+				proxyData.push_back(MeshRenderData(entry.mesh, entry.subMesh, DebugDrawMaterial::Line));
 		}
 
 		return proxyData;

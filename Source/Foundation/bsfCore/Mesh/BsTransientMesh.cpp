@@ -8,7 +8,18 @@
 namespace bs
 {
 	TransientMesh::TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices, UINT32 numIndices, DrawOperationType drawOp)
-		:MeshBase(numVertices, numIndices, drawOp), mIsDestroyed(false), mParentHeap(parentHeap), mId(id)
+		:MeshBase(numVertices, numIndices, drawOp),
+		mIsDestroyed(false),
+		mParentHeap(parentHeap), mId(id)
+	{
+
+		//ct::TransientMesh* core = new (bs_alloc<ct::TransientMesh>()) TransientMesh(mParentHeap->getCore(), mId, mProperties.mNumVertices, mProperties.mNumIndices, mProperties.mSubMeshes);
+
+	}
+
+	TransientMesh::TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes)
+		: MeshBase(numVertices, numIndices, subMeshes),
+		mParentHeap(parentHeap), mId(id)
 	{
 
 	}
@@ -22,32 +33,8 @@ namespace bs
 		}
 	}
 
-	SPtr<ct::TransientMesh> TransientMesh::getCore() const
-	{
-		return std::static_pointer_cast<ct::TransientMesh>(mCoreSpecific);
-	}
 
-	SPtr<ct::CoreObject> TransientMesh::createCore() const
-	{
-		ct::TransientMesh* core = new (bs_alloc<ct::TransientMesh>()) ct::TransientMesh(
-			mParentHeap->getCore(), mId, mProperties.mNumVertices, mProperties.mNumIndices, mProperties.mSubMeshes);
-
-		SPtr<ct::CoreObject> meshCore = bs_shared_ptr<ct::TransientMesh>(core);
-		meshCore->_setThisPtr(meshCore);
-
-		return meshCore;
-	}
-
-	namespace ct
-	{
-	TransientMesh::TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id,
-		UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes)
-		:MeshBase(numVertices, numIndices, subMeshes), mParentHeap(parentHeap), mId(id)
-	{
-
-	}
-
-	SPtr<VertexData> TransientMesh::getVertexData() const
+	SPtr<ct::VertexData> TransientMesh::getVertexData() const
 	{
 		return mParentHeap->getVertexData();
 	}
@@ -75,6 +62,5 @@ namespace bs
 	void TransientMesh::_notifyUsedOnGPU()
 	{
 		mParentHeap->notifyUsedOnGPU(mId);
-	}
 	}
 }

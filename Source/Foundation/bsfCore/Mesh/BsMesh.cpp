@@ -14,260 +14,42 @@
 namespace bs
 {
 	MESH_DESC MESH_DESC::DEFAULT = MESH_DESC();
-
-	Mesh::Mesh(const MESH_DESC& desc)
-		:MeshBase(desc.numVertices, desc.numIndices, desc.subMeshes), mVertexDesc(desc.vertexDesc), mUsage(desc.usage),
-		mIndexType(desc.indexType), mSkeleton(desc.skeleton), mMorphShapes(desc.morphShapes)
-	{
-
-	}
-
-	Mesh::Mesh(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc)
-		:MeshBase(initialMeshData->getNumVertices(), initialMeshData->getNumIndices(), desc.subMeshes),
-		mCPUData(initialMeshData), mVertexDesc(initialMeshData->getVertexDesc()),
-		mUsage(desc.usage), mIndexType(initialMeshData->getIndexType()), mSkeleton(desc.skeleton),
-		mMorphShapes(desc.morphShapes)
-	{ }
-
 	Mesh::Mesh()
 		:MeshBase(0, 0, DOT_TRIANGLE_LIST)
-	{ }
-
-	AsyncOp Mesh::writeData(const SPtr<MeshData>& data, bool discardEntireBuffer)
 	{
-		updateBounds(*data);
-		updateCPUBuffer(0, *data);
-
-		data->_lock();
-
-		std::function<void(const SPtr<ct::Mesh>&, const SPtr<MeshData>&, bool, AsyncOp&)> func =
-			[&](const SPtr<ct::Mesh>& mesh, const SPtr<MeshData>& _meshData, bool _discardEntireBuffer, AsyncOp& asyncOp)
-		{
-			mesh->writeData(*_meshData, _discardEntireBuffer, false);
-			_meshData->_unlock();
-			asyncOp._completeOperation();
-
-		};
-
-		AsyncOp op;
-		func(getCore(), data, discardEntireBuffer, op);
-
-		return op;
 	}
 
-	AsyncOp Mesh::readData(const SPtr<MeshData>& data)
+	Mesh::Mesh(const MESH_DESC& desc)
+		:MeshBase(desc.numVertices, desc.numIndices, desc.subMeshes),
+		mCPUData(nullptr),
+		mVertexData(nullptr),
+		mIndexBuffer(nullptr),
+		mVertexDesc(desc.vertexDesc),// mVertexDesc(initialMeshData->getVertexDesc()),
+		mUsage(desc.usage),
+		mIndexType(desc.indexType),//mIndexType(initialMeshData->getIndexType()),
+		mDeviceMask(GDF_DEFAULT),
+		mTempInitialMeshData(nullptr),
+		mSkeleton(desc.skeleton),
+		mMorphShapes(desc.morphShapes)
 	{
-		data->_lock();
 
-		std::function<void(const SPtr<ct::Mesh>&, const SPtr<MeshData>&, AsyncOp&)> func =
-			[&](const SPtr<ct::Mesh>& mesh, const SPtr<MeshData>& _meshData, AsyncOp& asyncOp)
-		{
-			// Make sure any queued command start executing before reading
-			ct::RenderAPI::instance().submitCommandBuffer(nullptr);
-
-			mesh->readData(*_meshData);
-			_meshData->_unlock();
-			asyncOp._completeOperation();
-
-		};
-
-		AsyncOp op;
-
-		func(getCore(), data, op);
-
-		return op;
 	}
 
-	SPtr<MeshData> Mesh::allocBuffer() const
-	{
-		SPtr<MeshData> meshData = bs_shared_ptr_new<MeshData>(mProperties.mNumVertices, mProperties.mNumIndices,
-			mVertexDesc, mIndexType);
-
-		return meshData;
-	}
-
-	void Mesh::initialize()
-	{
-		if (mCPUData != nullptr)
-			updateBounds(*mCPUData);
-
-		MeshBase::initialize();
-
-		if ((mUsage & MU_CPUCACHED) != 0 && mCPUData == nullptr)
-			createCPUBuffer();
-	}
-
-	void Mesh::updateBounds(const MeshData& meshData)
-	{
-		mProperties.mBounds = meshData.calculateBounds();
-		markCoreDirty();
-	}
-
-	SPtr<ct::Mesh> Mesh::getCore() const
-	{
-		return std::static_pointer_cast<ct::Mesh>(mCoreSpecific);
-	}
-
-	SPtr<ct::CoreObject> Mesh::createCore() const
-	{
-		MESH_DESC desc;
-		desc.numVertices = mProperties.mNumVertices;
-		desc.numIndices = mProperties.mNumIndices;
-		desc.vertexDesc = mVertexDesc;
-		desc.subMeshes = mProperties.mSubMeshes;
-		desc.usage = mUsage;
-		desc.indexType = mIndexType;
-		desc.skeleton = mSkeleton;
-		desc.morphShapes = mMorphShapes;
-
-		ct::Mesh* obj = new (bs_alloc<ct::Mesh>()) ct::Mesh(mCPUData, desc, GDF_DEFAULT);
-
-		SPtr<ct::CoreObject> meshCore = bs_shared_ptr<ct::Mesh>(obj);
-		meshCore->_setThisPtr(meshCore);
-
-		if ((mUsage & MU_CPUCACHED) == 0)
-			mCPUData = nullptr;
-
-		return meshCore;
-	}
-
-	void Mesh::updateCPUBuffer(UINT32 subresourceIdx, const MeshData& pixelData)
-	{
-		if ((mUsage & MU_CPUCACHED) == 0)
-			return;
-
-		if (subresourceIdx > 0)
-		{
-			BS_LOG(Error, Mesh, "Invalid subresource index: {0}. Supported range: 0 .. 1.", subresourceIdx);
-			return;
-		}
-
-		if (pixelData.getNumIndices() != mProperties.getNumIndices() ||
-			pixelData.getNumVertices() != mProperties.getNumVertices() ||
-			pixelData.getIndexType() != mIndexType ||
-			pixelData.getVertexDesc()->getVertexStride() != mVertexDesc->getVertexStride())
-		{
-			BS_LOG(Error, Mesh, "Provided buffer is not of valid dimensions or format in order to update this mesh.");
-			return;
-		}
-
-		if (mCPUData->getSize() != pixelData.getSize())
-			BS_EXCEPT(InternalErrorException, "Buffer sizes don't match.");
-
-		UINT8* dest = mCPUData->getData();
-		UINT8* src = pixelData.getData();
-
-		memcpy(dest, src, pixelData.getSize());
-	}
-
-	void Mesh::createCPUBuffer()
-	{
-		mCPUData = allocBuffer();
-	}
-
-	HMesh Mesh::dummy()
-	{
-		return MeshManager::instance().getDummyMesh();
-	}
-
-	/************************************************************************/
-	/* 								SERIALIZATION                      		*/
-	/************************************************************************/
-
-	RTTITypeBase* Mesh::getRTTIStatic()
-	{
-		return MeshRTTI::instance();
-	}
-
-	RTTITypeBase* Mesh::getRTTI() const
-	{
-		return Mesh::getRTTIStatic();
-	}
-
-	/************************************************************************/
-	/* 								STATICS		                     		*/
-	/************************************************************************/
-
-	HMesh Mesh::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
-		int usage, DrawOperationType drawOp, IndexType indexType)
-	{
-		MESH_DESC desc;
-		desc.numVertices = numVertices;
-		desc.numIndices = numIndices;
-		desc.vertexDesc = vertexDesc;
-		desc.usage = usage;
-		desc.subMeshes.push_back(SubMesh(0, numIndices, drawOp));
-		desc.indexType = indexType;
-
-		SPtr<Mesh> meshPtr = _createPtr(desc);
-		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
-	}
-
-	HMesh Mesh::create(const MESH_DESC& desc)
-	{
-		SPtr<Mesh> meshPtr = _createPtr(desc);
-		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
-	}
-
-	HMesh Mesh::create(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc)
-	{
-		SPtr<Mesh> meshPtr = _createPtr(initialMeshData, desc);
-		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
-	}
-
-	HMesh Mesh::create(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp)
-	{
-		SPtr<Mesh> meshPtr = _createPtr(initialMeshData, usage, drawOp);
-		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
-	}
-
-	SPtr<Mesh> Mesh::_createPtr(const MESH_DESC& desc)
-	{
-		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(desc));
-		mesh->_setThisPtr(mesh);
-		mesh->initialize();
-
-		return mesh;
-	}
-
-	SPtr<Mesh> Mesh::_createPtr(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc)
-	{
-		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, desc));
-		mesh->_setThisPtr(mesh);
-		mesh->initialize();
-
-		return mesh;
-	}
-
-	SPtr<Mesh> Mesh::_createPtr(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp)
-	{
-		MESH_DESC desc;
-		desc.usage = usage;
-		desc.subMeshes.push_back(SubMesh(0, initialMeshData->getNumIndices(), drawOp));
-
-		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, desc));
-		mesh->_setThisPtr(mesh);
-		mesh->initialize();
-
-		return mesh;
-	}
-
-	SPtr<Mesh> Mesh::createEmpty()
-	{
-		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh());
-		mesh->_setThisPtr(mesh);
-
-		return mesh;
-	}
-
-	namespace ct
-	{
 	Mesh::Mesh(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc, GpuDeviceFlags deviceMask)
-		: MeshBase(desc.numVertices, desc.numIndices, desc.subMeshes), mVertexData(nullptr), mIndexBuffer(nullptr)
-		, mVertexDesc(desc.vertexDesc), mUsage(desc.usage), mIndexType(desc.indexType), mDeviceMask(deviceMask)
-		, mTempInitialMeshData(initialMeshData), mSkeleton(desc.skeleton), mMorphShapes(desc.morphShapes)
+		:MeshBase(desc.numVertices, desc.numIndices, desc.subMeshes),//:MeshBase(initialMeshData->getNumVertices(), initialMeshData->getNumIndices(), desc.subMeshes),
+		mCPUData(initialMeshData),
+		mVertexData(nullptr),
+		mIndexBuffer(nullptr),
+		mVertexDesc(desc.vertexDesc),// mVertexDesc(initialMeshData->getVertexDesc()),
+		mUsage(desc.usage),
+		mIndexType(desc.indexType),//mIndexType(initialMeshData->getIndexType()),
+		mDeviceMask(deviceMask),
+		mTempInitialMeshData(initialMeshData),
+		mSkeleton(desc.skeleton),
+		mMorphShapes(desc.morphShapes)
 
-	{ }
+	{
+	}
 
 	Mesh::~Mesh()
 	{
@@ -279,6 +61,14 @@ namespace bs
 
 	void Mesh::initialize()
 	{
+		if (mCPUData != nullptr)
+			updateBounds(*mCPUData);
+
+		MeshBase::initialize();
+
+		if ((mUsage & MU_CPUCACHED) != 0 && mCPUData == nullptr)
+			createCPUBuffer();
+
 		bool isDynamic = (mUsage & MU_DYNAMIC) != 0;
 		int usage = isDynamic ? GBU_DYNAMIC : GBU_STATIC;
 
@@ -289,9 +79,9 @@ namespace bs
 
 		mIndexBuffer = IndexBuffer::create(ibDesc, mDeviceMask);
 
-		mVertexData = bs_shared_ptr_new<VertexData>();
+		mVertexData = bs_shared_ptr_new<ct::VertexData>();
 		mVertexData->vertexCount = mProperties.mNumVertices;
-		mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
+		//mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
 
 		for (UINT32 i = 0; i <= mVertexDesc->getMaxStreamIdx(); i++)
 		{
@@ -315,23 +105,10 @@ namespace bs
 			mTempInitialMeshData = nullptr;
 		}
 
-		MeshBase::initialize();
+		if ((mUsage & MU_CPUCACHED) == 0)
+			mCPUData = nullptr;
 	}
 
-	SPtr<VertexData> Mesh::getVertexData() const
-	{
-		return mVertexData;
-	}
-
-	SPtr<IndexBuffer> Mesh::getIndexBuffer() const
-	{
-		return mIndexBuffer;
-	}
-
-	SPtr<VertexDataDesc> Mesh::getVertexDesc() const
-	{
-		return mVertexDesc;
-	}
 
 	void Mesh::writeData(const MeshData& meshData, bool discardEntireBuffer, bool performUpdateBounds, UINT32 queueIdx)
 	{
@@ -411,6 +188,28 @@ namespace bs
 
 		if (performUpdateBounds)
 			updateBounds(meshData);
+	}
+
+	AsyncOp Mesh::writeData(const SPtr<MeshData>& data, bool discardEntireBuffer, bool performUpdateBounds, UINT32 queueIdx)
+	{
+		updateBounds(*data);
+		updateCPUBuffer(0, *data);
+
+		data->_lock();
+
+		std::function<void(const SPtr<MeshData>&, bool, AsyncOp&)> func =
+			[&](const SPtr<MeshData>& _meshData, bool _discardEntireBuffer, AsyncOp& asyncOp)
+		{
+			writeData(*_meshData, _discardEntireBuffer, false);
+			_meshData->_unlock();
+			asyncOp._completeOperation();
+
+		};
+
+		AsyncOp op;
+		func(data, discardEntireBuffer, op);
+
+		return op;
 	}
 
 	void Mesh::readData(MeshData& meshData, UINT32 deviceIdx, UINT32 queueIdx)
@@ -500,39 +299,145 @@ namespace bs
 		}
 	}
 
+	AsyncOp Mesh::readData(const SPtr<MeshData>& data, UINT32 deviceIdx, UINT32 queueIdx)
+	{
+		data->_lock();
+
+		std::function<void(const SPtr<MeshData>&, AsyncOp&)> func =
+			[&](const SPtr<MeshData>& _meshData, AsyncOp& asyncOp)
+		{
+			// Make sure any queued command start executing before reading
+			ct::RenderAPI::instance().submitCommandBuffer(nullptr);
+
+			readData(*_meshData);
+			_meshData->_unlock();
+			asyncOp._completeOperation();
+
+		};
+
+		AsyncOp op;
+
+		func(data, op);
+
+		return op;
+	}
+
+	SPtr<MeshData> Mesh::allocBuffer() const
+	{
+		SPtr<MeshData> meshData = bs_shared_ptr_new<MeshData>(mProperties.mNumVertices, mProperties.mNumIndices, mVertexDesc, mIndexType);
+
+		return meshData;
+	}
+
 	void Mesh::updateBounds(const MeshData& meshData)
 	{
 		mProperties.mBounds = meshData.calculateBounds();
-
-		// TODO - Sync this to sim-thread possibly?
+		markCoreDirty();
 	}
 
-	SPtr<Mesh> Mesh::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
-		int usage, DrawOperationType drawOp, IndexType indexType, GpuDeviceFlags deviceMask)
+	void Mesh::updateCPUBuffer(UINT32 subresourceIdx, const MeshData& pixelData)
 	{
-		MESH_DESC desc;
-		desc.numVertices = numVertices;
-		desc.numIndices = numIndices;
-		desc.vertexDesc = vertexDesc;
-		desc.subMeshes.push_back(SubMesh(0, numIndices, drawOp));
-		desc.usage = usage;
-		desc.indexType = indexType;
+		if ((mUsage & MU_CPUCACHED) == 0)
+			return;
 
-		SPtr<Mesh> mesh = bs_shared_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(nullptr, desc, deviceMask));
+		if (subresourceIdx > 0)
+		{
+			BS_LOG(Error, Mesh, "Invalid subresource index: {0}. Supported range: 0 .. 1.", subresourceIdx);
+			return;
+		}
+
+		if (pixelData.getNumIndices() != mProperties.getNumIndices() ||
+			pixelData.getNumVertices() != mProperties.getNumVertices() ||
+			pixelData.getIndexType() != mIndexType ||
+			pixelData.getVertexDesc()->getVertexStride() != mVertexDesc->getVertexStride())
+		{
+			BS_LOG(Error, Mesh, "Provided buffer is not of valid dimensions or format in order to update this mesh.");
+			return;
+		}
+
+		if (mCPUData->getSize() != pixelData.getSize())
+			BS_EXCEPT(InternalErrorException, "Buffer sizes don't match.");
+
+		UINT8* dest = mCPUData->getData();
+		UINT8* src = pixelData.getData();
+
+		memcpy(dest, src, pixelData.getSize());
+	}
+
+	void Mesh::createCPUBuffer()
+	{
+		mCPUData = allocBuffer();
+	}
+
+	HMesh Mesh::dummy()
+	{
+		return MeshManager::instance().getDummyMesh();
+	}
+
+
+	SPtr<ct::VertexData> Mesh::getVertexData() const
+	{
+		return mVertexData;
+	}
+
+	SPtr<IndexBuffer> Mesh::getIndexBuffer() const
+	{
+		return mIndexBuffer;
+	}
+
+	SPtr<VertexDataDesc> Mesh::getVertexDesc() const
+	{
+		return mVertexDesc;
+	}
+
+	/************************************************************************/
+	/* 								SERIALIZATION                      		*/
+	/************************************************************************/
+
+	RTTITypeBase* Mesh::getRTTIStatic()
+	{
+		return MeshRTTI::instance();
+	}
+
+	RTTITypeBase* Mesh::getRTTI() const
+	{
+		return Mesh::getRTTIStatic();
+	}
+
+	/************************************************************************/
+	/* 								STATICS		                     		*/
+	/************************************************************************/
+
+	SPtr<Mesh> Mesh::createEmpty()
+	{
+		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh());
 		mesh->_setThisPtr(mesh);
-		mesh->initialize();
 
 		return mesh;
 	}
+
+	HMesh Mesh::createHandle(const MESH_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Mesh> meshPtr = create(desc, deviceMask);
+		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
+	}
+
 
 	SPtr<Mesh> Mesh::create(const MESH_DESC& desc, GpuDeviceFlags deviceMask)
 	{
-		SPtr<Mesh> mesh = bs_shared_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(nullptr, desc, deviceMask));
+		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(nullptr, desc, deviceMask));
 
 		mesh->_setThisPtr(mesh);
 		mesh->initialize();
 
 		return mesh;
+	}
+
+
+	HMesh Mesh::createHandle(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Mesh> meshPtr = create(initialMeshData, desc, deviceMask);
+		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
 	}
 
 	SPtr<Mesh> Mesh::create(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc, GpuDeviceFlags deviceMask)
@@ -543,8 +448,8 @@ namespace bs
 		descCopy.vertexDesc = initialMeshData->getVertexDesc();
 		descCopy.indexType = initialMeshData->getIndexType();
 
-		SPtr<Mesh> mesh =
-			bs_shared_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, descCopy, deviceMask));
+		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, descCopy, deviceMask));
+		//SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, desc, deviceMask));
 
 		mesh->_setThisPtr(mesh);
 		mesh->initialize();
@@ -552,24 +457,59 @@ namespace bs
 		return mesh;
 	}
 
-	SPtr<Mesh> Mesh::create(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp,
-		GpuDeviceFlags deviceMask)
+	HMesh Mesh::createHandle(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp, GpuDeviceFlags deviceMask)
+	{
+		SPtr<Mesh> meshPtr = create(initialMeshData, usage, drawOp, deviceMask);
+		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
+	}
+
+	SPtr<Mesh> Mesh::create(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp, GpuDeviceFlags deviceMask)
 	{
 		MESH_DESC desc;
 		desc.numVertices = initialMeshData->getNumVertices();
 		desc.numIndices = initialMeshData->getNumIndices();
 		desc.vertexDesc = initialMeshData->getVertexDesc();
 		desc.indexType = initialMeshData->getIndexType();
-		desc.subMeshes.push_back(SubMesh(0, initialMeshData->getNumIndices(), drawOp));
 		desc.usage = usage;
+		desc.subMeshes.push_back(SubMesh(0, initialMeshData->getNumIndices(), drawOp));
 
-		SPtr<Mesh> mesh =
-			bs_shared_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, desc, deviceMask));
+		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(initialMeshData, desc, deviceMask));
 
 		mesh->_setThisPtr(mesh);
 		mesh->initialize();
 
 		return mesh;
 	}
+
+	HMesh Mesh::createHandle(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, int usage, DrawOperationType drawOp, IndexType indexType, GpuDeviceFlags deviceMask)
+	{
+		MESH_DESC desc;
+		desc.numVertices = numVertices;
+		desc.numIndices = numIndices;
+		desc.vertexDesc = vertexDesc;
+		desc.usage = usage;
+		desc.subMeshes.push_back(SubMesh(0, numIndices, drawOp));
+		desc.indexType = indexType;
+
+		SPtr<Mesh> meshPtr = create(nullptr, desc, deviceMask);
+		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
 	}
+
+	SPtr<Mesh> Mesh::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, int usage, DrawOperationType drawOp, IndexType indexType, GpuDeviceFlags deviceMask)
+	{
+		MESH_DESC desc;
+		desc.numVertices = numVertices;
+		desc.numIndices = numIndices;
+		desc.vertexDesc = vertexDesc;
+		desc.subMeshes.push_back(SubMesh(0, numIndices, drawOp));
+		desc.usage = usage;
+		desc.indexType = indexType;
+
+		SPtr<Mesh> mesh = bs_core_ptr<Mesh>(new (bs_alloc<Mesh>()) Mesh(nullptr, desc, deviceMask));
+		mesh->_setThisPtr(mesh);
+		mesh->initialize();
+
+		return mesh;
+	}
+
 }

@@ -87,7 +87,7 @@ namespace bs
 		return (UINT64)hash;
 	}
 
-	void SpriteMaterial::render(const SPtr<ct::MeshBase>& mesh, const SubMesh& subMesh, const SPtr<Texture>& texture,
+	void SpriteMaterial::render(const SPtr<MeshBase>& mesh, const SubMesh& subMesh, const SPtr<Texture>& texture,
 		const SPtr<ct::SamplerState>& sampler, const SPtr<ct::GpuParamBlockBuffer>& paramBuffer,
 		const SPtr<SpriteMaterialExtraInfo>& additionalData, bool alphaOnly) const
 	{

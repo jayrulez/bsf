@@ -152,11 +152,11 @@ namespace bs
 		/** Data about a mesh rendered by the draw manager. */
 		struct MeshRenderData
 		{
-			MeshRenderData(const SPtr<ct::Mesh>& mesh, const SubMesh& subMesh, DebugDrawMaterial type)
+			MeshRenderData(const SPtr<Mesh>& mesh, const SubMesh& subMesh, DebugDrawMaterial type)
 				:mesh(mesh), subMesh(subMesh), type(type)
 			{ }
 
-			SPtr<ct::Mesh> mesh;
+			SPtr<Mesh> mesh;
 			SubMesh subMesh;
 			DebugDrawMaterial type;
 		};

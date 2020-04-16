@@ -12,13 +12,15 @@ namespace bs
 	}
 
 	MeshProperties::MeshProperties(UINT32 numVertices, UINT32 numIndices, DrawOperationType drawOp)
-		:mNumVertices(numVertices), mNumIndices(numIndices)
+		:mNumVertices(numVertices),
+		mNumIndices(numIndices)
 	{
 		mSubMeshes.push_back(SubMesh(0, numIndices, drawOp));
 	}
 
 	MeshProperties::MeshProperties(UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes)
-		:mNumVertices(numVertices), mNumIndices(numIndices)
+		:mNumVertices(numVertices),
+		mNumIndices(numIndices)
 	{
 		mSubMeshes = subMeshes;
 	}
@@ -50,20 +52,6 @@ namespace bs
 	MeshBase::~MeshBase()
 	{ }
 
-	CoreSyncData MeshBase::syncToCore(FrameAlloc* allocator)
-	{
-		UINT32 size = sizeof(Bounds);
-		UINT8* buffer = allocator->alloc(size);
-
-		memcpy(buffer, &mProperties.mBounds, size);
-		return CoreSyncData(buffer, size);
-	}
-
-	SPtr<ct::MeshBase> MeshBase::getCore() const
-	{
-		return std::static_pointer_cast<ct::MeshBase>(mCoreSpecific);
-	}
-
 	/************************************************************************/
 	/* 								SERIALIZATION                      		*/
 	/************************************************************************/
@@ -76,17 +64,5 @@ namespace bs
 	RTTITypeBase* MeshBase::getRTTI() const
 	{
 		return MeshBase::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	MeshBase::MeshBase(UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes)
-		:mProperties(numVertices, numIndices, subMeshes)
-	{ }
-
-	void MeshBase::syncToCore(const CoreSyncData& data)
-	{
-		mProperties.mBounds = data.getData<Bounds>();
-	}
 	}
 }

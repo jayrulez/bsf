@@ -24,8 +24,35 @@ namespace bs
 	public:
 		virtual ~TransientMesh();
 
+		/** @copydoc MeshBase::getVertexData */
+		SPtr<ct::VertexData> getVertexData() const override;
+
+		/** @copydoc MeshBase::getIndexBuffer */
+		SPtr<IndexBuffer> getIndexBuffer() const override;
+
+		/** @copydoc MeshBase::getVertexDesc */
+		SPtr<VertexDataDesc> getVertexDesc() const override;
+
+		/**	Returns the ID that uniquely identifies this mesh in the parent heap. */
+		UINT32 getMeshHeapId() const
+		{
+			return mId;
+		}
+
+		/** @copydoc MeshBase::getVertexOffset */
+		UINT32 getVertexOffset() const override;
+
+		/** @copydoc MeshBase::getIndexOffset */
+		UINT32 getIndexOffset() const override;
+
+		/** @copydoc MeshBase::_notifyUsedOnGPU */
+		void _notifyUsedOnGPU() override;
+
 		/** Retrieves a core implementation of a mesh usable only from the core thread. */
-		SPtr<ct::TransientMesh> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 	protected:
 		friend class MeshHeap;
@@ -38,11 +65,17 @@ namespace bs
 		TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices,
 			UINT32 numIndices, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
+		TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices,
+			UINT32 numIndices, const Vector<SubMesh>& subMeshes);
+
 		/** Marks the mesh as destroyed so we know that we don't need to destroy it ourselves. */
 		void markAsDestroyed() { mIsDestroyed = true; }
 
 		/** @copydoc MeshBase::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 	protected:
 		bool mIsDestroyed;
@@ -52,51 +85,4 @@ namespace bs
 
 	/** @} */
 
-	namespace ct
-	{
-	/** @addtogroup Resources-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Core thread portion of a bs::TransientMesh.
-	 *
-	 * @note	Core thread.
-	 */
-	class BS_CORE_EXPORT TransientMesh : public MeshBase
-	{
-	public:
-		TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices,
-			UINT32 numIndices, const Vector<SubMesh>& subMeshes);
-
-		/** @copydoc MeshBase::getVertexData */
-		SPtr<VertexData> getVertexData() const override;
-
-		 /** @copydoc MeshBase::getIndexBuffer */
-		SPtr<IndexBuffer> getIndexBuffer() const override;
-
-		/** @copydoc MeshBase::getVertexDesc */
-		SPtr<VertexDataDesc> getVertexDesc() const override;
-
-		/**	Returns the ID that uniquely identifies this mesh in the parent heap. */
-		UINT32 getMeshHeapId() const { return mId; }
-
-		/** @copydoc MeshBase::getVertexOffset */
-		UINT32 getVertexOffset() const override;
-
-		 /** @copydoc MeshBase::getIndexOffset */
-		UINT32 getIndexOffset() const override;
-
-		 /** @copydoc MeshBase::_notifyUsedOnGPU */
-		void _notifyUsedOnGPU() override;
-
-	protected:
-		friend class bs::TransientMesh;
-
-		SPtr<MeshHeap> mParentHeap;
-		UINT32 mId;
-	};
-
-	/** @} */
-	}
 }

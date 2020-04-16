@@ -12,79 +12,17 @@
 
 namespace bs
 {
-	MeshHeap::MeshHeap(UINT32 numVertices, UINT32 numIndices,
-		const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType)
-		:mNumVertices(numVertices), mNumIndices(numIndices), mVertexDesc(vertexDesc), mIndexType(indexType), mNextFreeId(0)
-	{
-	}
-
-	SPtr<MeshHeap> MeshHeap::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
-		IndexType indexType)
-	{
-		MeshHeap* meshHeap = new (bs_alloc<MeshHeap>()) MeshHeap(numVertices, numIndices, vertexDesc, indexType);
-		SPtr<MeshHeap> meshHeapPtr = bs_core_ptr<MeshHeap>(meshHeap);
-
-		meshHeapPtr->_setThisPtr(meshHeapPtr);
-		meshHeapPtr->initialize();
-
-		return meshHeapPtr;
-	}
-
-	SPtr<TransientMesh> MeshHeap::alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp)
-	{
-		UINT32 meshIdx = mNextFreeId++;
-
-		SPtr<MeshHeap> thisPtr = std::static_pointer_cast<MeshHeap>(getThisPtr());
-		TransientMesh* transientMesh = new (bs_alloc<TransientMesh>()) TransientMesh(thisPtr, meshIdx,
-			meshData->getNumVertices(), meshData->getNumIndices(), drawOp);
-		SPtr<TransientMesh> transientMeshPtr = bs_core_ptr<TransientMesh>(transientMesh);
-
-		transientMeshPtr->_setThisPtr(transientMeshPtr);
-		transientMeshPtr->initialize();
-
-		mMeshes[meshIdx] = transientMeshPtr;
-
-		queueGpuCommand(getCore(), std::bind(&ct::MeshHeap::alloc, getCore().get(), transientMeshPtr->getCore(), meshData));
-
-		return transientMeshPtr;
-	}
-
-	void MeshHeap::dealloc(const SPtr<TransientMesh>& mesh)
-	{
-		auto iterFind = mMeshes.find(mesh->mId);
-		if(iterFind == mMeshes.end())
-			return;
-
-		mesh->markAsDestroyed();
-		mMeshes.erase(iterFind);
-
-		queueGpuCommand(getCore(), std::bind(&ct::MeshHeap::dealloc, getCore().get(), mesh->getCore()));
-	}
-
-	SPtr<ct::MeshHeap> MeshHeap::getCore() const
-	{
-		return std::static_pointer_cast<ct::MeshHeap>(mCoreSpecific);
-	}
-
-	SPtr<ct::CoreObject> MeshHeap::createCore() const
-	{
-		ct::MeshHeap* obj = new (bs_alloc<ct::MeshHeap>()) ct::MeshHeap(mNumVertices, mNumIndices,
-			mVertexDesc, mIndexType, GDF_DEFAULT);
-
-		SPtr<ct::MeshHeap> corePtr = bs_shared_ptr<ct::MeshHeap>(obj);
-		obj->_setThisPtr(corePtr);
-
-		return corePtr;
-	}
-
-	namespace ct
-	{
 	const float MeshHeap::GrowPercent = 1.5f;
 
-	MeshHeap::MeshHeap(UINT32 numVertices, UINT32 numIndices,
-		const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType, GpuDeviceFlags deviceMask)
-		: mNumVertices(numVertices), mNumIndices(numIndices), mCPUIndexData(nullptr), mVertexDesc(vertexDesc)
-		, mIndexType(indexType), mDeviceMask(deviceMask), mNextQueryId(0)
+	MeshHeap::MeshHeap(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType, GpuDeviceFlags deviceMask)
+		: mNumVertices(numVertices),
+		mNumIndices(numIndices),
+		mCPUIndexData(nullptr),
+		mVertexDesc(vertexDesc),
+		mIndexType(indexType),
+		mDeviceMask(deviceMask),
+		mNextFreeId(0),
+		mNextQueryId(0)
 	{
 		for (UINT32 i = 0; i <= mVertexDesc->getMaxStreamIdx(); i++)
 		{
@@ -105,12 +43,42 @@ namespace bs
 		mVertexDesc = nullptr;
 	}
 
+	SPtr<MeshHeap> MeshHeap::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType)
+	{
+		MeshHeap* meshHeap = new (bs_alloc<MeshHeap>()) MeshHeap(numVertices, numIndices, vertexDesc, indexType);
+		SPtr<MeshHeap> meshHeapPtr = bs_core_ptr<MeshHeap>(meshHeap);
+
+		meshHeapPtr->_setThisPtr(meshHeapPtr);
+		meshHeapPtr->initialize();
+
+		return meshHeapPtr;
+	}
+
 	void MeshHeap::initialize()
 	{
 		growVertexBuffer(mNumVertices);
 		growIndexBuffer(mNumIndices);
 
 		CoreObject::initialize();
+	}
+
+
+	SPtr<TransientMesh> MeshHeap::alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp)
+	{
+		UINT32 meshIdx = mNextFreeId++;
+
+		SPtr<MeshHeap> thisPtr = std::static_pointer_cast<MeshHeap>(getThisPtr());
+		TransientMesh* transientMesh = new (bs_alloc<TransientMesh>()) TransientMesh(thisPtr, meshIdx, meshData->getNumVertices(), meshData->getNumIndices(), drawOp);
+		SPtr<TransientMesh> transientMeshPtr = bs_core_ptr<TransientMesh>(transientMesh);
+
+		transientMeshPtr->_setThisPtr(transientMeshPtr);
+		transientMeshPtr->initialize();
+
+		mMeshes[meshIdx] = transientMeshPtr;
+
+		alloc(transientMeshPtr, meshData);
+
+		return transientMeshPtr;
 	}
 
 	void MeshHeap::alloc(SPtr<TransientMesh> mesh, const SPtr<MeshData>& meshData)
@@ -309,8 +277,15 @@ namespace bs
 		mIndexBuffer->writeData(idxChunkStart * idxSize, meshData->getNumIndices() * idxSize, idxDest, BTW_NO_OVERWRITE);
 	}
 
-	void MeshHeap::dealloc(SPtr<TransientMesh> mesh)
+	void MeshHeap::dealloc(const SPtr<TransientMesh>& mesh)
 	{
+		auto iterFind = mMeshes.find(mesh->mId);
+		if (iterFind == mMeshes.end())
+			return;
+
+		mesh->markAsDestroyed();
+		mMeshes.erase(iterFind);
+
 		auto findIter = mMeshAllocData.find(mesh->getMeshHeapId());
 		assert(findIter != mMeshAllocData.end());
 
@@ -334,10 +309,10 @@ namespace bs
 	void MeshHeap::growVertexBuffer(UINT32 numVertices)
 	{
 		mNumVertices = numVertices;
-		mVertexData = SPtr<VertexData>(bs_new<VertexData>());
+		mVertexData = SPtr<ct::VertexData>(bs_new<ct::VertexData>());
 
 		mVertexData->vertexCount = mNumVertices;
-		mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
+		//mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
 
 		// Create buffers and copy data
 		for (UINT32 i = 0; i <= mVertexDesc->getMaxStreamIdx(); i++)
@@ -506,7 +481,7 @@ namespace bs
 		else
 		{
 			QueryData newQuery;
-			newQuery.query = EventQuery::create();
+			newQuery.query = ct::EventQuery::create();
 			newQuery.queryId = 0;
 
 			mEventQueries.push_back(newQuery);
@@ -523,7 +498,7 @@ namespace bs
 		mFreeEventQueries.push(idx);
 	}
 
-	SPtr<VertexData> MeshHeap::getVertexData() const
+	SPtr<ct::VertexData> MeshHeap::getVertexData() const
 	{
 		return mVertexData;
 	}
@@ -683,6 +658,5 @@ namespace bs
 				mEmptyIdxChunks.push(freeChunkIdx);
 			}
 		}
-	}
 	}
 }

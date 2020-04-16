@@ -24,7 +24,7 @@ namespace bs
 	bool isMeshValid(const HMesh& mesh) { return mesh.isLoaded(); }
 
 	template<>
-	bool isMeshValid(const SPtr<ct::Mesh>& mesh) { return mesh != nullptr; }
+	bool isMeshValid(const SPtr<Mesh>& mesh) { return mesh != nullptr; }
 
 	template<bool Core>
 	TRenderable<Core>::TRenderable()
@@ -343,7 +343,7 @@ namespace bs
 				rtti_size(animationId).bytes +
 				rtti_size(mAnimType).bytes +
 				rtti_size(mCullDistanceFactor).bytes +
-				sizeof(SPtr<ct::Mesh>) +
+				sizeof(SPtr<Mesh>) +
 				numMaterials * sizeof(SPtr<ct::Material>);
 		}
 
@@ -365,11 +365,11 @@ namespace bs
 			rtti_write(mAnimType, stream);
 			rtti_write(mCullDistanceFactor, stream);
 
-			SPtr<ct::Mesh>* mesh = new (stream.cursor()) SPtr<ct::Mesh>();
+			SPtr<Mesh>* mesh = new (stream.cursor()) SPtr<Mesh>();
 			if (mMesh.isLoaded())
-				*mesh = mMesh->getCore();
+				*mesh = mMesh.getInternalPtr();
 
-			stream.skipBytes(sizeof(SPtr<ct::Mesh>));
+			stream.skipBytes(sizeof(SPtr<Mesh>));
 
 			for (UINT32 i = 0; i < numMaterials; i++)
 			{

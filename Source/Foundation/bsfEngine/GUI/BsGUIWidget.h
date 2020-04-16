@@ -68,8 +68,8 @@ namespace bs
 	{
 		Vector<GUIDrawGroupRenderData> newDrawGroups;
 		Vector<bool> groupDirtyState;
-		SPtr<ct::Mesh> triangleMesh;
-		SPtr<ct::Mesh> lineMesh;
+		SPtr<Mesh> triangleMesh;
+		SPtr<Mesh> lineMesh;
 	};
 
 	/**

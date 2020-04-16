@@ -75,9 +75,7 @@ namespace bs
 
 	private:
 		friend class Mesh;
-		friend class ct::Mesh;
 		friend class MeshHeap;
-		friend class ct::MeshHeap;
 
 		/**	Returns the largest stream index of all the stored vertex elements. */
 		UINT32 getMaxStreamIdx() const;

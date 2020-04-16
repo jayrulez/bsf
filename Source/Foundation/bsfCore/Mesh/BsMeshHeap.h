@@ -27,70 +27,6 @@ namespace bs
 	 */
 	class BS_CORE_EXPORT MeshHeap : public CoreObject
 	{
-	public:
-		/**
-		 * Allocates a new mesh in the heap, expanding the heap if needed. Mesh will be initialized with the provided
-		 * @p meshData. You may use the returned transient mesh for drawing.
-		 *
-		 * @note	
-		 * Offsets provided by MeshData are ignored. MeshHeap will determine where the data will be written internally.
-		 */
-		SPtr<TransientMesh> alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
-
-		/**
-		 * Deallocates the provided mesh and makes that room on the heap re-usable as soon as the GPU is also done with the
-		 * mesh.
-		 */
-		void dealloc(const SPtr<TransientMesh>& mesh);
-
-		/** Retrieves a core implementation of a mesh heap usable only from the core thread. */
-		SPtr<ct::MeshHeap> getCore() const;
-
-		/**
-		 * Creates a new mesh heap.
-		 *
-		 * @param[in]	numVertices	Initial number of vertices the heap may store. This will grow automatically if needed.
-		 * @param[in]	numIndices	Initial number of indices the heap may store. This will grow automatically if needed.
-		 * @param[in]	vertexDesc	Description of the stored vertices.
-		 * @param[in]	indexType	Type of the stored indices.
-		 */
-		static SPtr<MeshHeap> create(UINT32 numVertices, UINT32 numIndices,
-			const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType = IT_32BIT);
-
-	private:
-		/** @copydoc create */
-		MeshHeap(UINT32 numVertices, UINT32 numIndices,
-			const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType = IT_32BIT);
-
-		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-	private:
-		UINT32 mNumVertices;
-		UINT32 mNumIndices;
-
-		SPtr<VertexDataDesc> mVertexDesc;
-		IndexType mIndexType;
-
-		Map<UINT32, SPtr<TransientMesh>> mMeshes;
-		UINT32 mNextFreeId;
-	};
-
-	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup Resources-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Core thread version of bs::MeshHeap.
-	 *
-	 * @note	Core thread only.
-	 */
-	class BS_CORE_EXPORT MeshHeap : public CoreObject
-	{
 		/**	Signifies how is a data chunk used. */
 		enum class UseFlags
 		{
@@ -120,23 +56,56 @@ namespace bs
 		/**	Data about a GPU query. */
 		struct QueryData
 		{
-			SPtr<EventQuery> query;
+			SPtr<ct::EventQuery> query;
 			UINT32 queryId;
 		};
 
 	public:
 		~MeshHeap();
 
-	private:
-		friend class bs::MeshHeap;
-		friend class bs::TransientMesh;
-		friend class TransientMesh;
+		/**
+		 * Allocates a new mesh in the heap, expanding the heap if needed. Mesh will be initialized with the provided
+		 * @p meshData. You may use the returned transient mesh for drawing.
+		 *
+		 * @note	
+		 * Offsets provided by MeshData are ignored. MeshHeap will determine where the data will be written internally.
+		 */
+		SPtr<TransientMesh> alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
-		MeshHeap(UINT32 numVertices, UINT32 numIndices,
-			const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType, GpuDeviceFlags deviceMask);
+		/**
+		 * Deallocates the provided mesh and makes that room on the heap re-usable as soon as the GPU is also done with the
+		 * mesh.
+		 */
+		void dealloc(const SPtr<TransientMesh>& mesh);
+
+		/** Retrieves a core implementation of a mesh heap usable only from the core thread. */
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
+
 
 		/** @copydoc CoreObject::initialize() */
 		void initialize() override;
+
+		/**
+		 * Creates a new mesh heap.
+		 *
+		 * @param[in]	numVertices	Initial number of vertices the heap may store. This will grow automatically if needed.
+		 * @param[in]	numIndices	Initial number of indices the heap may store. This will grow automatically if needed.
+		 * @param[in]	vertexDesc	Description of the stored vertices.
+		 * @param[in]	indexType	Type of the stored indices.
+		 */
+		static SPtr<MeshHeap> create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType = IT_32BIT);
+
+	private:
+		/** @copydoc CoreObject::createCore */
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
+
+		MeshHeap(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc, IndexType indexType = IT_32BIT, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * Allocates a new mesh in the heap, expanding the heap if needed.
@@ -145,9 +114,6 @@ namespace bs
 		 * @param[in]	meshData	Data to initialize the new mesh with.
 		 */
 		void alloc(SPtr<TransientMesh> mesh, const SPtr<MeshData>& meshData);
-
-		/** Deallocates the provided mesh. Freed memory will be re-used as soon as the GPU is done with the mesh. */
-		void dealloc(SPtr<TransientMesh> mesh);
 
 		/** Resizes the vertex buffers so they max contain the provided number of vertices. */
 		void growVertexBuffer(UINT32 numVertices);
@@ -165,7 +131,7 @@ namespace bs
 		void freeEventQuery(UINT32 idx);
 
 		/**	Gets internal vertex data for all the meshes. */
-		SPtr<VertexData> getVertexData() const;
+		SPtr<ct::VertexData> getVertexData() const;
 
 		/**	Gets internal index data for all the meshes. */
 		SPtr<IndexBuffer> getIndexBuffer() const;
@@ -195,7 +161,7 @@ namespace bs
 		/**
 		 * Attempts to reorganize the vertex and index buffer chunks in order to in order to make free memory contigous.
 		 *
-		 * @note	
+		 * @note
 		 * This will not actually copy any data from index/vertex buffers, and will only modify the chunk descriptors.
 		 */
 		void mergeWithNearbyChunks(UINT32 chunkVertIdx, UINT32 chunkIdxIdx);
@@ -207,7 +173,7 @@ namespace bs
 		Vector<UINT8*> mCPUVertexData;
 		UINT8* mCPUIndexData;
 
-		SPtr<VertexData> mVertexData;
+		SPtr<ct::VertexData> mVertexData;
 		SPtr<IndexBuffer> mIndexBuffer;
 
 		Map<UINT32, AllocatedData> mMeshAllocData;
@@ -231,8 +197,12 @@ namespace bs
 		UINT32 mNextQueryId;
 
 		static const float GrowPercent;
+	private:
+		friend class TransientMesh;
+
+		Map<UINT32, SPtr<TransientMesh>> mMeshes;
+		UINT32 mNextFreeId;
 	};
 
 	/** @} */
-	}
 }

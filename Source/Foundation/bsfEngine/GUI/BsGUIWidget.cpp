@@ -385,8 +385,8 @@ namespace bs
 
 		// Return data required for updating the renderer
 		GUIDrawGroupRenderDataUpdate output;
-		output.triangleMesh = mTriangleMesh ? mTriangleMesh->getCore() : nullptr;
-		output.lineMesh = mLineMesh ? mLineMesh->getCore() : nullptr;
+		output.triangleMesh = mTriangleMesh ? mTriangleMesh : nullptr;
+		output.lineMesh = mLineMesh ? mLineMesh : nullptr;
 
 		output.groupDirtyState.reserve(mDrawGroups.size());
 		for (auto& entry : mDrawGroups)
@@ -734,10 +734,10 @@ namespace bs
 			}
 
 			if (meshData[0])
-				mTriangleMesh = Mesh::_createPtr(meshData[0], MU_STATIC, DOT_TRIANGLE_LIST);
+				mTriangleMesh = Mesh::create(meshData[0], MU_STATIC, DOT_TRIANGLE_LIST);
 
 			if (meshData[1])
-				mLineMesh = Mesh::_createPtr(meshData[1], MU_STATIC, DOT_LINE_LIST);
+				mLineMesh = Mesh::create(meshData[1], MU_STATIC, DOT_LINE_LIST);
 		}
 
 		bs_frame_clear();

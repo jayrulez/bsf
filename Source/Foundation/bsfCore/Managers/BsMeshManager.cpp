@@ -23,6 +23,6 @@ namespace bs
 		indices[1] = 0;
 		indices[2] = 0;
 
-		mDummyMesh = Mesh::create(mDummyMeshData);
+		mDummyMesh = Mesh::createHandle(mDummyMeshData);
 	}
 }

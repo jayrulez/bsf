@@ -288,7 +288,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem)
 	CORE_OBJECT_NEW_FORWARD_DECLARE(Texture)
 	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture)
-	CORE_OBJECT_FORWARD_DECLARE(Mesh)
+	CORE_OBJECT_NEW_FORWARD_DECLARE(Mesh)
 	CORE_OBJECT_FORWARD_DECLARE(VectorField)
 	CORE_OBJECT_FORWARD_DECLARE(Skybox)
 	CORE_OBJECT_FORWARD_DECLARE(Decal)
@@ -477,9 +477,6 @@ namespace bs
 		class VertexData;
 		class RenderAPI;
 		class CoreObject;
-		class MeshBase;
-		class TransientMesh;
-		class MeshHeap;
 		class GpuPipelineParamInfo;
 		class CommandBuffer;
 		class EventQuery;
