@@ -683,15 +683,15 @@ namespace bs
 
 	void Camera::notifyUpdated(UINT32 dirtyFlag)
 	{
-		UINT32 size = rtti_size(dirtyFlag).bytes;
+		//UINT32 size = rtti_size(dirtyFlag).bytes;
 
-		if ((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
-		{
-			size += csync_size((SceneActor&)*this);
+		//if ((dirtyFlag & ~(INT32)CameraDirtyFlag::Redraw) != 0)
+		//{
+		//	size += csync_size((SceneActor&)*this);
 
-			if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
-				size += csync_size(*this);
-		}
+		//	if (dirtyFlag != (UINT32)ActorDirtyFlag::Transform)
+		//		size += csync_size(*this);
+		//}
 
 		RendererManager::instance().getActive()->notifyCameraUpdated(this, dirtyFlag);
 	}
