@@ -121,11 +121,11 @@ namespace bs
 		GpuProgramManager::shutDown();
 
 		CoreObjectManager::shutDown(); // Must shut down before DynLibManager to ensure all objects are destroyed before unloading their libraries
+		CoreObjectFrameManager::shutDown();
 		DynLibManager::shutDown();
 		Time::shutDown();
 		DeferredCallManager::shutDown();
 
-		CoreObjectFrameManager::shutDown();
 		RenderStats::shutDown();
 		TaskScheduler::shutDown();
 		ThreadPool::shutDown();
@@ -325,7 +325,7 @@ namespace bs
 
 		beginCoreProfiling();
 		Platform::_coreUpdate();
-		//RenderWindowManager::instancePtr()->_update();
+		RenderWindowManager::instancePtr()->_update();
 
 		//gCoreThread().update();
 		//gCoreThread().submitAll();

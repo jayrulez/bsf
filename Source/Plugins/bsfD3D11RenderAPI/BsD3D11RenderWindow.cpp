@@ -20,7 +20,11 @@
 namespace bs
 {
 	D3D11RenderWindow::D3D11RenderWindow(const RENDER_WINDOW_DESC& desc, UINT32 windowId, ct::D3D11Device& device, IDXGIFactory1* DXGIFactory)
-		: RenderWindow(desc, windowId), mProperties(desc), mDevice(device), mDXGIFactory(DXGIFactory)
+		:
+		RenderWindow(desc, windowId),
+		mProperties(desc),
+		mDevice(device),
+		mDXGIFactory(DXGIFactory)
 	{
 	}
 

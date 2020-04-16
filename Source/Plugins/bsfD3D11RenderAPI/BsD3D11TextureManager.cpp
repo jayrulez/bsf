@@ -27,7 +27,8 @@ namespace bs
 
 	SPtr<Texture> D3D11TextureManager::createTextureInternal(const TEXTURE_DESC& desc, const SPtr<PixelData>& initialData, GpuDeviceFlags deviceMask)
 	{
-		SPtr<ct::D3D11Texture> texPtr = bs_core_ptr_new<ct::D3D11Texture>(desc, initialData, deviceMask);
+		ct::D3D11Texture* tex = new (bs_alloc<ct::D3D11Texture>()) ct::D3D11Texture(desc, initialData, deviceMask);
+		SPtr<ct::D3D11Texture> texPtr = bs_core_ptr<ct::D3D11Texture>(tex);
 		texPtr->_setThisPtr(texPtr);
 
 		return texPtr;
@@ -35,6 +36,7 @@ namespace bs
 
 	SPtr<RenderTexture> D3D11RenderTextureManager::createRenderTextureInternal(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 	{
+
 		SPtr<D3D11RenderTexture> texPtr = bs_core_ptr_new<D3D11RenderTexture>(desc, deviceIdx);
 		texPtr->_setThisPtr(texPtr);
 

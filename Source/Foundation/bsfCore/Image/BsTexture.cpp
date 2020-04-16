@@ -145,9 +145,9 @@ namespace bs
 			mInitData = nullptr;
 		}
 
-		//CoreObject::initialize();
-
 		Resource::initialize();
+
+		CoreObject::initialize();
 	}
 
 	AsyncOp Texture::writeData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel, bool discardEntireBuffer)
@@ -331,8 +331,7 @@ namespace bs
 	}
 
 
-	void Texture::writeData(const PixelData& src, UINT32 mipLevel, UINT32 face, bool discardEntireBuffer,
-		UINT32 queueIdx)
+	void Texture::writeData(const PixelData& src, UINT32 mipLevel, UINT32 face, bool discardEntireBuffer, UINT32 queueIdx)
 	{
 		if (discardEntireBuffer)
 		{

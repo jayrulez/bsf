@@ -76,6 +76,11 @@ namespace bs
 	RenderTexture::RenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx)
 		:mDesc(desc)
 	{
+	}
+
+
+	void RenderTexture::initialize()
+	{
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
 			if (mDesc.colorSurfaces[i].texture != nullptr)
@@ -102,12 +107,6 @@ namespace bs
 		}
 
 		throwIfBuffersDontMatch();
-	}
-
-
-	void RenderTexture::initialize()
-	{
-		RenderTarget::initialize();
 	}
 
 	const RenderTextureProperties& RenderTexture::getProperties() const
