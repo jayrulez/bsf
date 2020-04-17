@@ -43,7 +43,7 @@ namespace bs
 
 	void RenderAPI::setVertexDeclaration(const SPtr<VertexDeclaration>& vertexDeclaration)
 	{
-		ct::RenderAPI::instancePtr()->setVertexDeclaration(vertexDeclaration->getCore(), nullptr);
+		ct::RenderAPI::instancePtr()->setVertexDeclaration(vertexDeclaration, nullptr);
 	}
 
 	void RenderAPI::setViewport(const Rect2& vp)

@@ -15,7 +15,8 @@ namespace bs
 {
 	MESH_DESC MESH_DESC::DEFAULT = MESH_DESC();
 	Mesh::Mesh()
-		:MeshBase(0, 0, DOT_TRIANGLE_LIST)
+		:MeshBase(0, 0, DOT_TRIANGLE_LIST),
+		mDeviceMask(GDF_DEFAULT)
 	{
 	}
 
@@ -81,7 +82,7 @@ namespace bs
 
 		mVertexData = bs_shared_ptr_new<ct::VertexData>();
 		mVertexData->vertexCount = mProperties.mNumVertices;
-		//mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
+		mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
 
 		for (UINT32 i = 0; i <= mVertexDesc->getMaxStreamIdx(); i++)
 		{

@@ -250,88 +250,23 @@ namespace bs
 		return size;
 	}
 
-	VertexDeclaration::VertexDeclaration(const Vector<VertexElement>& elements)
-		:mProperties(elements)
-	{
-
-	}
-
-	SPtr<ct::VertexDeclaration> VertexDeclaration::getCore() const
-	{
-		return std::static_pointer_cast<ct::VertexDeclaration>(mCoreSpecific);
-	}
-
-	SPtr<ct::CoreObject> VertexDeclaration::createCore() const
-	{
-		return ct::HardwareBufferManager::instance().createVertexDeclarationInternal(mProperties.mElementList);
-	}
-
-	SPtr<VertexDeclaration> VertexDeclaration::create(const SPtr<VertexDataDesc>& desc)
-	{
-		return HardwareBufferManager::instance().createVertexDeclaration(desc);
-	}
-
-	/************************************************************************/
-	/* 								SERIALIZATION                      		*/
-	/************************************************************************/
-	RTTITypeBase* VertexDeclaration::getRTTIStatic()
-	{
-		return VertexDeclarationRTTI::instance();
-	}
-
-	RTTITypeBase* VertexDeclaration::getRTTI() const
-	{
-		return getRTTIStatic();
-	}
-
-	String toString(const VertexElementSemantic& val)
-	{
-		switch (val)
-		{
-		case VES_POSITION:
-			return "POSITION";
-		case VES_BLEND_WEIGHTS:
-			return "BLEND_WEIGHTS";
-		case VES_BLEND_INDICES:
-			return "BLEND_INDICES";
-		case VES_NORMAL:
-			return "NORMAL";
-		case VES_COLOR:
-			return "COLOR";
-		case VES_TEXCOORD:
-			return "TEXCOORD";
-		case VES_BITANGENT:
-			return "BITANGENT";
-		case VES_TANGENT:
-			return "TANGENT";
-		case VES_POSITIONT:
-			return "POSITIONT";
-		case VES_PSIZE:
-			return "PSIZE";
-		}
-
-		return "";
-	}
-
-	namespace ct
-	{
-	UINT32 VertexDeclaration::NextFreeId = 0;
-
 	VertexDeclaration::VertexDeclaration(const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask)
-		:mProperties(elements)
+		: mProperties(elements)
 	{
-		
+
 	}
+
+	UINT32 VertexDeclaration::NextFreeId = 0;
 
 	void VertexDeclaration::initialize()
 	{
 		mId = NextFreeId++;
-		CoreObject::initialize();
+		//CoreObject::initialize();
 	}
 
 	SPtr<VertexDeclaration> VertexDeclaration::create(const SPtr<VertexDataDesc>& desc, GpuDeviceFlags deviceMask)
 	{
-		return HardwareBufferManager::instance().createVertexDeclaration(desc, deviceMask);
+		return ct::HardwareBufferManager::instance().createVertexDeclaration(desc, deviceMask);
 	}
 
 	bool VertexDeclaration::isCompatible(const SPtr<VertexDeclaration>& shaderDecl)
@@ -383,5 +318,46 @@ namespace bs
 
 		return missingElements;
 	}
+
+	/************************************************************************/
+	/* 								SERIALIZATION                      		*/
+	/************************************************************************/
+	RTTITypeBase* VertexDeclaration::getRTTIStatic()
+	{
+		return VertexDeclarationRTTI::instance();
+	}
+
+	RTTITypeBase* VertexDeclaration::getRTTI() const
+	{
+		return getRTTIStatic();
+	}
+
+	String toString(const VertexElementSemantic& val)
+	{
+		switch (val)
+		{
+		case VES_POSITION:
+			return "POSITION";
+		case VES_BLEND_WEIGHTS:
+			return "BLEND_WEIGHTS";
+		case VES_BLEND_INDICES:
+			return "BLEND_INDICES";
+		case VES_NORMAL:
+			return "NORMAL";
+		case VES_COLOR:
+			return "COLOR";
+		case VES_TEXCOORD:
+			return "TEXCOORD";
+		case VES_BITANGENT:
+			return "BITANGENT";
+		case VES_TANGENT:
+			return "TANGENT";
+		case VES_POSITIONT:
+			return "POSITIONT";
+		case VES_PSIZE:
+			return "PSIZE";
+		}
+
+		return "";
 	}
 }

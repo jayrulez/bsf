@@ -312,7 +312,7 @@ namespace bs
 		mVertexData = SPtr<ct::VertexData>(bs_new<ct::VertexData>());
 
 		mVertexData->vertexCount = mNumVertices;
-		//mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
+		mVertexData->vertexDeclaration = VertexDeclaration::create(mVertexDesc, mDeviceMask);
 
 		// Create buffers and copy data
 		for (UINT32 i = 0; i <= mVertexDesc->getMaxStreamIdx(); i++)

@@ -167,25 +167,57 @@ namespace bs
 	public:
 		virtual ~VertexDeclaration() { }
 
-		/** Returns properties describing the vertex declaration. */
-		const VertexDeclarationProperties& getProperties() const { return mProperties; }
+		/** @copydoc CoreObject::initialize */
+		void initialize() override;
+
+		/**	Returns properties describing the vertex declaration. */
+		const VertexDeclarationProperties& getProperties() const
+		{
+			return mProperties;
+		}
+
+		/**	Returns an ID unique to this declaration. */
+		UINT32 getId() const
+		{
+			return mId;
+		}
+
+		/**
+		 * Checks can a vertex buffer declared with this declaration be bound to a shader defined with the provided
+		 * declaration.
+		 */
+		bool isCompatible(const SPtr<VertexDeclaration>& shaderDecl);
+
+		/**
+		 * Returns a list of vertex elements that the provided shader's vertex declaration expects but aren't present in
+		 * this vertex declaration.
+		 */
+		Vector<VertexElement> getMissingElements(const SPtr<VertexDeclaration>& shaderDecl);
 
 		/**	Retrieves a core implementation of a vertex declaration usable only from the core thread. */
-		SPtr<ct::VertexDeclaration> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/** @copydoc HardwareBufferManager::createVertexDeclaration */
-		static SPtr<VertexDeclaration> create(const SPtr<VertexDataDesc>& desc);
+		static SPtr<VertexDeclaration> create(const SPtr<VertexDataDesc>& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 	protected:
-		friend class HardwareBufferManager;
+		friend class ct::HardwareBufferManager;
 
-		VertexDeclaration(const Vector<VertexElement>& elements);
+		VertexDeclaration(const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+
+		VertexDeclarationProperties mProperties;
+		UINT32 mId;
+
+		static UINT32 NextFreeId;
 
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-	protected:
-		VertexDeclarationProperties mProperties;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/************************************************************************/
 		/* 								SERIALIZATION                      		*/
@@ -200,58 +232,4 @@ namespace bs
 	BS_CORE_EXPORT String toString(const VertexElementSemantic& val);
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup RenderAPI-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Core thread portion of a bs::VertexDeclaration.
-	 *
-	 * @note	Core thread.
-	 */
-	class BS_CORE_EXPORT VertexDeclaration : public CoreObject
-	{
-	public:
-		virtual ~VertexDeclaration() = default;
-
-		/** @copydoc CoreObject::initialize */
-		void initialize() override;
-
-		/**	Returns properties describing the vertex declaration. */
-		const VertexDeclarationProperties& getProperties() const { return mProperties; }
-
-		/**	Returns an ID unique to this declaration. */
-		UINT32 getId() const { return mId; }
-
-		/**
-		 * Checks can a vertex buffer declared with this declaration be bound to a shader defined with the provided
-		 * declaration.
-		 */
-		bool isCompatible(const SPtr<VertexDeclaration>& shaderDecl);
-
-		/**
-		 * Returns a list of vertex elements that the provided shader's vertex declaration expects but aren't present in
-		 * this vertex declaration.
-		 */
-		Vector<VertexElement> getMissingElements(const SPtr<VertexDeclaration>& shaderDecl);
-
-		/** @copydoc HardwareBufferManager::createVertexDeclaration */
-		static SPtr<VertexDeclaration> create(const SPtr<VertexDataDesc>& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
-
-	protected:
-		friend class HardwareBufferManager;
-
-		VertexDeclaration(const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask);
-
-		VertexDeclarationProperties mProperties;
-		UINT32 mId;
-
-		static UINT32 NextFreeId;
-	};
-
-	/** @} */
-	}
 }

@@ -63,12 +63,6 @@ namespace bs
 		 */
 		SPtr<GpuBuffer> createGpuBuffer(const GPU_BUFFER_DESC& desc);
 
-		/**
-		 * Creates a new vertex declaration from a list of vertex elements.
-		 *
-		 * @param[in]	desc	Description of the object to create.
-		 */
-		SPtr<VertexDeclaration> createVertexDeclaration(const SPtr<VertexDataDesc>& desc);
 
 		/** @copydoc GpuParams::create(const SPtr<GpuPipelineParamInfo>&) */
 		SPtr<GpuParams> createGpuParams(const SPtr<GpuPipelineParamInfo>& paramInfo);
@@ -100,8 +94,7 @@ namespace bs
 		 * @copydoc bs::HardwareBufferManager::createVertexDeclaration
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		SPtr<VertexDeclaration> createVertexDeclaration(const SPtr<VertexDataDesc>& desc,
-			GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		SPtr<VertexDeclaration> createVertexDeclaration(const SPtr<VertexDataDesc>& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * Creates a new vertex declaration from a list of vertex elements.
@@ -109,8 +102,7 @@ namespace bs
 		 * @param[in]	elements		List of elements to initialize the declaration with.
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		SPtr<VertexDeclaration> createVertexDeclaration(const Vector<VertexElement>& elements,
-			GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		SPtr<VertexDeclaration> createVertexDeclaration(const Vector<VertexElement>& elements, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * @copydoc bs::HardwareBufferManager::createGpuParamBlockBuffer
