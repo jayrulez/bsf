@@ -35,7 +35,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TRenderable : public SceneActor
 	{
-		using MeshType = CoreVariantHandleType<Mesh, Core>;
+		using MeshType = CoreVariantHandleType<Mesh, false>;
 		using MaterialType = CoreVariantHandleType<Material, Core>;
 
 	public:
@@ -165,8 +165,72 @@ namespace bs
 	class BS_CORE_EXPORT Renderable : public IReflectable, public CoreObject, public TRenderable<false>, public IResourceListener
 	{
 	public:
+		~Renderable();
+
+		/**	Sets an ID that can be used for uniquely identifying this object by the renderer. */
+		void setRendererId(UINT32 id)
+		{
+			mRendererId = id;
+		}
+
+		/**	Retrieves an ID that can be used for uniquely identifying this object by the renderer. */
+		UINT32 getRendererId() const
+		{
+			return mRendererId;
+		}
+
 		/**	Gets world bounds of the mesh rendered by this object. */
 		Bounds getBounds() const;
+
+
+		/** Returns the type of animation influencing this renderable, if any. */
+		RenderableAnimType getAnimType() const
+		{
+			return mAnimType;
+		}
+
+		/** Returns the identifier of the animation, if this object is animated using skeleton or blend shape animation. */
+		UINT64 getAnimationId() const
+		{
+			return mAnimationId;
+		}
+
+
+		/**
+		 * Updates internal animation buffers from the contents of the provided animation data object. Does nothing if
+		 * renderable is not affected by animation.
+		 */
+		void updateAnimationBuffers(const EvaluatedAnimationData& animData);
+
+		/**
+		 * Records information about previous frame's animation buffer data. Should be called once per frame, before the
+		 * call to updateAnimationBuffers().
+		 */
+		void updatePrevFrameAnimationBuffers();
+
+		/** Returns the GPU buffer containing element's bone matrices, if it has any. */
+		const SPtr<GpuBuffer>& getBoneMatrixBuffer() const
+		{
+			return mBoneMatrixBuffer;
+		}
+
+		/** Returns the GPU buffer containing element's bone matrices for the previous frame, if it has any. */
+		const SPtr<GpuBuffer>& getBonePrevMatrixBuffer() const
+		{
+			return mBonePrevMatrixBuffer;
+		}
+
+		/** Returns the vertex buffer containing element's morph shape vertices, if it has any. */
+		const SPtr<VertexBuffer>& getMorphShapeBuffer() const
+		{
+			return mMorphShapeBuffer;
+		}
+
+		/** Returns vertex declaration used for rendering meshes containing morph shape information. */
+		const SPtr<VertexDeclaration>& getMorphVertexDeclaration() const
+		{
+			return mMorphVertexDeclaration;
+		}
 
 		/** Determines the animation that will be used for animating the attached mesh. */
 		void setAnimation(const SPtr<Animation>& animation);
@@ -178,7 +242,10 @@ namespace bs
 		bool isAnimated() const { return mAnimation != nullptr; }
 
 		/**	Retrieves an implementation of a renderable handler usable only from the core thread. */
-		SPtr<ct::Renderable> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/**	Creates a new renderable handler instance. */
 		static SPtr<Renderable> create();
@@ -196,8 +263,26 @@ namespace bs
 
 		/** @} */
 	protected:
+		Renderable();
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
+
+		void notifyUpdated(UINT32 dirtyFlags);
+
+		/** Creates any buffers required for renderable animation. Should be called whenever animation properties change. */
+		void createAnimationBuffers();
+
+		UINT32 mRendererId;
+		UINT64 mAnimationId;
+		UINT32 mMorphShapeVersion;
+
+		SPtr<GpuBuffer> mBoneMatrixBuffer;
+		SPtr<GpuBuffer> mBonePrevMatrixBuffer;
+		SPtr<VertexBuffer> mMorphShapeBuffer;
+		SPtr<VertexDeclaration> mMorphVertexDeclaration;
 
 		/** @copydoc TRenderable::onMeshChanged */
 		void onMeshChanged() override;
@@ -213,9 +298,6 @@ namespace bs
 
 		/** @copydoc CoreObject::markDependenciesDirty */
 		void _markDependenciesDirty() override;
-
-		/** @copydoc CoreObject::syncToCore */
-		CoreSyncData syncToCore(FrameAlloc* allocator) override;
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
@@ -245,78 +327,6 @@ namespace bs
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
-
-	namespace ct
-	{
-	/** @copydoc TRenderable */
-	class BS_CORE_EXPORT Renderable : public CoreObject, public TRenderable<true>
-	{
-	public:
-		~Renderable();
-
-		/**	Gets world bounds of the mesh rendered by this object. */
-		Bounds getBounds() const;
-
-		/**	Sets an ID that can be used for uniquely identifying this object by the renderer. */
-		void setRendererId(UINT32 id) { mRendererId = id; }
-
-		/**	Retrieves an ID that can be used for uniquely identifying this object by the renderer. */
-		UINT32 getRendererId() const { return mRendererId; }
-
-		/** Returns the type of animation influencing this renderable, if any. */
-		RenderableAnimType getAnimType() const { return mAnimType; }
-
-		/** Returns the identifier of the animation, if this object is animated using skeleton or blend shape animation. */
-		UINT64 getAnimationId() const { return mAnimationId; }
-
-		/**
-		 * Updates internal animation buffers from the contents of the provided animation data object. Does nothing if
-		 * renderable is not affected by animation.
-		 */
-		void updateAnimationBuffers(const EvaluatedAnimationData& animData);
-
-		/**
-		 * Records information about previous frame's animation buffer data. Should be called once per frame, before the
-		 * call to updateAnimationBuffers().
-		 */
-		void updatePrevFrameAnimationBuffers();
-
-		/** Returns the GPU buffer containing element's bone matrices, if it has any. */
-		const SPtr<GpuBuffer>& getBoneMatrixBuffer() const { return mBoneMatrixBuffer; }
-
-		/** Returns the GPU buffer containing element's bone matrices for the previous frame, if it has any. */
-		const SPtr<GpuBuffer>& getBonePrevMatrixBuffer() const { return mBonePrevMatrixBuffer; }
-
-		/** Returns the vertex buffer containing element's morph shape vertices, if it has any. */
-		const SPtr<VertexBuffer>& getMorphShapeBuffer() const { return mMorphShapeBuffer; }
-
-		/** Returns vertex declaration used for rendering meshes containing morph shape information. */
-		const SPtr<VertexDeclaration>& getMorphVertexDeclaration() const { return mMorphVertexDeclaration; }
-
-	protected:
-		friend class bs::Renderable;
-
-		Renderable();
-
-		/** @copydoc CoreObject::initialize */
-		void initialize() override;
-
-		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
-
-		/** Creates any buffers required for renderable animation. Should be called whenever animation properties change. */
-		void createAnimationBuffers();
-
-		UINT32 mRendererId;
-		UINT64 mAnimationId;
-		UINT32 mMorphShapeVersion;
-
-		SPtr<GpuBuffer> mBoneMatrixBuffer;
-		SPtr<GpuBuffer> mBonePrevMatrixBuffer;
-		SPtr<VertexBuffer> mMorphShapeBuffer;
-		SPtr<VertexDeclaration> mMorphVertexDeclaration;
-	};
-	}
 
 	/** @} */
 }

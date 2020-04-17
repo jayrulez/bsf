@@ -136,52 +136,6 @@ namespace bs
 		return allParamDescs;
 	}
 
-	Vector<SPtr<GpuParamDesc>> getAllParamDescs(const SPtr<ct::Technique>& technique)
-	{
-		Vector<SPtr<GpuParamDesc>> allParamDescs;
-
-		// Make sure all gpu programs are fully loaded
-		for (UINT32 i = 0; i < technique->getNumPasses(); i++)
-		{
-			SPtr<ct::Pass> curPass = technique->getPass(i);
-
-			const SPtr<ct::GraphicsPipelineState>& graphicsPipeline = curPass->getGraphicsPipelineState();
-			if(graphicsPipeline)
-			{
-				SPtr<ct::GpuProgram> vertProgram = graphicsPipeline->getVertexProgram();
-				if (vertProgram)
-					allParamDescs.push_back(vertProgram->getParamDesc());
-
-				SPtr<ct::GpuProgram> fragProgram = graphicsPipeline->getFragmentProgram();
-				if (fragProgram)
-					allParamDescs.push_back(fragProgram->getParamDesc());
-
-				SPtr<ct::GpuProgram> geomProgram = graphicsPipeline->getGeometryProgram();
-				if (geomProgram)
-					allParamDescs.push_back(geomProgram->getParamDesc());
-
-				SPtr<ct::GpuProgram> hullProgram = graphicsPipeline->getHullProgram();
-				if (hullProgram)
-					allParamDescs.push_back(hullProgram->getParamDesc());
-
-				SPtr<ct::GpuProgram> domainProgram = graphicsPipeline->getDomainProgram();
-				if (domainProgram)
-					allParamDescs.push_back(domainProgram->getParamDesc());
-			}
-
-			const SPtr<ct::ComputePipelineState>& computePipeline = curPass->getComputePipelineState();
-			if(computePipeline)
-			{
-				SPtr<ct::GpuProgram> computeProgram = computePipeline->getProgram();
-				if (computeProgram)
-					allParamDescs.push_back(computeProgram->getParamDesc());
-				
-			}
-		}
-
-		return allParamDescs;
-	}
-
 	bool areParamsEqual(const GpuParamDataDesc& paramA, const GpuParamDataDesc& paramB, bool ignoreBufferOffsets)
 	{
 		bool equal = paramA.arraySize == paramB.arraySize && paramA.elementSize == paramB.elementSize

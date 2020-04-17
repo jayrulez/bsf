@@ -40,12 +40,12 @@ namespace bs
 		const bool materialStored = mMaterialStored.load(std::memory_order_acquire);
 		assert(materialStored == true);
 
-		const SPtr<ct::Pass>& pass = mMaterial->getPass(0, mTechnique);
+		const SPtr<Pass>& pass = mMaterial->getPass(0, mTechnique);
 
 		if(pass)
 			pass->compile();
 
-		const SPtr<ct::Pass>& alphaPass = mMaterial->getPass(0, mAlphaTechnique);
+		const SPtr<Pass>& alphaPass = mMaterial->getPass(0, mAlphaTechnique);
 
 		if(alphaPass)
 			alphaPass->compile();
@@ -53,7 +53,7 @@ namespace bs
 		mParams = mMaterial->createParamsSet(mTechnique);
 		mAlphaParams = mMaterial->createParamsSet(mAlphaTechnique);
 
-		SPtr<ct::Shader> shader = mMaterial->getShader();
+		SPtr<Shader> shader = mMaterial->getShader().getInternalPtr();
 		if(shader->hasTextureParam("gMainTexture"))
 		{
 			mTextureParam = mMaterial->getParamTexture("gMainTexture");
@@ -67,7 +67,7 @@ namespace bs
 			BS_LOG(Error, GUI, "Sprite material shader missing \"GUIParams\" block.");
 	}
 
-	void SpriteMaterial::destroy(const SPtr<ct::Material>& material, const SPtr<ct::GpuParamsSet>& params, const SPtr<ct::GpuParamsSet>& alphaParams)
+	void SpriteMaterial::destroy(const SPtr<Material>& material, const SPtr<ct::GpuParamsSet>& params, const SPtr<ct::GpuParamsSet>& alphaParams)
 	{
 		// Do nothing, we just need to make sure the material pointer's last reference is lost while on the core thread
 	}

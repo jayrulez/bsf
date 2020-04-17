@@ -22,12 +22,11 @@ namespace bs
 	class BS_CORE_EXPORT TMaterialDataCommon
 	{
 	protected:
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 
 	public:
 		TMaterialDataCommon() = default;
-		TMaterialDataCommon(const String& name, const MaterialPtrType& material);
+		TMaterialDataCommon(const String& name, const SPtr<Material>& material);
 
 		/** Checks if param is initialized. */
 		bool operator==(const std::nullptr_t& nullval) const
@@ -38,7 +37,7 @@ namespace bs
 	protected:
 		UINT32 mParamIndex;
 		UINT32 mArraySize;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 
 	/**
@@ -127,19 +126,17 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
 
 	public:
-		TMaterialParamTexture(const String& name, const MaterialPtrType& material);
+		TMaterialParamTexture(const String& name, const SPtr<Material>& material);
 		TMaterialParamTexture() { }
 
 		/** @copydoc GpuParamTexture::set */
-		void set(const TextureType& texture, const TextureSurface& surface = TextureSurface::COMPLETE) const;
+		void set(const HTexture& texture, const TextureSurface& surface = TextureSurface::COMPLETE) const;
 
 		/** @copydoc GpuParamTexture::get */
-		TextureType get() const;
+		HTexture get() const;
 
 		/** Checks if param is initialized. */
 		bool operator==(const std::nullptr_t& nullval) const
@@ -149,20 +146,18 @@ namespace bs
 
 	protected:
 		UINT32 mParamIndex;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 
 	/** @copydoc TMaterialDataParam */
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamSpriteTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
 
 	public:
-		TMaterialParamSpriteTexture(const String& name, const MaterialPtrType& material);
+		TMaterialParamSpriteTexture(const String& name, const SPtr<Material>& material);
 		TMaterialParamSpriteTexture() { }
 
 		/** @copydoc GpuParamTexture::set */
@@ -179,26 +174,24 @@ namespace bs
 
 	protected:
 		UINT32 mParamIndex;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 
 	/** @copydoc TMaterialDataParam */
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamLoadStoreTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
 
 	public:
-		TMaterialParamLoadStoreTexture(const String& name, const MaterialPtrType& material);
+		TMaterialParamLoadStoreTexture(const String& name, const SPtr<Material>& material);
 		TMaterialParamLoadStoreTexture() { }
 
 		/** @copydoc GpuParamLoadStoreTexture::set */
-		void set(const TextureType& texture, const TextureSurface& surface = TextureSurface()) const;
+		void set(const HTexture& texture, const TextureSurface& surface = TextureSurface()) const;
 
 		/** @copydoc GpuParamLoadStoreTexture::get */
-		TextureType get() const;
+		HTexture get() const;
 
 		/** Checks if param is initialized. */
 		bool operator==(const std::nullptr_t& nullval) const
@@ -208,19 +201,18 @@ namespace bs
 
 	protected:
 		UINT32 mParamIndex;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 	
 	/** @copydoc TMaterialDataParam */
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamBuffer
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 
 	public:
-		TMaterialParamBuffer(const String& name, const MaterialPtrType& material);
+		TMaterialParamBuffer(const String& name, const SPtr<Material>& material);
 		TMaterialParamBuffer() { }
 
 		/** @copydoc GpuParamBuffer::set */
@@ -237,19 +229,18 @@ namespace bs
 
 	protected:
 		UINT32 mParamIndex;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 
 	/** @copydoc TMaterialDataParam */
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamSampState
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
 
 	public:
-		TMaterialParamSampState(const String& name, const MaterialPtrType& material);
+		TMaterialParamSampState(const String& name, const SPtr<Material>& material);
 		TMaterialParamSampState() { }
 
 		/** @copydoc GpuParamSampState::set */
@@ -266,7 +257,7 @@ namespace bs
 
 	protected:
 		UINT32 mParamIndex;
-		MaterialPtrType mMaterial;
+		SPtr<Material> mMaterial;
 	};
 
 	/** @} */

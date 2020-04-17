@@ -118,21 +118,6 @@ namespace bs
 		:TPass(desc)
 	{ }
 
-	SPtr<ct::Pass> Pass::getCore() const
-	{
-		return std::static_pointer_cast<ct::Pass>(mCoreSpecific);
-	}
-
-	SPtr<ct::CoreObject> Pass::createCore() const
-	{
-		ct::Pass* pass = new (bs_alloc<ct::Pass>()) ct::Pass(mData);
-
-		SPtr<ct::Pass> passPtr = bs_shared_ptr(pass);
-		passPtr->_setThisPtr(passPtr);
-
-		return passPtr;
-	}
-
 	void Pass::compile()
 	{
 		if(mComputePipelineState || mGraphicsPipelineState)
@@ -144,18 +129,6 @@ namespace bs
 		createPipelineState();
 
 		markCoreDirty();
-		CoreObject::syncToCore();
-	}
-
-	CoreSyncData Pass::syncToCore(FrameAlloc* allocator)
-	{
-		UINT32 size = csync_size(*this);
-		UINT8* data = allocator->alloc(size);
-
-		Bitstream stream(data, size);
-		csync_write(*this, stream);
-
-		return CoreSyncData(data, size);
 	}
 
 	SPtr<Pass> Pass::create(const PASS_DESC& desc)
@@ -185,36 +158,5 @@ namespace bs
 	RTTITypeBase* Pass::getRTTI() const
 	{
 		return Pass::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	Pass::Pass(const PASS_DESC& desc)
-		:TPass(desc)
-	{ }
-
-	void Pass::compile()
-	{
-		if(mComputePipelineState || mGraphicsPipelineState)
-			return; // Already compiled
-
-		createPipelineState();
-	}
-
-	void Pass::syncToCore(const CoreSyncData& data)
-	{
-		Bitstream stream(data.getBuffer(), data.getBufferSize());
-		csync_read(*this, stream);
-	}
-
-	SPtr<Pass> Pass::create(const PASS_DESC& desc)
-	{
-		Pass* newPass = new (bs_alloc<Pass>()) Pass(desc);
-		SPtr<Pass> newPassPtr = bs_shared_ptr<Pass>(newPass);
-		newPassPtr->_setThisPtr(newPassPtr);
-		newPassPtr->initialize();
-
-		return newPassPtr;
-	}
 	}
 }

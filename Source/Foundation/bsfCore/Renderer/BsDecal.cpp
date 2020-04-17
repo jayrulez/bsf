@@ -106,9 +106,9 @@ namespace bs
 
 	SPtr<ct::CoreObject> Decal::createCore() const
 	{
-		SPtr<ct::Material> material;
+		SPtr<Material> material;
 		if(mMaterial.isLoaded(false))
-			material = mMaterial->getCore();
+			material = mMaterial.getInternalPtr();
 
 		ct::Decal* decal = new (bs_alloc<ct::Decal>()) ct::Decal(material, mSize, mMaxDistance);
 		SPtr<ct::Decal> decalPtr = bs_shared_ptr<ct::Decal>(decal);

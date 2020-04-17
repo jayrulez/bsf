@@ -266,7 +266,7 @@ namespace bs { namespace ct
 							{
 								if(mParams->hasTexture(progType, varName))
 								{
-									SPtr<Texture> texture = mShader->getDefaultTexture(defaultValueIdx);
+									SPtr<Texture> texture = mShader->getDefaultTexture(defaultValueIdx).getInternalPtr();
 									mParams->setTexture(progType, varName, texture);
 								}
 							}
@@ -288,7 +288,7 @@ namespace bs { namespace ct
 							{
 								if(mParams->hasSamplerState(progType, varName))
 								{
-									SPtr<SamplerState> samplerState = mShader->getDefaultSampler(defaultValueIdx);
+									SPtr<SamplerState> samplerState = mShader->getDefaultSampler(defaultValueIdx)->getCore();
 									mParams->setSamplerState(progType, varName, samplerState);
 								}
 							}

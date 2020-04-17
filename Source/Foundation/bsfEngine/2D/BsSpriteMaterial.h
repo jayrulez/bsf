@@ -126,13 +126,13 @@ namespace bs
 		virtual void initialize();
 
 		/** Destroys the core thread material. */
-		static void destroy(const SPtr<ct::Material>& material, const SPtr<ct::GpuParamsSet>& params, const SPtr<ct::GpuParamsSet>& alphaParams);
+		static void destroy(const SPtr<Material>& material, const SPtr<ct::GpuParamsSet>& params, const SPtr<ct::GpuParamsSet>& alphaParams);
 
 		UINT32 mId;
 		bool mAllowBatching;
 
 		// Core thread only (everything below)
-		SPtr<ct::Material> mMaterial;
+		SPtr<Material> mMaterial;
 		UINT32 mTechnique;
 		UINT32 mAlphaTechnique;
 		std::atomic<bool> mMaterialStored;

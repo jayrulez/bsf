@@ -9,7 +9,7 @@
 namespace bs
 {
 	template<int DATA_TYPE, bool Core>
-	TMaterialDataCommon<DATA_TYPE, Core>::TMaterialDataCommon(const String& name, const MaterialPtrType& material)
+	TMaterialDataCommon<DATA_TYPE, Core>::TMaterialDataCommon(const String& name, const SPtr<Material>& material)
 		:mParamIndex(0), mArraySize(0), mMaterial(nullptr)
 	{
 		if(material != nullptr)
@@ -180,7 +180,7 @@ namespace bs
 	}
 
 	template<bool Core>
-	TMaterialParamTexture<Core>::TMaterialParamTexture(const String& name, const MaterialPtrType& material)
+	TMaterialParamTexture<Core>::TMaterialParamTexture(const String& name, const SPtr<Material>& material)
 		:mParamIndex(0), mMaterial(nullptr)
 	{
 		if (material != nullptr)
@@ -201,7 +201,7 @@ namespace bs
 	}
 
 	template<bool Core>
-	void TMaterialParamTexture<Core>::set(const TextureType& texture, const TextureSurface& surface) const
+	void TMaterialParamTexture<Core>::set(const HTexture& texture, const TextureSurface& surface) const
 	{
 		if (mMaterial == nullptr)
 			return;
@@ -210,7 +210,7 @@ namespace bs
 		const MaterialParams::ParamData* data = params->getParamData(mParamIndex);
 
 		// If there is a default value, assign that instead of null
-		TextureType newValue = texture;
+		HTexture newValue = texture;
 		if (newValue == nullptr)
 			params->getDefaultTexture(*data, newValue);
 
@@ -221,9 +221,9 @@ namespace bs
 	}
 
 	template<bool Core>
-	typename TMaterialParamTexture<Core>::TextureType TMaterialParamTexture<Core>::get() const
+	HTexture TMaterialParamTexture<Core>::get() const
 	{
-		TextureType texture;
+		HTexture texture;
 		if (mMaterial == nullptr)
 			return texture;
 
@@ -237,7 +237,7 @@ namespace bs
 	}
 	
 	template<bool Core>
-	TMaterialParamSpriteTexture<Core>::TMaterialParamSpriteTexture(const String& name, const MaterialPtrType& material)
+	TMaterialParamSpriteTexture<Core>::TMaterialParamSpriteTexture(const String& name, const SPtr<Material>& material)
 		:mParamIndex(0), mMaterial(nullptr)
 	{
 		if (material != nullptr)
@@ -269,7 +269,7 @@ namespace bs
 		if(texture == nullptr)
 		{
 			// If there is a default value, assign that instead of null
-			TextureType newValue;
+			HTexture newValue;
 			params->getDefaultTexture(*data, newValue);
 			params->setTexture(*data, newValue, TextureSurface::COMPLETE);
 		}
@@ -297,7 +297,7 @@ namespace bs
 
 	template<bool Core>
 	TMaterialParamLoadStoreTexture<Core>::TMaterialParamLoadStoreTexture(const String& name,
-		const MaterialPtrType& material)
+		const SPtr<Material>& material)
 		:mParamIndex(0), mMaterial(nullptr)
 	{
 		if (material != nullptr)
@@ -318,7 +318,7 @@ namespace bs
 	}
 
 	template<bool Core>
-	void TMaterialParamLoadStoreTexture<Core>::set(const TextureType& texture, const TextureSurface& surface) const
+	void TMaterialParamLoadStoreTexture<Core>::set(const HTexture& texture, const TextureSurface& surface) const
 	{
 		if (mMaterial == nullptr)
 			return;
@@ -333,9 +333,9 @@ namespace bs
 	}
 
 	template<bool Core>
-	typename TMaterialParamLoadStoreTexture<Core>::TextureType TMaterialParamLoadStoreTexture<Core>::get() const
+	typename HTexture TMaterialParamLoadStoreTexture<Core>::get() const
 	{
-		TextureType texture;
+		HTexture texture;
 		if (mMaterial == nullptr)
 			return texture;
 
@@ -350,7 +350,7 @@ namespace bs
 	}
 	
 	template<bool Core>
-	TMaterialParamBuffer<Core>::TMaterialParamBuffer(const String& name, const MaterialPtrType& material)
+	TMaterialParamBuffer<Core>::TMaterialParamBuffer(const String& name, const SPtr<Material>& material)
 		:mParamIndex(0), mMaterial(nullptr)
 	{
 		if (material != nullptr)
@@ -399,7 +399,7 @@ namespace bs
 	}
 
 	template<bool Core>
-	TMaterialParamSampState<Core>::TMaterialParamSampState(const String& name, const MaterialPtrType& material)
+	TMaterialParamSampState<Core>::TMaterialParamSampState(const String& name, const SPtr<Material>& material)
 		:mParamIndex(0), mMaterial(nullptr)
 	{
 		if (material != nullptr)

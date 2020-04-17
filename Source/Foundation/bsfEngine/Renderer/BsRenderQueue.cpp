@@ -29,7 +29,7 @@ namespace bs { namespace ct
 	void RenderQueue::add(const RenderElement* element, float distFromCamera, UINT32 techniqueIdx)
 	{
 		SPtr<Material> material = element->material;
-		SPtr<Shader> shader = material->getShader();
+		SPtr<Shader> shader = material->getShader().getInternalPtr();
 		
 		UINT32 queuePriority = shader->getQueuePriority();
 		QueueSortType sortType = shader->getQueueSortType();

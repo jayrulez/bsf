@@ -42,7 +42,7 @@ namespace bs
 		friend class ct::RendererMaterialBase;
 
 		/**	Initializes all materials on the core thread. */
-		static void initOnCore(const Vector<SPtr<ct::Shader>>& shaders);
+		static void initOnCore(const Vector<SPtr<Shader>>& shaders);
 
 		/**	Destroys all materials on the core thread. */
 		static void destroyOnCore();

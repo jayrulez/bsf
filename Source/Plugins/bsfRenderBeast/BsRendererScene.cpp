@@ -386,7 +386,7 @@ namespace bs {	namespace ct
 		rendererRenderable->prevFrameDirtyState = PrevFrameDirtyState::Clean;
 		rendererRenderable->updatePerObjectBuffer();
 
-		SPtr<Mesh> mesh = renderable->getMesh();
+		SPtr<Mesh> mesh = renderable->getMesh().getInternalPtr();
 		if (mesh != nullptr)
 		{
 			const MeshProperties& meshProps = mesh->getProperties();

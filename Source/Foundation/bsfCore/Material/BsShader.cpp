@@ -79,7 +79,7 @@ namespace bs
 	}
 
 	template<bool Core>
-	void TSHADER_DESC<Core>::addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const TextureType& defaultValue)
+	void TSHADER_DESC<Core>::addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const HTexture& defaultValue)
 	{
 		UINT32 defaultValueIdx = (UINT32)-1;
 		if (Shader::isTexture(paramDesc.type) && defaultValue != nullptr)
@@ -232,7 +232,6 @@ namespace bs
 	}
 
 	template struct TSHADER_DESC<false>;
-	template struct TSHADER_DESC<true>;
 
 	template<bool Core>
 	TShader<Core>::TShader(UINT32 id)
@@ -370,12 +369,12 @@ namespace bs
 	}
 
 	template<bool Core>
-	typename TShader<Core>::TextureType TShader<Core>::getDefaultTexture(UINT32 index) const
+	HTexture TShader<Core>::getDefaultTexture(UINT32 index) const
 	{
 		if (index < (UINT32)mDesc.textureDefaultValues.size())
 			return mDesc.textureDefaultValues[index];
 
-		return TextureType();
+		return HTexture();
 	}
 
 	template<bool Core>
@@ -397,9 +396,9 @@ namespace bs
 	}
 
 	template<bool Core>
-	Vector<SPtr<typename TShader<Core>::TechniqueType>> TShader<Core>::getCompatibleTechniques() const
+	Vector<SPtr<Technique>> TShader<Core>::getCompatibleTechniques() const
 	{
-		Vector<SPtr<TechniqueType>> output;
+		Vector<SPtr<Technique>> output;
 		for (auto& technique : mDesc.techniques)
 		{
 			if (technique->isSupported())
@@ -410,10 +409,10 @@ namespace bs
 	}
 
 	template<bool Core>
-	Vector<SPtr<typename TShader<Core>::TechniqueType>> TShader<Core>::getCompatibleTechniques(
+	Vector<SPtr<Technique>> TShader<Core>::getCompatibleTechniques(
 		const ShaderVariation& variation, bool exact) const
 	{
-		Vector<SPtr<TechniqueType>> output;
+		Vector<SPtr<Technique>> output;
 		for (auto& technique : mDesc.techniques)
 		{
 			if (technique->isSupported() && technique->getVariation().matches(variation, exact))
@@ -424,7 +423,9 @@ namespace bs
 	}
 
 	template class TShader < false > ;
-	template class TShader < true >;
+
+
+	std::atomic<UINT32> Shader::mNextShaderId;
 
 	Shader::Shader(const String& name, const SHADER_DESC& desc, UINT32 id)
 		:TShader(name, desc, id)
@@ -436,87 +437,10 @@ namespace bs
 		:TShader(id)
 	{ }
 
-	SPtr<ct::Shader> Shader::getCore() const
-	{
-		return std::static_pointer_cast<ct::Shader>(mCoreSpecific);
-	}
-
 	void Shader::setIncludeFiles(const Vector<String>& includes)
 	{
 		SPtr<ShaderMetaData> meta = std::static_pointer_cast<ShaderMetaData>(getMetaData());
 		meta->includes = includes;
-	}
-
-	SPtr<ct::CoreObject> Shader::createCore() const
-	{
-		Vector<SPtr<ct::Technique>> techniques;
-		for (auto& technique : mDesc.techniques)
-			techniques.push_back(technique->getCore());
-
-		ct::Shader* shaderCore = new (bs_alloc<ct::Shader>()) ct::Shader(mName, convertDesc(mDesc), mId);
-		SPtr<ct::Shader> shaderCorePtr = bs_shared_ptr<ct::Shader>(shaderCore);
-		shaderCorePtr->_setThisPtr(shaderCorePtr);
-
-		return shaderCorePtr;
-	}
-
-	ct::SHADER_DESC Shader::convertDesc(const SHADER_DESC& desc) const
-	{
-		ct::SHADER_DESC output;
-		output.dataParams = desc.dataParams;
-		output.textureParams = desc.textureParams;
-		output.samplerParams = desc.samplerParams;
-		output.bufferParams = desc.bufferParams;
-		output.paramBlocks = desc.paramBlocks;
-		output.paramAttributes = desc.paramAttributes;
-
-		output.dataDefaultValues = desc.dataDefaultValues;
-
-		output.samplerDefaultValues.resize(desc.samplerDefaultValues.size());
-		for (UINT32 i = 0; i < (UINT32)desc.samplerDefaultValues.size(); i++)
-		{
-			if (desc.samplerDefaultValues[i] != nullptr)
-				output.samplerDefaultValues[i] = desc.samplerDefaultValues[i]->getCore();
-			else
-				output.samplerDefaultValues[i] = nullptr;
-		}
-
-		output.textureDefaultValues.resize(desc.textureDefaultValues.size());
-		for (UINT32 i = 0; i < (UINT32)desc.textureDefaultValues.size(); i++)
-		{
-			if (desc.textureDefaultValues[i].isLoaded())
-				output.textureDefaultValues[i] = desc.textureDefaultValues[i].getInternalPtr();//XXXTEX
-			else
-				output.textureDefaultValues[i] = nullptr;
-		}
-
-		output.queuePriority = desc.queuePriority;
-		output.queueSortType = desc.queueSortType;
-		output.separablePasses = desc.separablePasses;
-		output.flags = desc.flags;
-
-		for(auto& entry : desc.techniques)
-		{
-			if(entry)
-				output.techniques.push_back(entry->getCore());
-		}
-
-		for(auto& entry : desc.subShaders)
-		{
-			ct::SubShader subShader;
-			subShader.name = entry.name;
-			
-			if(entry.shader)
-				subShader.shader = entry.shader->getCore();
-
-			output.subShaders.push_back(subShader);
-		}
-
-		output.variationParams = desc.variationParams;
-		
-		// Ignoring default values as they are not needed for syncing since
-		// they're initialized through the material.
-		return output;
 	}
 
 	void Shader::getCoreDependencies(Vector<CoreObject*>& dependencies)
@@ -605,16 +529,16 @@ namespace bs
 		return 0;
 	}
 
-	HShader Shader::create(const String& name, const SHADER_DESC& desc)
+	HShader Shader::createHandle(const String& name, const SHADER_DESC& desc)
 	{
-		SPtr<Shader> newShader = _createPtr(name, desc);
+		SPtr<Shader> newShader = create(name, desc);
 
 		return static_resource_cast<Shader>(gResources()._createResourceHandle(newShader));
 	}
 
-	SPtr<Shader> Shader::_createPtr(const String& name, const SHADER_DESC& desc)
+	SPtr<Shader> Shader::create(const String& name, const SHADER_DESC& desc)
 	{
-		UINT32 id = ct::Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
+		UINT32 id = Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
 		assert(id < std::numeric_limits<UINT32>::max() && "Created too many shaders, reached maximum id.");
 
 		SPtr<Shader> newShader = bs_core_ptr<Shader>(new (bs_alloc<Shader>()) Shader(name, desc, id));
@@ -626,7 +550,7 @@ namespace bs
 
 	SPtr<Shader> Shader::createEmpty()
 	{
-		UINT32 id = ct::Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
+		UINT32 id = Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
 		assert(id < std::numeric_limits<UINT32>::max() && "Created too many shaders, reached maximum id.");
 
 		SPtr<Shader> newShader = bs_core_ptr<Shader>(new (bs_alloc<Shader>()) Shader(id));
@@ -653,29 +577,5 @@ namespace bs
 	RTTITypeBase* ShaderMetaData::getRTTI() const
 	{
 		return ShaderMetaData::getRTTIStatic();
-	}
-
-	namespace ct
-	{
-	std::atomic<UINT32> Shader::mNextShaderId;
-
-	Shader::Shader(const String& name, const SHADER_DESC& desc, UINT32 id)
-		:TShader(name, desc, id)
-	{
-
-	}
-
-	SPtr<Shader> Shader::create(const String& name, const SHADER_DESC& desc)
-	{
-		UINT32 id = mNextShaderId.fetch_add(1, std::memory_order_relaxed);
-		assert(id < std::numeric_limits<UINT32>::max() && "Created too many shaders, reached maximum id.");
-
-		Shader* shaderCore = new (bs_alloc<Shader>()) Shader(name, desc, id);
-		SPtr<Shader> shaderCorePtr = bs_shared_ptr<Shader>(shaderCore);
-		shaderCorePtr->_setThisPtr(shaderCorePtr);
-		shaderCorePtr->initialize();
-
-		return shaderCorePtr;
-	}
 	}
 }

@@ -382,17 +382,17 @@ namespace bs
 
 	HMaterial BuiltinResources::createSpriteTextMaterial() const
 	{
-		return Material::create(mShaderSpriteText);
+		return Material::createHandle(mShaderSpriteText);
 	}
 
 	HMaterial BuiltinResources::createSpriteImageMaterial() const
 	{
-		return Material::create(mShaderSpriteImage);
+		return Material::createHandle(mShaderSpriteImage);
 	}
 
 	HMaterial BuiltinResources::createSpriteLineMaterial() const
 	{
-		return Material::create(mShaderSpriteLine);
+		return Material::createHandle(mShaderSpriteLine);
 	}
 
 	BuiltinResources& gBuiltinResources()

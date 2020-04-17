@@ -125,14 +125,9 @@ namespace bs
 	class BS_CORE_EXPORT TMaterial : public MaterialBase
 	{
 	public:
-		using TextureType = CoreVariantHandleType<Texture, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
-		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
 		using GpuProgramPtrType = SPtr<CoreVariantType<GpuProgram, Core>>;
-		using PassType = CoreVariantType<Pass, Core>;
-		using TechniqueType = CoreVariantType<Technique, Core>;
-		using ShaderType = CoreVariantHandleType<Shader, Core>;
 		using GpuParamsSetType = CoreVariantType<GpuParamsSet, Core>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 
@@ -141,7 +136,7 @@ namespace bs
 
 		/** Returns the currently active shader. */
 		BS_SCRIPT_EXPORT(n:Shader,pr:getter)
-		ShaderType getShader() const { return mShader; }
+		HShader getShader() const { return mShader; }
 
 		/**
 		 * Set of parameters that determine which subset of techniques in the assigned shader should be used. Only the
@@ -156,7 +151,7 @@ namespace bs
 		UINT32 getNumTechniques() const { return (UINT32)mTechniques.size(); }
 
 		/** Returns the technique at the specified index. */
-		const SPtr<TechniqueType>& getTechnique(UINT32 idx) const { return mTechniques[idx]; }
+		const SPtr<Technique>& getTechnique(UINT32 idx) const { return mTechniques[idx]; }
 
 		/**
 		 * Attempts to find a technique matching the specified variation and tags among the supported techniques.
@@ -191,7 +186,7 @@ namespace bs
 		 *								the default technique.
 		 * @return						Pass if found, null otherwise.
 		 */
-		SPtr<PassType> getPass(UINT32 passIdx = 0, UINT32 techniqueIdx = 0) const;
+		SPtr<Pass> getPass(UINT32 passIdx = 0, UINT32 techniqueIdx = 0) const;
 
 		/**
 		 * Creates a set of GpuParams that may be used for binding material parameters to the GPU. The expected behaviour
@@ -299,7 +294,7 @@ namespace bs
 		void setStructData(const String& name, void* value, UINT32 size, UINT32 arrayIdx = 0) { return getParamStruct(name).set(value, size, arrayIdx); }
 
 		/** Assigns a texture to the shader parameter with the specified name. */
-		void setTexture(const String& name, const TextureType& value, const TextureSurface& surface = TextureSurface::COMPLETE)
+		void setTexture(const String& name, const HTexture& value, const TextureSurface& surface = TextureSurface::COMPLETE)
 		{
 			return getParamTexture(name).set(value, surface);
 		}
@@ -320,13 +315,13 @@ namespace bs
 		}
 
 		/** Assigns a texture to be used for random load/store operations to the shader parameter with the specified name. */
-		void setLoadStoreTexture(const String& name, const TextureType& value, const TextureSurface& surface)
+		void setLoadStoreTexture(const String& name, const HTexture& value, const TextureSurface& surface)
 		{
 			return getParamLoadStoreTexture(name).set(value, surface);
 		}
 
 		/** Assigns a buffer to the shader parameter with the specified name. */
-		void setBuffer(const String& name, const BufferType& value) { return getParamBuffer(name).set(value); }
+		void setBuffer(const String& name, const SPtr<GpuBuffer>& value) { return getParamBuffer(name).set(value); }
 
 		/** Assigns a sampler state to the shader parameter with the specified name. */
 		void setSamplerState(const String& name, const SamplerStateType& value) { return getParamSamplerState(name).set(value); }
@@ -421,7 +416,7 @@ namespace bs
 		bool isAnimated(const String& name, UINT32 arrayIdx = 0);
 
 		/** Returns a texture assigned with the parameter with the specified name. */
-		TextureType getTexture(const String& name) const { return getParamTexture(name).get(); }
+		HTexture getTexture(const String& name) const { return getParamTexture(name).get(); }
 
 		/**
 		 * Returns a sprite texture assigned to the parameter with the specified name. If the parameter has a regular
@@ -724,9 +719,9 @@ namespace bs
 		/** Throw an exception if no shader is set, or no acceptable technique was found. */
 		void throwIfNotInitialized() const;
 
-		ShaderType mShader;
+		HShader mShader;
 		SPtr<MaterialParamsType> mParams;
-		Vector<SPtr<TechniqueType>> mTechniques;
+		Vector<SPtr<Technique>> mTechniques;
 		ShaderVariation mVariation;
 	};
 
@@ -749,12 +744,26 @@ namespace bs
 		BS_SCRIPT_EXPORT(n:Shader,pr:setter)
 		void setShader(const HShader& shader);
 
-		/** @copydoc TMaterial<Core>::getVariation() const */
+
+		/** @copydoc bs::Material::setShader */
+		void setShader(const SPtr<Shader> & shader);
+
+
+
+		/**
+		 * Set of parameters that determine which subset of techniques in the assigned shader should be used. Only the
+		 * techniques that have the provided parameters with the provided values will match. This will control which
+		 * technique is considered the default technique and which subset of techniques are searched during a call to
+		 * findTechnique().
+		 */
 		BS_SCRIPT_EXPORT(n:Variation,pr:setter,hide)
 		void setVariation(const ShaderVariation& variation);
 
 		/** Retrieves an implementation of a material usable only from the core thread. */
-		SPtr<ct::Material> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/** @copydoc CoreObject::initialize */
 		void initialize() override;
@@ -769,17 +778,20 @@ namespace bs
 		 * @note	Make sure you call Material::setShader before using it.
 		 */
 		BS_SCRIPT_EXPORT(ec:Material)
-		static HMaterial create();
+		static HMaterial createHandle();
 
 		/** Creates a new material with the specified shader. */
 		BS_SCRIPT_EXPORT(ec:Material)
-		static HMaterial create(const HShader& shader);
+		static HMaterial createHandle(const HShader& shader);
 
 		/**
 		 * Creates a new material with the specified shader, and a set of parameters that determine which subset of
 		 * techniques in the shader should the material use.
 		 */
-		static HMaterial create(const HShader& shader, const ShaderVariation& variation);
+		static HMaterial createHandle(const HShader& shader, const ShaderVariation& variation);
+
+		/** Creates a new material with the specified shader. */
+		static SPtr<Material> create(const SPtr<Shader> & shader);
 
 		/** @name Internal
 		 *  @{
@@ -801,12 +813,14 @@ namespace bs
 	private:
 		Material();
 		Material(const HShader& shader, const ShaderVariation& variation);
+		Material(const SPtr<Shader>& shader, const ShaderVariation& variation);
+		Material(const SPtr<Shader>& shader, const Vector<SPtr<Technique>>& techniques, const SPtr<MaterialParams>& materialParams, const ShaderVariation& variation);
 
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
-
-		/** @copydoc CoreObject::syncToCore */
-		CoreSyncData syncToCore(FrameAlloc* allocator) override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
@@ -845,44 +859,4 @@ namespace bs
 	};
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup Material-Internal
-	 *  @{
-	 */
-
-	/** @copydoc MaterialBase */
-	class BS_CORE_EXPORT Material : public CoreObject, public TMaterial<true>
-	{
-	public:
-		~Material() = default;
-
-		/** @copydoc bs::Material::setShader */
-		void setShader(const SPtr<Shader>& shader);
-
-		/**
-		 * Set of parameters that determine which subset of techniques in the assigned shader should be used. Only the
-		 * techniques that have the provided parameters with the provided values will match. This will control which
-		 * technique is considered the default technique and which subset of techniques are searched during a call to
-		 * findTechnique().
-		 */
-		void setVariation(const ShaderVariation& variation);
-
-		/** Creates a new material with the specified shader. */
-		static SPtr<Material> create(const SPtr<Shader>& shader);
-	private:
-		friend class bs::Material;
-
-		Material() = default;
-		Material(const SPtr<Shader>& shader, const ShaderVariation& variation);
-		Material(const SPtr<Shader>& shader, const Vector<SPtr<Technique>>& techniques,
-			const SPtr<MaterialParams>& materialParams, const ShaderVariation& variation);
-
-		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
-	};
-
-	/** @} */	
-	}
 }

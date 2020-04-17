@@ -16,20 +16,18 @@ namespace bs
 
 	class Shader;
 
-	namespace ct
+	struct SubShader : IReflectable
 	{
-		class Shader;
-	}
-
-	/** Templated version of SubShader that can be used for both core and sim threads. */
-	template<bool Core>
-	struct TSubShader
-	{
-		using TechniqueType = CoreVariantType<Technique, Core>;
-		using ShaderType = SPtr<CoreVariantType<Shader, Core>>;
-		
 		String name;
-		ShaderType shader;
+		SPtr<Shader> shader;
+
+		/************************************************************************/
+		/* 								SERIALIZATION                      		*/
+		/************************************************************************/
+	public:
+		friend class SubShaderRTTI;
+		static RTTITypeBase* getRTTIStatic();
+		RTTITypeBase* getRTTI() const override;
 	};
 
 	/** Shared memebers between SHADER_DATA_PARAM_DESC and SHADER_OBJECT_PARAM_DESC */
@@ -192,16 +190,6 @@ namespace bs
 	 * a specific interface that can be utilized by the renderer, usually similar/identical to the default built-in
 	 * technique.
 	 */
-	struct BS_CORE_EXPORT SubShader : TSubShader<false>, IReflectable
-	{
-		/************************************************************************/
-		/* 								SERIALIZATION                      		*/
-		/************************************************************************/
-	public:
-		friend class SubShaderRTTI;
-		static RTTITypeBase* getRTTIStatic();
-		RTTITypeBase* getRTTI() const override;
-	};
 
 	/** @} */
 
@@ -209,18 +197,11 @@ namespace bs
 	 *  @{
 	 */
 
-	template<bool Core> struct TSubShaderType {};
-	template<> struct TSubShaderType < false > { typedef SubShader Type; };
-	template<> struct TSubShaderType < true > { typedef TSubShader<true> Type; };
-
 	/** Structure used for initializing a shader. */
 	template<bool Core>
 	struct BS_CORE_EXPORT TSHADER_DESC
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
-		using TechniqueType = CoreVariantType<Technique, Core>;
-		using SubShaderType = typename TSubShaderType<Core>::Type ;
 
 		TSHADER_DESC();
 
@@ -273,7 +254,7 @@ namespace bs
 		 * object parameter upon Material creation. Default texture value is only valid if the object type is one of the
 		 * texture types.
 		 */
-		void addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const TextureType& defaultValue);
+		void addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const HTexture& defaultValue);
 
 		/**
 		 * Applies an attribute to the parameter with the specified name.
@@ -302,8 +283,7 @@ namespace bs
 		 *									will be deemed incompatible and won't be used. Value of 0 signifies the parameter
 		 *									block is not used by the renderer.
 		 */
-		void setParamBlockAttribs(const String& name, bool shared, GpuBufferUsage usage,
-			StringID rendererSemantic = StringID::NONE);
+		void setParamBlockAttribs(const String& name, bool shared, GpuBufferUsage usage, StringID rendererSemantic = StringID::NONE);
 
 		/**
 		 * Sorting type to use when performing sort in the render queue. Default value is sort front to back which causes
@@ -339,10 +319,10 @@ namespace bs
 		ShaderFlags flags;
 
 		/** Techniques to initialize the shader with. */
-		Vector<SPtr<TechniqueType>> techniques;
+		Vector<SPtr<Technique>> techniques;
 
 		/** Optional set of sub-shaders to initialize the shader with. */
-		Vector<SubShaderType> subShaders;
+		Vector<SubShader> subShaders;
 
 		/**
 		 * Information about all variation parameters and their possible values. Each permutation of variation parameters
@@ -358,7 +338,7 @@ namespace bs
 
 		Vector<UINT8> dataDefaultValues;
 		Vector<SamplerStateType> samplerDefaultValues;
-		Vector<TextureType> textureDefaultValues;
+		Vector<HTexture> textureDefaultValues;
 		Vector<SHADER_PARAM_ATTRIBUTE> paramAttributes;
 
 	private:
@@ -375,10 +355,7 @@ namespace bs
 	class BS_CORE_EXPORT TShader
 	{
 	public:
-		using TechniqueType = CoreVariantType<Technique, Core>;
-		using TextureType = typename TSHADER_DESC<Core>::TextureType;
 		using SamplerStateType = typename TSHADER_DESC<Core>::SamplerStateType;
-		using SubShaderType = typename TSubShaderType<Core>::Type;
 
 		TShader(UINT32 id);
 		TShader(const String& name, const TSHADER_DESC<Core>& desc, UINT32 id);
@@ -388,7 +365,7 @@ namespace bs
 		UINT32 getNumTechniques() const { return (UINT32)mDesc.techniques.size(); }
 
 		/** Returns the list of all supported techniques based on current render API and renderer. */
-		Vector<SPtr<TechniqueType>> getCompatibleTechniques() const;
+		Vector<SPtr<Technique>> getCompatibleTechniques() const;
 
 		/**
 		 * Returns the list of all supported techniques based on current render API and renderer, and limits the techniques
@@ -400,13 +377,13 @@ namespace bs
 		 *								of parameters is used for comparison, while any extra parameters present in
 		 *								the technique are not compared.
 		 */
-		Vector<SPtr<TechniqueType>> getCompatibleTechniques(const ShaderVariation& variation, bool exact) const;
+		Vector<SPtr<Technique>> getCompatibleTechniques(const ShaderVariation& variation, bool exact) const;
 
 		/** Returns a list of all techniques in this shader. */
-		const Vector<SPtr<TechniqueType>>& getTechniques() const { return mDesc.techniques; }
+		const Vector<SPtr<Technique>>& getTechniques() const { return mDesc.techniques; }
 
 		/** Returns a list of all sub-shaders in this shader. */
-		const Vector<SubShaderType>& getSubShaders() const { return mDesc.subShaders; }
+		const Vector<SubShader>& getSubShaders() const { return mDesc.subShaders; }
 
 		/**
 		 * Returns the list of all variation parameters supported by this shader, possible values of each parameter and
@@ -505,7 +482,7 @@ namespace bs
 		 * Returns a default texture for a parameter that has the specified default value index (retrieved from the
 		 * parameters descriptor).
 		 */
-		TextureType getDefaultTexture(UINT32 index) const;
+		HTexture getDefaultTexture(UINT32 index) const;
 
 		/**
 		 * Returns a default sampler state for a parameter that has the specified default value index (retrieved from the
@@ -529,20 +506,6 @@ namespace bs
 	};
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup Material-Internal
-	 *  @{
-	 */
-
-	typedef TSHADER_DESC<true> SHADER_DESC;
-
-	/** Core thread version of bs::SubShader. */
-	typedef TSubShader<true> SubShader;
-
-	/** @} */
-	}
 
 	/** @addtogroup Material
 	 *  @{
@@ -569,7 +532,10 @@ namespace bs
 	{
 	public:
 		/** Retrieves an implementation of a shader usable only from the core thread. */
-		SPtr<ct::Shader> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/**
 		 * Sets a list include file paths that are referenced by this shader.
@@ -600,7 +566,10 @@ namespace bs
 		static UINT32 getDataParamSize(GpuParamDataType type);
 
 		/**	Creates a new shader resource using the provided descriptor and techniques. */
-		static HShader create(const String& name, const SHADER_DESC& desc);
+		static HShader createHandle(const String& name, const SHADER_DESC& desc);
+
+		/** @copydoc bs::Shader::create */
+		static SPtr<Shader> create(const String & name, const SHADER_DESC& desc);
 
 		/**	Returns a shader object but doesn't initialize it. */
 		static SPtr<Shader> createEmpty();
@@ -610,26 +579,24 @@ namespace bs
 		 *  @{
 		 */
 
-		/**
-		 * Creates a new shader object using the provided descriptor and techniques.
-		 *
-		 * @note	Internal method. Use create() for normal use.
-		 */
-		static SPtr<Shader> _createPtr(const String& name, const SHADER_DESC& desc);
-
 		/** @} */
 
 	private:
+		static std::atomic<UINT32> mNextShaderId;
+
 		Shader(const String& name, const SHADER_DESC& desc, UINT32 id);
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
 
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/** Converts a sim thread version of the shader descriptor to a core thread version. */
-		ct::SHADER_DESC convertDesc(const SHADER_DESC& desc) const;
+		SHADER_DESC convertDesc(const SHADER_DESC& desc) const;
 
 	private:
 		/************************************************************************/
@@ -664,28 +631,4 @@ namespace bs
 	};
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup Material-Internal
-	 *  @{
-	 */
-
-	/** Core thread version of Shader. */
-	class BS_CORE_EXPORT Shader : public CoreObject, public TShader<true>
-	{
-	public:
-		/** @copydoc bs::Shader::create */
-		static SPtr<Shader> create(const String& name, const SHADER_DESC& desc);
-
-	protected:
-		friend class bs::Shader;
-
-		Shader(const String& name, const SHADER_DESC& desc, UINT32 id);
-
-		static std::atomic<UINT32> mNextShaderId;
-	};
-
-	/** @} */
-	}
 }

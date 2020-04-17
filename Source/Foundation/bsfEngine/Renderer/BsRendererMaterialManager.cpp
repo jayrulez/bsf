@@ -13,12 +13,12 @@ namespace bs
 
 		// Note: Ideally I want to avoid loading all materials, and instead just load those that are used.
 		Vector<RendererMaterialData>& materials = getMaterials();
-		Vector<SPtr<ct::Shader>> shaders;
+		Vector<SPtr<Shader>> shaders;
 		for (auto& material : materials)
 		{
 			HShader shader = br.getShader(material.shaderPath);
 			if (shader.isLoaded())
-				shaders.push_back(shader->getCore());
+				shaders.push_back(shader.getInternalPtr());
 			else
 				shaders.push_back(nullptr);
 		}
@@ -39,7 +39,7 @@ namespace bs
 		materials.push_back({ metaData, shaderPath });
 	}
 
-	void RendererMaterialManager::initOnCore(const Vector<SPtr<ct::Shader>>& shaders)
+	void RendererMaterialManager::initOnCore(const Vector<SPtr<Shader>>& shaders)
 	{
 		Lock lock(getMutex());
 
@@ -56,7 +56,7 @@ namespace bs
 			}
 
 			// Note: Making the assumption here that all the techniques are generated due to shader variations
-			Vector<SPtr<ct::Technique>> techniques = shaders[i]->getCompatibleTechniques();
+			Vector<SPtr<Technique>> techniques = shaders[i]->getCompatibleTechniques();
 			materials[i].metaData->instances.resize((UINT32)techniques.size());
 
 			for(auto& entry : techniques)

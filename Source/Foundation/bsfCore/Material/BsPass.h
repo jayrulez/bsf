@@ -120,7 +120,10 @@ namespace bs
 		virtual ~Pass() = default;
 
 		/** Retrieves an implementation of a pass usable only from the core thread. */
-		SPtr<ct::Pass> getCore() const;
+		SPtr<ct::CoreObject> getCore() const
+		{
+			return nullptr;
+		}
 
 		/**
 		 * Initializes the pass internals by compiling the GPU programs and creating the relevant pipeline state. This
@@ -138,11 +141,11 @@ namespace bs
 		Pass() = default;
 		Pass(const PASS_DESC& desc);
 
-		/** @copydoc CoreObject::syncToCore */
-		CoreSyncData syncToCore(FrameAlloc* allocator) override;
-
 		/** @copydoc CoreObject::createCore */
-		SPtr<ct::CoreObject> createCore() const override;
+		SPtr<ct::CoreObject> createCore() const override
+		{
+			return nullptr;
+		}
 
 		/**	Creates a new empty pass but doesn't initialize it. */
 		static SPtr<Pass> createEmpty();
@@ -157,40 +160,4 @@ namespace bs
 	};
 
 	/** @} */
-
-	namespace ct
-	{
-	/** @addtogroup Material-Internal
-	 *  @{
-	 */
-
-	/**
-	 * Core thread counterpart of bs::Pass.
-	 *
-	 * @note	Core thread.
-	 */
-	class BS_CORE_EXPORT Pass : public CoreObject, public TPass<true>
-	{
-	public:
-		virtual ~Pass() = default;
-
-		/**	Creates a new empty pass. */
-		static SPtr<Pass> create(const PASS_DESC& desc);
-
-		/** @copydoc bs::Pass::compile */
-		void compile();
-
-	protected:
-		friend class bs::Pass;
-		friend class Technique;
-
-		Pass() = default;
-		Pass(const PASS_DESC& desc);
-
-		/** @copydoc CoreObject::syncToCore */
-		void syncToCore(const CoreSyncData& data) override;
-	};
-
-	/** @} */
-	}
 }
