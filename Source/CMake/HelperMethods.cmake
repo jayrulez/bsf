@@ -312,7 +312,7 @@ function(target_link_framework TARGET FRAMEWORK)
 	mark_as_advanced(FM_${FRAMEWORK})
 endfunction()
 
-set(BS_BINARY_DEP_WEBSITE "https://data.banshee3d.com" CACHE STRING "The location that binary dependencies will be pulled from. Must follow the same naming scheme as data.banshee3d.com")
+set(BS_BINARY_DEP_WEBSITE "https://jayrulez.keybase.pub/mirrors/data.banshee3d.com" CACHE STRING "The location that binary dependencies will be pulled from. Must follow the same naming scheme as data.banshee3d.com")
 mark_as_advanced(BS_BINARY_DEP_WEBSITE)
 
 function(update_binary_deps DEP_PREFIX DEP_NAME DEP_FOLDER DEP_VERSION)
