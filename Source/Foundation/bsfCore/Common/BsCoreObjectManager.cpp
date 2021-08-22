@@ -20,7 +20,7 @@ namespace bs
 #if BS_DEBUG_MODE
 		Lock lock(mObjectsMutex);
 
-		if(mObjects.size() > 0)
+		if (mObjects.size() > 0)
 		{
 			// All objects MUST be destroyed at this point, otherwise there might be memory corruption.
 			// (Reason: This is called on application shutdown and at that point we also unload any dynamic libraries,
@@ -65,7 +65,7 @@ namespace bs
 				if (coreObject != nullptr)
 				{
 					CoreSyncData objSyncData = object->syncToCore(gCoreThread().getFrameAlloc());
-				
+
 					mDestroyedSyncData.push_back(CoreStoredSyncObjData(coreObject, internalId, objSyncData));
 
 					DirtyObjectData& dirtyObjData = mDirtyObjects[internalId];
@@ -301,7 +301,7 @@ namespace bs
 		CoreStoredSyncData& syncData = mCoreSyncData.back();
 
 		syncData.alloc = allocator;
-		
+
 		// Add all objects dependant on the dirty objects
 		bs_frame_mark();
 		{
@@ -335,7 +335,7 @@ namespace bs
 		}
 
 		bs_frame_clear();
-		
+
 		// Order in which objects are recursed in matters, ones with lower ID will have been created before
 		// ones with higher ones and should be updated first.
 		for (auto& objectData : mDirtyObjects)
@@ -348,7 +348,7 @@ namespace bs
 				// Sync dependencies before dependants
 				// Note: I don't check for recursion. Possible infinite loop if two objects
 				// are dependent on one another.
-				
+
 				UINT64 id = curObj->getInternalID();
 				auto iterFind = mDependencies.find(id);
 
@@ -417,5 +417,57 @@ namespace bs
 		syncData.destroyedObjects.clear();
 		syncData.entries.clear();
 		mCoreSyncData.pop_front();
+	}
+}
+
+namespace bs
+{
+	CoreObject2Manager::CoreObject2Manager()
+		:mNextAvailableID(1)
+	{
+
+	}
+
+	CoreObject2Manager::~CoreObject2Manager()
+	{
+#if BS_DEBUG_MODE
+		Lock lock(mObjectsMutex);
+
+		if (mObjects.size() > 0)
+		{
+			// All objects MUST be destroyed at this point, otherwise there might be memory corruption.
+			// (Reason: This is called on application shutdown and at that point we also unload any dynamic libraries,
+			// which will invalidate any pointers to objects created from those libraries. Therefore we require of the user to
+			// clean up all objects manually before shutting down the application).
+			BS_EXCEPT(InternalErrorException, "Core object manager shut down, but not all objects were released. Application must release ALL " \
+				"engine objects before shutdown.");
+		}
+#endif
+	}
+
+	UINT64 CoreObject2Manager::generateId()
+	{
+		Lock lock(mObjectsMutex);
+
+		return mNextAvailableID++;
+	}
+
+	void CoreObject2Manager::registerObject(CoreObject2* object)
+	{
+		Lock lock(mObjectsMutex);
+
+		UINT64 objId = object->getInternalID();
+		mObjects[objId] = object;
+	}
+
+	void CoreObject2Manager::unregisterObject(CoreObject2* object)
+	{
+		assert(object != nullptr && !object->isDestroyed());
+
+		UINT64 internalId = object->getInternalID();
+
+		Lock lock(mObjectsMutex);
+
+		mObjects.erase(internalId);
 	}
 }

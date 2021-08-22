@@ -367,6 +367,7 @@ namespace bs
 	struct GpuParamBlockDesc;
 	class ShaderInclude;
 	class CoreObject;
+	class CoreObject2;
 	class ImportOptions;
 	class TextureImportOptions;
 	class FontImportOptions;
@@ -411,6 +412,7 @@ namespace bs
 	class Transform;
 	class SceneActor;
 	class CoreObjectManager;
+	class CoreObject2Manager;
 	struct CollisionData;
 	// Asset import
 	class SpecificImporter;
