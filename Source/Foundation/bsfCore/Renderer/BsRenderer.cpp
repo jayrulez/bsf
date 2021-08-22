@@ -7,7 +7,7 @@
 #include "Material/BsMaterial.h"
 #include "Renderer/BsRendererExtension.h"
 #include "Renderer/BsRendererManager.h"
-#include "CoreThread/BsCoreObjectManager.h"
+#include "Common/BsCoreObjectManager.h"
 #include "Scene/BsSceneManager.h"
 #include "Material/BsShader.h"
 #include "Profiling/BsProfilerGPU.h"

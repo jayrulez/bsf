@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Image/BsColor.h"
-#include "CoreThread/BsCoreObject.h"
+#include "Common/BsCoreObject.h"
 
 namespace bs
 {

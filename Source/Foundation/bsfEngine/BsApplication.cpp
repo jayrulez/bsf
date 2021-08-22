@@ -15,7 +15,7 @@
 #include "Resources/BsPlainTextImporter.h"
 #include "Importer/BsImporter.h"
 #include "GUI/BsShortcutManager.h"
-#include "CoreThread/BsCoreObjectManager.h"
+#include "Common/BsCoreObjectManager.h"
 #include "Renderer/BsRendererManager.h"
 #include "Renderer/BsRendererMaterialManager.h"
 #include "Debug/BsDebugDraw.h"

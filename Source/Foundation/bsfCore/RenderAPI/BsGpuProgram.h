@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsCorePrerequisites.h"
-#include "CoreThread/BsCoreObject.h"
+#include "Common/BsCoreObject.h"
 #include "Reflection/BsIReflectable.h"
 #include "Utility/BsDataBlob.h"
 #include "BsVertexDeclaration.h"

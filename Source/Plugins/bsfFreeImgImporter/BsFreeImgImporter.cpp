@@ -4,7 +4,7 @@
 #include "Resources/BsResource.h"
 #include "Debug/BsDebug.h"
 #include "FileSystem/BsDataStream.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 #include "Image/BsTexture.h"
 #include "Importer/BsTextureImportOptions.h"
 #include "FileSystem/BsFileSystem.h"

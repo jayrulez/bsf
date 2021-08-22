@@ -7,7 +7,7 @@
 #include "Math/BsVector3.h"
 #include "Math/BsRandom.h"
 #include "Scene/BsSceneActor.h"
-#include "CoreThread/BsCoreObject.h"
+#include "Common/BsCoreObject.h"
 #include "Image/BsPixelData.h"
 #include "Math/BsAABox.h"
 #include "Particles/BsParticleDistribution.h"
