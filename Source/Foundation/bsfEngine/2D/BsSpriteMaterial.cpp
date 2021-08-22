@@ -11,7 +11,7 @@
 
 namespace bs
 {
-	SpriteMaterial::SpriteMaterial(UINT32 id, const HMaterial& material, ShaderVariation variation, bool allowBatching)
+	SpriteMaterial::SpriteMaterial(UINT32 id, const MaterialResourceHandle& material, ShaderVariation variation, bool allowBatching)
 		:mId(id), mAllowBatching(allowBatching), mMaterialStored(false), mParamBufferIdx(-1)
 	{
 		mMaterial = material->getCore();

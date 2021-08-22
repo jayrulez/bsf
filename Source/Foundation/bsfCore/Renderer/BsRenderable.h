@@ -36,7 +36,7 @@ namespace bs
 	class BS_CORE_EXPORT TRenderable : public SceneActor
 	{
 		using MeshType = CoreVariantHandleType<Mesh, Core>;
-		using MaterialType = CoreVariantHandleType<Material, Core>;
+		using MaterialType = CoreVariantHandleType<MaterialResource, Core>;
 
 	public:
 		TRenderable();

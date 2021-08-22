@@ -73,7 +73,7 @@ namespace bs
 		ParticleSetData& particles = set.getParticles();
 
 		SpriteTexture* texture = nullptr;
-		const HMaterial& material = state.system->getSettings().material;
+		const MaterialResourceHandle& material = state.system->getSettings().material;
 		if (material.isLoaded(false))
 		{
 			const HShader& shader = material->getShader();

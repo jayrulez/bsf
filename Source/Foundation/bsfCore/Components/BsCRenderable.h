@@ -31,23 +31,23 @@ namespace bs
 
 		/** @copydoc Renderable::setMaterial */
 		BS_SCRIPT_EXPORT(n:SetMaterial)
-		void setMaterial(UINT32 idx, HMaterial material) { mInternal->setMaterial(idx, material); }
+		void setMaterial(UINT32 idx, MaterialResourceHandle material) { mInternal->setMaterial(idx, material); }
 
 		/** @copydoc Renderable::setMaterial */
 		BS_SCRIPT_EXPORT(n:SetMaterial)
-		void setMaterial(HMaterial material) { mInternal->setMaterial(material); }
+		void setMaterial(MaterialResourceHandle material) { mInternal->setMaterial(material); }
 
 		/** @copydoc Renderable::getMaterial */
 		BS_SCRIPT_EXPORT(n:GetMaterial)
-		HMaterial getMaterial(UINT32 idx) const { return mInternal->getMaterial(idx); }
+		MaterialResourceHandle getMaterial(UINT32 idx) const { return mInternal->getMaterial(idx); }
 
 		/** @copydoc Renderable::setMaterials */
 		BS_SCRIPT_EXPORT(n:Materials,pr:setter)
-		void setMaterials(const Vector<HMaterial>& materials) { mInternal->setMaterials(materials); }
+		void setMaterials(const Vector<MaterialResourceHandle>& materials) { mInternal->setMaterials(materials); }
 
 		/** @copydoc Renderable::getMaterials */
 		BS_SCRIPT_EXPORT(n:Materials,pr:getter)
-		const Vector<HMaterial>& getMaterials() { return mInternal->getMaterials(); }
+		const Vector<MaterialResourceHandle>& getMaterials() { return mInternal->getMaterials(); }
 
 		/** @copydoc Renderable::setCullDistanceFactor */
 		BS_SCRIPT_EXPORT(n:CullDistance, pr:setter)

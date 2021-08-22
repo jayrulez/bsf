@@ -21,11 +21,11 @@ namespace bs
 
 		/** @copydoc Decal::setMaterial */
 		BS_SCRIPT_EXPORT(n:Material,pr:setter)
-		void setMaterial(const HMaterial& material) { mInternal->setMaterial(material); }
+		void setMaterial(const MaterialResourceHandle& material) { mInternal->setMaterial(material); }
 
 		/** @copydoc setMaterial */
 		BS_SCRIPT_EXPORT(n:Material,pr:getter)
-		const HMaterial& getMaterial() const { return mInternal->getMaterial(); }
+		const MaterialResourceHandle& getMaterial() const { return mInternal->getMaterial(); }
 
 		/** @copydoc Decal::setSize */
 		BS_SCRIPT_EXPORT(n:Size,pr:setter)

@@ -31,7 +31,7 @@ namespace bs
 		if (mInternal != nullptr)
 			mInternal->initialize();
 		else
-			mInternal = Decal::create(HMaterial());
+			mInternal = Decal::create(MaterialResourceHandle());
 
 		gSceneManager()._bindActor(mInternal, sceneObject());
 	}

@@ -111,13 +111,13 @@ namespace bs
 		HShader getBuiltinShader(BuiltinShader type) const;
 
 		/**	Creates a material used for textual sprite rendering (for example text in GUI). */
-		HMaterial createSpriteTextMaterial() const;
+		MaterialResourceHandle createSpriteTextMaterial() const;
 
 		/**	Creates a material used for image sprite rendering (for example images in GUI). */
-		HMaterial createSpriteImageMaterial() const;
+		MaterialResourceHandle createSpriteImageMaterial() const;
 
 		/** Creates a material used for antialiased line rendering (for example curve rendering in GUI). */
-		HMaterial createSpriteLineMaterial() const;
+		MaterialResourceHandle createSpriteLineMaterial() const;
 
 		/**	Retrieves one of the builtin meshes. */
 		HMesh getMesh(BuiltinMesh mesh) const;

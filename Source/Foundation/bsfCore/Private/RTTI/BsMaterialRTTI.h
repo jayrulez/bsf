@@ -13,20 +13,20 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT MaterialRTTI : public RTTIType<Material, Resource, MaterialRTTI>
+	class BS_CORE_EXPORT MaterialResourceRTTI : public RTTIType<MaterialResource, Resource, MaterialResourceRTTI>
 	{
 	private:
-		HShader& getShader(Material* obj) { return obj->mShader; }
-		void setShader(Material* obj, HShader& val) { obj->mShader = val; }
+		HShader& getShader(MaterialResource* obj) { return obj->mShader; }
+		void setShader(MaterialResource* obj, HShader& val) { obj->mShader = val; }
 
-		SPtr<MaterialParams> getMaterialParams(Material* obj) { return obj->mParams; }
-		void setMaterialParams(Material* obj, SPtr<MaterialParams> value) { mMatParams = value; }
+		SPtr<MaterialParams> getMaterialParams(MaterialResource* obj) { return obj->mParams; }
+		void setMaterialParams(MaterialResource* obj, SPtr<MaterialParams> value) { mMatParams = value; }
 
 	public:
-		MaterialRTTI()
+		MaterialResourceRTTI()
 		{
-			addReflectableField("mShader", 0, &MaterialRTTI::getShader, &MaterialRTTI::setShader);
-			addReflectablePtrField("mMaterialParams", 2, &MaterialRTTI::getMaterialParams, &MaterialRTTI::setMaterialParams);
+			addReflectableField("mShader", 0, &MaterialResourceRTTI::getShader, &MaterialResourceRTTI::setShader);
+			addReflectablePtrField("mMaterialParams", 2, &MaterialResourceRTTI::getMaterialParams, &MaterialResourceRTTI::setMaterialParams);
 		}
 
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override;

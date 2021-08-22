@@ -37,10 +37,10 @@ namespace bs
 	bool isShaderValid(const SPtr<ct::Shader>& shader) { return shader != nullptr; }
 
 	template<bool Core>
-	SPtr<CoreVariantType<Material, Core>> getMaterialPtr(const TMaterial<Core>* material)
+	SPtr<CoreVariantType<MaterialResource, Core>> getMaterialPtr(const TMaterial<Core>* material)
 	{
-		return std::static_pointer_cast<CoreVariantType<Material, Core>>(
-			static_cast<const CoreVariantType<Material, Core>*>(material)->getThisPtr());
+		return std::static_pointer_cast<CoreVariantType<MaterialResource, Core>>(
+			static_cast<const CoreVariantType<MaterialResource, Core>*>(material)->getThisPtr());
 	}
 
 	template<bool Core>
@@ -571,18 +571,18 @@ namespace bs
 	template BS_CORE_EXPORT void TMaterial<true>::getParam(const String&, TMaterialDataParam<Matrix4x2, true>&) const;
 	template BS_CORE_EXPORT void TMaterial<true>::getParam(const String&, TMaterialDataParam<Matrix4x3, true>&) const;
 
-	Material::Material()
+	MaterialResource::MaterialResource()
 		:mLoadFlags(Load_None)
 	{ }
 
-	Material::Material(const HShader& shader, const ShaderVariation& variation)
+	MaterialResource::MaterialResource(const HShader& shader, const ShaderVariation& variation)
 		:mLoadFlags(Load_None)
 	{
 		mShader = shader;
 		mVariation = variation;
 	}
 
-	void Material::initialize()
+	void MaterialResource::initialize()
 	{
 		addResourceDependency(mShader);
 		_markResourcesDirty();
@@ -591,7 +591,7 @@ namespace bs
 		Resource::initialize();
 	}
 
-	void Material::setShader(const HShader& shader)
+	void MaterialResource::setShader(const HShader& shader)
 	{
 		if (mShader == shader)
 			return;
@@ -612,33 +612,33 @@ namespace bs
 		initializeIfLoaded();
 	}
 
-	void Material::setVariation(const ShaderVariation& variation)
+	void MaterialResource::setVariation(const ShaderVariation& variation)
 	{
 		mVariation = variation;
 		markCoreDirty();
 	}
 
-	void Material::_markCoreDirty(MaterialDirtyFlags flags)
+	void MaterialResource::_markCoreDirty(MaterialDirtyFlags flags)
 	{
 		markCoreDirty((UINT32)flags);
 	}
 
-	void Material::_markDependenciesDirty()
+	void MaterialResource::_markDependenciesDirty()
 	{
 		markDependenciesDirty();
 	}
 
-	void Material::_markResourcesDirty()
+	void MaterialResource::_markResourcesDirty()
 	{
 		markListenerResourcesDirty();
 	}
 
-	SPtr<ct::Material> Material::getCore() const
+	SPtr<ct::Material> MaterialResource::getCore() const
 	{
 		return std::static_pointer_cast<ct::Material>(mCoreSpecific);
 	}
 
-	SPtr<ct::CoreObject> Material::createCore() const
+	SPtr<ct::CoreObject> MaterialResource::createCore() const
 	{
 		ct::Material* material = nullptr;
 
@@ -665,7 +665,7 @@ namespace bs
 		return materialPtr;
 	}
 
-	CoreSyncData Material::syncToCore(FrameAlloc* allocator)
+	CoreSyncData MaterialResource::syncToCore(FrameAlloc* allocator)
 	{
 		const UINT32 dirtyParam = (UINT32)MaterialDirtyFlags::Param;
 		const bool syncAllParams = (getCoreDirtyFlags() & ~dirtyParam) != 0;
@@ -712,7 +712,7 @@ namespace bs
 		return CoreSyncData(buffer, size);
 	}
 
-	void Material::getCoreDependencies(Vector<CoreObject*>& dependencies)
+	void MaterialResource::getCoreDependencies(Vector<CoreObject*>& dependencies)
 	{
 		if (mShader.isLoaded())
 			dependencies.push_back(mShader.get());
@@ -721,7 +721,7 @@ namespace bs
 			mParams->getCoreObjectDependencies(dependencies);
 	}
 
-	void Material::getListenerResources(Vector<HResource>& resources)
+	void MaterialResource::getListenerResources(Vector<HResource>& resources)
 	{
 		if (mShader != nullptr)
 			resources.push_back(mShader);
@@ -730,7 +730,7 @@ namespace bs
 			mParams->getResourceDependencies(resources);
 	}
 
-	void Material::initializeIfLoaded()
+	void MaterialResource::initializeIfLoaded()
 	{
 		if (areDependenciesLoaded())
 		{
@@ -761,7 +761,7 @@ namespace bs
 		}
 	}
 
-	void Material::notifyResourceLoaded(const HResource& resource)
+	void MaterialResource::notifyResourceLoaded(const HResource& resource)
 	{
 		// Ready to initialize as soon as shader loads
 		if (resource->getRTTI()->getRTTIId() == TID_Shader)
@@ -773,7 +773,7 @@ namespace bs
 		}
 	}
 
-	void Material::notifyResourceChanged(const HResource& resource)
+	void MaterialResource::notifyResourceChanged(const HResource& resource)
 	{
 		// Need full rebuild if shader changed
 		if (resource->getRTTI()->getRTTIId() == TID_Shader)
@@ -788,20 +788,20 @@ namespace bs
 		}
 	}
 
-	HMaterial Material::clone()
+	MaterialResourceHandle MaterialResource::clone()
 	{
 		SPtr<MemoryDataStream> outputStream = bs_shared_ptr_new<MemoryDataStream>();
 		BinarySerializer serializer;
 
 		serializer.encode(this, outputStream);
 		outputStream->seek(0);
-		SPtr<Material> cloneObj = std::static_pointer_cast<Material>(serializer.decode(outputStream, (UINT32)outputStream->size()));
+		SPtr<MaterialResource> cloneObj = std::static_pointer_cast<MaterialResource>(serializer.decode(outputStream, (UINT32)outputStream->size()));
 
-		return static_resource_cast<Material>(gResources()._createResourceHandle(cloneObj));
+		return static_resource_cast<MaterialResource>(gResources()._createResourceHandle(cloneObj));
 	}
 
 	template<class T>
-	void copyParam(const SPtr<MaterialParams>& from, Material* to, const String& name,
+	void copyParam(const SPtr<MaterialParams>& from, MaterialResource* to, const String& name,
 		const MaterialParams::ParamData& paramRef, UINT32 arraySize)
 	{
 		TMaterialDataParam<T, false> param;
@@ -815,13 +815,13 @@ namespace bs
 		}
 	}
 
-	void Material::setParams(const SPtr<MaterialParams>& params)
+	void MaterialResource::setParams(const SPtr<MaterialParams>& params)
 	{
 		if (params == nullptr)
 			return;
 
 		std::function<
-			void(const SPtr<MaterialParams>&, Material*, const String&, const MaterialParams::ParamData&, UINT32)>
+			void(const SPtr<MaterialParams>&, MaterialResource*, const String&, const MaterialParams::ParamData&, UINT32)>
 			copyParamLookup[GPDT_COUNT];
 
 		copyParamLookup[GPDT_FLOAT1] = &copyParam<float>;
@@ -983,44 +983,44 @@ namespace bs
 		}
 	}
 
-	HMaterial Material::create()
+	MaterialResourceHandle MaterialResource::create()
 	{
-		const SPtr<Material> materialPtr = createEmpty();
+		const SPtr<MaterialResource> materialPtr = createEmpty();
 		materialPtr->initialize();
 
-		return static_resource_cast<Material>(gResources()._createResourceHandle(materialPtr));
+		return static_resource_cast<MaterialResource>(gResources()._createResourceHandle(materialPtr));
 	}
 
-	HMaterial Material::create(const HShader& shader)
+	MaterialResourceHandle MaterialResource::create(const HShader& shader)
 	{
 		return create(shader, ShaderVariation::EMPTY);
 	}
 
-	HMaterial Material::create(const HShader& shader, const ShaderVariation& variation)
+	MaterialResourceHandle MaterialResource::create(const HShader& shader, const ShaderVariation& variation)
 	{
-		SPtr<Material> materialPtr = bs_core_ptr<Material>(new (bs_alloc<Material>()) Material(shader, variation));
+		SPtr<MaterialResource> materialPtr = bs_core_ptr<MaterialResource>(new (bs_alloc<MaterialResource>()) MaterialResource(shader, variation));
 		materialPtr->_setThisPtr(materialPtr);
 		materialPtr->initialize();
 
-		return static_resource_cast<Material>(gResources()._createResourceHandle(materialPtr));
+		return static_resource_cast<MaterialResource>(gResources()._createResourceHandle(materialPtr));
 	}
 
-	SPtr<Material> Material::createEmpty()
+	SPtr<MaterialResource> MaterialResource::createEmpty()
 	{
-		SPtr<Material> newMat = bs_core_ptr<Material>(new (bs_alloc<Material>()) Material());
+		SPtr<MaterialResource> newMat = bs_core_ptr<MaterialResource>(new (bs_alloc<MaterialResource>()) MaterialResource());
 		newMat->_setThisPtr(newMat);
 
 		return newMat;
 	}
 
-	RTTITypeBase* Material::getRTTIStatic()
+	RTTITypeBase* MaterialResource::getRTTIStatic()
 	{
-		return MaterialRTTI::instance();
+		return MaterialResourceRTTI::instance();
 	}
 
-	RTTITypeBase* Material::getRTTI() const
+	RTTITypeBase* MaterialResource::getRTTI() const
 	{
-		return Material::getRTTIStatic();
+		return MaterialResource::getRTTIStatic();
 	}
 
 	namespace ct

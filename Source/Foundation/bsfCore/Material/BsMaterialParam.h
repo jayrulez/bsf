@@ -22,7 +22,7 @@ namespace bs
 	class BS_CORE_EXPORT TMaterialDataCommon
 	{
 	protected:
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 
 	public:
@@ -127,7 +127,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
@@ -156,7 +156,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamSpriteTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
 		using TextureType = CoreVariantHandleType<TextureResource, Core>;
@@ -186,7 +186,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamLoadStoreTexture
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
@@ -215,7 +215,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamBuffer
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 
@@ -244,7 +244,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TMaterialParamSampState
 	{
-		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
+		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
 

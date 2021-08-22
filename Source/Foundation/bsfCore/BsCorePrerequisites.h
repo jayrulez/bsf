@@ -257,7 +257,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(Pass);
 	CORE_OBJECT_FORWARD_DECLARE(Technique);
 	CORE_OBJECT_FORWARD_DECLARE(Shader);
-	CORE_OBJECT_FORWARD_DECLARE(Material);
+	//CORE_OBJECT_FORWARD_DECLARE(Material);
 	CORE_OBJECT_FORWARD_DECLARE(RenderTarget);
 	CORE_OBJECT_FORWARD_DECLARE(RenderTexture);
 	CORE_OBJECT_FORWARD_DECLARE(RenderWindow);
@@ -291,6 +291,11 @@ namespace bs
 	class TextureResource;
 	namespace ct { class Texture; }
 	template<> struct CoreThreadType<TextureResource> { typedef ct::Texture Type; };
+
+
+	class MaterialResource;
+	namespace ct { class Material; }
+	template<> struct CoreThreadType<MaterialResource> { typedef ct::Material Type; };
 
 	//class IndexBuffer;
 	//class VertexBuffer;
@@ -739,7 +744,7 @@ namespace bs
 	typedef ResourceHandle<Resource> HResource;
 	typedef ResourceHandle<TextureResource> TextureResourceHandle;
 	typedef ResourceHandle<Mesh> HMesh;
-	typedef ResourceHandle<Material> HMaterial;
+	typedef ResourceHandle<MaterialResource> MaterialResourceHandle;
 	typedef ResourceHandle<ShaderInclude> HShaderInclude;
 	typedef ResourceHandle<Font> HFont;
 	typedef ResourceHandle<Shader> HShader;

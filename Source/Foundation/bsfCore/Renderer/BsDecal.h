@@ -96,7 +96,7 @@ namespace bs
 	class BS_CORE_EXPORT TDecal : public DecalBase
 	{
 	public:
-		using MaterialType = CoreVariantHandleType<Material, Core>;
+		using MaterialType = CoreVariantHandleType<MaterialResource, Core>;
 
 		TDecal() = default;
 		TDecal(const MaterialType& material, const Vector2& size, float maxDistance)
@@ -144,10 +144,10 @@ namespace bs
 		 *								along the negative Z axis).
 		 * @returns						New decal object.
 		 */
-		static SPtr<Decal> create(const HMaterial& material, const Vector2& size = Vector2::ONE, float maxDistance = 10.0f);
+		static SPtr<Decal> create(const MaterialResourceHandle& material, const Vector2& size = Vector2::ONE, float maxDistance = 10.0f);
 
 	protected:
-		Decal(const HMaterial& material, const Vector2& size, float maxDistance);
+		Decal(const MaterialResourceHandle& material, const Vector2& size, float maxDistance);
 
 		/** @copydoc CoreObject::createCore */
 		SPtr<ct::CoreObject> createCore() const override;

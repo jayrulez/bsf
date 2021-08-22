@@ -737,10 +737,10 @@ namespace bs
 	 */
 
 	/** @copydoc MaterialBase */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Material: public Resource, public TMaterial<false>, public IResourceListener
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) MaterialResource: public Resource, public TMaterial<false>, public IResourceListener
 	{
 	public:
-		~Material() = default;
+		~MaterialResource() = default;
 
 		/**
 		 * Sets a shader that will be used by the material. Material will be initialized using all compatible techniques
@@ -761,7 +761,7 @@ namespace bs
 
 		/** Creates a deep copy of the material and returns the new object. */
 		BS_SCRIPT_EXPORT(n:Clone)
-		HMaterial clone();
+		MaterialResourceHandle clone();
 
 		/**
 		 * Creates a new empty material.
@@ -769,17 +769,17 @@ namespace bs
 		 * @note	Make sure you call Material::setShader before using it.
 		 */
 		BS_SCRIPT_EXPORT(ec:Material)
-		static HMaterial create();
+		static MaterialResourceHandle create();
 
 		/** Creates a new material with the specified shader. */
 		BS_SCRIPT_EXPORT(ec:Material)
-		static HMaterial create(const HShader& shader);
+		static MaterialResourceHandle create(const HShader& shader);
 
 		/**
 		 * Creates a new material with the specified shader, and a set of parameters that determine which subset of
 		 * techniques in the shader should the material use.
 		 */
-		static HMaterial create(const HShader& shader, const ShaderVariation& variation);
+		static MaterialResourceHandle create(const HShader& shader, const ShaderVariation& variation);
 
 		/** @name Internal
 		 *  @{
@@ -799,8 +799,8 @@ namespace bs
 
 		/** @} */
 	private:
-		Material();
-		Material(const HShader& shader, const ShaderVariation& variation);
+		MaterialResource();
+		MaterialResource(const HShader& shader, const ShaderVariation& variation);
 
 		/** @copydoc CoreObject::createCore */
 		SPtr<ct::CoreObject> createCore() const override;
@@ -830,7 +830,7 @@ namespace bs
 		void setParams(const SPtr<MaterialParams>& params);
 
 		/**	Creates a new empty material but doesn't initialize it. */
-		static SPtr<Material> createEmpty();
+		static SPtr<MaterialResource> createEmpty();
 
 		UINT32 mLoadFlags;
 		
@@ -839,7 +839,7 @@ namespace bs
 		/************************************************************************/
 		
 	public:
-		friend class MaterialRTTI;
+		friend class MaterialResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
@@ -872,7 +872,7 @@ namespace bs
 		/** Creates a new material with the specified shader. */
 		static SPtr<Material> create(const SPtr<Shader>& shader);
 	private:
-		friend class bs::Material;
+		friend class bs::MaterialResource;
 
 		Material() = default;
 		Material(const SPtr<Shader>& shader, const ShaderVariation& variation);

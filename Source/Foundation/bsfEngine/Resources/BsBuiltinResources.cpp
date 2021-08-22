@@ -383,19 +383,19 @@ namespace bs
 		return gResources().load<TextureResource>(texturePath);
 	}
 
-	HMaterial BuiltinResources::createSpriteTextMaterial() const
+	MaterialResourceHandle BuiltinResources::createSpriteTextMaterial() const
 	{
-		return Material::create(mShaderSpriteText);
+		return MaterialResource::create(mShaderSpriteText);
 	}
 
-	HMaterial BuiltinResources::createSpriteImageMaterial() const
+	MaterialResourceHandle BuiltinResources::createSpriteImageMaterial() const
 	{
-		return Material::create(mShaderSpriteImage);
+		return MaterialResource::create(mShaderSpriteImage);
 	}
 
-	HMaterial BuiltinResources::createSpriteLineMaterial() const
+	MaterialResourceHandle BuiltinResources::createSpriteLineMaterial() const
 	{
-		return Material::create(mShaderSpriteLine);
+		return MaterialResource::create(mShaderSpriteLine);
 	}
 
 	BuiltinResources& gBuiltinResources()

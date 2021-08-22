@@ -73,7 +73,7 @@ namespace bs
 		p(mLayerMask);
 	}
 
-	Decal::Decal(const HMaterial& material, const Vector2& size, float maxDistance)
+	Decal::Decal(const MaterialResourceHandle& material, const Vector2& size, float maxDistance)
 		:TDecal(material, size, maxDistance)
 	{
 		// Calling virtual method is okay here because this is the most derived type
@@ -85,7 +85,7 @@ namespace bs
 		return std::static_pointer_cast<ct::Decal>(mCoreSpecific);
 	}
 
-	SPtr<Decal> Decal::create(const HMaterial& material, const Vector2& size, float maxDistance)
+	SPtr<Decal> Decal::create(const MaterialResourceHandle& material, const Vector2& size, float maxDistance)
 	{
 		Decal* decal = new (bs_alloc<Decal>()) Decal(material, size, maxDistance);
 		SPtr<Decal> decalPtr = bs_core_ptr<Decal>(decal);
