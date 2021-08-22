@@ -6,12 +6,12 @@
 
 namespace bs
 {
-	HShaderInclude DefaultShaderIncludeHandler::findInclude(const String& name) const
+	ShaderIncludeResourceHandle DefaultShaderIncludeHandler::findInclude(const String& name) const
 	{
-		return Importer::instance().import<ShaderInclude>(name);
+		return Importer::instance().import<ShaderIncludeResource>(name);
 	}
 
-	HShaderInclude ShaderManager::findInclude(const String& name) const
+	ShaderIncludeResourceHandle ShaderManager::findInclude(const String& name) const
 	{
 		return mIncludeHandler->findInclude(name);
 	}

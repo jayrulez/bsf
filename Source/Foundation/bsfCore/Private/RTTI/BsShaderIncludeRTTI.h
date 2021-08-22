@@ -14,15 +14,15 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT ShaderIncludeRTTI : public RTTIType <ShaderInclude, Resource, ShaderIncludeRTTI>
+	class BS_CORE_EXPORT ShaderIncludeResourceRTTI : public RTTIType <ShaderIncludeResource, Resource, ShaderIncludeResourceRTTI>
 	{
 	private:
-		String& getString(ShaderInclude* obj) { return obj->mString; }
-		void setString(ShaderInclude* obj, String& val) { obj->mString = val; }
+		String& getString(ShaderIncludeResource* obj) { return obj->mString; }
+		void setString(ShaderIncludeResource* obj, String& val) { obj->mString = val; }
 	public:
-		ShaderIncludeRTTI()
+		ShaderIncludeResourceRTTI()
 		{
-			addPlainField("mString", 0, &ShaderIncludeRTTI::getString, &ShaderIncludeRTTI::setString);
+			addPlainField("mString", 0, &ShaderIncludeResourceRTTI::getString, &ShaderIncludeResourceRTTI::setString);
 		}
 
 		const String& getRTTIName() override
@@ -38,7 +38,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return ShaderInclude::_createPtr(""); // Initial string doesn't matter, it'll get overwritten
+			return ShaderIncludeResource::_createPtr(""); // Initial string doesn't matter, it'll get overwritten
 		}
 	};
 

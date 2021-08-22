@@ -18,7 +18,7 @@ char* includePush(ParseState* state, const char* filename, int line, int column,
 	memcpy(filenameNoQuote, filename + 1, filenameQuotesLen - 2);
 	filenameNoQuote[filenameQuotesLen - 2] = '\0';
 
-	HShaderInclude include = ShaderManager::instance().findInclude(filenameNoQuote);
+	ShaderIncludeResourceHandle include = ShaderManager::instance().findInclude(filenameNoQuote);
 
 	if (include != nullptr)
 		include.blockUntilLoaded();

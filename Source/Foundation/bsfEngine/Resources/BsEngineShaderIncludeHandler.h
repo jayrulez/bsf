@@ -19,7 +19,7 @@ namespace bs
 	{
 	public:
 		/** @copydoc IShaderIncludeHandler::findInclude */
-		HShaderInclude findInclude(const String& name) const override;
+		ShaderIncludeResourceHandle findInclude(const String& name) const override;
 
 		/** @copydoc IShaderIncludeHandler::addSearchPath */
 		void addSearchPath(const Path& path) override { mSearchPaths.push_back(path); }

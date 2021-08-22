@@ -12,14 +12,14 @@ namespace bs
 	 */
 
 	/**	Raw text resource that serves as an include file for shaders. */
-	class BS_CORE_EXPORT ShaderInclude : public Resource
+	class BS_CORE_EXPORT ShaderIncludeResource : public Resource
 	{
 	public:
 		/**	Text of the include file. */
 		const String& getString() const { return mString; }
 
 		/**	Creates a new include file resource with the specified include string. */
-		static HShaderInclude create(const String& includeString);
+		static ShaderIncludeResourceHandle create(const String& includeString);
 
 	public: // ***** INTERNAL ******
 		/** @name Internal
@@ -31,11 +31,11 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<ShaderInclude> _createPtr(const String& includeString);
+		static SPtr<ShaderIncludeResource> _createPtr(const String& includeString);
 
 		/** @} */
 	private:
-		ShaderInclude(const String& includeString);
+		ShaderIncludeResource(const String& includeString);
 
 		String mString;
 
@@ -43,7 +43,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class ShaderIncludeRTTI;
+		friend class ShaderIncludeResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

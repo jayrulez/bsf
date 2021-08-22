@@ -417,7 +417,7 @@ namespace bs
 	struct GpuParamDataDesc;
 	struct GpuParamObjectDesc;
 	struct GpuParamBlockDesc;
-	class ShaderInclude;
+	class ShaderIncludeResource;
 	class CoreObject;
 	class CoreObject2;
 	class ImportOptions;
@@ -750,7 +750,7 @@ namespace bs
 	typedef ResourceHandle<TextureResource> TextureResourceHandle;
 	typedef ResourceHandle<Mesh> MeshResourceHandle;
 	typedef ResourceHandle<MaterialResource> MaterialResourceHandle;
-	typedef ResourceHandle<ShaderInclude> HShaderInclude;
+	typedef ResourceHandle<ShaderIncludeResource> ShaderIncludeResourceHandle;
 	typedef ResourceHandle<Font> FontResourceHandle;
 	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
 	typedef ResourceHandle<Prefab> PrefabResourceHandle;

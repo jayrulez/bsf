@@ -6,34 +6,34 @@
 
 namespace bs
 {
-	ShaderInclude::ShaderInclude(const String& includeString)
+	ShaderIncludeResource::ShaderIncludeResource(const String& includeString)
 		:Resource(false), mString(includeString)
 	{
 
 	}
 
-	HShaderInclude ShaderInclude::create(const String& includeString)
+	ShaderIncludeResourceHandle ShaderIncludeResource::create(const String& includeString)
 	{
-		return static_resource_cast<ShaderInclude>(gResources()._createResourceHandle(_createPtr(includeString)));
+		return static_resource_cast<ShaderIncludeResource>(gResources()._createResourceHandle(_createPtr(includeString)));
 	}
 
-	SPtr<ShaderInclude> ShaderInclude::_createPtr(const String& includeString)
+	SPtr<ShaderIncludeResource> ShaderIncludeResource::_createPtr(const String& includeString)
 	{
-		SPtr<ShaderInclude> shaderIncludePtr = bs_core_ptr<ShaderInclude>(
-			new (bs_alloc<ShaderInclude>()) ShaderInclude(includeString));
+		SPtr<ShaderIncludeResource> shaderIncludePtr = bs_core_ptr<ShaderIncludeResource>(
+			new (bs_alloc<ShaderIncludeResource>()) ShaderIncludeResource(includeString));
 		shaderIncludePtr->_setThisPtr(shaderIncludePtr);
 		shaderIncludePtr->initialize();
 
 		return shaderIncludePtr;
 	}
 
-	RTTITypeBase* ShaderInclude::getRTTIStatic()
+	RTTITypeBase* ShaderIncludeResource::getRTTIStatic()
 	{
-		return ShaderIncludeRTTI::instance();
+		return ShaderIncludeResourceRTTI::instance();
 	}
 
-	RTTITypeBase* ShaderInclude::getRTTI() const
+	RTTITypeBase* ShaderIncludeResource::getRTTI() const
 	{
-		return ShaderInclude::getRTTIStatic();
+		return ShaderIncludeResource::getRTTIStatic();
 	}
 }
