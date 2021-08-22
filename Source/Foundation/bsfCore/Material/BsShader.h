@@ -217,7 +217,7 @@ namespace bs
 	template<bool Core>
 	struct BS_CORE_EXPORT TSHADER_DESC
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
 		using TechniqueType = CoreVariantType<Technique, Core>;
 		using SubShaderType = typename TSubShaderType<Core>::Type ;

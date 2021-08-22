@@ -698,7 +698,7 @@ namespace bs { namespace ct
 	private:
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
 		GpuParamTexture mColorTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 
 		SPtr<PooledRenderTexture> mOutput0;
 		SPtr<PooledRenderTexture> mOutput1;
@@ -759,7 +759,7 @@ namespace bs { namespace ct
 		GpuParamTexture mFocusedTexture;
 		GpuParamTexture mNearTexture;
 		GpuParamTexture mFarTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 	};
 
 	BS_PARAM_BLOCK_BEGIN(DepthOfFieldCommonParamDef)
@@ -821,7 +821,7 @@ namespace bs { namespace ct
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
 		SPtr<GpuParamBlockBuffer> mCommonParamBuffer;
 		GpuParamTexture mInputTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 	};
 
 	BS_PARAM_BLOCK_BEGIN(BokehDOFParamDef)
@@ -885,8 +885,8 @@ namespace bs { namespace ct
 		SPtr<GpuParamBlockBuffer> mCommonParamBuffer;
 		GpuParamTexture mInputTextureVS;
 		GpuParamTexture mInputTextureFS;
-		GpuParamTexture mBokehTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mBokeTextureResourceHandle;
+		GpuParamTexture mDeptTextureResourceHandle;
 
 		SPtr<VertexDeclaration> mTileVertexDecl;
 		SPtr<IndexBuffer> mTileIndexBuffer;
@@ -939,7 +939,7 @@ namespace bs { namespace ct
 		SPtr<GpuParamBlockBuffer> mCommonParamBuffer;
 		GpuParamTexture mUnfocusedTexture;
 		GpuParamTexture mFocusedTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 	};
 
 	BS_PARAM_BLOCK_BEGIN(MotionBlurParamDef)
@@ -968,7 +968,7 @@ namespace bs { namespace ct
 	private:
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
 		GpuParamTexture mInputTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 	};
 
 	BS_PARAM_BLOCK_BEGIN(BuildHiZFParamDef)
@@ -1131,7 +1131,7 @@ namespace bs { namespace ct
 
 	private:
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 		GpuParamTexture mNormalsTexture;
 		GpuParamTexture mDownsampledAOTexture;
 		GpuParamTexture mSetupAOTexture;
@@ -1170,7 +1170,7 @@ namespace bs { namespace ct
 
 	private:
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 		GpuParamTexture mNormalsTexture;
 	};
 
@@ -1221,7 +1221,7 @@ namespace bs { namespace ct
 	private:
 		SPtr<GpuParamBlockBuffer> mParamBuffer;
 		GpuParamTexture mAOTexture;
-		GpuParamTexture mDepthTexture;
+		GpuParamTexture mDeptTextureResourceHandle;
 	};
 
 	BS_PARAM_BLOCK_BEGIN(SSRStencilParamDef)
@@ -1424,7 +1424,7 @@ namespace bs { namespace ct
 
 		GpuParamTexture mSceneColorTexture;
 		GpuParamTexture mPrevColorTexture;
-		GpuParamTexture mSceneDepthTexture;
+		GpuParamTexture mSceneDeptTextureResourceHandle;
 		GpuParamTexture mVelocityTexture;
 
 		bool mHasVelocityTexture = false;

@@ -545,7 +545,7 @@ namespace bs
 			MemBuffer->deallocAll();
 	}
 
-	const HTexture& TextDataBase::getTextureForPage(UINT32 page) const
+	const TextureResourceHandle& TextDataBase::getTextureForPage(UINT32 page) const
 	{
 		return mFontData->texturePages[page];
 	}

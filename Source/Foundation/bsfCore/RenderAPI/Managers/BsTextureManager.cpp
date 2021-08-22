@@ -7,10 +7,10 @@
 
 namespace bs
 {
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc)
+	SPtr<TextureResource> TextureManager::createTexture(const TEXTURE_DESC& desc)
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
+		TextureResource* tex = new (bs_alloc<TextureResource>()) TextureResource(desc);
+		SPtr<TextureResource> ret = bs_core_ptr<TextureResource>(tex);
 
 		ret->_setThisPtr(ret);
 		ret->initialize();
@@ -18,10 +18,10 @@ namespace bs
 		return ret;
 	}
 
-	SPtr<Texture> TextureManager::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
+	SPtr<TextureResource> TextureManager::createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture(desc, pixelData);
-		SPtr<Texture> ret = bs_core_ptr<Texture>(tex);
+		TextureResource* tex = new (bs_alloc<TextureResource>()) TextureResource(desc, pixelData);
+		SPtr<TextureResource> ret = bs_core_ptr<TextureResource>(tex);
 
 		ret->_setThisPtr(ret);
 		ret->initialize();
@@ -29,10 +29,10 @@ namespace bs
 		return ret;
 	}
 
-	SPtr<Texture> TextureManager::_createEmpty()
+	SPtr<TextureResource> TextureManager::_createEmpty()
 	{
-		Texture* tex = new (bs_alloc<Texture>()) Texture();
-		SPtr<Texture> texture = bs_core_ptr<Texture>(tex);
+		TextureResource* tex = new (bs_alloc<TextureResource>()) TextureResource();
+		SPtr<TextureResource> texture = bs_core_ptr<TextureResource>(tex);
 		texture->_setThisPtr(texture);
 
 		return texture;
@@ -45,16 +45,16 @@ namespace bs
 		textureDesc.usage = TU_RENDERTARGET;
 		textureDesc.numMips = 0;
 
-		HTexture texture = Texture::createHandle(textureDesc);
+		TextureResourceHandle texture = TextureResource::createHandle(textureDesc);
 
-		HTexture depthStencil;
+		TextureResourceHandle depthStencil;
 		if(createDepth)
 		{
 			textureDesc.format = depthStencilFormat;
 			textureDesc.hwGamma = false;
 			textureDesc.usage = TU_DEPTHSTENCIL;
 
-			depthStencil = Texture::createHandle(textureDesc);
+			depthStencil = TextureResource::createHandle(textureDesc);
 		}
 
 		RENDER_TEXTURE_DESC desc;

@@ -384,11 +384,11 @@ namespace bs
 		{
 			TEXTURE_DESC texDesc; // Default
 
-			HTexture newTex = Texture::createHandle(texDesc);
+			TextureResourceHandle newTex = TextureResource::createHandle(texDesc);
 			mCaretTexture = SpriteTexture::create(newTex);
 		}
 
-		const HTexture& tex = mCaretTexture->getTexture();
+		const TextureResourceHandle& tex = mCaretTexture->getTexture();
 		SPtr<PixelData> data = tex->getProperties().allocBuffer(0, 0);
 
 		data->setColorAt(mCaretColor, 0, 0);
@@ -401,11 +401,11 @@ namespace bs
 		{
 			TEXTURE_DESC texDesc; // Default
 
-			HTexture newTex = Texture::createHandle(texDesc);
+			TextureResourceHandle newTex = TextureResource::createHandle(texDesc);
 			mTextSelectionTexture = SpriteTexture::create(newTex);
 		}
 
-		const HTexture& tex = mTextSelectionTexture->getTexture();
+		const TextureResourceHandle& tex = mTextSelectionTexture->getTexture();
 		SPtr<PixelData> data = tex->getProperties().allocBuffer(0, 0);
 
 		data->setColorAt(mTextSelectionColor, 0, 0);

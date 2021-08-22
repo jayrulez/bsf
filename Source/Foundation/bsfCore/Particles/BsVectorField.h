@@ -45,7 +45,7 @@ namespace bs
 		class BS_CORE_EXPORT TVectorField
 		{
 		public:
-			using TextureType = SPtr<CoreVariantType<Texture, Core>>;
+			using TextureType = SPtr<CoreVariantType<TextureResource, Core>>;
 
 			TVectorField() = default;
 			TVectorField(const VECTOR_FIELD_DESC& desc)

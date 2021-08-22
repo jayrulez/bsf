@@ -100,7 +100,7 @@ namespace bs
 		struct PageInfo
 		{
 			UINT32 numQuads;
-			HTexture texture;
+			TextureResourceHandle texture;
 		};
 
 	public:
@@ -234,7 +234,7 @@ namespace bs
 		BS_CORE_EXPORT const TextLine& getLine(UINT32 idx) const { return mLines[idx]; }
 
 		/**	Returns font texture for the provided page index.  */
-		BS_CORE_EXPORT const HTexture& getTextureForPage(UINT32 page) const;
+		BS_CORE_EXPORT const TextureResourceHandle& getTextureForPage(UINT32 page) const;
 
 		/**	Returns the number of quads used by all the characters in the provided page. */
 		BS_CORE_EXPORT UINT32 getNumQuadsForPage(UINT32 page) const { return mPageInfos[page].numQuads; }

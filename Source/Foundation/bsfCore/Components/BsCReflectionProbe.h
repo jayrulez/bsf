@@ -55,11 +55,11 @@ namespace bs
 
 		/** @copydoc ReflectionProbe::getCustomTexture */
 		BS_SCRIPT_EXPORT(n:CustomTexture,pr:getter)
-		HTexture getCustomTexture() const { return mInternal->getCustomTexture(); }
+		TextureResourceHandle getCustomTexture() const { return mInternal->getCustomTexture(); }
 
 		/** @copydoc ReflectionProbe::setCustomTexture */
 		BS_SCRIPT_EXPORT(n:CustomTexture,pr:setter)
-		void setCustomTexture(const HTexture& texture) { mInternal->setCustomTexture(texture); }
+		void setCustomTexture(const TextureResourceHandle& texture) { mInternal->setCustomTexture(texture); }
 
 		/** @copydoc ReflectionProbe::getBounds */
 		Sphere getBounds() const;

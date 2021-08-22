@@ -24,7 +24,7 @@ namespace bs
 		virtual ~TextureManager() = default;
 
 		/** @copydoc Texture::create(const TEXTURE_DESC&) */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc);
+		SPtr<TextureResource> createTexture(const TEXTURE_DESC& desc);
 			
 		/**
 		 * Creates a new 2D or 3D texture initialized using the provided pixel data. Texture will not have any mipmaps.
@@ -32,7 +32,7 @@ namespace bs
 		 * @param[in]	desc  		Description of the texture to create. Must match the pixel data.
 		 * @param[in]	pixelData	Data to initialize the texture width.
 		 */
-		SPtr<Texture> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
+		SPtr<TextureResource> createTexture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
 
 		/**
 		 * Creates a completely empty and uninitialized Texture.
@@ -41,7 +41,7 @@ namespace bs
 		 * Internal method. Should only be used for very specific purposes, like deserialization, as it requires additional
 		 * manual initialization that is not required normally.
 		 */
-		SPtr<Texture> _createEmpty();
+		SPtr<TextureResource> _createEmpty();
 
 		/**
 		 * Creates a new RenderTexture and automatically generates a single color surface and (optionally) a depth/stencil
@@ -76,7 +76,7 @@ namespace bs
 		 */
 		virtual SPtr<RenderTexture> createRenderTextureImpl(const RENDER_TEXTURE_DESC& desc) = 0;
 
-		mutable HTexture mDummyTexture;
+		mutable TextureResourceHandle mDummyTexture;
 	};
 
 	namespace ct
@@ -110,7 +110,7 @@ namespace bs
 		SPtr<RenderTexture> createRenderTexture(const RENDER_TEXTURE_DESC& desc, UINT32 deviceIdx = 0);
 
 	protected:
-		friend class bs::Texture;
+		friend class bs::TextureResource;
 		friend class Texture;
 		friend class bs::RenderTexture;
 

@@ -100,7 +100,7 @@ namespace bs
 			queuedOps.emplace_back(op, outputPath, entry);
 		};
 
-		auto generateSprite = [&](const HTexture& texture, const String& fileName, const UUID& UUID)
+		auto generateSprite = [&](const TextureResourceHandle& texture, const String& fileName, const UUID& UUID)
 		{
 			Path relativePath = fileName;
 			Path outputPath = spriteOutputFolder + relativePath;
@@ -114,7 +114,7 @@ namespace bs
 			manifest->registerResource(spriteTex.getUUID(), outputPath);
 		};
 
-		auto generateAnimatedSprite = [&](const HTexture& texture, const String& fileName, const UUID& UUID,
+		auto generateAnimatedSprite = [&](const TextureResourceHandle& texture, const String& fileName, const UUID& UUID,
 			SpriteAnimationPlayback playback, const SpriteSheetGridAnimation& animation)
 		{
 			Path relativePath = fileName;
@@ -149,7 +149,7 @@ namespace bs
 		struct IconData
 		{
 			String name;
-			HTexture source;
+			TextureResourceHandle source;
 			SPtr<PixelData> srcData;
 			std::string TextureUUIDs[3];
 			std::string SpriteUUIDs[3];
@@ -223,7 +223,7 @@ namespace bs
 
 					if (mode == AssetType::Sprite)
 					{
-						HTexture tex = static_resource_cast<Texture>(outputRes);
+						TextureResourceHandle tex = static_resource_cast<TextureResource>(outputRes);
 						std::string spriteUUID = entry["SpriteUUID"];
 
 						bool isAnimated = entry.find("Animation") != entry.end();
@@ -248,7 +248,7 @@ namespace bs
 					if (isIcon)
 					{
 						IconData iconData;
-						iconData.source = static_resource_cast<Texture>(outputRes);
+						iconData.source = static_resource_cast<TextureResource>(outputRes);
 						iconData.name = name.c_str();
 
 						if (mode == AssetType::Normal)
@@ -288,13 +288,13 @@ namespace bs
 
 		auto saveTexture = [&](auto& pixelData, auto& path, std::string& uuid)
 		{
-			SPtr<Texture> texturePtr = Texture::_createPtr(pixelData);
+			SPtr<TextureResource> texturePtr = TextureResource::_createPtr(pixelData);
 			HResource texture = gResources()._createResourceHandle(texturePtr, UUID(uuid.c_str()));
 
 			Resources::instance().save(texture, path, true, compress);
 			manifest->registerResource(texture.getUUID(), path);
 
-			return static_resource_cast<Texture>(texture);
+			return static_resource_cast<TextureResource>(texture);
 		};
 
 		for (UINT32 i = 0; i < (UINT32)iconsToGenerate.size(); i++)
@@ -314,9 +314,9 @@ namespace bs
 			Path outputPath32 = outputFolder + (iconsToGenerate[i].name + "32.asset");
 			Path outputPath16 = outputFolder + (iconsToGenerate[i].name + "16.asset");
 
-			HTexture tex48 = saveTexture(scaled48, outputPath48, iconsToGenerate[i].TextureUUIDs[0]);
-			HTexture tex32 = saveTexture(scaled32, outputPath32, iconsToGenerate[i].TextureUUIDs[1]);
-			HTexture tex16 = saveTexture(scaled16, outputPath16, iconsToGenerate[i].TextureUUIDs[2]);
+			TextureResourceHandle tex48 = saveTexture(scaled48, outputPath48, iconsToGenerate[i].TextureUUIDs[0]);
+			TextureResourceHandle tex32 = saveTexture(scaled32, outputPath32, iconsToGenerate[i].TextureUUIDs[1]);
+			TextureResourceHandle tex16 = saveTexture(scaled16, outputPath16, iconsToGenerate[i].TextureUUIDs[2]);
 
 			if (mode == AssetType::Sprite)
 			{

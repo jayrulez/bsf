@@ -64,20 +64,20 @@ namespace bs
 		return dst;
 	}
 
-	Texture::Texture(const TEXTURE_DESC& desc)
+	TextureResource::TextureResource(const TEXTURE_DESC& desc)
 		:mProperties(desc)
 	{
 		
 	}
 
-	Texture::Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
+	TextureResource::TextureResource(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData)
 		: mProperties(desc), mInitData(pixelData)
 	{
 		if (mInitData != nullptr)
 			mInitData->_lock();
 	}
 
-	void Texture::initialize()
+	void TextureResource::initialize()
 	{
 		mSize = calculateSize();
 
@@ -93,7 +93,7 @@ namespace bs
 		Resource::initialize();
 	}
 
-	SPtr<ct::CoreObject> Texture::createCore() const
+	SPtr<ct::CoreObject> TextureResource::createCore() const
 	{
 		const TextureProperties& props = getProperties();
 
@@ -105,7 +105,7 @@ namespace bs
 		return coreObj;
 	}
 
-	AsyncOp Texture::writeData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel, bool discardEntireBuffer)
+	AsyncOp TextureResource::writeData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel, bool discardEntireBuffer)
 	{
 		UINT32 subresourceIdx = mProperties.mapToSubresourceIdx(face, mipLevel);
 		updateCPUBuffers(subresourceIdx, *data);
@@ -126,7 +126,7 @@ namespace bs
 			data, discardEntireBuffer, std::placeholders::_1));
 	}
 
-	AsyncOp Texture::readData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel)
+	AsyncOp TextureResource::readData(const SPtr<PixelData>& data, UINT32 face, UINT32 mipLevel)
 	{
 		data->_lock();
 
@@ -147,7 +147,7 @@ namespace bs
 			data, std::placeholders::_1));
 	}
 
-	TAsyncOp<SPtr<PixelData>> Texture::readData(UINT32 face, UINT32 mipLevel)
+	TAsyncOp<SPtr<PixelData>> TextureResource::readData(UINT32 face, UINT32 mipLevel)
 	{
 		TAsyncOp<SPtr<PixelData>> op;
 
@@ -167,13 +167,13 @@ namespace bs
 		return op;
 	}
 
-	UINT32 Texture::calculateSize() const
+	UINT32 TextureResource::calculateSize() const
 	{
 		return mProperties.getNumFaces() * PixelUtil::getMemorySize(mProperties.getWidth(),
 			mProperties.getHeight(), mProperties.getDepth(), mProperties.getFormat());
 	}
 
-	void Texture::updateCPUBuffers(UINT32 subresourceIdx, const PixelData& pixelData)
+	void TextureResource::updateCPUBuffers(UINT32 subresourceIdx, const PixelData& pixelData)
 	{
 		if ((mProperties.getUsage() & TU_CPUCACHED) == 0)
 			return;
@@ -209,7 +209,7 @@ namespace bs
 		memcpy(dest, src, pixelData.getSize());
 	}
 
-	void Texture::readCachedData(PixelData& dest, UINT32 face, UINT32 mipLevel)
+	void TextureResource::readCachedData(PixelData& dest, UINT32 face, UINT32 mipLevel)
 	{
 		if ((mProperties.getUsage() & TU_CPUCACHED) == 0)
 		{
@@ -245,7 +245,7 @@ namespace bs
 		memcpy(destPtr, srcPtr, dest.getSize());
 	}
 
-	void Texture::createCPUBuffers()
+	void TextureResource::createCPUBuffers()
 	{
 		UINT32 numFaces = mProperties.getNumFaces();
 		UINT32 numMips = mProperties.getNumMipmaps() + 1;
@@ -278,7 +278,7 @@ namespace bs
 		}
 	}
 
-	SPtr<ct::Texture> Texture::getCore() const
+	SPtr<ct::Texture> TextureResource::getCore() const
 	{
 		return std::static_pointer_cast<ct::Texture>(mCoreSpecific);
 	}
@@ -287,39 +287,39 @@ namespace bs
 	/* 								SERIALIZATION                      		*/
 	/************************************************************************/
 
-	RTTITypeBase* Texture::getRTTIStatic()
+	RTTITypeBase* TextureResource::getRTTIStatic()
 	{
-		return TextureRTTI::instance();
+		return TextureResourceRTTI::instance();
 	}
 
-	RTTITypeBase* Texture::getRTTI() const
+	RTTITypeBase* TextureResource::getRTTI() const
 	{
-		return Texture::getRTTIStatic();
+		return TextureResource::getRTTIStatic();
 	}
 
 	/************************************************************************/
 	/* 								STATICS	                      			*/
 	/************************************************************************/
-	HTexture Texture::createHandle(const TEXTURE_DESC& desc)
+	TextureResourceHandle TextureResource::createHandle(const TEXTURE_DESC& desc)
 	{
-		SPtr<Texture> texturePtr = _createPtr(desc);
+		SPtr<TextureResource> texturePtr = _createPtr(desc);
 
-		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
+		return static_resource_cast<TextureResource>(gResources()._createResourceHandle(texturePtr));
 	}
 	
-	HTexture Texture::createHandle(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
+	TextureResourceHandle TextureResource::createHandle(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
 	{
-		SPtr<Texture> texturePtr = _createPtr(pixelData, usage, hwGammaCorrection);
+		SPtr<TextureResource> texturePtr = _createPtr(pixelData, usage, hwGammaCorrection);
 
-		return static_resource_cast<Texture>(gResources()._createResourceHandle(texturePtr));
+		return static_resource_cast<TextureResource>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	SPtr<Texture> Texture::_createPtr(const TEXTURE_DESC& desc)
+	SPtr<TextureResource> TextureResource::_createPtr(const TEXTURE_DESC& desc)
 	{
 		return TextureManager::instance().createTexture(desc);
 	}
 
-	SPtr<Texture> Texture::_createPtr(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
+	SPtr<TextureResource> TextureResource::_createPtr(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection)
 	{
 		TEXTURE_DESC desc;
 		desc.type = pixelData->getDepth() > 1 ? TEX_TYPE_3D : TEX_TYPE_2D;

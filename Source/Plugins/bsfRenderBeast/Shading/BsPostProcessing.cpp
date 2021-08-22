@@ -1038,7 +1038,7 @@ namespace bs { namespace ct
 
 		mParams->setParamBlockBuffer("Input", mParamBuffer);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gColorTex", mColorTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDeptTextureResourceHandle);
 
 		SAMPLER_STATE_DESC desc;
 		desc.minFilter = FO_POINT;
@@ -1092,7 +1092,7 @@ namespace bs { namespace ct
 		gGaussianDOFParamDef.gInvFarBlurRange.set(mParamBuffer, 1.0f / settings.farTransitionRange);
 
 		mColorTexture.set(color);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1140,7 +1140,7 @@ namespace bs { namespace ct
 		mParams->setParamBlockBuffer("Input", mParamBuffer);
 
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gFocusedTex", mFocusedTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDeptTextureResourceHandle);
 
 		if(mParams->hasTexture(GPT_FRAGMENT_PROGRAM, "gNearTex"))
 			mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gNearTex", mNearTexture);
@@ -1168,7 +1168,7 @@ namespace bs { namespace ct
 		mFocusedTexture.set(focused);
 		mNearTexture.set(near);
 		mFarTexture.set(far);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1205,7 +1205,7 @@ namespace bs { namespace ct
 		mParams->setParamBlockBuffer("DepthOfFieldParams", mCommonParamBuffer);
 
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gInputTex", mInputTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDeptTextureResourceHandle);
 	}
 
 	void BokehDOFPrepareMat::execute(const SPtr<Texture>& input, const SPtr<Texture>& depth, const RendererView& view,
@@ -1221,7 +1221,7 @@ namespace bs { namespace ct
 		BokehDOFMat::populateDOFCommonParams(mCommonParamBuffer, settings, view);
 
 		mInputTexture.set(input);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1270,7 +1270,7 @@ namespace bs { namespace ct
 		mParams->setParamBlockBuffer("DepthOfFieldParams", mCommonParamBuffer);
 		mParams->getTextureParam(GPT_VERTEX_PROGRAM, "gInputTex", mInputTextureVS);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gInputTex", mInputTextureFS);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gBokehTex", mBokehTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gBokehTex", mBokeTextureResourceHandle);
 
 		// Prepare vertex declaration for rendering tiles
 		SPtr<VertexDataDesc> tileVertexDesc = bs_shared_ptr_new<VertexDataDesc>();
@@ -1360,11 +1360,11 @@ namespace bs { namespace ct
 		mInputTextureVS.set(input);
 		mInputTextureFS.set(input);
 
-		SPtr<Texture> bokehTexture = settings.bokehShape;
-		if(bokehTexture == nullptr)
-			bokehTexture = RendererTextures::bokehFlare;
+		SPtr<Texture> bokeTextureResourceHandle = settings.bokehShape;
+		if(bokeTextureResourceHandle == nullptr)
+			bokeTextureResourceHandle = RendererTextures::bokehFlare;
 
-		mBokehTexture.set(bokehTexture);
+		mBokeTextureResourceHandle.set(bokeTextureResourceHandle);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1441,7 +1441,7 @@ namespace bs { namespace ct
 
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gUnfocusedTex", mUnfocusedTexture);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gFocusedTex", mFocusedTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDeptTextureResourceHandle);
 	}
 
 	void BokehDOFCombineMat::execute(const SPtr<Texture>& unfocused, const SPtr<Texture>& focused,
@@ -1466,7 +1466,7 @@ namespace bs { namespace ct
 
 		mUnfocusedTexture.set(unfocused);
 		mFocusedTexture.set(focused);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1501,7 +1501,7 @@ namespace bs { namespace ct
 		mParams->setParamBlockBuffer("Params", mParamBuffer);
 
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gInputTex", mInputTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthBufferTex", mDeptTextureResourceHandle);
 
 		SAMPLER_STATE_DESC pointSampDesc;
 		pointSampDesc.minFilter = FO_POINT;
@@ -1536,7 +1536,7 @@ namespace bs { namespace ct
 		gMotionBlurParamDef.gHalfNumSamples.set(mParamBuffer, numSamples / 2);
 
 		mInputTexture.set(input);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -1654,7 +1654,7 @@ namespace bs { namespace ct
 
 		if (isFinal)
 		{
-			mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDepthTexture);
+			mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDeptTextureResourceHandle);
 			mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gNormalsTex", mNormalsTexture);
 		}
 		
@@ -1780,7 +1780,7 @@ namespace bs { namespace ct
 		bool finalPass = mVariation.getBool("FINAL_AO");
 		if (finalPass)
 		{
-			mDepthTexture.set(textures.sceneDepth);
+			mDeptTextureResourceHandle.set(textures.sceneDepth);
 			mNormalsTexture.set(textures.sceneNormals);
 		}
 
@@ -1838,7 +1838,7 @@ namespace bs { namespace ct
 		mParamBuffer = gSSAODownsampleParamDef.createBuffer();
 
 		mParams->setParamBlockBuffer("Input", mParamBuffer);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDeptTextureResourceHandle);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gNormalsTex", mNormalsTexture);
 
 		SAMPLER_STATE_DESC inputSampDesc;
@@ -1877,7 +1877,7 @@ namespace bs { namespace ct
 		gSSAODownsampleParamDef.gPixelSize.set(mParamBuffer, pixelSize);
 		gSSAODownsampleParamDef.gInvDepthThreshold.set(mParamBuffer, (1.0f / depthRange) / scale);
 
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 		mNormalsTexture.set(normals);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
@@ -1898,7 +1898,7 @@ namespace bs { namespace ct
 
 		mParams->setParamBlockBuffer("Input", mParamBuffer);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gInputTex", mAOTexture);
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gDepthTex", mDeptTextureResourceHandle);
 
 		SAMPLER_STATE_DESC inputSampDesc;
 		inputSampDesc.minFilter = FO_POINT;
@@ -1943,7 +1943,7 @@ namespace bs { namespace ct
 		gSSAOBlurParamDef.gInvDepthThreshold.set(mParamBuffer, (1.0f / depthRange) / scale);
 
 		mAOTexture.set(ao);
-		mDepthTexture.set(depth);
+		mDeptTextureResourceHandle.set(depth);
 
 		SPtr<GpuParamBlockBuffer> perView = view.getPerViewBuffer();
 		mParams->setParamBlockBuffer("PerCamera", perView);
@@ -2152,7 +2152,7 @@ namespace bs { namespace ct
 		mParamBuffer = gTemporalFilteringParamDef.createBuffer();
 		mTemporalParamBuffer = gTemporalResolveParamDef.createBuffer();
 
-		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gSceneDepth", mSceneDepthTexture);
+		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gSceneDepth", mSceneDeptTextureResourceHandle);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gSceneColor", mSceneColorTexture);
 		mParams->getTextureParam(GPT_FRAGMENT_PROGRAM, "gPrevColor", mPrevColorTexture);
 
@@ -2208,7 +2208,7 @@ namespace bs { namespace ct
 
 		mPrevColorTexture.set(prevFrame);
 		mSceneColorTexture.set(curFrame);
-		mSceneDepthTexture.set(sceneDepth);
+		mSceneDeptTextureResourceHandle.set(sceneDepth);
 
 		if(mHasVelocityTexture)
 			mVelocityTexture.set(velocityTex);

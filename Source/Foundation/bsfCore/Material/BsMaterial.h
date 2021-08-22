@@ -125,7 +125,7 @@ namespace bs
 	class BS_CORE_EXPORT TMaterial : public MaterialBase
 	{
 	public:
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;

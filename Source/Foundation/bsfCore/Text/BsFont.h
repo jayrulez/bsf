@@ -41,7 +41,7 @@ namespace bs
 
 		/** Textures in which the character's pixels are stored. */
 		BS_SCRIPT_EXPORT()
-		Vector<HTexture> texturePages;
+		Vector<TextureResourceHandle> texturePages;
 
 		/** All characters in the font referenced by character ID. */
 		Map<UINT32, CharDesc> characters;

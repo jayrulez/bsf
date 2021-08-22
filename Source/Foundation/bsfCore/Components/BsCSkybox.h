@@ -25,11 +25,11 @@ namespace bs
 
 		/** @copydoc Skybox::getTexture */
 		BS_SCRIPT_EXPORT(n:Texture,pr:getter)
-		HTexture getTexture() const { return mInternal->getTexture(); }
+		TextureResourceHandle getTexture() const { return mInternal->getTexture(); }
 
 		/** @copydoc Skybox::setTexture */
 		BS_SCRIPT_EXPORT(n:Texture,pr:setter)
-		void setTexture(const HTexture& texture) { mInternal->setTexture(texture); }
+		void setTexture(const TextureResourceHandle& texture) { mInternal->setTexture(texture); }
 
 		/** @copydoc Skybox::setBrightness */
 		BS_SCRIPT_EXPORT(n:Brightness,pr:setter)

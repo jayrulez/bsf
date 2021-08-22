@@ -25,7 +25,7 @@ namespace bs
 		using PassType = CoreVariantType<Pass, Core>;
 		using GpuProgramPtrType = SPtr<CoreVariantType<GpuProgram, Core>>;
 		using ParamBlockType = CoreVariantType<GpuParamBlockBuffer, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 		using SamplerStateType = SPtr<CoreVariantType<SamplerState, Core>>;
 		using GraphicsPipelineStateType = CoreVariantType<GraphicsPipelineState, Core>;

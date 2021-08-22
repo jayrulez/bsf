@@ -43,7 +43,7 @@ namespace bs
 		gSceneManager()._bindActor(mInternal, sceneObject());
 
 		// If filtered texture doesn't exist, ensure it is generated
-		SPtr<Texture> filteredTexture = mInternal->getFilteredTexture();
+		SPtr<TextureResource> filteredTexture = mInternal->getFilteredTexture();
 		if(filteredTexture == nullptr)
 		{
 			if (mInternal->getCustomTexture())

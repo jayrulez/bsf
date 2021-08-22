@@ -156,7 +156,7 @@ namespace bs
 		friend class ct::GpuParams;
 
 		using GpuParamsType = SPtr<CoreVariantType<GpuParams, Core>>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:
 		TGpuParamTexture();
@@ -191,7 +191,7 @@ namespace bs
 		friend class ct::GpuParams;
 
 		using GpuParamsType = SPtr<CoreVariantType<GpuParams, Core>>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:
 		TGpuParamLoadStoreTexture();

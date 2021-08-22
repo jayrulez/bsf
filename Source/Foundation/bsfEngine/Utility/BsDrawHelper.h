@@ -41,7 +41,7 @@ namespace bs
 			SPtr<Mesh> mesh;
 			SubMesh subMesh;
 			MeshType type;
-			HTexture texture;
+			TextureResourceHandle texture;
 		};
 
 		DrawHelper();

@@ -60,14 +60,14 @@ namespace bs
 		 *
 		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
 		 */
-		const HTexture& getColorTexture(UINT32 idx) const { return mBindableColorTex[idx]; }
+		const TextureResourceHandle& getColorTexture(UINT32 idx) const { return mBindableColorTex[idx]; }
 
 		/**
 		 * Returns a depth/stencil surface texture you may bind as an input to an GPU program.
 		 *
 		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
 		 */
-		const HTexture& getDepthStencilTexture() const { return mBindableDepthStencilTex; }
+		const TextureResourceHandle& getDepthStencilTexture() const { return mBindableDepthStencilTex; }
 
 		/**
 		 * Retrieves a core implementation of a render texture usable only from the core thread.
@@ -91,8 +91,8 @@ namespace bs
 		CoreSyncData syncToCore(FrameAlloc* allocator) override;
 
 	protected:
-		HTexture mBindableColorTex[BS_MAX_MULTIPLE_RENDER_TARGETS];
-		HTexture mBindableDepthStencilTex;
+		TextureResourceHandle mBindableColorTex[BS_MAX_MULTIPLE_RENDER_TARGETS];
+		TextureResourceHandle mBindableDepthStencilTex;
 
 		RENDER_TEXTURE_DESC mDesc;
 

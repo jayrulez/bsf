@@ -16,7 +16,7 @@ namespace bs
 		bool requiresHwGamma = false;
 		for (UINT32 i = 0; i < BS_MAX_MULTIPLE_RENDER_TARGETS; i++)
 		{
-			HTexture texture = desc.colorSurfaces[i].texture;
+			TextureResourceHandle texture = desc.colorSurfaces[i].texture;
 
 			if (!texture.isLoaded())
 				continue;
@@ -29,7 +29,7 @@ namespace bs
 
 		if (firstIdx == (UINT32)-1)
 		{
-			HTexture texture = desc.depthStencilSurface.texture;
+			TextureResourceHandle texture = desc.depthStencilSurface.texture;
 			if (texture.isLoaded())
 			{
 				const TextureProperties& texProps = texture->getProperties();
@@ -39,7 +39,7 @@ namespace bs
 		}
 		else
 		{
-			HTexture texture = desc.colorSurfaces[firstIdx].texture;
+			TextureResourceHandle texture = desc.colorSurfaces[firstIdx].texture;
 
 			const TextureProperties& texProps = texture->getProperties();
 			construct(&texProps, desc.colorSurfaces[firstIdx].numFaces, desc.colorSurfaces[firstIdx].mipLevel,

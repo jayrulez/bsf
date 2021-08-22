@@ -23,12 +23,12 @@ namespace bs
 			return nullptr;
 		}
 
-		HTexture getSpriteTextureAtlas(const HSpriteTexture& spriteTexture)
+		TextureResourceHandle getSpriteTextureAtlas(const HSpriteTexture& spriteTexture)
 		{
 			if(spriteTexture.isLoaded())
 				return spriteTexture->getTexture();
 
-			return HTexture();
+			return TextureResourceHandle();
 		}
 	}
 
@@ -1175,7 +1175,7 @@ namespace bs
 				break;
 			case ParamType::Texture:
 			{
-				HTexture texture = params->mTextureParams[param.index].texture;
+				TextureResourceHandle texture = params->mTextureParams[param.index].texture;
 				SPtr<Texture> textureCore;
 				if (texture.isLoaded())
 					textureCore = texture->getCore();

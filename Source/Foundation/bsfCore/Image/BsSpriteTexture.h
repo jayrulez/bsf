@@ -141,7 +141,7 @@ namespace bs
 	class BS_CORE_EXPORT TSpriteTexture : public SpriteTextureBase
 	{
 	public:
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 		TSpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, TextureType atlasTexture)
 			:SpriteTextureBase(uvOffset, uvScale), mAtlasTexture(std::move(atlasTexture))
@@ -174,11 +174,11 @@ namespace bs
 	public:
 		/**	Determines the internal texture that the sprite texture references. */
 		BS_SCRIPT_EXPORT(n:Texture,pr:setter)
-		void setTexture(const HTexture& texture);
+		void setTexture(const TextureResourceHandle& texture);
 
 		/**	@copydoc setTexture() */
 		BS_SCRIPT_EXPORT(n:Texture,pr:getter)
-		const HTexture& getTexture() const { return mAtlasTexture; }
+		const TextureResourceHandle& getTexture() const { return mAtlasTexture; }
 
 		/**	Returns width of the sprite texture in pixels. */
 		BS_SCRIPT_EXPORT(n:Width,pr:getter)
@@ -207,11 +207,11 @@ namespace bs
 
 		/**	Creates a new sprite texture that references the entire area of the provided texture. */
 		BS_SCRIPT_EXPORT(ec:SpriteTexture)
-		static HSpriteTexture create(const HTexture& texture);
+		static HSpriteTexture create(const TextureResourceHandle& texture);
 
 		/**	Creates a new sprite texture that references a sub-area of the provided	texture. */
 		BS_SCRIPT_EXPORT(ec:SpriteTexture)
-		static HSpriteTexture create(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture);
+		static HSpriteTexture create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/**	Checks if the sprite texture and its internal texture have been loaded. */
 		static bool checkIsLoaded(const HSpriteTexture& tex);
@@ -224,10 +224,10 @@ namespace bs
 		 */
 
 		/** Creates a new SpriteTexture without a resource handle. Use create() for normal use. */
-		static SPtr<SpriteTexture> _createPtr(const HTexture& texture);
+		static SPtr<SpriteTexture> _createPtr(const TextureResourceHandle& texture);
 
 		/** Creates a new SpriteTexture without a resource handle. Use create() for normal use. */
-		static SPtr<SpriteTexture> _createPtr(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture);
+		static SPtr<SpriteTexture> _createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/** @copydoc SpriteTextureBase::_markCoreDirty */
 		void _markCoreDirty() override;
@@ -236,8 +236,8 @@ namespace bs
 	private:
 		friend class SpriteTextureRTTI;
 
-		/** @copydoc create(const Vector2&, const Vector2&, const HTexture&) */
-		SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture);
+		/** @copydoc create(const Vector2&, const Vector2&, const TextureResourceHandle&) */
+		SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/** @copydoc CoreObject::initialize */
 		void initialize() override;

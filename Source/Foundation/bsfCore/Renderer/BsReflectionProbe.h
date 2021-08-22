@@ -92,7 +92,7 @@ namespace bs
 	class BS_CORE_EXPORT TReflectionProbe : public ReflectionProbeBase
 	{
 	public:
-		using TextureType = CoreVariantType<Texture, Core>;
+		using TextureType = CoreVariantType<TextureResource, Core>;
 
 		TReflectionProbe() = default;
 		TReflectionProbe(ReflectionProbeType type, float radius, const Vector3& extents)
@@ -137,10 +137,10 @@ namespace bs
 		 * Allows you assign a custom texture to use as a reflection map. This will disable automatic generation of
 		 * reflections. To re-enable auto-generation call this with a null parameter.
 		 */
-		void setCustomTexture(const HTexture& texture) { mCustomTexture = texture; filter(); }
+		void setCustomTexture(const TextureResourceHandle& texture) { mCustomTexture = texture; filter(); }
 
 		/** Gets the custom texture assigned through setCustomTexture(). */
-		HTexture getCustomTexture() const { return mCustomTexture; }
+		TextureResourceHandle getCustomTexture() const { return mCustomTexture; }
 
 		/**
 		 * Captures the scene at the current location and generates a filtered reflection cubemap. No action is taken
@@ -194,7 +194,7 @@ namespace bs
 		/**	Creates a probe with without initializing it. Used for serialization. */
 		static SPtr<ReflectionProbe> createEmpty();
 
-		HTexture mCustomTexture;
+		TextureResourceHandle mCustomTexture;
 		SPtr<ct::RendererTask> mRendererTask;
 
 		/************************************************************************/

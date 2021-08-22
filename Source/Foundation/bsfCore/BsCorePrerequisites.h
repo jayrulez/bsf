@@ -5,184 +5,184 @@
 #include "Prerequisites/BsPrerequisitesUtil.h"
 
 /** @addtogroup Layers
- *  @{
- */
+*  @{
+*/
 
- /** @defgroup Core Core
-  *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
-  *  @{
-  */
-
-  /** @defgroup Animation Animation
-   *	%Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
+/** @defgroup Core Core
+   *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
+   *  @{
    */
 
-   /** @defgroup Application-Core Application
-	*  Entry point into the application and other general functionality.
+   /** @defgroup Animation Animation
+	*	%Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
 	*/
 
-	/** @defgroup Audio Audio
-	 *	%Audio clips, 3D sound and music reproduction.
+	/** @defgroup Application-Core Application
+	 *  Entry point into the application and other general functionality.
 	 */
 
-	 /** @defgroup Components-Core Components
-	   *	Built-in components (elements that may be attached to scene objects).
-	   */
+	 /** @defgroup Audio Audio
+	  *	%Audio clips, 3D sound and music reproduction.
+	  */
 
-	   /** @defgroup CoreThread Core thread
-		*	Core objects and interaction with the core (rendering) thread.
+	  /** @defgroup Components-Core Components
+		*	Built-in components (elements that may be attached to scene objects).
 		*/
 
-		/** @defgroup Importer Importer
-		 *	Import of resources into engine friendly format.
+		/** @defgroup CoreThread Core thread
+		 *	Core objects and interaction with the core (rendering) thread.
 		 */
 
-		 /** @defgroup Input Input
-		  *	%Input (mouse, keyboard, gamepad, etc.).
+		 /** @defgroup Importer Importer
+		  *	Import of resources into engine friendly format.
 		  */
 
-		  /** @defgroup Localization Localization
-		   *	GUI localization.
+		  /** @defgroup Input Input
+		   *	%Input (mouse, keyboard, gamepad, etc.).
 		   */
 
-		   /** @defgroup Material Material
-			*	Materials, shaders and related functionality.
+		   /** @defgroup Localization Localization
+			*	GUI localization.
 			*/
 
-			/** @defgroup Physics Physics
-			 *	%Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
+			/** @defgroup Material Material
+			 *	Materials, shaders and related functionality.
 			 */
 
-			 /** @defgroup Profiling Profiling
-			  *	Measuring CPU and GPU execution times and memory usage.
+			 /** @defgroup Physics Physics
+			  *	%Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
 			  */
 
-			  /** @defgroup RenderAPI RenderAPI
-				*	Interface for interacting with the render API (DirectX, OpenGL, etc.).
-				*/
+			  /** @defgroup Profiling Profiling
+			   *	Measuring CPU and GPU execution times and memory usage.
+			   */
 
-				/** @defgroup Renderer Renderer
-				  *	Abstract interface and helper functionality for rendering scene objects.
-				  */
+			   /** @defgroup RenderAPI RenderAPI
+				 *	Interface for interacting with the render API (DirectX, OpenGL, etc.).
+				 */
 
-				  /** @defgroup Resources Resources
-					*	Core resource types and resource management functionality (loading, saving, etc.).
-					*/
+				 /** @defgroup Renderer Renderer
+				   *	Abstract interface and helper functionality for rendering scene objects.
+				   */
 
-					/** @defgroup Particles Particles
-					  *	Emission, updates and rendering of particles in the particle system.
-					  */
+				   /** @defgroup Resources Resources
+					 *	Core resource types and resource management functionality (loading, saving, etc.).
+					 */
 
-					  /** @defgroup Network Network
-						* Sending and receiving data over the network.
-						*/
+					 /** @defgroup Particles Particles
+					   *	Emission, updates and rendering of particles in the particle system.
+					   */
 
-						/** @cond RTTI */
-						/** @defgroup RTTI-Impl-Core RTTI types
-						 *  RTTI implementations for classes within the core layer.
+					   /** @defgroup Network Network
+						 * Sending and receiving data over the network.
 						 */
-						 /** @endcond */
 
-						 /** @defgroup Scene Scene
-						  *  Managing scene objects and their hierarchy.
+						 /** @cond RTTI */
+						 /** @defgroup RTTI-Impl-Core RTTI types
+						  *  RTTI implementations for classes within the core layer.
 						  */
+						  /** @endcond */
 
-						  /** @defgroup Text Text
-						   *  Generating text geometry.
+						  /** @defgroup Scene Scene
+						   *  Managing scene objects and their hierarchy.
 						   */
 
-						   /** @defgroup Utility-Core Utility
-							*  Various utility methods and types used by the core layer.
+						   /** @defgroup Text Text
+							*  Generating text geometry.
 							*/
 
-							/** @} */
-							/** @} */
-
-							/** @addtogroup Internals
-							 *  @{
+							/** @defgroup Utility-Core Utility
+							 *  Various utility methods and types used by the core layer.
 							 */
 
-							 /** @defgroup Internal-Core Core
-							  *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
+							 /** @} */
+							 /** @} */
+
+							 /** @addtogroup Internals
 							  *  @{
 							  */
 
-							  /** @defgroup Animation-Internal Animation
-							   *	Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
+							  /** @defgroup Internal-Core Core
+							   *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
+							   *  @{
 							   */
 
-							   /** @defgroup Audio-Internal Audio
-								*	Audio clips, 3D sound and music reproduction.
+							   /** @defgroup Animation-Internal Animation
+								*	Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
 								*/
 
-								/** @defgroup CoreThread-Internal Core thread
-								 *	Core objects and interaction with the core (rendering) thread.
+								/** @defgroup Audio-Internal Audio
+								 *	Audio clips, 3D sound and music reproduction.
 								 */
 
-								 /** @defgroup Importer-Internal Importer
-								  *	Import of resources into engine friendly format.
+								 /** @defgroup CoreThread-Internal Core thread
+								  *	Core objects and interaction with the core (rendering) thread.
 								  */
 
-								  /** @defgroup Input-Internal Input
-								   *	Input (mouse, keyboard, gamepad, etc.).
+								  /** @defgroup Importer-Internal Importer
+								   *	Import of resources into engine friendly format.
 								   */
 
-								   /** @defgroup Localization-Internal Localization
-									*	GUI localization.
+								   /** @defgroup Input-Internal Input
+									*	Input (mouse, keyboard, gamepad, etc.).
 									*/
 
-									/** @defgroup Material-Internal Material
-									 *	Materials, shaders and related functionality.
+									/** @defgroup Localization-Internal Localization
+									 *	GUI localization.
 									 */
 
-									 /** @defgroup Particles-Internal Particles
-									  *	Emission, updates and rendering of particles in the particle system.
+									 /** @defgroup Material-Internal Material
+									  *	Materials, shaders and related functionality.
 									  */
 
-									  /** @defgroup Network-Internal Network
-									   * Sending and receiving data over the network.
+									  /** @defgroup Particles-Internal Particles
+									   *	Emission, updates and rendering of particles in the particle system.
 									   */
 
-									   /** @defgroup Physics-Internal Physics
-										*	Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
+									   /** @defgroup Network-Internal Network
+										* Sending and receiving data over the network.
 										*/
 
-										/** @defgroup Platform-Internal Platform
-										 *	Interface for interacting with the platform (OS).
+										/** @defgroup Physics-Internal Physics
+										 *	Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
 										 */
 
-										 /** @defgroup Profiling-Internal Profiling
-										  *	Measuring CPU and GPU execution times and memory usage.
+										 /** @defgroup Platform-Internal Platform
+										  *	Interface for interacting with the platform (OS).
 										  */
 
-										  /** @defgroup RenderAPI-Internal RenderAPI
-											*	Interface for interacting with the render API (DirectX, OpenGL, etc.).
-											*/
+										  /** @defgroup Profiling-Internal Profiling
+										   *	Measuring CPU and GPU execution times and memory usage.
+										   */
 
-											/** @defgroup Renderer-Internal Renderer
-											  *	Abstract interface and helper functionality for rendering scene objects.
-											  */
+										   /** @defgroup RenderAPI-Internal RenderAPI
+											 *	Interface for interacting with the render API (DirectX, OpenGL, etc.).
+											 */
 
-											  /** @defgroup Resources-Internal Resources
-												*	Core resource types and resource management functionality (loading, saving, etc.).
-												*/
+											 /** @defgroup Renderer-Internal Renderer
+											   *	Abstract interface and helper functionality for rendering scene objects.
+											   */
 
-												/** @defgroup Scene-Internal Scene
-												 *  Managing scene objects and their hierarchy.
+											   /** @defgroup Resources-Internal Resources
+												 *	Core resource types and resource management functionality (loading, saving, etc.).
 												 */
 
-												 /** @defgroup Text-Internal Text
-												  *  Generating text geometry.
+												 /** @defgroup Scene-Internal Scene
+												  *  Managing scene objects and their hierarchy.
 												  */
 
-												  /** @defgroup Utility-Core-Internal Utility
-												   *  Various utility methods and types used by the core layer.
+												  /** @defgroup Text-Internal Text
+												   *  Generating text geometry.
 												   */
 
-												   /** @} */
-												   /** @} */
+												   /** @defgroup Utility-Core-Internal Utility
+													*  Various utility methods and types used by the core layer.
+													*/
 
-												   /** Maximum number of color surfaces that can be attached to a multi render target. */
+													/** @} */
+													/** @} */
+
+													/** Maximum number of color surfaces that can be attached to a multi render target. */
 #define BS_MAX_MULTIPLE_RENDER_TARGETS 8
 #define BS_FORCE_SINGLETHREADED_RENDERING 1
 
@@ -278,7 +278,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ComputePipelineState);
 	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe);
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem);
-	CORE_OBJECT_FORWARD_DECLARE(Texture);
+	//CORE_OBJECT_FORWARD_DECLARE(Texture);
 	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
 	CORE_OBJECT_FORWARD_DECLARE(Mesh);
 	CORE_OBJECT_FORWARD_DECLARE(VectorField);
@@ -287,6 +287,10 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings);
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings);
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(RenderSettings);
+
+	class TextureResource;
+	namespace ct { class Texture; }
+	template<> struct CoreThreadType<TextureResource> { typedef ct::Texture Type; };
 
 	//class IndexBuffer;
 	//class VertexBuffer;
@@ -733,7 +737,7 @@ namespace bs
 	 */
 
 	typedef ResourceHandle<Resource> HResource;
-	typedef ResourceHandle<Texture> HTexture;
+	typedef ResourceHandle<TextureResource> TextureResourceHandle;
 	typedef ResourceHandle<Mesh> HMesh;
 	typedef ResourceHandle<Material> HMaterial;
 	typedef ResourceHandle<ShaderInclude> HShaderInclude;

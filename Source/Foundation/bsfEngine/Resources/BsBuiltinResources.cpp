@@ -126,7 +126,7 @@ namespace bs
 		dummyPixelData->setColorAt(Color::Red, 1, 0);
 		dummyPixelData->setColorAt(Color::Red, 1, 1);
 
-		mDummyTexture = Texture::createHandle(dummyPixelData);
+		mDummyTexture = TextureResource::createHandle(dummyPixelData);
 
 		mWhiteSpriteTexture = getSkinTexture(WhiteTex);
 		mDummySpriteTexture = SpriteTexture::create(mDummyTexture);
@@ -139,16 +139,16 @@ namespace bs
 		/* 								CURSOR		                     		*/
 		/************************************************************************/
 
-		HTexture cursorArrowTex = getCursorTexture(CursorArrowTex);
-		HTexture cursorArrowDragTex = getCursorTexture(CursorArrowDragTex);
-		HTexture cursorArrowLeftRightTex = getCursorTexture(CursorArrowLeftRightTex);
-		HTexture cursorIBeamTex = getCursorTexture(CursorIBeamTex);
-		HTexture cursorDenyTex = getCursorTexture(CursorDenyTex);
-		HTexture cursorWaitTex = getCursorTexture(CursorWaitTex);
-		HTexture cursorSizeNESWTex = getCursorTexture(CursorSizeNESWTex);
-		HTexture cursorSizeNSTex = getCursorTexture(CursorSizeNSTex);
-		HTexture cursorSizeNWSETex = getCursorTexture(CursorSizeNWSETex);
-		HTexture cursorSizeWETex = getCursorTexture(CursorSizeWETex);
+		TextureResourceHandle cursorArrowTex = getCursorTexture(CursorArrowTex);
+		TextureResourceHandle cursorArrowDragTex = getCursorTexture(CursorArrowDragTex);
+		TextureResourceHandle cursorArrowLeftRightTex = getCursorTexture(CursorArrowLeftRightTex);
+		TextureResourceHandle cursorIBeamTex = getCursorTexture(CursorIBeamTex);
+		TextureResourceHandle cursorDenyTex = getCursorTexture(CursorDenyTex);
+		TextureResourceHandle cursorWaitTex = getCursorTexture(CursorWaitTex);
+		TextureResourceHandle cursorSizeNESWTex = getCursorTexture(CursorSizeNESWTex);
+		TextureResourceHandle cursorSizeNSTex = getCursorTexture(CursorSizeNSTex);
+		TextureResourceHandle cursorSizeNWSETex = getCursorTexture(CursorSizeNWSETex);
+		TextureResourceHandle cursorSizeWETex = getCursorTexture(CursorSizeWETex);
 
 		mCursorArrow = cursorArrowTex->getProperties().allocBuffer(0, 0);
 		cursorArrowTex->readData(mCursorArrow);
@@ -187,7 +187,7 @@ namespace bs
 		Path iconPath = mBuiltinDataFolder + ICON_FOLDER;
 		iconPath.append(String(IconTextureName) + u8".asset");
 
-		HTexture iconTex = gResources().load<Texture>(iconPath);
+		TextureResourceHandle iconTex = gResources().load<TextureResource>(iconPath);
 
 		mFrameworkIcon = iconTex->getProperties().allocBuffer(0, 0);
 		iconTex->readData(mFrameworkIcon);
@@ -212,12 +212,12 @@ namespace bs
 		return gResources().load<Shader>(programPath);
 	}
 
-	HTexture BuiltinResources::getCursorTexture(const String& name) const
+	TextureResourceHandle BuiltinResources::getCursorTexture(const String& name) const
 	{
 		Path cursorPath = mEngineCursorFolder;
 		cursorPath.append(name + u8".asset");
 
-		return gResources().load<Texture>(cursorPath);
+		return gResources().load<TextureResource>(cursorPath);
 	}
 
 	const PixelData& BuiltinResources::getCursorArrow(Vector2I& hotSpot)
@@ -359,7 +359,7 @@ namespace bs
 		return HShader();
 	}
 
-	HTexture BuiltinResources::getTexture(BuiltinTexture type)
+	TextureResourceHandle BuiltinResources::getTexture(BuiltinTexture type)
 	{
 		Path texturePath = Paths::getDataPath();
 		texturePath.append(TEXTURE_FOLDER);
@@ -380,7 +380,7 @@ namespace bs
 			break;
 		}
 
-		return gResources().load<Texture>(texturePath);
+		return gResources().load<TextureResource>(texturePath);
 	}
 
 	HMaterial BuiltinResources::createSpriteTextMaterial() const

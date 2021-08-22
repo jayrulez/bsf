@@ -147,7 +147,7 @@ namespace bs { namespace ct
 		case ParticleRenderMode::Mesh:
 		{
 			const auto meshRenderData = static_cast<const ParticleMeshRenderData*>(renderData);
-			const ParticleMeshTextures* textures = particlesTexPool.alloc(*meshRenderData);
+			const ParticleMesTextureResourceHandles* textures = particlesTexPool.alloc(*meshRenderData);
 
 			renderElement.paramsCPUMesh.positionTexture.set(textures->position);
 			renderElement.paramsCPUMesh.colorTexture.set(textures->color);
@@ -254,11 +254,11 @@ namespace bs { namespace ct
 		return output;
 	}
 
-	const ParticleMeshTextures* ParticleTexturePool::alloc(const ParticleMeshRenderData& simulationData)
+	const ParticleMesTextureResourceHandles* ParticleTexturePool::alloc(const ParticleMeshRenderData& simulationData)
 	{
 		const UINT32 size = simulationData.color.getWidth();
 
-		const ParticleMeshTextures* output = nullptr;
+		const ParticleMesTextureResourceHandles* output = nullptr;
 		MeshBuffersPerSize& buffers = mMeshBufferList[size];
 		if (buffers.nextFreeIdx < (UINT32)buffers.buffers.size())
 		{
@@ -268,7 +268,7 @@ namespace bs { namespace ct
 
 		if (!output)
 		{
-			output = createNewMeshTextures(size);
+			output = createNewMesTextureResourceHandles(size);
 			buffers.nextFreeIdx++;
 		}
 
@@ -323,9 +323,9 @@ namespace bs { namespace ct
 		return output;
 	}
 
-	ParticleMeshTextures* ParticleTexturePool::createNewMeshTextures(UINT32 size)
+	ParticleMesTextureResourceHandles* ParticleTexturePool::createNewMesTextureResourceHandles(UINT32 size)
 	{
-		ParticleMeshTextures* output = mMeshAlloc.construct<ParticleMeshTextures>();
+		ParticleMesTextureResourceHandles* output = mMeshAlloc.construct<ParticleMesTextureResourceHandles>();
 
 		TEXTURE_DESC texDesc;
 		texDesc.type = TEX_TYPE_2D;

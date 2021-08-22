@@ -118,7 +118,7 @@ namespace bs
 		blackPixelData->setColorAt(Color::Black, 1, 0);
 		blackPixelData->setColorAt(Color::Black, 1, 1);
 
-		SPtr<Texture> blackTexture = Texture::_createPtr(blackPixelData);
+		SPtr<TextureResource> blackTexture = TextureResource::_createPtr(blackPixelData);
 
 		SPtr<PixelData> whitePixelData = PixelData::create(2, 2, 1, PF_RGBA8);
 		whitePixelData->setColorAt(Color::White, 0, 0);
@@ -126,7 +126,7 @@ namespace bs
 		whitePixelData->setColorAt(Color::White, 1, 0);
 		whitePixelData->setColorAt(Color::White, 1, 1);
 
-		SPtr<Texture> whiteTexture = Texture::_createPtr(whitePixelData);
+		SPtr<TextureResource> whiteTexture = TextureResource::_createPtr(whitePixelData);
 
 		SPtr<PixelData> normalPixelData = PixelData::create(2, 2, 1, PF_RGBA8);
 
@@ -136,12 +136,12 @@ namespace bs
 		normalPixelData->setColorAt(encodedNormal, 1, 0);
 		normalPixelData->setColorAt(encodedNormal, 1, 1);
 
-		SPtr<Texture> normalTexture = Texture::_createPtr(normalPixelData);
+		SPtr<TextureResource> normalTexture = TextureResource::_createPtr(normalPixelData);
 
 		// Save all textures
 		Path outputDir = sOutputFolder + BuiltinResources::TEXTURE_FOLDER;
 
-		auto saveTexture = [&](const Path& path, const SPtr<Texture>& texture, const String& uuid)
+		auto saveTexture = [&](const Path& path, const SPtr<TextureResource>& texture, const String& uuid)
 		{
 			HResource textureResource = gResources()._createResourceHandle(texture, UUID(uuid));
 
@@ -760,10 +760,10 @@ namespace bs
 			auto textureIO = gImporter().createImportOptions<TextureImportOptions>(inputPath);
 			textureIO->cpuCached = true;
 			textureIO->generateMips = false;
-			HTexture splashTexture = gImporter().import<Texture>(inputPath, textureIO);
+			TextureResourceHandle splasTextureResourceHandle = gImporter().import<TextureResource>(inputPath, textureIO);
 
-			SPtr<PixelData> splashPixelData = splashTexture->getProperties().allocBuffer(0, 0);
-			splashTexture->readCachedData(*splashPixelData);
+			SPtr<PixelData> splashPixelData = splasTextureResourceHandle->getProperties().allocBuffer(0, 0);
+			splasTextureResourceHandle->readCachedData(*splashPixelData);
 
 			FileEncoder fe(outputPath);
 			fe.encode(splashPixelData.get());

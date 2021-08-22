@@ -49,7 +49,7 @@ namespace bs
 				renderElem.numQuads = newNumQuads;
 			}
 
-			const HTexture& tex = desc.texture->getTexture();
+			const TextureResourceHandle& tex = desc.texture->getTexture();
 
 			SpriteMaterialInfo& matInfo = renderElem.matInfo;
 			matInfo.groupId = groupId;

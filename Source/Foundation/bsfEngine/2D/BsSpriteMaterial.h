@@ -64,7 +64,7 @@ namespace bs
 		}
 
 		UINT64 groupId = 0;
-		HTexture texture;
+		TextureResourceHandle texture;
 		HSpriteTexture spriteTexture;
 		Color tint;
 		float animationStartTime = 0.0f;

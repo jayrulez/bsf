@@ -51,7 +51,7 @@ namespace bs
 	class BS_CORE_EXPORT TSkybox : public SkyboxBase
 	{
 	public:
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 		virtual ~TSkybox() = default;
 
@@ -82,7 +82,7 @@ namespace bs
 		~Skybox();
 
 		/** @copydoc TSkybox::getTexture */
-		void setTexture(const HTexture& texture);
+		void setTexture(const TextureResourceHandle& texture);
 
 		/**	Retrieves an implementation of the skybox usable only from the core thread. */
 		SPtr<ct::Skybox> getCore() const;
@@ -108,8 +108,8 @@ namespace bs
 		/** @copydoc CoreObject::syncToCore */
 		CoreSyncData syncToCore(FrameAlloc* allocator) override;
 
-		SPtr<Texture> mFilteredRadiance;
-		SPtr<Texture> mIrradiance;
+		SPtr<TextureResource> mFilteredRadiance;
+		SPtr<TextureResource> mIrradiance;
 		SPtr<ct::RendererTask> mRendererTask;
 
 		/************************************************************************/

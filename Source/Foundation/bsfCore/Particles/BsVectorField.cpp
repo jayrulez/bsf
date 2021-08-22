@@ -60,7 +60,7 @@ namespace bs
 			}
 		}
 
-		mTexture = Texture::_createPtr(pixelData);
+		mTexture = TextureResource::_createPtr(pixelData);
 	}
 
 	SPtr<ct::CoreObject> VectorField::createCore() const

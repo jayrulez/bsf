@@ -922,7 +922,7 @@ namespace bs
 			{
 				TMaterialParamTexture<false> curParam = getParamTexture(param.first);
 
-				HTexture texture;
+				TextureResourceHandle texture;
 				TextureSurface surface;
 				params->getTexture(*paramData, texture, surface);
 				curParam.set(texture);
@@ -932,7 +932,7 @@ namespace bs
 			{
 				TMaterialParamLoadStoreTexture<false> curParam = getParamLoadStoreTexture(param.first);
 
-				HTexture texture;
+				TextureResourceHandle texture;
 				TextureSurface surface;
 				params->getLoadStoreTexture(*paramData, texture, surface);
 				curParam.set(texture, surface);

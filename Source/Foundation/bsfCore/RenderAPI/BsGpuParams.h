@@ -101,7 +101,7 @@ namespace bs
 	{
 	public:
 		using GpuParamsType = CoreVariantType<GpuParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 		using SamplerType = SPtr<CoreVariantType<SamplerState, Core>>;
 		using ParamsBufferType = SPtr<CoreVariantType<GpuParamBlockBuffer, Core>>;

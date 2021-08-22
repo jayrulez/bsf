@@ -72,7 +72,7 @@ namespace bs
 		const HSpriteTexture& getDummySpriteTexture() const { return mDummySpriteTexture; }
 
 		/**	Returns a dummy 2x2 texture that may be used when no other is available. Don't modify the returned texture. */
-		const HTexture& getDummyTexture() const { return mDummyTexture; }
+		const TextureResourceHandle& getDummyTexture() const { return mDummyTexture; }
 
 		/**	Returns image data for an arrow cursor, along with its hotspot. */
 		const PixelData& getCursorArrow(Vector2I& hotSpot);
@@ -133,7 +133,7 @@ namespace bs
 		HFont getDefaultFont() const { return mFont; }
 
 		/**	Retrieves one of the builtin textures. */
-		static HTexture getTexture(BuiltinTexture type);
+		static TextureResourceHandle getTexture(BuiltinTexture type);
 
 		/**	Returns absolute path to the builtin shader folder where raw shader files are located. */
 		static Path getRawShaderFolder();
@@ -184,7 +184,7 @@ namespace bs
 		HSpriteTexture getSkinTexture(const String& name) const;
 
 		/**	Loads a cursor texture with the specified filename. */
-		HTexture getCursorTexture(const String& name) const;
+		TextureResourceHandle getCursorTexture(const String& name) const;
 
 		HGUISkin mEmptySkin;
 		HGUISkin mSkin;
@@ -205,7 +205,7 @@ namespace bs
 		HSpriteTexture mWhiteSpriteTexture;
 		HSpriteTexture mDummySpriteTexture;
 
-		HTexture mDummyTexture;
+		TextureResourceHandle mDummyTexture;
 
 		HShader mShaderSpriteText;
 		HShader mShaderSpriteImage;

@@ -21,7 +21,7 @@ namespace bs
 
 	BS_ALLOW_MEMCPY_SERIALIZATION(TextureSurface);
 
-	class BS_CORE_EXPORT TextureRTTI : public RTTIType<Texture, Resource, TextureRTTI>
+	class BS_CORE_EXPORT TextureResourceRTTI : public RTTIType<TextureResource, Resource, TextureResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -36,8 +36,8 @@ namespace bs
 			BS_RTTI_MEMBER_PLAIN_NAMED(format, mProperties.mDesc.format, 10)
 		BS_END_RTTI_MEMBERS
 
-		INT32& getUsage(Texture* obj) { return obj->mProperties.mDesc.usage; }
-		void setUsage(Texture* obj, INT32& val)
+		INT32& getUsage(TextureResource* obj) { return obj->mProperties.mDesc.usage; }
+		void setUsage(TextureResource* obj, INT32& val)
 		{
 			// Render target and depth stencil texture formats are for in-memory use only
 			// and don't make sense when serialized
@@ -50,7 +50,7 @@ namespace bs
 				obj->mProperties.mDesc.usage = val;
 		}
 
-		SPtr<PixelData> getPixelData(Texture* obj, UINT32 idx)
+		SPtr<PixelData> getPixelData(TextureResource* obj, UINT32 idx)
 		{
 			UINT32 face = (size_t)Math::floor(idx / (float)(obj->mProperties.getNumMipmaps() + 1));
 			UINT32 mipmap = idx % (obj->mProperties.getNumMipmaps() + 1);
@@ -63,33 +63,33 @@ namespace bs
 			return pixelData;
 		}
 
-		void setPixelData(Texture* obj, UINT32 idx, SPtr<PixelData> data)
+		void setPixelData(TextureResource* obj, UINT32 idx, SPtr<PixelData> data)
 		{
 			mPixelData[idx] = data;
 		}
 
-		UINT32 getPixelDataArraySize(Texture* obj)
+		UINT32 getPixelDataArraySize(TextureResource* obj)
 		{
 			return obj->mProperties.getNumFaces() * (obj->mProperties.getNumMipmaps() + 1);
 		}
 
-		void setPixelDataArraySize(Texture* obj, UINT32 size)
+		void setPixelDataArraySize(TextureResource* obj, UINT32 size)
 		{
 			mPixelData.resize(size);
 		}
 
 	public:
-		TextureRTTI()
+		TextureResourceRTTI()
 		{
-			addPlainField("mUsage", 11, &TextureRTTI::getUsage, &TextureRTTI::setUsage);
+			addPlainField("mUsage", 11, &TextureResourceRTTI::getUsage, &TextureResourceRTTI::setUsage);
 
-			addReflectablePtrArrayField("mPixelData", 12, &TextureRTTI::getPixelData, &TextureRTTI::getPixelDataArraySize,
-				&TextureRTTI::setPixelData, &TextureRTTI::setPixelDataArraySize, RTTIFieldInfo(RTTIFieldFlag::SkipInReferenceSearch));
+			addReflectablePtrArrayField("mPixelData", 12, &TextureResourceRTTI::getPixelData, &TextureResourceRTTI::getPixelDataArraySize,
+				&TextureResourceRTTI::setPixelData, &TextureResourceRTTI::setPixelDataArraySize, RTTIFieldInfo(RTTIFieldFlag::SkipInReferenceSearch));
 		}
 
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			Texture* texture = static_cast<Texture*>(obj);
+			TextureResource* texture = static_cast<TextureResource*>(obj);
 			TextureProperties& texProps = texture->mProperties;
 
 			// Update pixel format if needed as it's possible the original texture was saved using some other render API

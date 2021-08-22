@@ -68,7 +68,7 @@ namespace bs
 		}
 		else
 		{
-			setTexture(SpriteTexture::create(HTexture()));
+			setTexture(SpriteTexture::create(TextureResourceHandle()));
 		}
 
 		_markLayoutAsDirty();

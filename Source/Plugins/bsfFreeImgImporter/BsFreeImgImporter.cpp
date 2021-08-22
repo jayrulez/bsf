@@ -182,7 +182,7 @@ namespace bs
 		texDesc.usage = usage;
 		texDesc.hwGamma = sRGB;
 
-		SPtr<Texture> newTexture = Texture::_createPtr(texDesc);
+		SPtr<TextureResource> newTexture = TextureResource::_createPtr(texDesc);
 
 		UINT32 numFaces = (UINT32)faceData.size();
 		for (UINT32 i = 0; i < numFaces; i++)

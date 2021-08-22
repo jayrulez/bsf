@@ -278,7 +278,7 @@ namespace bs { namespace ct
 	 * Contains a set of textures used for rendering a particle system using 3D meshes. Each pixel in a texture represent
 	 * properties of a single particle.
 	 */
-	struct ParticleMeshTextures
+	struct ParticleMesTextureResourceHandles
 	{
 		SPtr<Texture> position;
 		SPtr<Texture> color;
@@ -300,7 +300,7 @@ namespace bs { namespace ct
 		/** A set of created textures for mesh rendering, per size. */
 		struct MeshBuffersPerSize
 		{
-			Vector<ParticleMeshTextures*> buffers;
+			Vector<ParticleMesTextureResourceHandles*> buffers;
 			UINT32 nextFreeIdx = 0;
 		};
 
@@ -317,7 +317,7 @@ namespace bs { namespace ct
 		 * Returns a set of textures used for particle mesh rendering. The textures will contain the pixel data from
 		 * the provided @p simulationData. Returned textures will remain in-use until the next call to clear().
 		 */
-		const ParticleMeshTextures* alloc(const ParticleMeshRenderData& simulationData);
+		const ParticleMesTextureResourceHandles* alloc(const ParticleMeshRenderData& simulationData);
 
 		/** Frees all allocates textures and makes them available for re-use. */
 		void clear();
@@ -327,13 +327,13 @@ namespace bs { namespace ct
 		ParticleBillboardTextures* createNewBillboardTextures(UINT32 size);
 
 		/** Creates a new set of textures for mesh rendering, with @p size width and height. */
-		ParticleMeshTextures* createNewMeshTextures(UINT32 size);
+		ParticleMesTextureResourceHandles* createNewMesTextureResourceHandles(UINT32 size);
 
 		UnorderedMap<UINT32, BillboardBuffersPerSize> mBillboardBufferList;
 		PoolAlloc<sizeof(ParticleBillboardTextures), 32> mBillboardAlloc;
 
 		UnorderedMap<UINT32, MeshBuffersPerSize> mMeshBufferList;
-		PoolAlloc<sizeof(ParticleMeshTextures), 32> mMeshAlloc;
+		PoolAlloc<sizeof(ParticleMesTextureResourceHandles), 32> mMeshAlloc;
 	};
 
 	/** Handles internal logic for rendering of particle systems. */

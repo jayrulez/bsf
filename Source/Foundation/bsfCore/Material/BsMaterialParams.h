@@ -446,7 +446,7 @@ namespace bs
 	class BS_CORE_EXPORT MaterialParamTextureData : public IReflectable
 	{
 	public:
-		HTexture texture;
+		TextureResourceHandle texture;
 		HSpriteTexture spriteTexture;
 		bool isLoadStore;
 		TextureSurface surface;
@@ -508,7 +508,7 @@ namespace bs
 	{
 	public:
 		using GpuParamsType = CoreVariantType<GpuParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 		using ShaderType = CoreVariantHandleType<Shader, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
@@ -679,14 +679,14 @@ namespace bs
 		UINT32 getStructSize(const ParamData& param) const;
 
 		/**
-		 * Equivalent to getTexture(const String&, HTexture&, TextureSurface&) except it uses the internal parameter
+		 * Equivalent to getTexture(const String&, TextureResourceHandle&, TextureSurface&) except it uses the internal parameter
 		 * reference directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid and belongs
 		 * to this object.
 		 */
 		void getTexture(const ParamData& param, TextureType& value, TextureSurface& surface) const;
 
 		/**
-		 * Equivalent to setTexture(const String&, const HTexture&, const TextureSurface&) except it uses the internal
+		 * Equivalent to setTexture(const String&, const TextureResourceHandle&, const TextureSurface&) except it uses the internal
 		 * parameter reference directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid
 		 * and belongs to this object.
 		 */
@@ -722,14 +722,14 @@ namespace bs
 		void setBuffer(const ParamData& param, const BufferType& value);
 
 		/**
-		 * Equivalent to getLoadStoreTexture(const String&, HTexture&, TextureSurface&) except it uses the internal
+		 * Equivalent to getLoadStoreTexture(const String&, TextureResourceHandle&, TextureSurface&) except it uses the internal
 		 * parameter reference directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid
 		 * and belongs to this object.
 		 */
 		void getLoadStoreTexture(const ParamData& param, TextureType& value, TextureSurface& surface) const;
 
 		/**
-		 * Equivalent to setLoadStoreTexture(const String&, const HTexture&, TextureSurface&) except it uses the internal
+		 * Equivalent to setLoadStoreTexture(const String&, const TextureResourceHandle&, TextureSurface&) except it uses the internal
 		 * parameter reference directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid
 		 * and belongs to this object.
 		 */

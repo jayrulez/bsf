@@ -48,7 +48,7 @@ namespace bs
 				cachedElem.indexes = (UINT32*)mAlloc.alloc(sizeof(UINT32) * newNumQuads * 6);
 				cachedElem.numQuads = newNumQuads;
 
-				const HTexture& tex = textData.getTextureForPage(texPage);
+				const TextureResourceHandle& tex = textData.getTextureForPage(texPage);
 
 				SpriteMaterialInfo& matInfo = cachedElem.matInfo;
 				matInfo.groupId = groupId;

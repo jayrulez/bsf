@@ -789,7 +789,7 @@ namespace bs
 		struct Batch
 		{
 			MeshType type;
-			HTexture texture;
+			TextureResourceHandle texture;
 			UINT32 startIdx;
 			UINT32 endIdx;
 			UINT32 numVertices;
@@ -821,7 +821,7 @@ namespace bs
 			{
 				Batch& currentBatch = batches.back();
 
-				HTexture texture;
+				TextureResourceHandle texture;
 				if (allShapes[i].meshType == MeshType::Text)
 				{
 					TextRenderData& renderData = textRenderData[allShapes[i].textIdx];

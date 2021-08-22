@@ -80,7 +80,7 @@ namespace bs
 		p(mAtlasTexture);
 	}
 
-	SpriteTexture::SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture)
+	SpriteTexture::SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 		:TSpriteTexture(uvOffset, uvScale, texture)
 	{ }
 
@@ -94,7 +94,7 @@ namespace bs
 		return tex != nullptr && tex.isLoaded(false) && tex->getTexture() != nullptr && tex->getTexture().isLoaded(false);
 	}
 
-	void SpriteTexture::setTexture(const HTexture& texture)
+	void SpriteTexture::setTexture(const TextureResourceHandle& texture)
 	{
 		removeResourceDependency(mAtlasTexture);
 		mAtlasTexture = texture;
@@ -172,21 +172,21 @@ namespace bs
 		return std::static_pointer_cast<ct::SpriteTexture>(mCoreSpecific);
 	}
 
-	HSpriteTexture SpriteTexture::create(const HTexture& texture)
+	HSpriteTexture SpriteTexture::create(const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = _createPtr(texture);
 
 		return static_resource_cast<SpriteTexture>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	HSpriteTexture SpriteTexture::create(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture)
+	HSpriteTexture SpriteTexture::create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = _createPtr(uvOffset, uvScale, texture);
 
 		return static_resource_cast<SpriteTexture>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	SPtr<SpriteTexture> SpriteTexture::_createPtr(const HTexture& texture)
+	SPtr<SpriteTexture> SpriteTexture::_createPtr(const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
 			(new (bs_alloc<SpriteTexture>()) SpriteTexture(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), texture));
@@ -197,7 +197,7 @@ namespace bs
 		return texturePtr;
 	}
 
-	SPtr<SpriteTexture> SpriteTexture::_createPtr(const Vector2& uvOffset, const Vector2& uvScale, const HTexture& texture)
+	SPtr<SpriteTexture> SpriteTexture::_createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
 			(new (bs_alloc<SpriteTexture>()) SpriteTexture(uvOffset, uvScale, texture));
@@ -211,7 +211,7 @@ namespace bs
 	SPtr<SpriteTexture> SpriteTexture::createEmpty()
 	{
 		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
-			(new (bs_alloc<SpriteTexture>()) SpriteTexture(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), HTexture()));
+			(new (bs_alloc<SpriteTexture>()) SpriteTexture(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), TextureResourceHandle()));
 
 		texturePtr->_setThisPtr(texturePtr);
 

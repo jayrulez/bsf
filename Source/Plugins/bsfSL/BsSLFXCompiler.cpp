@@ -274,7 +274,7 @@ namespace bs
 		}
 	}
 
-	HTexture getBuiltinTexture(UINT32 idx)
+	TextureResourceHandle getBuiltinTexture(UINT32 idx)
 	{
 		if (idx == 1)
 			return BuiltinResources::getTexture(BuiltinTexture::White);
@@ -283,7 +283,7 @@ namespace bs
 		else if (idx == 3)
 			return BuiltinResources::getTexture(BuiltinTexture::Normal);
 
-		return HTexture();
+		return TextureResourceHandle();
 	}
 
 	UINT32 getStructSize(INT32 structIdx, const std::vector<Xsc::Reflection::Struct>& structLookup)

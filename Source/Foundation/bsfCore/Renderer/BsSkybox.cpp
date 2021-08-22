@@ -51,7 +51,7 @@ namespace bs
 			cubemapDesc.numMips = PixelUtil::getMaxMipmaps(cubemapDesc.width, cubemapDesc.height, 1, cubemapDesc.format);
 			cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			mFilteredRadiance = Texture::_createPtr(cubemapDesc);
+			mFilteredRadiance = TextureResource::_createPtr(cubemapDesc);
 		}
 
 		{
@@ -63,7 +63,7 @@ namespace bs
 			irradianceCubemapDesc.numMips = 0;
 			irradianceCubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			mIrradiance = Texture::_createPtr(irradianceCubemapDesc);
+			mIrradiance = TextureResource::_createPtr(irradianceCubemapDesc);
 		}
 
 		auto renderComplete = [this]()
@@ -96,7 +96,7 @@ namespace bs
 		ct::gRenderer()->addTask(mRendererTask);
 	}
 
-	void Skybox::setTexture(const HTexture& texture)
+	void Skybox::setTexture(const TextureResourceHandle& texture)
 	{
 		mTexture = texture;
 

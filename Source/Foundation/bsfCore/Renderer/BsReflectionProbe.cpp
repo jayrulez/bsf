@@ -93,7 +93,7 @@ namespace bs
 		cubemapDesc.numMips = PixelUtil::getMaxMipmaps(cubemapDesc.width, cubemapDesc.height, 1, cubemapDesc.format);
 		cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-		mFilteredTexture = Texture::_createPtr(cubemapDesc);
+		mFilteredTexture = TextureResource::_createPtr(cubemapDesc);
 
 		auto renderComplete = [this]()
 		{

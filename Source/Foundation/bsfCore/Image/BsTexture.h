@@ -177,8 +177,8 @@ namespace bs
 		SPtr<PixelData> allocBuffer(UINT32 face, UINT32 mipLevel) const;
 
 	protected:
-		friend class TextureRTTI;
-		friend class Texture;
+		friend class TextureResourceRTTI;
+		friend class TextureResource;
 
 		/**
 		 * Maps a sub-resource index to an exact face and mip level. Sub-resource indexes are used when reading or writing
@@ -200,7 +200,7 @@ namespace bs
 	 *
 	 * @note	Sim thread.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Texture : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) TextureResource : public Resource
 	{
 	public:
 		/**
@@ -279,7 +279,7 @@ namespace bs
 		 *
 		 * @param[in]	desc  	Description of the texture to create.
 		 */
-		static HTexture createHandle(const TEXTURE_DESC& desc);
+		static TextureResourceHandle createHandle(const TEXTURE_DESC& desc);
 
 		/**
 		 * Creates a new 2D or 3D texture initialized using the provided pixel data. Texture will not have any mipmaps.
@@ -289,17 +289,17 @@ namespace bs
 		 * @param[in]	hwGammaCorrection	If true the texture data is assumed to have been gamma corrected and will be
 		 *									converted back to linear space when sampled on GPU.
 		 */
-		static HTexture createHandle(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
+		static TextureResourceHandle createHandle(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
 
 		/** @name Internal
 		 *  @{
 		 */
 
 		/** Same as create() excepts it creates a pointer to the texture instead of a texture handle. */
-		static SPtr<Texture> _createPtr(const TEXTURE_DESC& desc);
+		static SPtr<TextureResource> _createPtr(const TEXTURE_DESC& desc);
 
 		/** Same as create() excepts it creates a pointer to the texture instead of a texture handle. */
-		static SPtr<Texture> _createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
+		static SPtr<TextureResource> _createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
 			bool hwGammaCorrection = false);
 
 		/** @} */
@@ -307,8 +307,8 @@ namespace bs
 	protected:
 		friend class TextureManager;
 
-		Texture(const TEXTURE_DESC& desc);
-		Texture(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
+		TextureResource(const TEXTURE_DESC& desc);
+		TextureResource(const TEXTURE_DESC& desc, const SPtr<PixelData>& pixelData);
 
 		/** @copydoc Resource::initialize */
 		void initialize() override;
@@ -338,9 +338,9 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		Texture() = default; // Serialization only
+		TextureResource() = default; // Serialization only
 
-		friend class TextureRTTI;
+		friend class TextureResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

@@ -129,7 +129,7 @@ namespace bs
 	{
 		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:
 		TMaterialParamTexture(const String& name, const MaterialPtrType& material);
@@ -159,7 +159,7 @@ namespace bs
 		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:
 		TMaterialParamSpriteTexture(const String& name, const MaterialPtrType& material);
@@ -188,7 +188,7 @@ namespace bs
 	{
 		using MaterialPtrType = SPtr<CoreVariantType<Material, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:
 		TMaterialParamLoadStoreTexture(const String& name, const MaterialPtrType& material);

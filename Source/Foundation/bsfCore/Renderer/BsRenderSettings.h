@@ -456,7 +456,7 @@ namespace bs
 	template<bool Core>
 	struct BS_CORE_EXPORT TDepthOfFieldSettings : DepthOfFieldSettingsBase
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 		/** Texture to use for the bokeh shape. Only relevant when using Bokeh depth of field. */
 		BS_SCRIPT_EXPORT()
@@ -884,7 +884,7 @@ namespace bs
 	template<bool Core>
 	struct BS_CORE_EXPORT TChromaticAberrationSettings : ChromaticAberrationSettingsBase 
 	{
-		using TextureType = CoreVariantHandleType<Texture, Core>;
+		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 		/**
 		 * Optional texture to apply to generate the channel shift fringe, allowing you to modulate the shifted colors.
