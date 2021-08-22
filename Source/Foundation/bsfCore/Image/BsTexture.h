@@ -279,7 +279,7 @@ namespace bs
 		 *
 		 * @param[in]	desc  	Description of the texture to create.
 		 */
-		static HTexture create(const TEXTURE_DESC& desc);
+		static HTexture createHandle(const TEXTURE_DESC& desc);
 
 		/**
 		 * Creates a new 2D or 3D texture initialized using the provided pixel data. Texture will not have any mipmaps.
@@ -289,7 +289,7 @@ namespace bs
 		 * @param[in]	hwGammaCorrection	If true the texture data is assumed to have been gamma corrected and will be
 		 *									converted back to linear space when sampled on GPU.
 		 */
-		static HTexture create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
+		static HTexture createHandle(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT, bool hwGammaCorrection = false);
 
 		/** @name Internal
 		 *  @{
