@@ -8,181 +8,181 @@
  *  @{
  */
 
-/** @defgroup Core Core
- *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
- *  @{
- */
-
-/** @defgroup Animation Animation
- *	%Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
- */
-
-/** @defgroup Application-Core Application
- *  Entry point into the application and other general functionality.
- */
-
-/** @defgroup Audio Audio
- *	%Audio clips, 3D sound and music reproduction.
- */
-
-/** @defgroup Components-Core Components
-  *	Built-in components (elements that may be attached to scene objects).
+ /** @defgroup Core Core
+  *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
+  *  @{
   */
 
-/** @defgroup CoreThread Core thread
- *	Core objects and interaction with the core (rendering) thread.
- */
+  /** @defgroup Animation Animation
+   *	%Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
+   */
 
-/** @defgroup Importer Importer
- *	Import of resources into engine friendly format.
- */
+   /** @defgroup Application-Core Application
+	*  Entry point into the application and other general functionality.
+	*/
 
-/** @defgroup Input Input
- *	%Input (mouse, keyboard, gamepad, etc.).
- */
+	/** @defgroup Audio Audio
+	 *	%Audio clips, 3D sound and music reproduction.
+	 */
 
-/** @defgroup Localization Localization
- *	GUI localization.
- */
+	 /** @defgroup Components-Core Components
+	   *	Built-in components (elements that may be attached to scene objects).
+	   */
 
-/** @defgroup Material Material
- *	Materials, shaders and related functionality.
- */
+	   /** @defgroup CoreThread Core thread
+		*	Core objects and interaction with the core (rendering) thread.
+		*/
 
-/** @defgroup Physics Physics
- *	%Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
- */
+		/** @defgroup Importer Importer
+		 *	Import of resources into engine friendly format.
+		 */
 
- /** @defgroup Profiling Profiling
-  *	Measuring CPU and GPU execution times and memory usage.
-  */
+		 /** @defgroup Input Input
+		  *	%Input (mouse, keyboard, gamepad, etc.).
+		  */
 
-/** @defgroup RenderAPI RenderAPI
-  *	Interface for interacting with the render API (DirectX, OpenGL, etc.).
-  */
+		  /** @defgroup Localization Localization
+		   *	GUI localization.
+		   */
 
-/** @defgroup Renderer Renderer
-  *	Abstract interface and helper functionality for rendering scene objects.
-  */
+		   /** @defgroup Material Material
+			*	Materials, shaders and related functionality.
+			*/
 
-/** @defgroup Resources Resources
-  *	Core resource types and resource management functionality (loading, saving, etc.).
-  */
+			/** @defgroup Physics Physics
+			 *	%Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
+			 */
 
-/** @defgroup Particles Particles
-  *	Emission, updates and rendering of particles in the particle system.
-  */
+			 /** @defgroup Profiling Profiling
+			  *	Measuring CPU and GPU execution times and memory usage.
+			  */
 
-/** @defgroup Network Network
-  * Sending and receiving data over the network.
-  */
+			  /** @defgroup RenderAPI RenderAPI
+				*	Interface for interacting with the render API (DirectX, OpenGL, etc.).
+				*/
 
-/** @cond RTTI */
-/** @defgroup RTTI-Impl-Core RTTI types
- *  RTTI implementations for classes within the core layer.
- */
-/** @endcond */
+				/** @defgroup Renderer Renderer
+				  *	Abstract interface and helper functionality for rendering scene objects.
+				  */
 
-/** @defgroup Scene Scene
- *  Managing scene objects and their hierarchy.
- */
+				  /** @defgroup Resources Resources
+					*	Core resource types and resource management functionality (loading, saving, etc.).
+					*/
 
-/** @defgroup Text Text
- *  Generating text geometry.
- */
+					/** @defgroup Particles Particles
+					  *	Emission, updates and rendering of particles in the particle system.
+					  */
 
-/** @defgroup Utility-Core Utility
- *  Various utility methods and types used by the core layer.
- */
+					  /** @defgroup Network Network
+						* Sending and receiving data over the network.
+						*/
 
-/** @} */
-/** @} */
+						/** @cond RTTI */
+						/** @defgroup RTTI-Impl-Core RTTI types
+						 *  RTTI implementations for classes within the core layer.
+						 */
+						 /** @endcond */
 
-/** @addtogroup Internals
- *  @{
- */
+						 /** @defgroup Scene Scene
+						  *  Managing scene objects and their hierarchy.
+						  */
 
-/** @defgroup Internal-Core Core
- *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
- *  @{
- */
+						  /** @defgroup Text Text
+						   *  Generating text geometry.
+						   */
 
-/** @defgroup Animation-Internal Animation
- *	Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
- */
+						   /** @defgroup Utility-Core Utility
+							*  Various utility methods and types used by the core layer.
+							*/
 
-/** @defgroup Audio-Internal Audio
- *	Audio clips, 3D sound and music reproduction.
- */
+							/** @} */
+							/** @} */
 
-/** @defgroup CoreThread-Internal Core thread
- *	Core objects and interaction with the core (rendering) thread.
- */
+							/** @addtogroup Internals
+							 *  @{
+							 */
 
-/** @defgroup Importer-Internal Importer
- *	Import of resources into engine friendly format.
- */
+							 /** @defgroup Internal-Core Core
+							  *	Second lowest layer that provides core engine functionality and abstract interfaces for various systems.
+							  *  @{
+							  */
 
-/** @defgroup Input-Internal Input
- *	Input (mouse, keyboard, gamepad, etc.).
- */
+							  /** @defgroup Animation-Internal Animation
+							   *	Animation clips, skeletal and blend shape animation, animation playback, blending and other features.
+							   */
 
-/** @defgroup Localization-Internal Localization
- *	GUI localization.
- */
+							   /** @defgroup Audio-Internal Audio
+								*	Audio clips, 3D sound and music reproduction.
+								*/
 
-/** @defgroup Material-Internal Material
- *	Materials, shaders and related functionality.
- */
+								/** @defgroup CoreThread-Internal Core thread
+								 *	Core objects and interaction with the core (rendering) thread.
+								 */
 
-/** @defgroup Particles-Internal Particles
- *	Emission, updates and rendering of particles in the particle system.
- */
+								 /** @defgroup Importer-Internal Importer
+								  *	Import of resources into engine friendly format.
+								  */
 
-/** @defgroup Network-Internal Network
- * Sending and receiving data over the network.
- */
+								  /** @defgroup Input-Internal Input
+								   *	Input (mouse, keyboard, gamepad, etc.).
+								   */
 
-/** @defgroup Physics-Internal Physics
- *	Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
- */
+								   /** @defgroup Localization-Internal Localization
+									*	GUI localization.
+									*/
 
-/** @defgroup Platform-Internal Platform
- *	Interface for interacting with the platform (OS).
- */
+									/** @defgroup Material-Internal Material
+									 *	Materials, shaders and related functionality.
+									 */
 
- /** @defgroup Profiling-Internal Profiling
-  *	Measuring CPU and GPU execution times and memory usage.
-  */
+									 /** @defgroup Particles-Internal Particles
+									  *	Emission, updates and rendering of particles in the particle system.
+									  */
 
-/** @defgroup RenderAPI-Internal RenderAPI
-  *	Interface for interacting with the render API (DirectX, OpenGL, etc.).
-  */
+									  /** @defgroup Network-Internal Network
+									   * Sending and receiving data over the network.
+									   */
 
-/** @defgroup Renderer-Internal Renderer
-  *	Abstract interface and helper functionality for rendering scene objects.
-  */
+									   /** @defgroup Physics-Internal Physics
+										*	Physics system: colliders, triggers, rigidbodies, joints, scene queries, etc.
+										*/
 
-/** @defgroup Resources-Internal Resources
-  *	Core resource types and resource management functionality (loading, saving, etc.).
-  */
+										/** @defgroup Platform-Internal Platform
+										 *	Interface for interacting with the platform (OS).
+										 */
 
-/** @defgroup Scene-Internal Scene
- *  Managing scene objects and their hierarchy.
- */
+										 /** @defgroup Profiling-Internal Profiling
+										  *	Measuring CPU and GPU execution times and memory usage.
+										  */
 
-/** @defgroup Text-Internal Text
- *  Generating text geometry.
- */
+										  /** @defgroup RenderAPI-Internal RenderAPI
+											*	Interface for interacting with the render API (DirectX, OpenGL, etc.).
+											*/
 
-/** @defgroup Utility-Core-Internal Utility
- *  Various utility methods and types used by the core layer.
- */
+											/** @defgroup Renderer-Internal Renderer
+											  *	Abstract interface and helper functionality for rendering scene objects.
+											  */
 
-/** @} */
-/** @} */
+											  /** @defgroup Resources-Internal Resources
+												*	Core resource types and resource management functionality (loading, saving, etc.).
+												*/
 
-/** Maximum number of color surfaces that can be attached to a multi render target. */
+												/** @defgroup Scene-Internal Scene
+												 *  Managing scene objects and their hierarchy.
+												 */
+
+												 /** @defgroup Text-Internal Text
+												  *  Generating text geometry.
+												  */
+
+												  /** @defgroup Utility-Core-Internal Utility
+												   *  Various utility methods and types used by the core layer.
+												   */
+
+												   /** @} */
+												   /** @} */
+
+												   /** Maximum number of color surfaces that can be attached to a multi render target. */
 #define BS_MAX_MULTIPLE_RENDER_TARGETS 8
 #define BS_FORCE_SINGLETHREADED_RENDERING 0
 
@@ -192,7 +192,7 @@
  */
 #define BS_CORE_THREAD_IS_MAIN 0
 
-/** Maximum number of individual GPU queues, per type. */
+ /** Maximum number of individual GPU queues, per type. */
 #define BS_MAX_QUEUES_PER_TYPE 8
 
 /** Maximum number of hardware devices usable at once. */
@@ -243,50 +243,88 @@ namespace bs
 #define CORE_OBJECT_FORWARD_DECLARE(TYPE)				\
 	class TYPE;											\
 	namespace ct { class TYPE; }						\
-	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
+	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; }
 
 #define CORE_OBJECT_FORWARD_DECLARE_STRUCT(TYPE)		\
 	struct TYPE;										\
 	namespace ct { struct TYPE; }						\
-	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; };
+	template<> struct CoreThreadType<TYPE> { typedef ct::TYPE Type; }
 
-	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer)
-	CORE_OBJECT_FORWARD_DECLARE(VertexBuffer)
-	CORE_OBJECT_FORWARD_DECLARE(GpuBuffer)
-	CORE_OBJECT_FORWARD_DECLARE(GpuProgram)
-	CORE_OBJECT_FORWARD_DECLARE(Pass)
-	CORE_OBJECT_FORWARD_DECLARE(Technique)
-	CORE_OBJECT_FORWARD_DECLARE(Shader)
-	CORE_OBJECT_FORWARD_DECLARE(Material)
-	CORE_OBJECT_FORWARD_DECLARE(RenderTarget)
-	CORE_OBJECT_FORWARD_DECLARE(RenderTexture)
-	CORE_OBJECT_FORWARD_DECLARE(RenderWindow)
-	CORE_OBJECT_FORWARD_DECLARE(SamplerState)
-	CORE_OBJECT_FORWARD_DECLARE(Viewport)
-	CORE_OBJECT_FORWARD_DECLARE(VertexDeclaration)
-	CORE_OBJECT_FORWARD_DECLARE(DepthStencilState)
-	CORE_OBJECT_FORWARD_DECLARE(RasterizerState)
-	CORE_OBJECT_FORWARD_DECLARE(BlendState)
-	CORE_OBJECT_FORWARD_DECLARE(GpuParamBlockBuffer)
-	CORE_OBJECT_FORWARD_DECLARE(GpuParams)
-	CORE_OBJECT_FORWARD_DECLARE(GpuParamsSet)
-	CORE_OBJECT_FORWARD_DECLARE(MaterialParams)
-	CORE_OBJECT_FORWARD_DECLARE(Light)
-	CORE_OBJECT_FORWARD_DECLARE(Camera)
-	CORE_OBJECT_FORWARD_DECLARE(Renderable)
-	CORE_OBJECT_FORWARD_DECLARE(GraphicsPipelineState)
-	CORE_OBJECT_FORWARD_DECLARE(ComputePipelineState)
-	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe)
-	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem)
-	CORE_OBJECT_FORWARD_DECLARE(Texture)
-	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture)
-	CORE_OBJECT_FORWARD_DECLARE(Mesh)
-	CORE_OBJECT_FORWARD_DECLARE(VectorField)
-	CORE_OBJECT_FORWARD_DECLARE(Skybox)
-	CORE_OBJECT_FORWARD_DECLARE(Decal)
-	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings)
-	CORE_OBJECT_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings)
-	CORE_OBJECT_FORWARD_DECLARE_STRUCT(RenderSettings)
+	CORE_OBJECT_FORWARD_DECLARE(IndexBuffer);
+	CORE_OBJECT_FORWARD_DECLARE(VertexBuffer);
+	CORE_OBJECT_FORWARD_DECLARE(GpuBuffer);
+	CORE_OBJECT_FORWARD_DECLARE(GpuProgram);
+	CORE_OBJECT_FORWARD_DECLARE(Pass);
+	CORE_OBJECT_FORWARD_DECLARE(Technique);
+	CORE_OBJECT_FORWARD_DECLARE(Shader);
+	CORE_OBJECT_FORWARD_DECLARE(Material);
+	CORE_OBJECT_FORWARD_DECLARE(RenderTarget);
+	CORE_OBJECT_FORWARD_DECLARE(RenderTexture);
+	CORE_OBJECT_FORWARD_DECLARE(RenderWindow);
+	CORE_OBJECT_FORWARD_DECLARE(SamplerState);
+	CORE_OBJECT_FORWARD_DECLARE(Viewport);
+	CORE_OBJECT_FORWARD_DECLARE(VertexDeclaration);
+	CORE_OBJECT_FORWARD_DECLARE(DepthStencilState);
+	CORE_OBJECT_FORWARD_DECLARE(RasterizerState);
+	CORE_OBJECT_FORWARD_DECLARE(BlendState);
+	CORE_OBJECT_FORWARD_DECLARE(GpuParamBlockBuffer);
+	CORE_OBJECT_FORWARD_DECLARE(GpuParams);
+	CORE_OBJECT_FORWARD_DECLARE(GpuParamsSet);
+	CORE_OBJECT_FORWARD_DECLARE(MaterialParams);
+	CORE_OBJECT_FORWARD_DECLARE(Light);
+	CORE_OBJECT_FORWARD_DECLARE(Camera);
+	CORE_OBJECT_FORWARD_DECLARE(Renderable);
+	CORE_OBJECT_FORWARD_DECLARE(GraphicsPipelineState);
+	CORE_OBJECT_FORWARD_DECLARE(ComputePipelineState);
+	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe);
+	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem);
+	CORE_OBJECT_FORWARD_DECLARE(Texture);
+	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
+	CORE_OBJECT_FORWARD_DECLARE(Mesh);
+	CORE_OBJECT_FORWARD_DECLARE(VectorField);
+	CORE_OBJECT_FORWARD_DECLARE(Skybox);
+	CORE_OBJECT_FORWARD_DECLARE(Decal);
+	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings);
+	CORE_OBJECT_FORWARD_DECLARE_STRUCT(ChromaticAberrationSettings);
+	CORE_OBJECT_FORWARD_DECLARE_STRUCT(RenderSettings);
+
+	//class IndexBuffer;
+	//class VertexBuffer;
+	//class GpuBuffer;
+	//class GpuProgram;
+	//class Pass;
+	//class Technique;
+	//class Shader;
+	//class Material;
+	//class RenderTarget;
+	//class RenderTexture;
+	//class RenderWindow;
+	//class SamplerState;
+	//class Viewport;
+	//class VertexDeclaration;
+	//class DepthStencilState;
+	//class RasterizerState;
+	//class BlendState;
+	//class GpuParamBlockBuffer;
+	//class GpuParams;
+	//class GpuParamsSet;
+	//class MaterialParams;
+	//class Light;
+	//class Camera;
+	//class Renderable;
+	//class GraphicsPipelineState;
+	//class ComputePipelineState;
+	//class ReflectionProbe;
+	//class ParticleSystem;
+	//class Texture;
+	//class SpriteTexture;
+	//class Mesh;
+	//class VectorField;
+	//class Skybox;
+	//class Decal;
+	//struct DepthOfFieldSettings;
+	//struct ChromaticAberrationSettings;
+	//struct RenderSettings;
 
 	class Collider;
 	class Rigidbody;
@@ -316,35 +354,35 @@ namespace bs
 
 #define COMPONENT_FORWARD_DECLARE(TYPE)								\
 	class C##TYPE;													\
-	template<> struct ComponentType<TYPE> { typedef C##TYPE Type; };
+	template<> struct ComponentType<TYPE> { typedef C##TYPE Type; }
 
-	COMPONENT_FORWARD_DECLARE(Collider)
-	COMPONENT_FORWARD_DECLARE(Rigidbody)
-	COMPONENT_FORWARD_DECLARE(BoxCollider)
-	COMPONENT_FORWARD_DECLARE(SphereCollider)
-	COMPONENT_FORWARD_DECLARE(PlaneCollider)
-	COMPONENT_FORWARD_DECLARE(CapsuleCollider)
-	COMPONENT_FORWARD_DECLARE(MeshCollider)
-	COMPONENT_FORWARD_DECLARE(Joint)
-	COMPONENT_FORWARD_DECLARE(HingeJoint)
-	COMPONENT_FORWARD_DECLARE(DistanceJoint)
-	COMPONENT_FORWARD_DECLARE(FixedJoint)
-	COMPONENT_FORWARD_DECLARE(SphericalJoint)
-	COMPONENT_FORWARD_DECLARE(SliderJoint)
-	COMPONENT_FORWARD_DECLARE(D6Joint)
-	COMPONENT_FORWARD_DECLARE(CharacterController)
-	COMPONENT_FORWARD_DECLARE(Camera)
-	COMPONENT_FORWARD_DECLARE(Renderable)
-	COMPONENT_FORWARD_DECLARE(Light)
-	COMPONENT_FORWARD_DECLARE(Animation)
-	COMPONENT_FORWARD_DECLARE(Bone)
-	COMPONENT_FORWARD_DECLARE(AudioSource)
-	COMPONENT_FORWARD_DECLARE(AudioListener)
-	COMPONENT_FORWARD_DECLARE(ReflectionProbe)
-	COMPONENT_FORWARD_DECLARE(Skybox)
-	COMPONENT_FORWARD_DECLARE(LightProbeVolume)
-	COMPONENT_FORWARD_DECLARE(ParticleSystem)
-	COMPONENT_FORWARD_DECLARE(Decal)
+	COMPONENT_FORWARD_DECLARE(Collider);
+	COMPONENT_FORWARD_DECLARE(Rigidbody);
+	COMPONENT_FORWARD_DECLARE(BoxCollider);
+	COMPONENT_FORWARD_DECLARE(SphereCollider);
+	COMPONENT_FORWARD_DECLARE(PlaneCollider);
+	COMPONENT_FORWARD_DECLARE(CapsuleCollider);
+	COMPONENT_FORWARD_DECLARE(MeshCollider);
+	COMPONENT_FORWARD_DECLARE(Joint);
+	COMPONENT_FORWARD_DECLARE(HingeJoint);
+	COMPONENT_FORWARD_DECLARE(DistanceJoint);
+	COMPONENT_FORWARD_DECLARE(FixedJoint);
+	COMPONENT_FORWARD_DECLARE(SphericalJoint);
+	COMPONENT_FORWARD_DECLARE(SliderJoint);
+	COMPONENT_FORWARD_DECLARE(D6Joint);
+	COMPONENT_FORWARD_DECLARE(CharacterController);
+	COMPONENT_FORWARD_DECLARE(Camera);
+	COMPONENT_FORWARD_DECLARE(Renderable);
+	COMPONENT_FORWARD_DECLARE(Light);
+	COMPONENT_FORWARD_DECLARE(Animation);
+	COMPONENT_FORWARD_DECLARE(Bone);
+	COMPONENT_FORWARD_DECLARE(AudioSource);
+	COMPONENT_FORWARD_DECLARE(AudioListener);
+	COMPONENT_FORWARD_DECLARE(ReflectionProbe);
+	COMPONENT_FORWARD_DECLARE(Skybox);
+	COMPONENT_FORWARD_DECLARE(LightProbeVolume);
+	COMPONENT_FORWARD_DECLARE(ParticleSystem);
+	COMPONENT_FORWARD_DECLARE(Decal);
 
 	class Color;
 	class GpuProgramManager;
@@ -721,7 +759,7 @@ namespace bs
 	 *  @{
 	 */
 
-	// Game object handles
+	 // Game object handles
 	typedef GameObjectHandle<GameObject> HGameObject;
 	typedef GameObjectHandle<SceneObject> HSceneObject;
 	typedef GameObjectHandle<Component> HComponent;
@@ -761,8 +799,8 @@ namespace bs
 	/**
 	 * Defers function execution until the next frame. If this function is called within another deferred call, then it will
 	 * be executed the same frame, but only after all existing deferred calls are done.
-	 * 			
-	 * @note	
+	 *
+	 * @note
 	 * This method can be used for breaking dependencies among other things. If a class A depends on class B having
 	 * something done, but class B also depends in some way on class A, you can break up the initialization into two
 	 * separate steps, queuing the second step using this method.
@@ -799,7 +837,7 @@ namespace bs
 		}
 	};
 
-	#define BS_ALL_LAYERS 0xFFFFFFFFFFFFFFFF
+#define BS_ALL_LAYERS 0xFFFFFFFFFFFFFFFF
 
 	/** Used for marking a CoreObject dependency as dirty. */
 	static constexpr INT32 DIRTY_DEPENDENCY_MASK = 1 << 31;
@@ -874,7 +912,7 @@ namespace bs
 		/** Returns the assigned value as a scene actor. */
 		SPtr<T> getActor() const
 		{
-			if(mActor)
+			if (mActor)
 				return mActor;
 
 			return mComponent->_getInternal();
@@ -892,25 +930,25 @@ namespace bs
 	};
 
 	BS_LOG_CATEGORY(CoreThread, 20)
-	BS_LOG_CATEGORY(Renderer, 21)
-	BS_LOG_CATEGORY(Scene, 22)
-	BS_LOG_CATEGORY(Physics, 23)
-	BS_LOG_CATEGORY(Audio, 24)
-	BS_LOG_CATEGORY(RenderBackend, 25)
-	BS_LOG_CATEGORY(BSLCompiler, 26)
-	BS_LOG_CATEGORY(Particles, 27)
-	BS_LOG_CATEGORY(Resources, 28)
-	BS_LOG_CATEGORY(FBXImporter, 29)
-	BS_LOG_CATEGORY(PixelUtility, 30)
-	BS_LOG_CATEGORY(Texture, 31)
-	BS_LOG_CATEGORY(Mesh, 32)
-	BS_LOG_CATEGORY(GUI, 33)
-	BS_LOG_CATEGORY(Profiler, 34)
-	BS_LOG_CATEGORY(Material, 35)
-	BS_LOG_CATEGORY(FreeImageImporter, 36)
-	BS_LOG_CATEGORY(Script, 37)
-	BS_LOG_CATEGORY(Importer, 38)
-	BS_LOG_CATEGORY(Network, 39)
+		BS_LOG_CATEGORY(Renderer, 21)
+		BS_LOG_CATEGORY(Scene, 22)
+		BS_LOG_CATEGORY(Physics, 23)
+		BS_LOG_CATEGORY(Audio, 24)
+		BS_LOG_CATEGORY(RenderBackend, 25)
+		BS_LOG_CATEGORY(BSLCompiler, 26)
+		BS_LOG_CATEGORY(Particles, 27)
+		BS_LOG_CATEGORY(Resources, 28)
+		BS_LOG_CATEGORY(FBXImporter, 29)
+		BS_LOG_CATEGORY(PixelUtility, 30)
+		BS_LOG_CATEGORY(Texture, 31)
+		BS_LOG_CATEGORY(Mesh, 32)
+		BS_LOG_CATEGORY(GUI, 33)
+		BS_LOG_CATEGORY(Profiler, 34)
+		BS_LOG_CATEGORY(Material, 35)
+		BS_LOG_CATEGORY(FreeImageImporter, 36)
+		BS_LOG_CATEGORY(Script, 37)
+		BS_LOG_CATEGORY(Importer, 38)
+		BS_LOG_CATEGORY(Network, 39)
 }
 
 #include "Utility/BsCommonTypes.h"
