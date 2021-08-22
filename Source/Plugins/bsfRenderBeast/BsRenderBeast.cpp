@@ -666,7 +666,7 @@ namespace bs { namespace ct
 				cubeMapDesc.numMips = PixelUtil::getMaxMipmaps(cubeMapDesc.width, cubeMapDesc.height, 1, cubeMapDesc.format);
 				cubeMapDesc.numArraySlices = std::min(MaxReflectionCubemaps, numProbes + 4); // Keep a few empty entries
 
-				sceneInfo.reflProbeCubemapsTex = Texture::create(cubeMapDesc);
+				sceneInfo.reflProbeCubemapsTex = Texture::createPtr(cubeMapDesc);
 
 				forceArrayUpdate = true;
 			}

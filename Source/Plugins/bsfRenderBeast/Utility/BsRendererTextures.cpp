@@ -36,7 +36,7 @@ namespace bs { namespace ct
 				pixelData->setColorAt(color, x, y);
 			}
 
-		return Texture::create(pixelData);
+		return Texture::createPtr(pixelData);
 	}
 
 	// Reverse bits functions used for Hammersley sequence
@@ -93,7 +93,7 @@ namespace bs { namespace ct
 		desc.width = 128;
 		desc.height = 32;
 
-		SPtr<Texture> texture = Texture::create(desc);
+		SPtr<Texture> texture = Texture::createPtr(desc);
 		PixelData pixelData = texture->lock(GBL_WRITE_ONLY_DISCARD);
 
 		for (UINT32 y = 0; y < desc.height; y++)
@@ -186,7 +186,7 @@ namespace bs { namespace ct
 		// Note: Eventually replace this with a time of day model
 		float intensity = 1.0f;
 		Color skyColor = Color::White * intensity;
-		SPtr<Texture> skyTexture = Texture::create(dummySkyDesc);
+		SPtr<Texture> skyTexture = Texture::createPtr(dummySkyDesc);
 		
 		UINT32 sides[] = { CF_PositiveX, CF_NegativeX, CF_PositiveZ, CF_NegativeZ };
 		for(UINT32 i = 0; i < 4; ++i)
@@ -231,7 +231,7 @@ namespace bs { namespace ct
 		irradianceCubemapDesc.numMips = 0;
 		irradianceCubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-		SPtr<Texture> irradiance = Texture::create(irradianceCubemapDesc);
+		SPtr<Texture> irradiance = Texture::createPtr(irradianceCubemapDesc);
 		gIBLUtility().filterCubemapForIrradiance(skyTexture, irradiance);
 
 		return irradiance;
@@ -260,7 +260,7 @@ namespace bs { namespace ct
 		for(UINT32 i = 16; i < 32; i++)
 			pixels->setColorAt(Color::Black, i, 0);
 
-		return Texture::create(pixels);
+		return Texture::createPtr(pixels);
 	}
 
 	SPtr<Texture> generateChromaticAberrationFringe()
@@ -270,7 +270,7 @@ namespace bs { namespace ct
 		pixels->setColorAt(Color(0.0f, 1.0f, 0.0f, 1.0f), 1, 0);
 		pixels->setColorAt(Color(0.0f, 0.0f, 1.0f, 1.0f), 2, 0);
 
-		return Texture::create(pixels);
+		return Texture::createPtr(pixels);
 	}
 
 	SPtr<Texture> RendererTextures::preintegratedEnvGF;

@@ -460,7 +460,7 @@ namespace bs
 				cubemapDesc.height = 256;
 				cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-				SPtr<Texture> cubemap = Texture::create(cubemapDesc);
+				SPtr<Texture> cubemap = Texture::createPtr(cubemapDesc);
 
 				Vector3 localPos = mProbePositions[mFirstDirtyProbe];
 
@@ -662,7 +662,7 @@ namespace bs
 		desc.usage = TU_LOADSTORE | TU_RENDERTARGET;
 		desc.format = PF_RGBA32F;
 
-		SPtr<Texture> newTexture = Texture::create(desc);
+		SPtr<Texture> newTexture = Texture::createPtr(desc);
 
 		if (mCoefficients)
 			mCoefficients->copy(newTexture);

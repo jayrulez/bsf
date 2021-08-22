@@ -346,7 +346,7 @@ namespace bs { namespace ct
 		textureDesc.format = PF_RGBA32F;
 		textureDesc.usage = TU_STATIC | TU_LOADSTORE;
 
-		return Texture::create(textureDesc);
+		return Texture::createPtr(textureDesc);
 	}
 
 	IrradianceReduceSHMat* IrradianceReduceSHMat::getVariation(int order)
@@ -397,7 +397,7 @@ namespace bs { namespace ct
 			cubemapDesc.numMips = PixelUtil::getMaxMipmaps(cubemapDesc.width, cubemapDesc.height, 1, cubemapDesc.format);
 			cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			scratchCubemap = Texture::create(cubemapDesc);
+			scratchCubemap = Texture::createPtr(cubemapDesc);
 		}
 
 		// We sample the cubemaps using importance sampling to generate roughness
@@ -545,7 +545,7 @@ namespace bs { namespace ct
 			cubemapDesc.numMips = numDownsamples - 1;
 			cubemapDesc.usage = TU_STATIC | TU_RENDERTARGET;
 
-			scratchTex = Texture::create(cubemapDesc);
+			scratchTex = Texture::createPtr(cubemapDesc);
 
 			downsampleCubemap(src, srcMip, scratchTex, 0);
 			for(UINT32 i = 0; i < cubemapDesc.numMips; i++)

@@ -42,7 +42,7 @@ namespace bs { namespace ct
 		if (desc.type != TEX_TYPE_3D)
 			texDesc.numArraySlices = desc.arraySize;
 
-		newTexture->texture = Texture::create(texDesc);
+		newTexture->texture = Texture::createPtr(texDesc);
 		
 		if ((desc.flag & (TU_RENDERTARGET | TU_DEPTHSTENCIL)) != 0)
 		{

@@ -454,13 +454,13 @@ namespace bs
 		 * @copydoc bs::Texture::create(const TEXTURE_DESC&)
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		static SPtr<Texture> create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
+		static SPtr<Texture> createPtr(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/**
 		 * @copydoc bs::Texture::create(const SPtr<PixelData>&, int, bool)
 		 * @param[in]	deviceMask		Mask that determines on which GPU devices should the object be created on.
 		 */
-		static SPtr<Texture> create(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
+		static SPtr<Texture> createPtr(const SPtr<PixelData>& pixelData, int usage = TU_DEFAULT,
 			bool hwGammaCorrection = false, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 		/************************************************************************/

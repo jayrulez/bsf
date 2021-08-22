@@ -277,8 +277,8 @@ namespace bs { namespace ct
 
 		for (UINT32 i = 0; i < 2; i++)
 		{
-			mStateTextures[i].positionAndTimeTex = Texture::create(positionAndTimeDesc);
-			mStateTextures[i].velocityTex = Texture::create(velocityDesc);
+			mStateTextures[i].positionAndTimeTex = Texture::createPtr(positionAndTimeDesc);
+			mStateTextures[i].velocityTex = Texture::createPtr(velocityDesc);
 		}
 
 		TEXTURE_DESC sizeAndRotationDesc;
@@ -287,7 +287,7 @@ namespace bs { namespace ct
 		sizeAndRotationDesc.height = TEX_SIZE;
 		sizeAndRotationDesc.usage = TU_RENDERTARGET;
 
-		mStaticTextures.sizeAndRotationTex = Texture::create(sizeAndRotationDesc);
+		mStaticTextures.sizeAndRotationTex = Texture::createPtr(sizeAndRotationDesc);
 
 		RENDER_TEXTURE_DESC staticRtDesc;
 		staticRtDesc.colorSurfaces[0].texture = mStaticTextures.sizeAndRotationTex;
@@ -1341,7 +1341,7 @@ namespace bs { namespace ct
 		textureDesc.height = TEX_SIZE;
 		textureDesc.usage = TU_RENDERTARGET;
 
-		mCurveTexture = Texture::create(textureDesc);
+		mCurveTexture = Texture::createPtr(textureDesc);
 
 		RENDER_TEXTURE_DESC rtDesc;
 		rtDesc.colorSurfaces[0].texture = mCurveTexture;

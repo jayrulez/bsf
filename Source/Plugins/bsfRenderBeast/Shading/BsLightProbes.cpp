@@ -806,7 +806,7 @@ namespace bs { namespace ct
 		desc.usage = TU_LOADSTORE | TU_RENDERTARGET;
 		desc.format = PF_RGBA32F;
 
-		SPtr<Texture> newTexture = Texture::create(desc);
+		SPtr<Texture> newTexture = Texture::createPtr(desc);
 		if (mProbeCoefficientsGPU)
 			mProbeCoefficientsGPU->copy(newTexture);
 

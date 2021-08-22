@@ -601,12 +601,12 @@ namespace bs
 	/************************************************************************/
 	/* 								STATICS	                      			*/
 	/************************************************************************/
-	SPtr<Texture> Texture::create(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
+	SPtr<Texture> Texture::createPtr(const TEXTURE_DESC& desc, GpuDeviceFlags deviceMask)
 	{
 		return TextureManager::instance().createTexture(desc, deviceMask);
 	}
 
-	SPtr<Texture> Texture::create(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection,
+	SPtr<Texture> Texture::createPtr(const SPtr<PixelData>& pixelData, int usage, bool hwGammaCorrection,
 		GpuDeviceFlags deviceMask)
 	{
 		TEXTURE_DESC desc;

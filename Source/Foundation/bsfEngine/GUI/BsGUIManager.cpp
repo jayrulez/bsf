@@ -1693,7 +1693,7 @@ namespace bs
 				texDesc.format = PF_D24S8; // TODO: Can we create a stencil only texture here?
 				texDesc.usage = TU_DEPTHSTENCIL;
 
-				SPtr<Texture> stencilTexture = Texture::create(texDesc);
+				SPtr<Texture> stencilTexture = Texture::createPtr(texDesc);
 
 				RENDER_TEXTURE_DESC rtDesc;
 				rtDesc.colorSurfaces[0].texture = colorTex;

@@ -304,13 +304,13 @@ namespace bs { namespace ct
 		texDesc.usage = TU_DYNAMIC;
 
 		texDesc.format = PF_RGBA32F;
-		output->positionAndRotation = Texture::create(texDesc);
+		output->positionAndRotation = Texture::createPtr(texDesc);
 
 		texDesc.format = PF_RGBA8;
-		output->color = Texture::create(texDesc);
+		output->color = Texture::createPtr(texDesc);
 
 		texDesc.format = PF_RGBA16F;
-		output->sizeAndFrameIdx = Texture::create(texDesc);
+		output->sizeAndFrameIdx = Texture::createPtr(texDesc);
 
 		GPU_BUFFER_DESC bufferDesc;
 		bufferDesc.type = GBT_STANDARD;
@@ -334,16 +334,16 @@ namespace bs { namespace ct
 		texDesc.usage = TU_DYNAMIC;
 
 		texDesc.format = PF_RGBA32F;
-		output->position = Texture::create(texDesc);
+		output->position = Texture::createPtr(texDesc);
 
 		texDesc.format = PF_RGBA8;
-		output->color = Texture::create(texDesc);
+		output->color = Texture::createPtr(texDesc);
 
 		texDesc.format = PF_RGBA16F;
-		output->size = Texture::create(texDesc);
+		output->size = Texture::createPtr(texDesc);
 
 		texDesc.format = PF_RGBA16F;
-		output->rotation = Texture::create(texDesc);
+		output->rotation = Texture::createPtr(texDesc);
 
 		GPU_BUFFER_DESC bufferDesc;
 		bufferDesc.type = GBT_STANDARD;
