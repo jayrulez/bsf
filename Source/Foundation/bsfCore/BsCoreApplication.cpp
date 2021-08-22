@@ -123,6 +123,7 @@ namespace bs
 		GpuProgramManager::shutDown();
 
 		CoreObjectManager::shutDown(); // Must shut down before DynLibManager to ensure all objects are destroyed before unloading their libraries
+		CoreObject2Manager::shutDown(); // Must shut down before DynLibManager to ensure all objects are destroyed before unloading their libraries
 		DynLibManager::shutDown();
 		Time::shutDown();
 		DeferredCallManager::shutDown();
@@ -161,6 +162,7 @@ namespace bs
 		DeferredCallManager::startUp();
 		Time::startUp();
 		DynLibManager::startUp();
+		CoreObject2Manager::startUp();
 		CoreObjectManager::startUp();
 		GameObjectManager::startUp();
 		Resources::startUp();
