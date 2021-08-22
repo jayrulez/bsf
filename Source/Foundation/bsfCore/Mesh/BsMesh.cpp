@@ -161,7 +161,7 @@ namespace bs
 		mCPUData = allocBuffer();
 	}
 
-	HMesh Mesh::dummy()
+	MeshResourceHandle Mesh::dummy()
 	{
 		return MeshManager::instance().getDummyMesh();
 	}
@@ -184,7 +184,7 @@ namespace bs
 	/* 								STATICS		                     		*/
 	/************************************************************************/
 
-	HMesh Mesh::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
+	MeshResourceHandle Mesh::create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
 		int usage, DrawOperationType drawOp, IndexType indexType)
 	{
 		MESH_DESC desc;
@@ -199,19 +199,19 @@ namespace bs
 		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
 	}
 
-	HMesh Mesh::create(const MESH_DESC& desc)
+	MeshResourceHandle Mesh::create(const MESH_DESC& desc)
 	{
 		SPtr<Mesh> meshPtr = _createPtr(desc);
 		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
 	}
 
-	HMesh Mesh::create(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc)
+	MeshResourceHandle Mesh::create(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc)
 	{
 		SPtr<Mesh> meshPtr = _createPtr(initialMeshData, desc);
 		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));
 	}
 
-	HMesh Mesh::create(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp)
+	MeshResourceHandle Mesh::create(const SPtr<MeshData>& initialMeshData, int usage, DrawOperationType drawOp)
 	{
 		SPtr<Mesh> meshPtr = _createPtr(initialMeshData, usage, drawOp);
 		return static_resource_cast<Mesh>(gResources()._createResourceHandle(meshPtr));

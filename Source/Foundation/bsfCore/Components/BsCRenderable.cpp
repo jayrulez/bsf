@@ -24,7 +24,7 @@ namespace bs
 		setFlag(ComponentFlag::AlwaysRun, true);
 	}
 
-	void CRenderable::setMesh(HMesh mesh)
+	void CRenderable::setMesh(MeshResourceHandle mesh)
 	{
 		mInternal->setMesh(mesh);
 

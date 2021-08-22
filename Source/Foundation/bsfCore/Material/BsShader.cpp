@@ -15,7 +15,7 @@ namespace bs
 {
 	RTTITypeBase* SubShader::getRTTIStatic()
 	{
-		return SubShaderRTTI::instance();
+		return SubShaderResourceRTTI::instance();
 	}
 
 	RTTITypeBase* SubShader::getRTTI() const
@@ -46,7 +46,7 @@ namespace bs
 		if (defaultValue != nullptr)
 		{
 			paramDesc.defaultValueIdx = (UINT32)dataDefaultValues.size();
-			UINT32 defaultValueSize = Shader::getDataParamSize(paramDesc.type);
+			UINT32 defaultValueSize = ShaderResource::getDataParamSize(paramDesc.type);
 
 			dataDefaultValues.resize(paramDesc.defaultValueIdx + defaultValueSize);
 			memcpy(&dataDefaultValues[paramDesc.defaultValueIdx], defaultValue, defaultValueSize);
@@ -69,7 +69,7 @@ namespace bs
 	void TSHADER_DESC<Core>::addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const SamplerStateType& defaultValue)
 	{
 		UINT32 defaultValueIdx = (UINT32)-1;
-		if (Shader::isSampler(paramDesc.type) && defaultValue != nullptr)
+		if (ShaderResource::isSampler(paramDesc.type) && defaultValue != nullptr)
 		{
 			defaultValueIdx = (UINT32)samplerDefaultValues.size();
 			samplerDefaultValues.push_back(defaultValue);
@@ -82,7 +82,7 @@ namespace bs
 	void TSHADER_DESC<Core>::addParameter(SHADER_OBJECT_PARAM_DESC paramDesc, const TextureType& defaultValue)
 	{
 		UINT32 defaultValueIdx = (UINT32)-1;
-		if (Shader::isTexture(paramDesc.type) && defaultValue != nullptr)
+		if (ShaderResource::isTexture(paramDesc.type) && defaultValue != nullptr)
 		{
 			defaultValueIdx = (UINT32)textureDefaultValues.size();
 			textureDefaultValues.push_back(defaultValue);
@@ -96,9 +96,9 @@ namespace bs
 	{
 		Map<String, SHADER_OBJECT_PARAM_DESC>* DEST_LOOKUP[] = { &textureParams, &bufferParams, &samplerParams };
 		UINT32 destIdx = 0;
-		if (Shader::isBuffer(paramDesc.type))
+		if (ShaderResource::isBuffer(paramDesc.type))
 			destIdx = 1;
-		else if (Shader::isSampler(paramDesc.type))
+		else if (ShaderResource::isSampler(paramDesc.type))
 			destIdx = 2;
 
 		Map<String, SHADER_OBJECT_PARAM_DESC>& paramsMap = *DEST_LOOKUP[destIdx];
@@ -426,28 +426,28 @@ namespace bs
 	template class TShader < false > ;
 	template class TShader < true >;
 
-	Shader::Shader(const String& name, const SHADER_DESC& desc, UINT32 id)
+	ShaderResource::ShaderResource(const String& name, const SHADER_DESC& desc, UINT32 id)
 		:TShader(name, desc, id)
 	{
 		mMetaData = bs_shared_ptr_new<ShaderMetaData>();
 	}
 
-	Shader::Shader(UINT32 id)
+	ShaderResource::ShaderResource(UINT32 id)
 		:TShader(id)
 	{ }
 
-	SPtr<ct::Shader> Shader::getCore() const
+	SPtr<ct::Shader> ShaderResource::getCore() const
 	{
 		return std::static_pointer_cast<ct::Shader>(mCoreSpecific);
 	}
 
-	void Shader::setIncludeFiles(const Vector<String>& includes)
+	void ShaderResource::setIncludeFiles(const Vector<String>& includes)
 	{
 		SPtr<ShaderMetaData> meta = std::static_pointer_cast<ShaderMetaData>(getMetaData());
 		meta->includes = includes;
 	}
 
-	SPtr<ct::CoreObject> Shader::createCore() const
+	SPtr<ct::CoreObject> ShaderResource::createCore() const
 	{
 		Vector<SPtr<ct::Technique>> techniques;
 		for (auto& technique : mDesc.techniques)
@@ -460,7 +460,7 @@ namespace bs
 		return shaderCorePtr;
 	}
 
-	ct::SHADER_DESC Shader::convertDesc(const SHADER_DESC& desc) const
+	ct::SHADER_DESC ShaderResource::convertDesc(const SHADER_DESC& desc) const
 	{
 		ct::SHADER_DESC output;
 		output.dataParams = desc.dataParams;
@@ -519,13 +519,13 @@ namespace bs
 		return output;
 	}
 
-	void Shader::getCoreDependencies(Vector<CoreObject*>& dependencies)
+	void ShaderResource::getCoreDependencies(Vector<CoreObject*>& dependencies)
 	{
 		for (auto& technique : mDesc.techniques)
 			dependencies.push_back(technique.get());
 	}
 
-	bool Shader::isSampler(GpuParamObjectType type)
+	bool ShaderResource::isSampler(GpuParamObjectType type)
 	{
 		switch(type)
 		{
@@ -540,7 +540,7 @@ namespace bs
 		}
 	}
 
-	bool Shader::isTexture(GpuParamObjectType type)
+	bool ShaderResource::isTexture(GpuParamObjectType type)
 	{
 		switch(type)
 		{
@@ -559,7 +559,7 @@ namespace bs
 		}
 	}
 
-	bool Shader::isLoadStoreTexture(GpuParamObjectType type)
+	bool ShaderResource::isLoadStoreTexture(GpuParamObjectType type)
 	{
 		switch (type)
 		{
@@ -576,7 +576,7 @@ namespace bs
 		}
 	}
 
-	bool Shader::isBuffer(GpuParamObjectType type)
+	bool ShaderResource::isBuffer(GpuParamObjectType type)
 	{
 		switch(type)
 		{
@@ -594,7 +594,7 @@ namespace bs
 		}
 	}
 
-	UINT32 Shader::getDataParamSize(GpuParamDataType type)
+	UINT32 ShaderResource::getDataParamSize(GpuParamDataType type)
 	{
 		static const GpuDataParamInfos PARAM_SIZES;
 
@@ -605,44 +605,44 @@ namespace bs
 		return 0;
 	}
 
-	HShader Shader::create(const String& name, const SHADER_DESC& desc)
+	ShaderResourceHandle ShaderResource::create(const String& name, const SHADER_DESC& desc)
 	{
-		SPtr<Shader> newShader = _createPtr(name, desc);
+		SPtr<ShaderResource> newShader = _createPtr(name, desc);
 
-		return static_resource_cast<Shader>(gResources()._createResourceHandle(newShader));
+		return static_resource_cast<ShaderResource>(gResources()._createResourceHandle(newShader));
 	}
 
-	SPtr<Shader> Shader::_createPtr(const String& name, const SHADER_DESC& desc)
+	SPtr<ShaderResource> ShaderResource::_createPtr(const String& name, const SHADER_DESC& desc)
 	{
 		UINT32 id = ct::Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
 		assert(id < std::numeric_limits<UINT32>::max() && "Created too many shaders, reached maximum id.");
 
-		SPtr<Shader> newShader = bs_core_ptr<Shader>(new (bs_alloc<Shader>()) Shader(name, desc, id));
+		SPtr<ShaderResource> newShader = bs_core_ptr<ShaderResource>(new (bs_alloc<ShaderResource>()) ShaderResource(name, desc, id));
 		newShader->_setThisPtr(newShader);
 		newShader->initialize();
 
 		return newShader;
 	}
 
-	SPtr<Shader> Shader::createEmpty()
+	SPtr<ShaderResource> ShaderResource::createEmpty()
 	{
 		UINT32 id = ct::Shader::mNextShaderId.fetch_add(1, std::memory_order_relaxed);
 		assert(id < std::numeric_limits<UINT32>::max() && "Created too many shaders, reached maximum id.");
 
-		SPtr<Shader> newShader = bs_core_ptr<Shader>(new (bs_alloc<Shader>()) Shader(id));
+		SPtr<ShaderResource> newShader = bs_core_ptr<ShaderResource>(new (bs_alloc<ShaderResource>()) ShaderResource(id));
 		newShader->_setThisPtr(newShader);
 
 		return newShader;
 	}
 
-	RTTITypeBase* Shader::getRTTIStatic()
+	RTTITypeBase* ShaderResource::getRTTIStatic()
 	{
-		return ShaderRTTI::instance();
+		return ShaderResourceRTTI::instance();
 	}
 
-	RTTITypeBase* Shader::getRTTI() const
+	RTTITypeBase* ShaderResource::getRTTI() const
 	{
-		return Shader::getRTTIStatic();
+		return ShaderResource::getRTTIStatic();
 	}
 
 	RTTITypeBase* ShaderMetaData::getRTTIStatic()

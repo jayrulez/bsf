@@ -23,11 +23,11 @@ namespace bs
 	public:
 		/** @copydoc Renderable::setMesh */
 		BS_SCRIPT_EXPORT(n:Mesh,pr:setter)
-		void setMesh(HMesh mesh);
+		void setMesh(MeshResourceHandle mesh);
 
 		/** @copydoc Renderable::getMesh */
 		BS_SCRIPT_EXPORT(n:Mesh,pr:getter)
-		HMesh getMesh() const { return mInternal->getMesh(); }
+		MeshResourceHandle getMesh() const { return mInternal->getMesh(); }
 
 		/** @copydoc Renderable::setMaterial */
 		BS_SCRIPT_EXPORT(n:SetMaterial)

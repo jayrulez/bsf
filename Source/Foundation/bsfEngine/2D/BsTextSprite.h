@@ -41,7 +41,7 @@ namespace bs
 		SpriteAnchor anchor = SA_TopLeft; /**< Determines how to anchor the text within the bounds. */
 
 		String text; /**< UTF-8 encoded text to generate geometry for. */
-		HFont font; /**< Font containing the data about character glyphs. */
+		FontResourceHandle font; /**< Font containing the data about character glyphs. */
 		UINT32 fontSize = 0; /**< Size of the font to use when displaying the text. */
 		Color color; /**< Color tint of the text. */
 		TextHorzAlign horzAlign = THA_Left; /**< Specifies how is text horizontally aligned within its bounds. */

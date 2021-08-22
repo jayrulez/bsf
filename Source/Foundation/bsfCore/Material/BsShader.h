@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class Shader;
+	class ShaderResource;
 
 	namespace ct
 	{
@@ -26,7 +26,7 @@ namespace bs
 	struct TSubShader
 	{
 		using TechniqueType = CoreVariantType<Technique, Core>;
-		using ShaderType = SPtr<CoreVariantType<Shader, Core>>;
+		using ShaderType = SPtr<CoreVariantType<ShaderResource, Core>>;
 		
 		String name;
 		ShaderType shader;
@@ -198,7 +198,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class SubShaderRTTI;
+		friend class SubShaderResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
@@ -565,7 +565,7 @@ namespace bs
 	 * programs.
 	 * @endscript
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Shader : public Resource, public TShader<false>
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) ShaderResource : public Resource, public TShader<false>
 	{
 	public:
 		/** Retrieves an implementation of a shader usable only from the core thread. */
@@ -600,10 +600,10 @@ namespace bs
 		static UINT32 getDataParamSize(GpuParamDataType type);
 
 		/**	Creates a new shader resource using the provided descriptor and techniques. */
-		static HShader create(const String& name, const SHADER_DESC& desc);
+		static ShaderResourceHandle create(const String& name, const SHADER_DESC& desc);
 
 		/**	Returns a shader object but doesn't initialize it. */
-		static SPtr<Shader> createEmpty();
+		static SPtr<ShaderResource> createEmpty();
 
 	public: // ***** INTERNAL ******
 		/** @name Internal
@@ -615,12 +615,12 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<Shader> _createPtr(const String& name, const SHADER_DESC& desc);
+		static SPtr<ShaderResource> _createPtr(const String& name, const SHADER_DESC& desc);
 
 		/** @} */
 
 	private:
-		Shader(const String& name, const SHADER_DESC& desc, UINT32 id);
+		ShaderResource(const String& name, const SHADER_DESC& desc, UINT32 id);
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
@@ -635,10 +635,10 @@ namespace bs
 		/************************************************************************/
 		/* 								RTTI		                     		*/
 		/************************************************************************/
-		Shader(UINT32 id);
+		ShaderResource(UINT32 id);
 
 	public:
-		friend class ShaderRTTI;
+		friend class ShaderResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
@@ -675,11 +675,11 @@ namespace bs
 	class BS_CORE_EXPORT Shader : public CoreObject, public TShader<true>
 	{
 	public:
-		/** @copydoc bs::Shader::create */
+		/** @copydoc bs::ShaderResource::create */
 		static SPtr<Shader> create(const String& name, const SHADER_DESC& desc);
 
 	protected:
-		friend class bs::Shader;
+		friend class bs::ShaderResource;
 
 		Shader(const String& name, const SHADER_DESC& desc, UINT32 id);
 

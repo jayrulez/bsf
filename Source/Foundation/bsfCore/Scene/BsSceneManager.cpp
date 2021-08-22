@@ -76,13 +76,13 @@ namespace bs
 		_setRootNode(newRoot);
 	}
 
-	void SceneManager::loadScene(const HPrefab& scene)
+	void SceneManager::loadScene(const PrefabResourceHandle& scene)
 	{
 		HSceneObject root = scene->_instantiate(true);
 		_setRootNode(root);
 	}
 
-	HPrefab SceneManager::saveScene() const
+	PrefabResourceHandle SceneManager::saveScene() const
 	{
 		HSceneObject sceneRoot = mMainScene->getRoot();
 		return Prefab::create(sceneRoot);

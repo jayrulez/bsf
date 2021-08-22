@@ -345,7 +345,7 @@ namespace bs
 		}
 	}
 
-	TextDataBase::TextDataBase(const U32String& text, const HFont& font, UINT32 fontSize, UINT32 width, UINT32 height,
+	TextDataBase::TextDataBase(const U32String& text, const FontResourceHandle& font, UINT32 fontSize, UINT32 width, UINT32 height,
 		bool wordWrap, bool wordBreak)
 		: mChars(nullptr), mNumChars(0), mWords(nullptr), mNumWords(0), mLines(nullptr), mNumLines(0), mPageInfos(nullptr)
 		, mNumPageInfos(0), mFont(font), mFontData(nullptr)

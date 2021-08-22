@@ -16,8 +16,8 @@ namespace bs
 	class BS_CORE_EXPORT MaterialResourceRTTI : public RTTIType<MaterialResource, Resource, MaterialResourceRTTI>
 	{
 	private:
-		HShader& getShader(MaterialResource* obj) { return obj->mShader; }
-		void setShader(MaterialResource* obj, HShader& val) { obj->mShader = val; }
+		ShaderResourceHandle& getShader(MaterialResource* obj) { return obj->mShader; }
+		void setShader(MaterialResource* obj, ShaderResourceHandle& val) { obj->mShader = val; }
 
 		SPtr<MaterialParams> getMaterialParams(MaterialResource* obj) { return obj->mParams; }
 		void setMaterialParams(MaterialResource* obj, SPtr<MaterialParams> value) { mMatParams = value; }

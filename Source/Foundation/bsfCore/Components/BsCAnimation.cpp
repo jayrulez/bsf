@@ -133,7 +133,7 @@ namespace bs
 		if (mAnimatedRenderable == nullptr)
 			return;
 
-		HMesh mesh = mAnimatedRenderable->getMesh();
+		MeshResourceHandle mesh = mAnimatedRenderable->getMesh();
 		if (!mesh.isLoaded())
 			return;
 
@@ -244,7 +244,7 @@ namespace bs
 			HRenderable animatedRenderable = SO()->getComponent<CRenderable>();
 			if(animatedRenderable)
 			{
-				HMesh mesh = animatedRenderable->getMesh();
+				MeshResourceHandle mesh = animatedRenderable->getMesh();
 				if(mesh.isLoaded())
 				{
 					const SPtr<Skeleton>& skeleton = mesh->getSkeleton();

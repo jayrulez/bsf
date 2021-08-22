@@ -132,7 +132,7 @@ namespace bs
 		using GpuProgramPtrType = SPtr<CoreVariantType<GpuProgram, Core>>;
 		using PassType = CoreVariantType<Pass, Core>;
 		using TechniqueType = CoreVariantType<Technique, Core>;
-		using ShaderType = CoreVariantHandleType<Shader, Core>;
+		using ShaderType = CoreVariantHandleType<ShaderResource, Core>;
 		using GpuParamsSetType = CoreVariantType<GpuParamsSet, Core>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 
@@ -747,7 +747,7 @@ namespace bs
 		 * from the shader. Shader must be set before doing any other operations with the material.
 		 */
 		BS_SCRIPT_EXPORT(n:Shader,pr:setter)
-		void setShader(const HShader& shader);
+		void setShader(const ShaderResourceHandle& shader);
 
 		/** @copydoc TMaterial<Core>::getVariation() const */
 		BS_SCRIPT_EXPORT(n:Variation,pr:setter,hide)
@@ -773,13 +773,13 @@ namespace bs
 
 		/** Creates a new material with the specified shader. */
 		BS_SCRIPT_EXPORT(ec:Material)
-		static MaterialResourceHandle create(const HShader& shader);
+		static MaterialResourceHandle create(const ShaderResourceHandle& shader);
 
 		/**
 		 * Creates a new material with the specified shader, and a set of parameters that determine which subset of
 		 * techniques in the shader should the material use.
 		 */
-		static MaterialResourceHandle create(const HShader& shader, const ShaderVariation& variation);
+		static MaterialResourceHandle create(const ShaderResourceHandle& shader, const ShaderVariation& variation);
 
 		/** @name Internal
 		 *  @{
@@ -800,7 +800,7 @@ namespace bs
 		/** @} */
 	private:
 		MaterialResource();
-		MaterialResource(const HShader& shader, const ShaderVariation& variation);
+		MaterialResource(const ShaderResourceHandle& shader, const ShaderVariation& variation);
 
 		/** @copydoc CoreObject::createCore */
 		SPtr<ct::CoreObject> createCore() const override;

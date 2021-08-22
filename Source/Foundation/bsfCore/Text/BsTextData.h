@@ -217,7 +217,7 @@ namespace bs
 		 *
 		 * After this object is constructed you may call various getter methods to get needed information.
 		 */
-		BS_CORE_EXPORT TextDataBase(const U32String& text, const HFont& font, UINT32 fontSize,
+		BS_CORE_EXPORT TextDataBase(const U32String& text, const FontResourceHandle& font, UINT32 fontSize,
 			UINT32 width = 0, UINT32 height = 0, bool wordWrap = false, bool wordBreak = true);
 		BS_CORE_EXPORT virtual ~TextDataBase() = default;
 
@@ -288,7 +288,7 @@ namespace bs
 		PageInfo* mPageInfos;
 		UINT32 mNumPageInfos;
 
-		HFont mFont;
+		FontResourceHandle mFont;
 		SPtr<const FontBitmap> mFontData;
 
 		// Static buffers used to reduce runtime memory allocation
@@ -351,7 +351,7 @@ namespace bs
 	{
 	public:
 		/** @copydoc TextDataBase::TextDataBase */
-		TextData(const U32String& text, const HFont& font, UINT32 fontSize,
+		TextData(const U32String& text, const FontResourceHandle& font, UINT32 fontSize,
 			UINT32 width = 0, UINT32 height = 0, bool wordWrap = false, bool wordBreak = true)
 			:TextDataBase(text, font, fontSize, width, height, wordWrap, wordBreak), mData(nullptr)
 		{

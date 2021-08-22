@@ -203,13 +203,13 @@ namespace bs
 		return gResources().load<SpriteTexture>(texturePath);
 	}
 
-	HShader BuiltinResources::getShader(const Path& path) const
+	ShaderResourceHandle BuiltinResources::getShader(const Path& path) const
 	{
 		Path programPath = mEngineShaderFolder;
 		programPath.append(path);
 		programPath.setExtension(programPath.getExtension() + ".asset");
 
-		return gResources().load<Shader>(programPath);
+		return gResources().load<ShaderResource>(programPath);
 	}
 
 	TextureResourceHandle BuiltinResources::getCursorTexture(const String& name) const
@@ -307,7 +307,7 @@ namespace bs
 	}
 #endif
 
-	HMesh BuiltinResources::getMesh(BuiltinMesh mesh) const
+	MeshResourceHandle BuiltinResources::getMesh(BuiltinMesh mesh) const
 	{
 		Path meshPath = mEngineMeshFolder;
 
@@ -336,7 +336,7 @@ namespace bs
 		return gResources().load<Mesh>(meshPath);
 	}
 
-	HShader BuiltinResources::getBuiltinShader(BuiltinShader type) const
+	ShaderResourceHandle BuiltinResources::getBuiltinShader(BuiltinShader type) const
 	{
 		switch(type)
 		{
@@ -356,7 +356,7 @@ namespace bs
 			break;
 		}
 
-		return HShader();
+		return ShaderResourceHandle();
 	}
 
 	TextureResourceHandle BuiltinResources::getTexture(BuiltinTexture type)

@@ -17,7 +17,7 @@ namespace bs
 		Vector<SPtr<ct::Shader>> shaders;
 		for (auto& material : materials)
 		{
-			HShader shader = br.getShader(material.shaderPath);
+			ShaderResourceHandle shader = br.getShader(material.shaderPath);
 			if (shader.isLoaded())
 				shaders.push_back(shader->getCore());
 			else

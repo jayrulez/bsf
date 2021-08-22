@@ -76,7 +76,7 @@ namespace bs
 		const MaterialResourceHandle& material = state.system->getSettings().material;
 		if (material.isLoaded(false))
 		{
-			const HShader& shader = material->getShader();
+			const ShaderResourceHandle& shader = material->getShader();
 			if(shader->hasTextureParam("gTexture"))
 			{
 				const HSpriteTexture& spriteTex = material->getSpriteTexture("gTexture");

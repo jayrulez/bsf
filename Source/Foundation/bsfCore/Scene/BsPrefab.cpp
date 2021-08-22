@@ -21,7 +21,7 @@ namespace bs
 			mRoot->destroy(true);
 	}
 
-	HPrefab Prefab::create(const HSceneObject& sceneObject, bool isScene)
+	PrefabResourceHandle Prefab::create(const HSceneObject& sceneObject, bool isScene)
 	{
 		SPtr<Prefab> newPrefab = createEmpty();
 		newPrefab->mIsScene = isScene;
@@ -29,7 +29,7 @@ namespace bs
 		PrefabUtility::clearPrefabIds(sceneObject, true, false);
 		newPrefab->initialize(sceneObject);
 
-		HPrefab handle = static_resource_cast<Prefab>(gResources()._createResourceHandle(newPrefab));
+		PrefabResourceHandle handle = static_resource_cast<Prefab>(gResources()._createResourceHandle(newPrefab));
 		newPrefab->mUUID = handle.getUUID();
 		sceneObject->mPrefabLinkUUID = newPrefab->mUUID;
 		newPrefab->_getRoot()->mPrefabLinkUUID = newPrefab->mUUID;

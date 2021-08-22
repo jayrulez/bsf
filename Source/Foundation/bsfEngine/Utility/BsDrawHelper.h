@@ -118,7 +118,7 @@ namespace bs
 		 * @param[in]	font		Font to use for rendering the text's characters.
 		 * @param[in]	size		Size of the characters, in points.
 		 */
-		void text(const Vector3& position, const String& text, const HFont& font, UINT32 size = 10);
+		void text(const Vector3& position, const String& text, const FontResourceHandle& font, UINT32 size = 10);
 
 		/**	Clears all recorded shapes. */
 		void clear();
@@ -216,7 +216,7 @@ namespace bs
 		{
 			Vector3 position;
 			String text;
-			HFont font;
+			FontResourceHandle font;
 			UINT32 size;
 		};
 

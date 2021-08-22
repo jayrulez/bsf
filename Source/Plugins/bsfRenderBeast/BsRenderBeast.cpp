@@ -329,7 +329,7 @@ namespace bs { namespace ct
 		return ShaderExtensionPointInfo();
 	}
 
-	void RenderBeast::setGlobalShaderOverride(const String& name, const SPtr<bs::Shader>& shader)
+	void RenderBeast::setGlobalShaderOverride(const String& name, const SPtr<bs::ShaderResource>& shader)
 	{
 		SPtr<ct::Shader> shaderCore;
 		if(shader)

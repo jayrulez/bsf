@@ -30,7 +30,7 @@ namespace bs
 		 * @param[in]	isScene			Determines if the prefab represents a scene or just a generic group of objects.
 		 *								@see isScene().
 		 */
-		static HPrefab create(const HSceneObject& sceneObject, bool isScene = true);
+		static PrefabResourceHandle create(const HSceneObject& sceneObject, bool isScene = true);
 
 		/**
 		 * Instantiates a prefab by creating an instance of the prefab's scene object hierarchy. The returned hierarchy

@@ -125,7 +125,7 @@ namespace bs
 		SPtr<ct::Mesh> getCore() const;
 
 		/**	Returns a dummy mesh, containing just one triangle. Don't modify the returned mesh. */
-		static HMesh dummy();
+		static MeshResourceHandle dummy();
 
 	protected:
 		friend class MeshManager;
@@ -188,7 +188,7 @@ namespace bs
 		 * @param[in]	indexType		Size of indices, use smaller size for better performance, however be careful not to
 		 *								go over the number of vertices limited by the size.
 		 */
-		static HMesh create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
+		static MeshResourceHandle create(UINT32 numVertices, UINT32 numIndices, const SPtr<VertexDataDesc>& vertexDesc,
 			int usage = MU_STATIC, DrawOperationType drawOp = DOT_TRIANGLE_LIST, IndexType indexType = IT_32BIT);
 
 		/**
@@ -196,7 +196,7 @@ namespace bs
 		 *
 		 * @param[in]	desc	Descriptor containing the properties of the mesh to create.
 		 */
-		static HMesh create(const MESH_DESC& desc);
+		static MeshResourceHandle create(const MESH_DESC& desc);
 
 		/**
 		 * Creates a new mesh from an existing mesh data. Created mesh will match the vertex and index buffers described
@@ -207,7 +207,7 @@ namespace bs
 		 *								vertex descriptor and index type properties are ignored and are read from provided
 		 *								mesh data instead.
 		 */
-		static HMesh create(const SPtr<MeshData>& initialData, const MESH_DESC& desc);
+		static MeshResourceHandle create(const SPtr<MeshData>& initialData, const MESH_DESC& desc);
 
 		/**
 		 * Creates a new mesh from an existing mesh data. Created mesh will match the vertex and index buffers described
@@ -218,7 +218,7 @@ namespace bs
 		 * @param[in]	drawOp			Determines how should the provided indices be interpreted by the pipeline. Default
 		 *								option is a triangle strip, where three indices represent a single triangle.
 		 */
-		static HMesh create(const SPtr<MeshData>& initialData, int usage = MU_STATIC,
+		static MeshResourceHandle create(const SPtr<MeshData>& initialData, int usage = MU_STATIC,
 			DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
 		/** @name Internal

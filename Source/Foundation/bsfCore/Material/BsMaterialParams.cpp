@@ -796,7 +796,7 @@ namespace bs
 	template class TMaterialParams<true>;
 	template class TMaterialParams<false>;
 
-	MaterialParams::MaterialParams(const HShader& shader, UINT64 initialParamVersion)
+	MaterialParams::MaterialParams(const ShaderResourceHandle& shader, UINT64 initialParamVersion)
 		:TMaterialParams(shader, initialParamVersion), mLastSyncVersion(1)
 	{ }
 

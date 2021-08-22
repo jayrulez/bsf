@@ -256,7 +256,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(GpuProgram);
 	CORE_OBJECT_FORWARD_DECLARE(Pass);
 	CORE_OBJECT_FORWARD_DECLARE(Technique);
-	CORE_OBJECT_FORWARD_DECLARE(Shader);
+	//CORE_OBJECT_FORWARD_DECLARE(Shader);
 	//CORE_OBJECT_FORWARD_DECLARE(Material);
 	CORE_OBJECT_FORWARD_DECLARE(RenderTarget);
 	CORE_OBJECT_FORWARD_DECLARE(RenderTexture);
@@ -296,6 +296,11 @@ namespace bs
 	class MaterialResource;
 	namespace ct { class Material; }
 	template<> struct CoreThreadType<MaterialResource> { typedef ct::Material Type; };
+
+
+	class ShaderResource;
+	namespace ct { class Shader; }
+	template<> struct CoreThreadType<ShaderResource> { typedef ct::Shader Type; };
 
 	//class IndexBuffer;
 	//class VertexBuffer;
@@ -743,12 +748,12 @@ namespace bs
 
 	typedef ResourceHandle<Resource> HResource;
 	typedef ResourceHandle<TextureResource> TextureResourceHandle;
-	typedef ResourceHandle<Mesh> HMesh;
+	typedef ResourceHandle<Mesh> MeshResourceHandle;
 	typedef ResourceHandle<MaterialResource> MaterialResourceHandle;
 	typedef ResourceHandle<ShaderInclude> HShaderInclude;
-	typedef ResourceHandle<Font> HFont;
-	typedef ResourceHandle<Shader> HShader;
-	typedef ResourceHandle<Prefab> HPrefab;
+	typedef ResourceHandle<Font> FontResourceHandle;
+	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
+	typedef ResourceHandle<Prefab> PrefabResourceHandle;
 	typedef ResourceHandle<StringTable> HStringTable;
 	typedef ResourceHandle<PhysicsMaterial> HPhysicsMaterial;
 	typedef ResourceHandle<PhysicsMesh> HPhysicsMesh;
@@ -783,7 +788,7 @@ namespace bs
 	typedef GameObjectHandle<CSphereCollider> HSphereCollider;
 	typedef GameObjectHandle<CCapsuleCollider> HCapsuleCollider;
 	typedef GameObjectHandle<CPlaneCollider> HPlaneCollider;
-	typedef GameObjectHandle<CMeshCollider> HMeshCollider;
+	typedef GameObjectHandle<CMeshCollider> MeshResourceHandleCollider;
 	typedef GameObjectHandle<CJoint> HJoint;
 	typedef GameObjectHandle<CHingeJoint> HHingeJoint;
 	typedef GameObjectHandle<CSliderJoint> HSliderJoint;

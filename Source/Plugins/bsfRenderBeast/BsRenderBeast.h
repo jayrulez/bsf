@@ -78,7 +78,7 @@ namespace bs
 		ShaderExtensionPointInfo getShaderExtensionPointInfo(const String& name) override;
 
 		/** @copydoc Renderer::setGlobalShaderOverride */
-		void setGlobalShaderOverride(const String& name, const SPtr<bs::Shader>& shader) override;
+		void setGlobalShaderOverride(const String& name, const SPtr<bs::ShaderResource>& shader) override;
 
 	private:
 		/** @copydoc Renderer::notifyCameraAdded */

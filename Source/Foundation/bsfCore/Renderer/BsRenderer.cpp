@@ -31,7 +31,7 @@ namespace bs { namespace ct
 			RendererMeshData(meshData));
 	}
 
-	void Renderer::setGlobalShaderOverride(const SPtr<bs::Shader>& shader)
+	void Renderer::setGlobalShaderOverride(const SPtr<bs::ShaderResource>& shader)
 	{
 		const Vector<bs::SubShader>& subShaders = shader->getSubShaders();
 		

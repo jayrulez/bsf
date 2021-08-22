@@ -108,7 +108,7 @@ namespace bs
 		const PixelData& getFrameworkIcon();
 
 		/**	Returns one of the builtin shader types. */
-		HShader getBuiltinShader(BuiltinShader type) const;
+		ShaderResourceHandle getBuiltinShader(BuiltinShader type) const;
 
 		/**	Creates a material used for textual sprite rendering (for example text in GUI). */
 		MaterialResourceHandle createSpriteTextMaterial() const;
@@ -120,17 +120,17 @@ namespace bs
 		MaterialResourceHandle createSpriteLineMaterial() const;
 
 		/**	Retrieves one of the builtin meshes. */
-		HMesh getMesh(BuiltinMesh mesh) const;
+		MeshResourceHandle getMesh(BuiltinMesh mesh) const;
 
 		/**
 		 * Loads a shader at the specified path.
 		 *
 		 * @param[in]	path	Path relative to the default shader folder with no file extension.
 		 */
-		HShader getShader(const Path& path) const;
+		ShaderResourceHandle getShader(const Path& path) const;
 
 		/** Returns the default font used by the engine. */
-		HFont getDefaultFont() const { return mFont; }
+		FontResourceHandle getDefaultFont() const { return mFont; }
 
 		/**	Retrieves one of the builtin textures. */
 		static TextureResourceHandle getTexture(BuiltinTexture type);
@@ -188,7 +188,7 @@ namespace bs
 
 		HGUISkin mEmptySkin;
 		HGUISkin mSkin;
-		HFont mFont;
+		FontResourceHandle mFont;
 
 		SPtr<PixelData> mCursorArrow;
 		SPtr<PixelData> mCursorArrowDrag;
@@ -207,15 +207,15 @@ namespace bs
 
 		TextureResourceHandle mDummyTexture;
 
-		HShader mShaderSpriteText;
-		HShader mShaderSpriteImage;
-		HShader mShaderSpriteLine;
-		HShader mShaderDiffuse;
-		HShader mShaderTransparent;
-		HShader mShaderParticlesUnlit;
-		HShader mShaderParticlesLit;
-		HShader mShaderParticlesLitOpaque;
-		HShader mShaderDecal;
+		ShaderResourceHandle mShaderSpriteText;
+		ShaderResourceHandle mShaderSpriteImage;
+		ShaderResourceHandle mShaderSpriteLine;
+		ShaderResourceHandle mShaderDiffuse;
+		ShaderResourceHandle mShaderTransparent;
+		ShaderResourceHandle mShaderParticlesUnlit;
+		ShaderResourceHandle mShaderParticlesLit;
+		ShaderResourceHandle mShaderParticlesLitOpaque;
+		ShaderResourceHandle mShaderDecal;
 
 		SPtr<ResourceManifest> mResourceManifest;
 

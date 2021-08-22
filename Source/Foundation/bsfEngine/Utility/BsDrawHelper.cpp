@@ -286,7 +286,7 @@ namespace bs
 		rectData.center = mTransform.multiplyAffine(area.getCenter());
 	}
 
-	void DrawHelper::text(const Vector3& position, const String& text, const HFont& font, UINT32 size)
+	void DrawHelper::text(const Vector3& position, const String& text, const FontResourceHandle& font, UINT32 size)
 	{
 		if (!font.isLoaded() || text.empty())
 			return;

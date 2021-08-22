@@ -83,7 +83,7 @@ namespace bs
 		INT32 getClosestSize(UINT32 size) const;
 
 		/**	Creates a new font from the provided per-size font data. */
-		static HFont create(const Vector<SPtr<FontBitmap>>& fontInitData);
+		static FontResourceHandle create(const Vector<SPtr<FontBitmap>>& fontInitData);
 
 	public: // ***** INTERNAL ******
 		using Resource::initialize;

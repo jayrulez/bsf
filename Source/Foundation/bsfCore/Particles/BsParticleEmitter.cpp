@@ -751,7 +751,7 @@ namespace bs
 		return getRTTIStatic();
 	}
 
-	bool MeshEmissionHelper::initialize(const HMesh& mesh, bool perVertex, bool skinning)
+	bool MeshEmissionHelper::initialize(const MeshResourceHandle& mesh, bool perVertex, bool skinning)
 	{
 		// Validate
 		if(mesh)
@@ -1098,7 +1098,7 @@ namespace bs
 	ParticleEmitterSkinnedMeshShape::ParticleEmitterSkinnedMeshShape(const PARTICLE_SKINNED_MESH_SHAPE_DESC& desc)
 		:mInfo(desc)
 	{
-		HMesh mesh;
+		MeshResourceHandle mesh;
 		if(!desc.renderable.empty())
 			mesh = desc.renderable.getActor()->getMesh();
 
@@ -1109,7 +1109,7 @@ namespace bs
 	{
 		mInfo = options;
 
-		HMesh mesh;
+		MeshResourceHandle mesh;
 		if(!options.renderable.empty())
 			mesh = options.renderable.getActor()->getMesh();
 
@@ -1236,7 +1236,7 @@ namespace bs
 			}
 			else
 			{
-				const HMesh& mesh = renderable->getMesh();
+				const MeshResourceHandle& mesh = renderable->getMesh();
 				if (mesh.isLoaded(false))
 					shape = mesh->getProperties().getBounds().getBox();
 				else

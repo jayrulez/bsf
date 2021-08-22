@@ -21,7 +21,7 @@ namespace bs
 	bool isMeshValid(const T& mesh) { return false; }
 
 	template<>
-	bool isMeshValid(const HMesh& mesh) { return mesh.isLoaded(); }
+	bool isMeshValid(const MeshResourceHandle& mesh) { return mesh.isLoaded(); }
 
 	template<>
 	bool isMeshValid(const SPtr<ct::Mesh>& mesh) { return mesh != nullptr; }
@@ -196,7 +196,7 @@ namespace bs
 			return bounds;
 		}
 
-		HMesh mesh = getMesh();
+		MeshResourceHandle mesh = getMesh();
 
 		if (!mesh.isLoaded())
 		{

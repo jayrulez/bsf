@@ -94,13 +94,13 @@ namespace bs
 		 * Instantiates a new scene and makes it active. All non-persistent objects that are part of the current scene will
 		 * be destroyed.
 		 */
-		void loadScene(const HPrefab& scene);
+		void loadScene(const PrefabResourceHandle& scene);
 
 		/**
 		 * Saves all the currently active scene objects into a brand new prefab which can then be saved to disk, loaded back
 		 * and provided to setScene() for loading.
 		 */
-		HPrefab saveScene() const;
+		PrefabResourceHandle saveScene() const;
 
 		/**
 		 * Changes the component state that globally determines which component callbacks are activated. Only affects

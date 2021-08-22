@@ -283,7 +283,7 @@ namespace bs
 	void PrefabUtility::revertToPrefab(const HSceneObject& so)
 	{
 		UUID prefabLinkUUID = so->getPrefabLink();
-		HPrefab prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(prefabLinkUUID, false, ResourceLoadFlag::None));
+		PrefabResourceHandle prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(prefabLinkUUID, false, ResourceLoadFlag::None));
 
 		if (!prefabLink.isLoaded(false))
 			return;
@@ -371,7 +371,7 @@ namespace bs
 		for (auto iter = prefabInstanceRoots.rbegin(); iter != prefabInstanceRoots.rend(); ++iter)
 		{
 			HSceneObject current = *iter;
-			HPrefab prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(current->mPrefabLinkUUID, false, ResourceLoadFlag::None));
+			PrefabResourceHandle prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(current->mPrefabLinkUUID, false, ResourceLoadFlag::None));
 
 			if (prefabLink.isLoaded(false) && prefabLink->getHash() != current->mPrefabHash)
 			{
@@ -555,7 +555,7 @@ namespace bs
 			{
 				current->mPrefabDiff = nullptr;
 
-				HPrefab prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(current->mPrefabLinkUUID, false, ResourceLoadFlag::None));
+				PrefabResourceHandle prefabLink = static_resource_cast<Prefab>(gResources().loadFromUUID(current->mPrefabLinkUUID, false, ResourceLoadFlag::None));
 				if (prefabLink.isLoaded(false))
 					current->mPrefabDiff = PrefabDiff::create(prefabLink->_getRoot(), current->getHandle());
 			}

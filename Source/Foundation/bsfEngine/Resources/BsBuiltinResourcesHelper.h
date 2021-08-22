@@ -110,7 +110,7 @@ namespace bs
 		static UINT32 checkForModifications(const Path& folder, const Path& timeStampFile, time_t& lastUpdateTime);
 
 		/** Checks if the shader compiled properly and reports the problem if it hasn't. Returns true if shader is valid. */
-		static bool verifyAndReportShader(const HShader& shader);
+		static bool verifyAndReportShader(const ShaderResourceHandle& shader);
 
 		/** Loads the shader at the specified path, updates its bytecode if required, and re-saves the shader file. */
 		static void updateShaderBytecode(const Path& path);
@@ -129,7 +129,7 @@ namespace bs
 		virtual ~GUIElementStyleLoader() = default;
 
 		/** Loads a font with the specified name. */
-		virtual HFont loadFont(const String& name) const = 0;
+		virtual FontResourceHandle loadFont(const String& name) const = 0;
 
 		/** Loads a sprite texture with the specified name. */
 		virtual HSpriteTexture loadTexture(const String& name) const = 0;
@@ -142,7 +142,7 @@ namespace bs
 		BuiltinResourceGUIElementStyleLoader(const Path& fontPath, const Path& texturePath);
 
 		/** Loads a font with the specified name. */
-		HFont loadFont(const String& name) const override;
+		FontResourceHandle loadFont(const String& name) const override;
 
 		/** Loads a sprite texture with the specified name. */
 		HSpriteTexture loadTexture(const String& name) const override;

@@ -21,7 +21,7 @@ namespace bs
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
 		using ParamBlockPtrType = SPtr<CoreVariantType<GpuParamBlockBuffer, Core>>;
 		using TechniqueType = CoreVariantType<Technique, Core>;
-		using ShaderType = CoreVariantHandleType<Shader, Core>;
+		using ShaderType = CoreVariantHandleType<ShaderResource, Core>;
 		using PassType = CoreVariantType<Pass, Core>;
 		using GpuProgramPtrType = SPtr<CoreVariantType<GpuProgram, Core>>;
 		using ParamBlockType = CoreVariantType<GpuParamBlockBuffer, Core>;
@@ -185,7 +185,7 @@ namespace bs
 	{
 	public:
 		GpuParamsSet() = default;
-		GpuParamsSet(const SPtr<Technique>& technique, const HShader& shader,
+		GpuParamsSet(const SPtr<Technique>& technique, const ShaderResourceHandle& shader,
 			const SPtr<MaterialParams>& params)
 			:TGpuParamsSet(technique, shader, params)
 		{ }

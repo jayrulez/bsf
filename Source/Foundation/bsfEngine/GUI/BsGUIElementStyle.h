@@ -38,7 +38,7 @@ namespace bs
 		GUIElementStyle() = default;
 
 		BS_SCRIPT_EXPORT()
-		BS_NORREF HFont font; /**< Font to use for all text within the GUI element. */
+		BS_NORREF FontResourceHandle font; /**< Font to use for all text within the GUI element. */
 
 		BS_SCRIPT_EXPORT()
 		UINT32 fontSize = 8; /**< Font size to use for all text within the GUI element. */

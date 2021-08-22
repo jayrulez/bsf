@@ -59,7 +59,7 @@ namespace bs
 		 * @param[in]	fontSize		Size of individual characters in the font, in points.
 		 * @return						Width/height required to display the text, in pixels.
 		 */
-		static Vector2I calcTextSize(const String& text, const HFont& font, UINT32 fontSize);
+		static Vector2I calcTextSize(const String& text, const FontResourceHandle& font, UINT32 fontSize);
 	};
 
 	/** @} */

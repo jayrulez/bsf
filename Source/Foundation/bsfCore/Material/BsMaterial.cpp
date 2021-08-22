@@ -31,7 +31,7 @@ namespace bs
 	bool isShaderValid(const T& shader) { return false; }
 
 	template<>
-	bool isShaderValid(const HShader& shader) { return shader.isLoaded(); }
+	bool isShaderValid(const ShaderResourceHandle& shader) { return shader.isLoaded(); }
 
 	template<>
 	bool isShaderValid(const SPtr<ct::Shader>& shader) { return shader != nullptr; }
@@ -575,7 +575,7 @@ namespace bs
 		:mLoadFlags(Load_None)
 	{ }
 
-	MaterialResource::MaterialResource(const HShader& shader, const ShaderVariation& variation)
+	MaterialResource::MaterialResource(const ShaderResourceHandle& shader, const ShaderVariation& variation)
 		:mLoadFlags(Load_None)
 	{
 		mShader = shader;
@@ -591,7 +591,7 @@ namespace bs
 		Resource::initialize();
 	}
 
-	void MaterialResource::setShader(const HShader& shader)
+	void MaterialResource::setShader(const ShaderResourceHandle& shader)
 	{
 		if (mShader == shader)
 			return;
@@ -991,12 +991,12 @@ namespace bs
 		return static_resource_cast<MaterialResource>(gResources()._createResourceHandle(materialPtr));
 	}
 
-	MaterialResourceHandle MaterialResource::create(const HShader& shader)
+	MaterialResourceHandle MaterialResource::create(const ShaderResourceHandle& shader)
 	{
 		return create(shader, ShaderVariation::EMPTY);
 	}
 
-	MaterialResourceHandle MaterialResource::create(const HShader& shader, const ShaderVariation& variation)
+	MaterialResourceHandle MaterialResource::create(const ShaderResourceHandle& shader, const ShaderVariation& variation)
 	{
 		SPtr<MaterialResource> materialPtr = bs_core_ptr<MaterialResource>(new (bs_alloc<MaterialResource>()) MaterialResource(shader, variation));
 		materialPtr->_setThisPtr(materialPtr);

@@ -183,9 +183,9 @@ namespace bs
 					else if (mode == AssetType::Sprite)
 						isIcon = entry.find("TextureUUID16") != entry.end();
 
-					if (rtti_is_of_type<Shader>(outputRes.get()))
+					if (rtti_is_of_type<ShaderResource>(outputRes.get()))
 					{
-						HShader shader = static_resource_cast<Shader>(outputRes);
+						ShaderResourceHandle shader = static_resource_cast<ShaderResource>(outputRes);
 						if (!verifyAndReportShader(shader))
 						{
 							iter = queuedOps.erase(iter);
@@ -341,7 +341,7 @@ namespace bs
 		else
 			return;
 
-		HFont font = Importer::instance().import<Font>(inputFile, fontImportOptions, UUID);
+		FontResourceHandle font = Importer::instance().import<Font>(inputFile, fontImportOptions, UUID);
 
 		String fontName = outputName;
 		Path outputPath = outputFolder + fontName;
@@ -621,7 +621,7 @@ namespace bs
 		return 0;
 	}
 
-	bool BuiltinResourcesHelper::verifyAndReportShader(const HShader& shader)
+	bool BuiltinResourcesHelper::verifyAndReportShader(const ShaderResourceHandle& shader)
 	{
 		if(!shader.isLoaded(false) || shader->getNumTechniques() == 0)
 		{
@@ -686,7 +686,7 @@ namespace bs
 
 	void BuiltinResourcesHelper::updateShaderBytecode(const Path& path)
 	{
-		HShader shader = gResources().load<Shader>(path, ResourceLoadFlag::KeepSourceData);
+		ShaderResourceHandle shader = gResources().load<ShaderResource>(path, ResourceLoadFlag::KeepSourceData);
 		if (!shader)
 			return;
 
@@ -890,7 +890,7 @@ namespace bs
 		return gResources().load<SpriteTexture>(texturePath);
 	}
 
-	HFont BuiltinResourceGUIElementStyleLoader::loadFont(const String& name) const
+	FontResourceHandle BuiltinResourceGUIElementStyleLoader::loadFont(const String& name) const
 	{
 		Path fontPath = mFontPath;
 		fontPath.append(name + u8".asset");

@@ -101,7 +101,7 @@ namespace bs
 		}
 	}
 
-	HFont Font::create(const Vector<SPtr<FontBitmap>>& fontData)
+	FontResourceHandle Font::create(const Vector<SPtr<FontBitmap>>& fontData)
 	{
 		SPtr<Font> newFont = _createPtr(fontData);
 

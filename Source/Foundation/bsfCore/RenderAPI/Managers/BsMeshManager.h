@@ -20,7 +20,7 @@ namespace bs
 		SPtr<MeshData> getDummyMeshData() const { return mDummyMeshData; }
 
 		/**	Returns a dummy mesh containing one triangle. */
-		HMesh getDummyMesh() const { return mDummyMesh; }
+		MeshResourceHandle getDummyMesh() const { return mDummyMesh; }
 
 	protected:
 		/** @copydoc Module::onStartUp */
@@ -28,7 +28,7 @@ namespace bs
 
 	private:
 		SPtr<MeshData> mDummyMeshData;
-		HMesh mDummyMesh;
+		MeshResourceHandle mDummyMesh;
 	};
 
 	/** @} */

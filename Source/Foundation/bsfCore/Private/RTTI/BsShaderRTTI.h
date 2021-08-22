@@ -350,7 +350,7 @@ namespace bs
 		}
 	};
 
-	class BS_CORE_EXPORT SubShaderRTTI : public RTTIType<SubShader, IReflectable, SubShaderRTTI>
+	class BS_CORE_EXPORT SubShaderResourceRTTI : public RTTIType<SubShader, IReflectable, SubShaderResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -376,7 +376,7 @@ namespace bs
 		}
 	};
 
-	class BS_CORE_EXPORT ShaderRTTI : public RTTIType<Shader, Resource, ShaderRTTI>
+	class BS_CORE_EXPORT ShaderResourceRTTI : public RTTIType<ShaderResource, Resource, ShaderResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -398,7 +398,7 @@ namespace bs
 			BS_RTTI_MEMBER_PLAIN_ARRAY_NAMED(mVariationParams, mDesc.variationParams, 16)
 		BS_END_RTTI_MEMBERS
 
-		SHADER_DATA_PARAM_DESC& getDataParam(Shader* obj, UINT32 idx)
+		SHADER_DATA_PARAM_DESC& getDataParam(ShaderResource* obj, UINT32 idx)
 		{
 			auto iter = obj->mDesc.dataParams.begin();
 			for(UINT32 i = 0; i < idx; i++) ++iter;
@@ -406,11 +406,11 @@ namespace bs
 			return iter->second;
 		}
 
-		void setDataParam(Shader* obj, UINT32 idx, SHADER_DATA_PARAM_DESC& val) { obj->mDesc.dataParams[val.name] = val; }
-		UINT32 getDataParamsArraySize(Shader* obj) { return (UINT32)obj->mDesc.dataParams.size(); }
-		void setDataParamsArraySize(Shader* obj, UINT32 size) {  } // Do nothing
+		void setDataParam(ShaderResource* obj, UINT32 idx, SHADER_DATA_PARAM_DESC& val) { obj->mDesc.dataParams[val.name] = val; }
+		UINT32 getDataParamsArraySize(ShaderResource* obj) { return (UINT32)obj->mDesc.dataParams.size(); }
+		void setDataParamsArraySize(ShaderResource* obj, UINT32 size) {  } // Do nothing
 
-		SHADER_OBJECT_PARAM_DESC& getTextureParam(Shader* obj, UINT32 idx)
+		SHADER_OBJECT_PARAM_DESC& getTextureParam(ShaderResource* obj, UINT32 idx)
 		{
 			auto iter = obj->mDesc.textureParams.begin();
 			for(UINT32 i = 0; i < idx; i++) ++iter;
@@ -418,11 +418,11 @@ namespace bs
 			return iter->second;
 		}
 
-		void setTextureParam(Shader* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.textureParams[val.name] = val; }
-		UINT32 getTextureParamsArraySize(Shader* obj) { return (UINT32)obj->mDesc.textureParams.size(); }
-		void setTextureParamsArraySize(Shader* obj, UINT32 size) {  } // Do nothing
+		void setTextureParam(ShaderResource* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.textureParams[val.name] = val; }
+		UINT32 getTextureParamsArraySize(ShaderResource* obj) { return (UINT32)obj->mDesc.textureParams.size(); }
+		void setTextureParamsArraySize(ShaderResource* obj, UINT32 size) {  } // Do nothing
 
-		SHADER_OBJECT_PARAM_DESC& getSamplerParam(Shader* obj, UINT32 idx)
+		SHADER_OBJECT_PARAM_DESC& getSamplerParam(ShaderResource* obj, UINT32 idx)
 		{
 			auto iter = obj->mDesc.samplerParams.begin();
 			for (UINT32 i = 0; i < idx; i++) ++iter;
@@ -430,11 +430,11 @@ namespace bs
 			return iter->second;
 		}
 
-		void setSamplerParam(Shader* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.samplerParams[val.name] = val; }
-		UINT32 getSamplerParamsArraySize(Shader* obj) { return (UINT32)obj->mDesc.samplerParams.size(); }
-		void setSamplerParamsArraySize(Shader* obj, UINT32 size) {  } // Do nothing
+		void setSamplerParam(ShaderResource* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.samplerParams[val.name] = val; }
+		UINT32 getSamplerParamsArraySize(ShaderResource* obj) { return (UINT32)obj->mDesc.samplerParams.size(); }
+		void setSamplerParamsArraySize(ShaderResource* obj, UINT32 size) {  } // Do nothing
 
-		SHADER_OBJECT_PARAM_DESC& getBufferParam(Shader* obj, UINT32 idx)
+		SHADER_OBJECT_PARAM_DESC& getBufferParam(ShaderResource* obj, UINT32 idx)
 		{
 			auto iter = obj->mDesc.bufferParams.begin();
 			for (UINT32 i = 0; i < idx; i++) ++iter;
@@ -442,11 +442,11 @@ namespace bs
 			return iter->second;
 		}
 
-		void setBufferParam(Shader* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.bufferParams[val.name] = val; }
-		UINT32 getBufferParamsArraySize(Shader* obj) { return (UINT32)obj->mDesc.bufferParams.size(); }
-		void setBufferParamsArraySize(Shader* obj, UINT32 size) {  } // Do nothing
+		void setBufferParam(ShaderResource* obj, UINT32 idx, SHADER_OBJECT_PARAM_DESC& val) { obj->mDesc.bufferParams[val.name] = val; }
+		UINT32 getBufferParamsArraySize(ShaderResource* obj) { return (UINT32)obj->mDesc.bufferParams.size(); }
+		void setBufferParamsArraySize(ShaderResource* obj, UINT32 size) {  } // Do nothing
 
-		SHADER_PARAM_BLOCK_DESC& getParamBlock(Shader* obj, UINT32 idx)
+		SHADER_PARAM_BLOCK_DESC& getParamBlock(ShaderResource* obj, UINT32 idx)
 		{
 			auto iter = obj->mDesc.paramBlocks.begin();
 			for (UINT32 i = 0; i < idx; i++) ++iter;
@@ -454,28 +454,28 @@ namespace bs
 			return iter->second;
 		}
 
-		void setParamBlock(Shader* obj, UINT32 idx, SHADER_PARAM_BLOCK_DESC& val) { obj->mDesc.paramBlocks[val.name] = val; }
-		UINT32 getParamBlocksArraySize(Shader* obj) { return (UINT32)obj->mDesc.paramBlocks.size(); }
-		void setParamBlocksArraySize(Shader* obj, UINT32 size) {  } // Do nothing
+		void setParamBlock(ShaderResource* obj, UINT32 idx, SHADER_PARAM_BLOCK_DESC& val) { obj->mDesc.paramBlocks[val.name] = val; }
+		UINT32 getParamBlocksArraySize(ShaderResource* obj) { return (UINT32)obj->mDesc.paramBlocks.size(); }
+		void setParamBlocksArraySize(ShaderResource* obj, UINT32 size) {  } // Do nothing
 
 	public:
-		ShaderRTTI()
+		ShaderResourceRTTI()
 		{
-			addPlainArrayField("mDataParams", 2, &ShaderRTTI::getDataParam, &ShaderRTTI::getDataParamsArraySize,
-				&ShaderRTTI::setDataParam, &ShaderRTTI::setDataParamsArraySize);
-			addPlainArrayField("mTextureParams", 3, &ShaderRTTI::getTextureParam, &ShaderRTTI::getTextureParamsArraySize,
-				&ShaderRTTI::setTextureParam, &ShaderRTTI::setTextureParamsArraySize);
-			addPlainArrayField("mSamplerParams", 4, &ShaderRTTI::getSamplerParam, &ShaderRTTI::getSamplerParamsArraySize,
-				&ShaderRTTI::setSamplerParam, &ShaderRTTI::setSamplerParamsArraySize);
-			addPlainArrayField("mBufferParams", 5, &ShaderRTTI::getBufferParam, &ShaderRTTI::getBufferParamsArraySize,
-				&ShaderRTTI::setBufferParam, &ShaderRTTI::setBufferParamsArraySize);
-			addPlainArrayField("mParamBlocks", 6, &ShaderRTTI::getParamBlock, &ShaderRTTI::getParamBlocksArraySize,
-				&ShaderRTTI::setParamBlock, &ShaderRTTI::setParamBlocksArraySize);
+			addPlainArrayField("mDataParams", 2, &ShaderResourceRTTI::getDataParam, &ShaderResourceRTTI::getDataParamsArraySize,
+				&ShaderResourceRTTI::setDataParam, &ShaderResourceRTTI::setDataParamsArraySize);
+			addPlainArrayField("mTextureParams", 3, &ShaderResourceRTTI::getTextureParam, &ShaderResourceRTTI::getTextureParamsArraySize,
+				&ShaderResourceRTTI::setTextureParam, &ShaderResourceRTTI::setTextureParamsArraySize);
+			addPlainArrayField("mSamplerParams", 4, &ShaderResourceRTTI::getSamplerParam, &ShaderResourceRTTI::getSamplerParamsArraySize,
+				&ShaderResourceRTTI::setSamplerParam, &ShaderResourceRTTI::setSamplerParamsArraySize);
+			addPlainArrayField("mBufferParams", 5, &ShaderResourceRTTI::getBufferParam, &ShaderResourceRTTI::getBufferParamsArraySize,
+				&ShaderResourceRTTI::setBufferParam, &ShaderResourceRTTI::setBufferParamsArraySize);
+			addPlainArrayField("mParamBlocks", 6, &ShaderResourceRTTI::getParamBlock, &ShaderResourceRTTI::getParamBlocksArraySize,
+				&ShaderResourceRTTI::setParamBlock, &ShaderResourceRTTI::setParamBlocksArraySize);
 		}
 
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			Shader* shader = static_cast<Shader*>(obj);
+			ShaderResource* shader = static_cast<ShaderResource*>(obj);
 			shader->initialize();
 		}
 
@@ -492,7 +492,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return Shader::createEmpty();
+			return ShaderResource::createEmpty();
 		}
 	};
 

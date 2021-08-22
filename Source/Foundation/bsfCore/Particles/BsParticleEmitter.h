@@ -650,7 +650,7 @@ namespace bs
 		 * Mesh to spawn particles on. Must at least contain per-vertex position data encoded as 3D float vectors. Can
 		 * optionally contain per-vertex normals encoded as 3D float vectors or as 4-byte unsigned-normalized format.
 		 */
-		HMesh mesh;
+		MeshResourceHandle mesh;
 	};
 
 	/**
@@ -693,7 +693,7 @@ namespace bs
 		 * @param[in]	skinning	Set to true if the mesh will be animated using skinning.
 		 * @return					True if initialized, or false if issues were detected.
 		 */
-		bool initialize(const HMesh& mesh, bool perVertex, bool skinning);
+		bool initialize(const MeshResourceHandle& mesh, bool perVertex, bool skinning);
 
 		/**
 		 * Returns the next sequential vertex on the mesh and increments the internal counter so the next vertex is

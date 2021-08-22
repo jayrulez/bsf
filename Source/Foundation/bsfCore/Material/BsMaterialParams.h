@@ -509,7 +509,7 @@ namespace bs
 	public:
 		using GpuParamsType = CoreVariantType<GpuParams, Core>;
 		using TextureType = CoreVariantHandleType<TextureResource, Core>;
-		using ShaderType = CoreVariantHandleType<Shader, Core>;
+		using ShaderType = CoreVariantHandleType<ShaderResource, Core>;
 		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
 		using BufferType = SPtr<CoreVariantType<GpuBuffer, Core>>;
 		using SamplerType = SPtr<CoreVariantType<SamplerState, Core>>;
@@ -811,7 +811,7 @@ namespace bs
 	{
 	public:
 		/** @copydoc TMaterialParams::TMaterialParams(const ShaderType&, UINT64) */
-		MaterialParams(const HShader& shader, UINT64 initialParamVersion = 1);
+		MaterialParams(const ShaderResourceHandle& shader, UINT64 initialParamVersion = 1);
 
 		/**
 		 * Populates the provided buffer with parameters that can be used for syncing this object with its core-thread
