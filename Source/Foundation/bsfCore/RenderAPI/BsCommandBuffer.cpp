@@ -1,10 +1,9 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "RenderAPI/BsCommandBuffer.h"
-#include "Managers/BsCommandBufferManager.h"
+#include "RenderAPI/Managers/BsCommandBufferManager.h"
 
-namespace bs { namespace ct
-{
+namespace bs {
 	void CommandSyncMask::addDependency(const SPtr<CommandBuffer>& buffer)
 	{
 		if (buffer == nullptr)
@@ -75,4 +74,4 @@ namespace bs { namespace ct
 	{
 		return CommandBufferManager::instance().create(type, deviceIdx, queueIdx, secondary);
 	}
-}}
+}

@@ -5,7 +5,7 @@
 #include "Math/BsVector3.h"
 #include "Math/BsSphere.h"
 #include "Math/BsAABox.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Private/RTTI/BsMeshDataRTTI.h"
 #include "RenderAPI/BsVertexDeclaration.h"
 #include "RenderAPI/BsVertexDataDesc.h"

@@ -1,9 +1,8 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Managers/BsCommandBufferManager.h"
+#include "RenderAPI/Managers/BsCommandBufferManager.h"
 
-namespace bs { namespace ct
-{
+namespace bs {
 	SPtr<CommandBuffer> CommandBufferManager::create(GpuQueueType type, UINT32 deviceIdx, UINT32 queueIdx,
 		bool secondary)
 	{
@@ -11,4 +10,4 @@ namespace bs { namespace ct
 
 		return createInternal(type, deviceIdx, queueIdx, secondary);
 	}
-}}
+}

@@ -6,7 +6,7 @@
 #include "Input/BsGamepad.h"
 #include "Utility/BsTime.h"
 #include "Math/BsMath.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "BsCoreApplication.h"
 
 using namespace std::placeholders;

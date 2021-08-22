@@ -322,30 +322,30 @@ namespace bs
 		sample.activeTimeQuery->end();
 	}
 
-	SPtr<ct::TimerQuery> ProfilerGPU::getTimerQuery() const
+	SPtr<TimerQuery> ProfilerGPU::getTimerQuery() const
 	{
 		if (!mFreeTimerQueries.empty())
 		{
-			SPtr<ct::TimerQuery> timerQuery = mFreeTimerQueries.top();
+			SPtr<TimerQuery> timerQuery = mFreeTimerQueries.top();
 			mFreeTimerQueries.pop();
 
 			return timerQuery;
 		}
 
-		return ct::TimerQuery::create();
+		return TimerQuery::create();
 	}
 
-	SPtr<ct::OcclusionQuery> ProfilerGPU::getOcclusionQuery() const
+	SPtr<OcclusionQuery> ProfilerGPU::getOcclusionQuery() const
 	{
 		if (!mFreeOcclusionQueries.empty())
 		{
-			SPtr<ct::OcclusionQuery> occlusionQuery = mFreeOcclusionQueries.top();
+			SPtr<OcclusionQuery> occlusionQuery = mFreeOcclusionQueries.top();
 			mFreeOcclusionQueries.pop();
 
 			return occlusionQuery;
 		}
 
-		return ct::OcclusionQuery::create(false);
+		return OcclusionQuery::create(false);
 	}
 
 	ProfilerGPU& gProfilerGPU()

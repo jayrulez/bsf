@@ -9,7 +9,7 @@
 #include "RTTI/BsDataBlobRTTI.h"
 #include "RenderAPI/BsGpuProgram.h"
 #include "RenderAPI/BsGpuParamDesc.h"
-#include "Managers/BsGpuProgramManager.h"
+#include "RenderAPI/Managers/BsGpuProgramManager.h"
 
 namespace bs
 {

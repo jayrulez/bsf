@@ -14,7 +14,7 @@
 #include "Math/BsVector3I.h"
 #include "Math/BsVector4I.h"
 #include "Math/BsMatrixNxM.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 
 namespace bs
 {

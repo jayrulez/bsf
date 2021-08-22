@@ -250,7 +250,7 @@ namespace bs { namespace ct
 	}
 
 	void D3D11HardwareBuffer::copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset,
-		UINT32 dstOffset, UINT32 length, bool discardWholeBuffer, const SPtr<ct::CommandBuffer>& commandBuffer)
+		UINT32 dstOffset, UINT32 length, bool discardWholeBuffer, const SPtr<CommandBuffer>& commandBuffer)
 	{
 		auto executeRef = [this](HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length)
 		{

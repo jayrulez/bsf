@@ -1,10 +1,9 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "RenderAPI/BsOcclusionQuery.h"
-#include "Managers/BsQueryManager.h"
+#include "RenderAPI/Managers/BsQueryManager.h"
 
-namespace bs { namespace ct
-{
+namespace bs {
 	OcclusionQuery::OcclusionQuery(bool binary)
 		:mActive(false), mBinary(binary)
 	{ }
@@ -13,4 +12,4 @@ namespace bs { namespace ct
 	{
 		return QueryManager::instance().createOcclusionQuery(binary, deviceIdx);
 	}
-}}
+}

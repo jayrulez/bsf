@@ -69,8 +69,8 @@ namespace bs
 			ProfilerString name;
 			RenderStatsData startStats;
 			RenderStatsData endStats;
-			SPtr<ct::TimerQuery> activeTimeQuery;
-			SPtr<ct::OcclusionQuery> activeOcclusionQuery;
+			SPtr<TimerQuery> activeTimeQuery;
+			SPtr<OcclusionQuery> activeOcclusionQuery;
 
 			Vector<ProfiledSample*> children;
 		};
@@ -178,10 +178,10 @@ namespace bs
 		void endSampleInternal(ProfiledSample& sample);
 
 		/**	Creates a new timer query or returns an existing free query. */
-		SPtr<ct::TimerQuery> getTimerQuery() const;
+		SPtr<TimerQuery> getTimerQuery() const;
 
 		/**	Creates a new occlusion query or returns an existing free query. */
-		SPtr<ct::OcclusionQuery> getOcclusionQuery() const;
+		SPtr<OcclusionQuery> getOcclusionQuery() const;
 
 		/** Frees the memory used by all the child samples. */
 		void freeSample(ProfiledSample& sample);
@@ -208,8 +208,8 @@ namespace bs
 		PoolAlloc<sizeof(ProfiledViewSample), 16> mViewSamplePool;
 		PoolAlloc<sizeof(ProfiledSample), 256> mSamplePool;
 
-		mutable Stack<SPtr<ct::TimerQuery>> mFreeTimerQueries;
-		mutable Stack<SPtr<ct::OcclusionQuery>> mFreeOcclusionQueries;
+		mutable Stack<SPtr<TimerQuery>> mFreeTimerQueries;
+		mutable Stack<SPtr<OcclusionQuery>> mFreeOcclusionQueries;
 
 		Mutex mMutex;
 	};

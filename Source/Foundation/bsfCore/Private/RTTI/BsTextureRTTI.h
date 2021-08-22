@@ -9,7 +9,7 @@
 #include "Math/BsMath.h"
 #include "CoreThread/BsCoreThread.h"
 #include "RenderAPI/BsRenderAPI.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 #include "Image/BsPixelData.h"
 
 namespace bs

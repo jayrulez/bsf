@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "RenderAPI/BsGpuParamBlockBuffer.h"
 #include "RenderAPI/BsHardwareBuffer.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Profiling/BsRenderStats.h"
 
 namespace bs

@@ -460,21 +460,21 @@ namespace bs
 	class CommandQueueNoSync;
 	class CommandQueueSync;
 
+	class CommandBuffer;
+	class EventQuery;
+	class TimerQuery;
+	class OcclusionQuery;
+	class TextureView;
+	class VertexData;
 	namespace ct
 	{
 		class Renderer;
-		class VertexData;
 		class RenderAPI;
 		class CoreObject;
 		class MeshBase;
 		class TransientMesh;
 		class MeshHeap;
 		class GpuPipelineParamInfo;
-		class CommandBuffer;
-		class EventQuery;
-		class TimerQuery;
-		class OcclusionQuery;
-		class TextureView;
 		class RenderElement;
 		class RenderWindowManager;
 		class RenderStateManager;

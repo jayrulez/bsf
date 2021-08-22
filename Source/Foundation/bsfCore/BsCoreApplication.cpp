@@ -3,7 +3,7 @@
 #include "BsCoreApplication.h"
 
 #include "RenderAPI/BsRenderAPI.h"
-#include "Managers/BsRenderAPIManager.h"
+#include "RenderAPI/Managers/BsRenderAPIManager.h"
 
 #include "Platform/BsPlatform.h"
 #include "RenderAPI/BsRenderWindow.h"
@@ -19,9 +19,9 @@
 #include "Utility/BsTime.h"
 #include "Input/BsInput.h"
 #include "Renderer/BsRendererManager.h"
-#include "Managers/BsGpuProgramManager.h"
-#include "Managers/BsMeshManager.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsGpuProgramManager.h"
+#include "RenderAPI/Managers/BsMeshManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "Renderer/BsRenderer.h"
 #include "Utility/BsDeferredCallManager.h"
 #include "CoreThread/BsCoreThread.h"
@@ -29,13 +29,13 @@
 #include "Profiling/BsProfilingManager.h"
 #include "Profiling/BsProfilerCPU.h"
 #include "Profiling/BsProfilerGPU.h"
-#include "Managers/BsQueryManager.h"
+#include "RenderAPI/Managers/BsQueryManager.h"
 #include "Threading/BsThreadPool.h"
 #include "Threading/BsTaskScheduler.h"
 #include "Profiling/BsRenderStats.h"
 #include "Utility/BsMessageHandler.h"
-#include "Managers/BsResourceListenerManager.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsResourceListenerManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 #include "Material/BsShaderManager.h"
 #include "Physics/BsPhysicsManager.h"
 #include "Physics/BsPhysics.h"
@@ -336,7 +336,7 @@ namespace bs
 
 		gCoreThread().queueCommand(std::bind(&CoreApplication::frameRenderingFinishedCallback, this), CTQF_InternalQueue);
 
-		gCoreThread().queueCommand(std::bind(&ct::QueryManager::_update, ct::QueryManager::instancePtr()), CTQF_InternalQueue);
+		gCoreThread().queueCommand(std::bind(&QueryManager::_update, QueryManager::instancePtr()), CTQF_InternalQueue);
 		gCoreThread().queueCommand(std::bind(&CoreApplication::endCoreProfiling, this), CTQF_InternalQueue);
 
 		gProfilerCPU().endThread();

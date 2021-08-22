@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "Reflection/BsRTTIPlain.h"
 #include "RenderAPI/BsDepthStencilState.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 
 namespace bs
 {

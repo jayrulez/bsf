@@ -107,7 +107,7 @@ namespace bs
 		 *									used.
 		 */
 		virtual void copyData(HardwareBuffer& srcBuffer, UINT32 srcOffset, UINT32 dstOffset, UINT32 length,
-			bool discardWholeBuffer = false, const SPtr<ct::CommandBuffer>& commandBuffer = nullptr) = 0;
+			bool discardWholeBuffer = false, const SPtr<CommandBuffer>& commandBuffer = nullptr) = 0;
 
 		/**
 		 * Copy data from the provided buffer into this buffer. If buffers are not the same size, smaller size will be used.
@@ -116,7 +116,7 @@ namespace bs
 		 * @param[in]	commandBuffer	Command buffer to queue the copy operation on. If null, main command buffer is
 		 *								used.
 		 */
-		virtual void copyData(HardwareBuffer& srcBuffer, const SPtr<ct::CommandBuffer>& commandBuffer = nullptr)
+		virtual void copyData(HardwareBuffer& srcBuffer, const SPtr<CommandBuffer>& commandBuffer = nullptr)
 		{
 			UINT32 sz = std::min(getSize(), srcBuffer.getSize());
 			copyData(srcBuffer, 0, 0, sz, true, commandBuffer);

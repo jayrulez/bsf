@@ -5,7 +5,7 @@
 #include "Image/BsPixelUtil.h"
 #include "BsCoreApplication.h"
 #include "Debug/BsDebug.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "Platform/BsDropTarget.h"
 #include "Private/Win32/BsWin32DropTarget.h"
 #include "Private/Win32/BsWin32PlatformUtility.h"

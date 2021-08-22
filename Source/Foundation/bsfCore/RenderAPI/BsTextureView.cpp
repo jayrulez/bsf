@@ -3,8 +3,7 @@
 #include "RenderAPI/BsTextureView.h"
 #include "Image/BsTexture.h"
 
-namespace bs { namespace ct
-{
+namespace bs {
 	size_t TextureView::HashFunction::operator()(const TEXTURE_VIEW_DESC &key) const
 	{
 		size_t seed = 0;
@@ -29,4 +28,4 @@ namespace bs { namespace ct
 	{
 
 	}
-}}
+}

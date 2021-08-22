@@ -5,7 +5,7 @@
 #include "Resources/BsResource.h"
 #include "Private/RTTI/BsResourceHandleRTTI.h"
 #include "Resources/BsResources.h"
-#include "Managers/BsResourceListenerManager.h"
+#include "RenderAPI/Managers/BsResourceListenerManager.h"
 #include "BsCoreApplication.h"
 
 namespace bs

@@ -10,7 +10,7 @@
 #include "Mesh/BsMeshData.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "Mesh/BsMesh.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "Platform/BsPlatform.h"
 #include "Math/BsRect2I.h"
 #include "BsCoreApplication.h"
@@ -35,7 +35,7 @@
 #include "Image/BsTexture.h"
 #include "RenderAPI/BsRenderTexture.h"
 #include "RenderAPI/BsSamplerState.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 #include "Resources/BsBuiltinResources.h"
 #include "2D/BsSpriteManager.h"
 

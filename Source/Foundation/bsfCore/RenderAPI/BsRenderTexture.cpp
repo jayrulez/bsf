@@ -3,7 +3,7 @@
 #include "RenderAPI/BsRenderTexture.h"
 #include "Error/BsException.h"
 #include "Image/BsTexture.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 #include "Resources/BsResources.h"
 #include "CoreThread/BsCoreThread.h"
 #include <Private/RTTI/BsRenderTargetRTTI.h>

@@ -165,17 +165,62 @@ set(BS_CORE_INC_RENDERAPI
 )
 
 set(BS_CORE_INC_RENDERAPI_MANAGERS
-	"bsfCore/Managers/BsRenderWindowManager.h"
-	"bsfCore/Managers/BsRenderStateManager.h"
-	"bsfCore/Managers/BsQueryManager.h"
-	"bsfCore/Managers/BsMeshManager.h"
-	"bsfCore/Managers/BsHardwareBufferManager.h"
-	"bsfCore/Managers/BsGpuProgramManager.h"
-	"bsfCore/Managers/BsRenderAPIManager.h"
-	"bsfCore/Managers/BsRenderAPIFactory.h"
-	"bsfCore/Managers/BsCommandBufferManager.h"
-	"bsfCore/Managers/BsTextureManager.h"
-	"bsfCore/Managers/BsResourceListenerManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderWindowManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderStateManager.h"
+	"bsfCore/RenderAPI/Managers/BsQueryManager.h"
+	"bsfCore/RenderAPI/Managers/BsMeshManager.h"
+	"bsfCore/RenderAPI/Managers/BsHardwareBufferManager.h"
+	"bsfCore/RenderAPI/Managers/BsGpuProgramManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIFactory.h"
+	"bsfCore/RenderAPI/Managers/BsCommandBufferManager.h"
+	"bsfCore/RenderAPI/Managers/BsTextureManager.h"
+	"bsfCore/RenderAPI/Managers/BsResourceListenerManager.h"
+)
+
+set(BS_CORE_INC_RHI
+	"bsfCore/RHI/BsVideoModeInfo.h"
+	"bsfCore/RHI/BsVertexDeclaration.h"
+	"bsfCore/RHI/BsVertexData.h"
+	"bsfCore/RHI/BsVertexBuffer.h"
+	"bsfCore/RHI/BsTimerQuery.h"
+	"bsfCore/RHI/BsTextureView.h"
+	"bsfCore/RHI/BsSubMesh.h"
+	"bsfCore/RHI/BsSamplerState.h"
+	"bsfCore/RHI/BsRenderWindow.h"
+	"bsfCore/RHI/BsRenderTexture.h"
+	"bsfCore/RHI/BsRenderTarget.h"
+	"bsfCore/RHI/BsRasterizerState.h"
+	"bsfCore/RHI/BsOcclusionQuery.h"
+	"bsfCore/RHI/BsIndexBuffer.h"
+	"bsfCore/RHI/BsHardwareBuffer.h"
+	"bsfCore/RHI/BsGpuProgram.h"
+	"bsfCore/RHI/BsGpuParams.h"
+	"bsfCore/RHI/BsGpuParamDesc.h"
+	"bsfCore/RHI/BsGpuParamBlockBuffer.h"
+	"bsfCore/RHI/BsGpuParam.h"
+	"bsfCore/RHI/BsGpuBuffer.h"
+	"bsfCore/RHI/BsEventQuery.h"
+	"bsfCore/RHI/BsDepthStencilState.h"
+	"bsfCore/RHI/BsBlendState.h"
+	"bsfCore/RHI/BsRenderAPI.h"
+	"bsfCore/RHI/BsRenderAPICapabilities.h"
+	"bsfCore/RHI/BsViewport.h"
+	"bsfCore/RHI/BsCommandBuffer.h"
+	"bsfCore/RHI/BsGpuPipelineState.h"
+	"bsfCore/RHI/BsGpuPipelineParamInfo.h"
+	"bsfCore/RHI/BsVertexDataDesc.h"
+	"bsfCore/RHI/Managers/BsRenderWindowManager.h"
+	"bsfCore/RHI/Managers/BsRenderStateManager.h"
+	"bsfCore/RHI/Managers/BsQueryManager.h"
+	"bsfCore/RHI/Managers/BsMeshManager.h"
+	"bsfCore/RHI/Managers/BsHardwareBufferManager.h"
+	"bsfCore/RHI/Managers/BsGpuProgramManager.h"
+	"bsfCore/RHI/Managers/BsRenderAPIManager.h"
+	"bsfCore/RHI/Managers/BsRenderAPIFactory.h"
+	"bsfCore/RHI/Managers/BsCommandBufferManager.h"
+	"bsfCore/RHI/Managers/BsTextureManager.h"
+	"bsfCore/RHI/Managers/BsResourceListenerManager.h"
 )
 
 set(BS_CORE_SRC_CORETHREAD
@@ -498,16 +543,58 @@ set(BS_CORE_SRC_RENDERAPI
 )
 
 set(BS_CORE_SRC_RENDERAPI_MANAGERS
-	"bsfCore/Managers/BsGpuProgramManager.cpp"
-	"bsfCore/Managers/BsHardwareBufferManager.cpp"
-	"bsfCore/Managers/BsMeshManager.cpp"
-	"bsfCore/Managers/BsQueryManager.cpp"
-	"bsfCore/Managers/BsRenderStateManager.cpp"
-	"bsfCore/Managers/BsRenderWindowManager.cpp"
-	"bsfCore/Managers/BsRenderAPIManager.cpp"
-	"bsfCore/Managers/BsCommandBufferManager.cpp"
-	"bsfCore/Managers/BsTextureManager.cpp"
-	"bsfCore/Managers/BsResourceListenerManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsGpuProgramManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsHardwareBufferManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsMeshManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsQueryManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderStateManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderWindowManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsCommandBufferManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsTextureManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsResourceListenerManager.cpp"
+)
+
+set(BS_CORE_SRC_RHI
+	"bsfCore/RHI/BsBlendState.cpp"
+	"bsfCore/RHI/BsDepthStencilState.cpp"
+	"bsfCore/RHI/BsEventQuery.cpp"
+	"bsfCore/RHI/BsGpuBuffer.cpp"
+	"bsfCore/RHI/BsGpuParam.cpp"
+	"bsfCore/RHI/BsGpuParamBlockBuffer.cpp"
+	"bsfCore/RHI/BsGpuParams.cpp"
+	"bsfCore/RHI/BsGpuProgram.cpp"
+	"bsfCore/RHI/BsIndexBuffer.cpp"
+	"bsfCore/RHI/BsOcclusionQuery.cpp"
+	"bsfCore/RHI/BsRasterizerState.cpp"
+	"bsfCore/RHI/BsRenderTarget.cpp"
+	"bsfCore/RHI/BsRenderTexture.cpp"
+	"bsfCore/RHI/BsRenderWindow.cpp"
+	"bsfCore/RHI/BsSamplerState.cpp"
+	"bsfCore/RHI/BsTextureView.cpp"
+	"bsfCore/RHI/BsTimerQuery.cpp"
+	"bsfCore/RHI/BsVertexBuffer.cpp"
+	"bsfCore/RHI/BsVertexData.cpp"
+	"bsfCore/RHI/BsVertexDeclaration.cpp"
+	"bsfCore/RHI/BsVideoModeInfo.cpp"
+	"bsfCore/RHI/BsRenderAPI.cpp"
+	"bsfCore/RHI/BsRenderAPICapabilities.cpp"
+	"bsfCore/RHI/BsViewport.cpp"
+	"bsfCore/RHI/BsCommandBuffer.cpp"
+	"bsfCore/RHI/BsGpuPipelineState.cpp"
+	"bsfCore/RHI/BsGpuPipelineParamInfo.cpp"
+	"bsfCore/RHI/BsVertexDataDesc.cpp"
+	"bsfCore/RHI/BsGpuParamDesc.cpp"
+	"bsfCore/RHI/Managers/BsGpuProgramManager.cpp"
+	"bsfCore/RHI/Managers/BsHardwareBufferManager.cpp"
+	"bsfCore/RHI/Managers/BsMeshManager.cpp"
+	"bsfCore/RHI/Managers/BsQueryManager.cpp"
+	"bsfCore/RHI/Managers/BsRenderStateManager.cpp"
+	"bsfCore/RHI/Managers/BsRenderWindowManager.cpp"
+	"bsfCore/RHI/Managers/BsRenderAPIManager.cpp"
+	"bsfCore/RHI/Managers/BsCommandBufferManager.cpp"
+	"bsfCore/RHI/Managers/BsTextureManager.cpp"
+	"bsfCore/RHI/Managers/BsResourceListenerManager.cpp"
 )
 
 set(BS_CORE_SRC_NOFILTER
@@ -716,6 +803,7 @@ source_group("Renderer" FILES ${BS_CORE_INC_RENDERER} ${BS_CORE_SRC_RENDERER})
 source_group("Profiling" FILES ${BS_CORE_INC_PROFILING} ${BS_CORE_SRC_PROFILING})
 source_group("RenderAPI" FILES ${BS_CORE_INC_RENDERAPI} ${BS_CORE_SRC_RENDERAPI})
 source_group("RenderAPI\\Managers" FILES ${BS_CORE_INC_RENDERAPI_MANAGERS} ${BS_CORE_SRC_RENDERAPI_MANAGERS})
+source_group("RHI" FILES ${BS_CORE_INC_RHI} ${BS_CORE_SRC_RHI})
 source_group("Material" FILES ${BS_CORE_INC_MATERIAL} ${BS_CORE_SRC_MATERIAL})
 source_group("Resources" FILES ${BS_CORE_INC_RESOURCES} ${BS_CORE_SRC_RESOURCES})
 source_group("Text" FILES ${BS_CORE_INC_TEXT} ${BS_CORE_SRC_TEXT})
@@ -750,6 +838,7 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_RTTI}
 	${BS_CORE_INC_PROFILING}
 	${BS_CORE_INC_RENDERAPI}
+#	${BS_CORE_INC_RHI}
 	${BS_CORE_SRC_CORETHREAD}
 	${BS_CORE_INC_NOFILTER}
 	${BS_CORE_INC_MATERIAL}
@@ -769,6 +858,7 @@ set(BS_CORE_SRC
 	${BS_CORE_INC_LOCALIZATION}
 	${BS_CORE_SRC_TEXT}
 	${BS_CORE_SRC_RENDERAPI}
+#	${BS_CORE_SRC_RHI}
 	${BS_CORE_SRC_NOFILTER}
 	${BS_CORE_SRC_PHYSICS}
 	${BS_CORE_SRC_SCENE}
