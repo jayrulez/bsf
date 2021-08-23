@@ -313,8 +313,6 @@ namespace bs
 	//class GpuProgram;
 	//class Pass;
 	//class Technique;
-	//class Shader;
-	//class Material;
 	//class RenderTarget;
 	//class RenderTexture;
 	//class RenderWindow;
@@ -335,9 +333,7 @@ namespace bs
 	//class ComputePipelineState;
 	//class ReflectionProbe;
 	//class ParticleSystem;
-	//class Texture;
 	//class SpriteTexture;
-	//class Mesh;
 	//class VectorField;
 	//class Skybox;
 	//class Decal;
@@ -481,7 +477,7 @@ namespace bs
 	class MeshResourceBase;
 	class TransientMeshResource;
 	class MeshHeap;
-	class Font;
+	class FontResource;
 	class ResourceMetaData;
 	class DropTarget;
 	class StringTable;
@@ -756,7 +752,7 @@ namespace bs
 	typedef ResourceHandle<MeshResource> MeshResourceHandle;
 	typedef ResourceHandle<MaterialResource> MaterialResourceHandle;
 	typedef ResourceHandle<ShaderIncludeResource> ShaderIncludeResourceHandle;
-	typedef ResourceHandle<Font> FontResourceHandle;
+	typedef ResourceHandle<FontResource> FontResourceHandle;
 	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
 	typedef ResourceHandle<Prefab> PrefabResourceHandle;
 	typedef ResourceHandle<StringTable> HStringTable;

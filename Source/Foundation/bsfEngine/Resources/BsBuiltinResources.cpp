@@ -131,7 +131,7 @@ namespace bs
 		mWhiteSpriteTexture = getSkinTexture(WhiteTex);
 		mDummySpriteTexture = SpriteTexture::create(mDummyTexture);
 
-		mFont = gResources().load<Font>(mBuiltinDataFolder + (String(DEFAULT_FONT_NAME) + u8".asset"));
+		mFont = gResources().load<FontResource>(mBuiltinDataFolder + (String(DEFAULT_FONT_NAME) + u8".asset"));
 		mSkin = gResources().load<GUISkin>(mBuiltinDataFolder + (String(GUI_SKIN_FILE) + u8".json.asset"));
 		mEmptySkin = GUISkin::create();
 

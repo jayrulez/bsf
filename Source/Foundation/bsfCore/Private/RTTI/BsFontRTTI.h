@@ -46,10 +46,10 @@ namespace bs
 		}
 	};
 
-	class BS_CORE_EXPORT FontRTTI : public RTTIType<Font, Resource, FontRTTI>
+	class BS_CORE_EXPORT FontResourceRTTI : public RTTIType<FontResource, Resource, FontResourceRTTI>
 	{
 	private:
-		FontBitmap& getBitmap(Font* obj, UINT32 idx)
+		FontBitmap& getBitmap(FontResource* obj, UINT32 idx)
 		{
 			if(idx >= obj->mFontDataPerSize.size())
 				BS_EXCEPT(InternalErrorException, "Index out of range: " + toString(idx) + ". Valid range: 0 .. " + toString((int)obj->mFontDataPerSize.size()));
@@ -61,26 +61,26 @@ namespace bs
 			return *iter->second;
 		}
 
-		void setBitmap(Font* obj, UINT32 idx, FontBitmap& value)
+		void setBitmap(FontResource* obj, UINT32 idx, FontBitmap& value)
 		{
 			mFontDataPerSize[idx] = bs_shared_ptr_new<FontBitmap>();
 			*mFontDataPerSize[idx] = value;
 		}
 
-		UINT32 getNumBitmaps(Font* obj)
+		UINT32 getNumBitmaps(FontResource* obj)
 		{
 			return (UINT32)obj->mFontDataPerSize.size();
 		}
 
-		void setNumBitmaps(Font* obj, UINT32 size)
+		void setNumBitmaps(FontResource* obj, UINT32 size)
 		{
 			mFontDataPerSize.resize(size);
 		}
 
 	public:
-		FontRTTI()
+		FontResourceRTTI()
 		{
-			addReflectableArrayField("mBitmaps", 0, &FontRTTI::getBitmap, &FontRTTI::getNumBitmaps, &FontRTTI::setBitmap, &FontRTTI::setNumBitmaps);
+			addReflectableArrayField("mBitmaps", 0, &FontResourceRTTI::getBitmap, &FontResourceRTTI::getNumBitmaps, &FontResourceRTTI::setBitmap, &FontResourceRTTI::setNumBitmaps);
 		}
 
 		const String& getRTTIName() override
@@ -96,13 +96,13 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return Font::_createEmpty();
+			return FontResource::_createEmpty();
 		}
 
 	protected:
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			Font* font = static_cast<Font*>(obj);
+			FontResource* font = static_cast<FontResource*>(obj);
 			font->initialize(mFontDataPerSize);
 		}
 

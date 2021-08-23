@@ -341,7 +341,7 @@ namespace bs
 		else
 			return;
 
-		FontResourceHandle font = Importer::instance().import<Font>(inputFile, fontImportOptions, UUID);
+		FontResourceHandle font = Importer::instance().import<FontResource>(inputFile, fontImportOptions, UUID);
 
 		String fontName = outputName;
 		Path outputPath = outputFolder + fontName;
@@ -895,6 +895,6 @@ namespace bs
 		Path fontPath = mFontPath;
 		fontPath.append(name + u8".asset");
 
-		return gResources().load<Font>(fontPath);
+		return gResources().load<FontResource>(fontPath);
 	}
 }

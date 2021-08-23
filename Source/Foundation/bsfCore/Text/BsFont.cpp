@@ -27,11 +27,11 @@ namespace bs
 		return FontBitmap::getRTTIStatic();
 	}
 
-	Font::Font()
+	FontResource::FontResource()
 		:Resource(false)
 	{ }
 
-	void Font::initialize(const Vector<SPtr<FontBitmap>>& fontData)
+	void FontResource::initialize(const Vector<SPtr<FontBitmap>>& fontData)
 	{
 		for(auto iter = fontData.begin(); iter != fontData.end(); ++iter)
 		{
@@ -47,7 +47,7 @@ namespace bs
 		Resource::initialize();
 	}
 
-	SPtr<FontBitmap> Font::getBitmap(UINT32 size) const
+	SPtr<FontBitmap> FontResource::getBitmap(UINT32 size) const
 	{
 		auto iterFind = mFontDataPerSize.find(size);
 
@@ -57,7 +57,7 @@ namespace bs
 		return iterFind->second;
 	}
 
-	INT32 Font::getClosestSize(UINT32 size) const
+	INT32 FontResource::getClosestSize(UINT32 size) const
 	{
 		UINT32 minDiff = std::numeric_limits<UINT32>::max();
 		UINT32 bestSize = size;
@@ -89,7 +89,7 @@ namespace bs
 		return bestSize;
 	}
 
-	void Font::getCoreDependencies(Vector<CoreObject*>& dependencies)
+	void FontResource::getCoreDependencies(Vector<CoreObject*>& dependencies)
 	{
 		for (auto& fontDataEntry : mFontDataPerSize)
 		{
@@ -101,37 +101,37 @@ namespace bs
 		}
 	}
 
-	FontResourceHandle Font::create(const Vector<SPtr<FontBitmap>>& fontData)
+	FontResourceHandle FontResource::create(const Vector<SPtr<FontBitmap>>& fontData)
 	{
-		SPtr<Font> newFont = _createPtr(fontData);
+		SPtr<FontResource> newFont = _createPtr(fontData);
 
-		return static_resource_cast<Font>(gResources()._createResourceHandle(newFont));
+		return static_resource_cast<FontResource>(gResources()._createResourceHandle(newFont));
 	}
 
-	SPtr<Font> Font::_createPtr(const Vector<SPtr<FontBitmap>>& fontData)
+	SPtr<FontResource> FontResource::_createPtr(const Vector<SPtr<FontBitmap>>& fontData)
 	{
-		SPtr<Font> newFont = bs_core_ptr<Font>(new (bs_alloc<Font>()) Font());
+		SPtr<FontResource> newFont = bs_core_ptr<FontResource>(new (bs_alloc<FontResource>()) FontResource());
 		newFont->_setThisPtr(newFont);
 		newFont->initialize(fontData);
 
 		return newFont;
 	}
 
-	SPtr<Font> Font::_createEmpty()
+	SPtr<FontResource> FontResource::_createEmpty()
 	{
-		SPtr<Font> newFont = bs_core_ptr<Font>(new (bs_alloc<Font>()) Font());
+		SPtr<FontResource> newFont = bs_core_ptr<FontResource>(new (bs_alloc<FontResource>()) FontResource());
 		newFont->_setThisPtr(newFont);
 
 		return newFont;
 	}
 
-	RTTITypeBase* Font::getRTTIStatic()
+	RTTITypeBase* FontResource::getRTTIStatic()
 	{
-		return FontRTTI::instance();
+		return FontResourceRTTI::instance();
 	}
 
-	RTTITypeBase* Font::getRTTI() const
+	RTTITypeBase* FontResource::getRTTI() const
 	{
-		return Font::getRTTIStatic();
+		return FontResource::getRTTIStatic();
 	}
 }

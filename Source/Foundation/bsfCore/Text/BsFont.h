@@ -59,10 +59,10 @@ namespace bs
 	 * Font resource containing data about textual characters and how to render text. Contains one or multiple font
 	 * bitmaps, each for a specific size.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:GUI_Engine) Font : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:GUI_Engine) FontResource : public Resource
 	{
 	public:
-		virtual ~Font() = default;
+		virtual ~FontResource() = default;
 
 		/**
 		 * Returns font bitmap for a specific font size.
@@ -100,17 +100,17 @@ namespace bs
 		void initialize(const Vector<SPtr<FontBitmap>>& fontData);
 
 		/** Creates a new font as a pointer instead of a resource handle. */
-		static SPtr<Font> _createPtr(const Vector<SPtr<FontBitmap>>& fontInitData);
+		static SPtr<FontResource> _createPtr(const Vector<SPtr<FontBitmap>>& fontInitData);
 
 		/** Creates a Font without initializing it. */
-		static SPtr<Font> _createEmpty();
+		static SPtr<FontResource> _createEmpty();
 
 		/** @} */
 
 	protected:
 		friend class FontManager;
 
-		Font();
+		FontResource();
 
 		/** @copydoc CoreObject::getCoreDependencies */
 		void getCoreDependencies(Vector<CoreObject*>& dependencies) override;
@@ -122,7 +122,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class FontRTTI;
+		friend class FontResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
