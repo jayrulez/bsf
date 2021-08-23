@@ -112,7 +112,7 @@ namespace bs
 
 		Any mRTTIData; // RTTI only
 	private:
-		friend class Prefab;
+		friend class PrefabResource;
 		GameObjectInstanceDataPtr mInstanceData;
 		bool mIsDestroyed = false;
 

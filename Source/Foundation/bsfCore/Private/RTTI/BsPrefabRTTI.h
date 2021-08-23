@@ -16,7 +16,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT PrefabRTTI : public RTTIType < Prefab, Resource, PrefabRTTI >
+	class BS_CORE_EXPORT PrefabResourceRTTI : public RTTIType < PrefabResource, Resource, PrefabResourceRTTI >
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -26,13 +26,13 @@ namespace bs
 			BS_RTTI_MEMBER_PLAIN(mIsScene, 4)
 		BS_END_RTTI_MEMBERS
 
-		SPtr<SceneObject> getSceneObject(Prefab* obj) { return obj->mRoot.getInternalPtr(); }
-		void setSceneObject(Prefab* obj, SPtr<SceneObject> value) { obj->mRoot = value->getHandle(); }
+		SPtr<SceneObject> getSceneObject(PrefabResource* obj) { return obj->mRoot.getInternalPtr(); }
+		void setSceneObject(PrefabResource* obj, SPtr<SceneObject> value) { obj->mRoot = value->getHandle(); }
 
 	public:
-		PrefabRTTI()
+		PrefabResourceRTTI()
 		{
-			addReflectablePtrField("mRoot", 0, &PrefabRTTI::getSceneObject, &PrefabRTTI::setSceneObject);
+			addReflectablePtrField("mRoot", 0, &PrefabResourceRTTI::getSceneObject, &PrefabResourceRTTI::setSceneObject);
 		}
 
 		void onDeserializationStarted(IReflectable* ptr, SerializationContext* context) override
@@ -60,7 +60,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return Prefab::createEmpty();
+			return PrefabResource::createEmpty();
 		}
 	};
 

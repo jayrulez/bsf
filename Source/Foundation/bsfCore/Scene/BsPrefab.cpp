@@ -9,27 +9,27 @@
 
 namespace bs
 {
-	Prefab::Prefab()
+	PrefabResource::PrefabResource()
 		:Resource(false)
 	{
 		
 	}
 
-	Prefab::~Prefab()
+	PrefabResource::~PrefabResource()
 	{
 		if (mRoot != nullptr)
 			mRoot->destroy(true);
 	}
 
-	PrefabResourceHandle Prefab::create(const HSceneObject& sceneObject, bool isScene)
+	PrefabResourceHandle PrefabResource::create(const HSceneObject& sceneObject, bool isScene)
 	{
-		SPtr<Prefab> newPrefab = createEmpty();
+		SPtr<PrefabResource> newPrefab = createEmpty();
 		newPrefab->mIsScene = isScene;
 
 		PrefabUtility::clearPrefabIds(sceneObject, true, false);
 		newPrefab->initialize(sceneObject);
 
-		PrefabResourceHandle handle = static_resource_cast<Prefab>(gResources()._createResourceHandle(newPrefab));
+		PrefabResourceHandle handle = static_resource_cast<PrefabResource>(gResources()._createResourceHandle(newPrefab));
 		newPrefab->mUUID = handle.getUUID();
 		sceneObject->mPrefabLinkUUID = newPrefab->mUUID;
 		newPrefab->_getRoot()->mPrefabLinkUUID = newPrefab->mUUID;
@@ -37,15 +37,15 @@ namespace bs
 		return handle;
 	}
 
-	SPtr<Prefab> Prefab::createEmpty()
+	SPtr<PrefabResource> PrefabResource::createEmpty()
 	{
-		SPtr<Prefab> newPrefab = bs_core_ptr<Prefab>(new (bs_alloc<Prefab>()) Prefab());
+		SPtr<PrefabResource> newPrefab = bs_core_ptr<PrefabResource>(new (bs_alloc<PrefabResource>()) PrefabResource());
 		newPrefab->_setThisPtr(newPrefab);
 
 		return newPrefab;
 	}
 
-	void Prefab::initialize(const HSceneObject& sceneObject)
+	void PrefabResource::initialize(const HSceneObject& sceneObject)
 	{
 		sceneObject->mPrefabDiff = nullptr;
 		PrefabUtility::generatePrefabIds(sceneObject);
@@ -98,7 +98,7 @@ namespace bs
 		}
 	}
 
-	void Prefab::update(const HSceneObject& sceneObject)
+	void PrefabResource::update(const HSceneObject& sceneObject)
 	{
 		initialize(sceneObject);
 		sceneObject->mPrefabLinkUUID = mUUID;
@@ -107,7 +107,7 @@ namespace bs
 		mHash++;
 	}
 
-	void Prefab::_updateChildInstances() const
+	void PrefabResource::_updateChildInstances() const
 	{
 		Stack<HSceneObject> todo;
 		todo.push(mRoot);
@@ -130,7 +130,7 @@ namespace bs
 		}
 	}
 
-	HSceneObject Prefab::_instantiate(bool preserveUUIDs) const
+	HSceneObject PrefabResource::_instantiate(bool preserveUUIDs) const
 	{
 		if (mRoot == nullptr)
 			return HSceneObject();
@@ -149,7 +149,7 @@ namespace bs
 		return clone;
 	}
 
-	HSceneObject Prefab::_clone(bool preserveUUIDs) const
+	HSceneObject PrefabResource::_clone(bool preserveUUIDs) const
 	{
 		if (mRoot == nullptr)
 			return HSceneObject();
@@ -160,13 +160,13 @@ namespace bs
 		return mRoot->clone(false, preserveUUIDs);
 	}
 
-	RTTITypeBase* Prefab::getRTTIStatic()
+	RTTITypeBase* PrefabResource::getRTTIStatic()
 	{
-		return PrefabRTTI::instance();
+		return PrefabResourceRTTI::instance();
 	}
 
-	RTTITypeBase* Prefab::getRTTI() const
+	RTTITypeBase* PrefabResource::getRTTI() const
 	{
-		return Prefab::getRTTIStatic();
+		return PrefabResource::getRTTIStatic();
 	}
 }

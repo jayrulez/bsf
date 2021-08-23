@@ -442,7 +442,7 @@ namespace bs
 	class IResourceListener;
 	class TextureProperties;
 	class IShaderIncludeHandler;
-	class Prefab;
+	class PrefabResource;
 	class PrefabDiff;
 	class RendererMeshData;
 	class Win32Window;
@@ -754,7 +754,7 @@ namespace bs
 	typedef ResourceHandle<ShaderIncludeResource> ShaderIncludeResourceHandle;
 	typedef ResourceHandle<FontResource> FontResourceHandle;
 	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
-	typedef ResourceHandle<Prefab> PrefabResourceHandle;
+	typedef ResourceHandle<PrefabResource> PrefabResourceHandle;
 	typedef ResourceHandle<StringTable> HStringTable;
 	typedef ResourceHandle<PhysicsMaterial> HPhysicsMaterial;
 	typedef ResourceHandle<PhysicsMesh> HPhysicsMesh;

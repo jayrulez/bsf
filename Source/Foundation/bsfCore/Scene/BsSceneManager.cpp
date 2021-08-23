@@ -85,7 +85,7 @@ namespace bs
 	PrefabResourceHandle SceneManager::saveScene() const
 	{
 		HSceneObject sceneRoot = mMainScene->getRoot();
-		return Prefab::create(sceneRoot);
+		return PrefabResource::create(sceneRoot);
 	}
 
 	void SceneManager::_setRootNode(const HSceneObject& root)

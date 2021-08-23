@@ -16,11 +16,11 @@ namespace bs
 	 * Prefab is a saveable hierarchy of scene objects. In general it can serve as any grouping of scene objects
 	 * (for example a level) or be used as a form of a template instantiated and reused throughout the scene.
 	 */
-	class BS_CORE_EXPORT Prefab : public Resource
+	class BS_CORE_EXPORT PrefabResource : public Resource
 	{
 	public:
-		Prefab();
-		~Prefab();
+		PrefabResource();
+		~PrefabResource();
 
 		/**
 		 * Creates a new prefab from the provided scene object. If the scene object has an existing prefab link it will
@@ -106,7 +106,7 @@ namespace bs
 		void initialize(const HSceneObject& sceneObject);
 
 		/**	Creates an empty and uninitialized prefab. */
-		static SPtr<Prefab> createEmpty();
+		static SPtr<PrefabResource> createEmpty();
 
 		HSceneObject mRoot;
 		UINT32 mHash = 0;
@@ -118,7 +118,7 @@ namespace bs
 		/************************************************************************/
 
 	public:
-		friend class PrefabRTTI;
+		friend class PrefabResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

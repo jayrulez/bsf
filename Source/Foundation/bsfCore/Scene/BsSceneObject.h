@@ -50,7 +50,7 @@ namespace bs
 		};
 
 		friend class SceneManager;
-		friend class Prefab;
+		friend class PrefabResource;
 		friend class PrefabDiff;
 		friend class PrefabUtility;
 	public:
