@@ -434,7 +434,7 @@ namespace bs { namespace ct
 			for (UINT32 face = 0; face < 6; face++)
 			{
 				RENDER_TEXTURE_DESC cubeFaceRTDesc;
-				cubeFaceRTDesc.colorSurfaces[0].texture = cubemap;
+				cubeFaceRTDesc.colorSurfaces[0].pTexture = cubemap;
 				cubeFaceRTDesc.colorSurfaces[0].face = face;
 				cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 				cubeFaceRTDesc.colorSurfaces[0].mipLevel = mip;
@@ -483,7 +483,7 @@ namespace bs { namespace ct
 		for (UINT32 face = 0; face < 6; face++)
 		{
 			RENDER_TEXTURE_DESC cubeFaceRTDesc;
-			cubeFaceRTDesc.colorSurfaces[0].texture = output;
+			cubeFaceRTDesc.colorSurfaces[0].pTexture = output;
 			cubeFaceRTDesc.colorSurfaces[0].face = face;
 			cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 			cubeFaceRTDesc.colorSurfaces[0].mipLevel = 0;
@@ -511,7 +511,7 @@ namespace bs { namespace ct
 		else
 		{
 			RENDER_TEXTURE_DESC rtDesc;
-			rtDesc.colorSurfaces[0].texture = output;
+			rtDesc.colorSurfaces[0].pTexture = output;
 
 			SPtr<RenderTexture> target = RenderTexture::create(rtDesc);
 			filterCubemapForIrradianceNonCompute(cubemap, outputIdx, target);
@@ -578,7 +578,7 @@ namespace bs { namespace ct
 		for (UINT32 face = 0; face < 6; face++)
 		{
 			RENDER_TEXTURE_DESC cubeFaceRTDesc;
-			cubeFaceRTDesc.colorSurfaces[0].texture = dst;
+			cubeFaceRTDesc.colorSurfaces[0].pTexture = dst;
 			cubeFaceRTDesc.colorSurfaces[0].face = face;
 			cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 			cubeFaceRTDesc.colorSurfaces[0].mipLevel = dstMip;
@@ -608,7 +608,7 @@ namespace bs { namespace ct
 			for(UINT32 face = 0; face < 6; face++)
 			{
 				RENDER_TEXTURE_DESC cubeFaceRTDesc;
-				cubeFaceRTDesc.colorSurfaces[0].texture = coeffsTex->texture;
+				cubeFaceRTDesc.colorSurfaces[0].pTexture = coeffsTex->texture;
 				cubeFaceRTDesc.colorSurfaces[0].face = face;
 				cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 				cubeFaceRTDesc.colorSurfaces[0].mipLevel = 0;
@@ -632,7 +632,7 @@ namespace bs { namespace ct
 				for(UINT32 face = 0; face < 6; face++)
 				{
 					RENDER_TEXTURE_DESC cubeFaceRTDesc;
-					cubeFaceRTDesc.colorSurfaces[0].texture = accumCoeffsTex->texture;
+					cubeFaceRTDesc.colorSurfaces[0].pTexture = accumCoeffsTex->texture;
 					cubeFaceRTDesc.colorSurfaces[0].face = face;
 					cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 					cubeFaceRTDesc.colorSurfaces[0].mipLevel = 0;

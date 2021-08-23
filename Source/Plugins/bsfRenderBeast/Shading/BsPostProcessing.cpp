@@ -1075,8 +1075,8 @@ namespace bs { namespace ct
 			mOutput1 = gGpuResourcePool().get(outputTexDesc);
 
 			RENDER_TEXTURE_DESC rtDesc;
-			rtDesc.colorSurfaces[0].texture = mOutput0->texture;
-			rtDesc.colorSurfaces[1].texture = mOutput1->texture;
+			rtDesc.colorSurfaces[0].pTexture = mOutput0->texture;
+			rtDesc.colorSurfaces[1].pTexture = mOutput1->texture;
 
 			rt = RenderTexture::create(rtDesc);
 		}

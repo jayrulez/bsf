@@ -1696,8 +1696,8 @@ namespace bs
 				SPtr<Texture> stencilTexture = Texture::createPtr(texDesc);
 
 				RENDER_TEXTURE_DESC rtDesc;
-				rtDesc.colorSurfaces[0].texture = colorTex;
-				rtDesc.depthStencilSurface.texture = stencilTexture;
+				rtDesc.colorSurfaces[0].pTexture = colorTex;
+				rtDesc.depthStencilSurface.pTexture = stencilTexture;
 
 				// Draw the alpha only first
 				// Note: Can we avoid drawing each element twice?

@@ -286,25 +286,25 @@ namespace bs { namespace ct
 			UINT32 targetIdx = 0;
 			
 			RENDER_TEXTURE_DESC gbufferDesc;
-			gbufferDesc.colorSurfaces[targetIdx].texture = sceneColorTex->texture;
+			gbufferDesc.colorSurfaces[targetIdx].pTexture = sceneColorTex->texture;
 			gbufferDesc.colorSurfaces[targetIdx].face = 0;
 			gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 			gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
 			targetIdx++;
 
-			gbufferDesc.colorSurfaces[targetIdx].texture = albedoTex->texture;
+			gbufferDesc.colorSurfaces[targetIdx].pTexture = albedoTex->texture;
 			gbufferDesc.colorSurfaces[targetIdx].face = 0;
 			gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 			gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
 			targetIdx++;
 
-			gbufferDesc.colorSurfaces[targetIdx].texture = normalTex->texture;
+			gbufferDesc.colorSurfaces[targetIdx].pTexture = normalTex->texture;
 			gbufferDesc.colorSurfaces[targetIdx].face = 0;
 			gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 			gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
 			targetIdx++;
 
-			gbufferDesc.colorSurfaces[targetIdx].texture = roughMetalTex->texture;
+			gbufferDesc.colorSurfaces[targetIdx].pTexture = roughMetalTex->texture;
 			gbufferDesc.colorSurfaces[targetIdx].face = 0;
 			gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 			gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
@@ -312,20 +312,20 @@ namespace bs { namespace ct
 
 			if (needsVelocity)
 			{
-				gbufferDesc.colorSurfaces[targetIdx].texture = velocityTex->texture;
+				gbufferDesc.colorSurfaces[targetIdx].pTexture = velocityTex->texture;
 				gbufferDesc.colorSurfaces[targetIdx].face = 0;
 				gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 				gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
 				targetIdx++;
 			}
 
-			gbufferDesc.depthStencilSurface.texture = sceneDepthTex->texture;
+			gbufferDesc.depthStencilSurface.pTexture = sceneDepthTex->texture;
 			gbufferDesc.depthStencilSurface.face = 0;
 			gbufferDesc.depthStencilSurface.mipLevel = 0;
 
 			renderTargetNoMask = RenderTexture::create(gbufferDesc);
 
-			gbufferDesc.colorSurfaces[targetIdx].texture = idTex->texture;
+			gbufferDesc.colorSurfaces[targetIdx].pTexture = idTex->texture;
 			gbufferDesc.colorSurfaces[targetIdx].face = 0;
 			gbufferDesc.colorSurfaces[targetIdx].numFaces = 1;
 			gbufferDesc.colorSurfaces[targetIdx].mipLevel = 0;
@@ -543,12 +543,12 @@ namespace bs { namespace ct
 		if (rebuildRT)
 		{
 			RENDER_TEXTURE_DESC sceneColorDesc;
-			sceneColorDesc.colorSurfaces[0].texture = sceneColorTex->texture;
+			sceneColorDesc.colorSurfaces[0].pTexture = sceneColorTex->texture;
 			sceneColorDesc.colorSurfaces[0].face = 0;
 			sceneColorDesc.colorSurfaces[0].numFaces = 1;
 			sceneColorDesc.colorSurfaces[0].mipLevel = 0;
 
-			sceneColorDesc.depthStencilSurface.texture = sceneDepthTex->texture;
+			sceneColorDesc.depthStencilSurface.pTexture = sceneDepthTex->texture;
 			sceneColorDesc.depthStencilSurface.face = 0;
 			sceneColorDesc.depthStencilSurface.numFaces = 1;
 			sceneColorDesc.depthStencilSurface.mipLevel = 0;
@@ -798,12 +798,12 @@ namespace bs { namespace ct
 		if (rebuildRT)
 		{
 			RENDER_TEXTURE_DESC lightAccumulationRTDesc;
-			lightAccumulationRTDesc.colorSurfaces[0].texture = lightAccumulationTex->texture;
+			lightAccumulationRTDesc.colorSurfaces[0].pTexture = lightAccumulationTex->texture;
 			lightAccumulationRTDesc.colorSurfaces[0].face = 0;
 			lightAccumulationRTDesc.colorSurfaces[0].numFaces = 1;
 			lightAccumulationRTDesc.colorSurfaces[0].mipLevel = 0;
 
-			lightAccumulationRTDesc.depthStencilSurface.texture = depthNode->depthTex->texture;
+			lightAccumulationRTDesc.depthStencilSurface.pTexture = depthNode->depthTex->texture;
 			lightAccumulationRTDesc.depthStencilSurface.face = 0;
 			lightAccumulationRTDesc.depthStencilSurface.numFaces = 1;
 			lightAccumulationRTDesc.depthStencilSurface.mipLevel = 0;
@@ -939,12 +939,12 @@ namespace bs { namespace ct
 		if (rebuildRT)
 		{
 			RENDER_TEXTURE_DESC lightOcclusionRTDesc;
-			lightOcclusionRTDesc.colorSurfaces[0].texture = lightOcclusionTex->texture;
+			lightOcclusionRTDesc.colorSurfaces[0].pTexture = lightOcclusionTex->texture;
 			lightOcclusionRTDesc.colorSurfaces[0].face = 0;
 			lightOcclusionRTDesc.colorSurfaces[0].numFaces = 1;
 			lightOcclusionRTDesc.colorSurfaces[0].mipLevel = 0;
 
-			lightOcclusionRTDesc.depthStencilSurface.texture = sceneDepthNode->depthTex->texture;
+			lightOcclusionRTDesc.depthStencilSurface.pTexture = sceneDepthNode->depthTex->texture;
 			lightOcclusionRTDesc.depthStencilSurface.face = 0;
 			lightOcclusionRTDesc.depthStencilSurface.numFaces = 1;
 			lightOcclusionRTDesc.depthStencilSurface.mipLevel = 0;
@@ -1034,8 +1034,8 @@ namespace bs { namespace ct
 			SPtr<PooledRenderTexture> depthTex = resPool.get(depthDesc);
 
 			RENDER_TEXTURE_DESC rtDesc;
-			rtDesc.colorSurfaces[0].texture = volumeIndices->texture;
-			rtDesc.depthStencilSurface.texture = depthTex->texture;
+			rtDesc.colorSurfaces[0].pTexture = volumeIndices->texture;
+			rtDesc.depthStencilSurface.pTexture = depthTex->texture;
 
 			SPtr<RenderTexture> rt = RenderTexture::create(rtDesc);
 
@@ -1158,8 +1158,8 @@ namespace bs { namespace ct
 				POOLED_RENDER_TEXTURE_DESC::create2D(PF_RGBA16F, width, height, TU_RENDERTARGET, numSamples, false));
 
 			RENDER_TEXTURE_DESC rtDesc;
-			rtDesc.colorSurfaces[0].texture = iblRadianceTex->texture;
-			rtDesc.depthStencilSurface.texture = sceneDepthNode->depthTex->texture;
+			rtDesc.colorSurfaces[0].pTexture = iblRadianceTex->texture;
+			rtDesc.depthStencilSurface.pTexture = sceneDepthNode->depthTex->texture;
 
 			SPtr<GpuParamBlockBuffer> perViewBuffer = inputs.view.getPerViewBuffer();
 
@@ -1430,12 +1430,12 @@ namespace bs { namespace ct
 		if (rebuildRT)
 		{
 			RENDER_TEXTURE_DESC rtDesc;
-			rtDesc.colorSurfaces[0].texture = sceneColorNode->sceneColorTex->texture;
+			rtDesc.colorSurfaces[0].pTexture = sceneColorNode->sceneColorTex->texture;
 			rtDesc.colorSurfaces[0].face = 0;
 			rtDesc.colorSurfaces[0].numFaces = 1;
 			rtDesc.colorSurfaces[0].mipLevel = 0;
 
-			rtDesc.depthStencilSurface.texture = sceneDepthNode->depthTex->texture;
+			rtDesc.depthStencilSurface.pTexture = sceneDepthNode->depthTex->texture;
 			rtDesc.depthStencilSurface.face = 0;
 			rtDesc.depthStencilSurface.numFaces = 1;
 			rtDesc.depthStencilSurface.mipLevel = 0;
@@ -2449,7 +2449,7 @@ namespace bs { namespace ct
 
 		// Generate first mip
 		RENDER_TEXTURE_DESC rtDesc;
-		rtDesc.colorSurfaces[0].texture = output->texture;
+		rtDesc.colorSurfaces[0].pTexture = output->texture;
 		rtDesc.colorSurfaces[0].mipLevel = 0;
 
 		SPtr<RenderTexture> rt = RenderTexture::create(rtDesc);
@@ -2759,8 +2759,8 @@ namespace bs { namespace ct
 			height, TU_RENDERTARGET));
 
 		RENDER_TEXTURE_DESC traceRtDesc;
-		traceRtDesc.colorSurfaces[0].texture = traceOutput->texture;
-		traceRtDesc.depthStencilSurface.texture = resolvedSceneDepthNode->output->texture;
+		traceRtDesc.colorSurfaces[0].pTexture = traceOutput->texture;
+		traceRtDesc.depthStencilSurface.pTexture = resolvedSceneDepthNode->output->texture;
 
 		SPtr<RenderTexture> traceRt = RenderTexture::create(traceRtDesc);
 

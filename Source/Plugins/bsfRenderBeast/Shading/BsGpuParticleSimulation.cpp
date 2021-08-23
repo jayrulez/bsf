@@ -290,20 +290,20 @@ namespace bs { namespace ct
 		mStaticTextures.sizeAndRotationTex = Texture::createPtr(sizeAndRotationDesc);
 
 		RENDER_TEXTURE_DESC staticRtDesc;
-		staticRtDesc.colorSurfaces[0].texture = mStaticTextures.sizeAndRotationTex;
+		staticRtDesc.colorSurfaces[0].pTexture = mStaticTextures.sizeAndRotationTex;
 
 		for (UINT32 i = 0; i < 2; i++)
 		{
 			RENDER_TEXTURE_DESC simulationRTDesc;
-			simulationRTDesc.colorSurfaces[0].texture = mStateTextures[i].positionAndTimeTex;
-			simulationRTDesc.colorSurfaces[1].texture = mStateTextures[i].velocityTex;
+			simulationRTDesc.colorSurfaces[0].pTexture = mStateTextures[i].positionAndTimeTex;
+			simulationRTDesc.colorSurfaces[1].pTexture = mStateTextures[i].velocityTex;
 
 			mSimulateRT[i] = RenderTexture::create(simulationRTDesc);
 
 			RENDER_TEXTURE_DESC injectRTDesc;
-			injectRTDesc.colorSurfaces[0].texture = mStateTextures[i].positionAndTimeTex;
-			injectRTDesc.colorSurfaces[1].texture = mStateTextures[i].velocityTex;
-			injectRTDesc.colorSurfaces[2].texture = mStaticTextures.sizeAndRotationTex;
+			injectRTDesc.colorSurfaces[0].pTexture = mStateTextures[i].positionAndTimeTex;
+			injectRTDesc.colorSurfaces[1].pTexture = mStateTextures[i].velocityTex;
+			injectRTDesc.colorSurfaces[2].pTexture = mStaticTextures.sizeAndRotationTex;
 			mInjectRT[i] = RenderTexture::create(injectRTDesc);
 		}
 
@@ -1344,7 +1344,7 @@ namespace bs { namespace ct
 		mCurveTexture = Texture::createPtr(textureDesc);
 
 		RENDER_TEXTURE_DESC rtDesc;
-		rtDesc.colorSurfaces[0].texture = mCurveTexture;
+		rtDesc.colorSurfaces[0].pTexture = mCurveTexture;
 
 		mRT = RenderTexture::create(rtDesc);
 

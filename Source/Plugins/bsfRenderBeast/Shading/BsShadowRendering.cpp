@@ -417,7 +417,7 @@ namespace bs { namespace ct
 			TU_DEPTHSTENCIL, 0, false, numCascades));
 
 		RENDER_TEXTURE_DESC rtDesc;
-		rtDesc.depthStencilSurface.texture = mShadowMap->texture;
+		rtDesc.depthStencilSurface.pTexture = mShadowMap->texture;
 		rtDesc.depthStencilSurface.numFaces = 1;
 
 		for (UINT32 i = 0; i < mNumCascades; ++i)
@@ -1603,7 +1603,7 @@ namespace bs { namespace ct
 				gShadowParamsDef.gMatViewProj.set(shadowParamsBuffer, shadowViewProj);
 
 				RENDER_TEXTURE_DESC rtDesc;
-				rtDesc.depthStencilSurface.texture = cubemap.getTexture();
+				rtDesc.depthStencilSurface.pTexture = cubemap.getTexture();
 				rtDesc.depthStencilSurface.face = i;
 				rtDesc.depthStencilSurface.numFaces = 1;
 

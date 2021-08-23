@@ -50,7 +50,7 @@ namespace bs { namespace ct
 
 			if ((desc.flag & TU_RENDERTARGET) != 0)
 			{
-				rtDesc.colorSurfaces[0].texture = newTexture->texture;
+				rtDesc.colorSurfaces[0].pTexture = newTexture->texture;
 				rtDesc.colorSurfaces[0].face = 0;
 				rtDesc.colorSurfaces[0].numFaces = newTexture->texture->getProperties().getNumFaces();
 				rtDesc.colorSurfaces[0].mipLevel = 0;
@@ -58,7 +58,7 @@ namespace bs { namespace ct
 
 			if ((desc.flag & TU_DEPTHSTENCIL) != 0)
 			{
-				rtDesc.depthStencilSurface.texture = newTexture->texture;
+				rtDesc.depthStencilSurface.pTexture = newTexture->texture;
 				rtDesc.depthStencilSurface.face = 0;
 				rtDesc.depthStencilSurface.numFaces = newTexture->texture->getProperties().getNumFaces();
 				rtDesc.depthStencilSurface.mipLevel = 0;

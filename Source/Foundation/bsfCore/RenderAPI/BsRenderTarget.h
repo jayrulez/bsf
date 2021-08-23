@@ -19,7 +19,7 @@ namespace bs
 	{
 		RENDER_SURFACE_DESC() { }
 
-		TextureResourceHandle texture;
+		TextureResourceHandle hTexture;
 
 		/** First face of the texture to bind (array index in texture arrays, or Z slice in 3D textures). */
 		UINT32 face = 0;
@@ -45,7 +45,7 @@ namespace bs
 	{
 		RENDER_SURFACE_DESC() { }
 
-		SPtr<Texture> texture;
+		SPtr<Texture> pTexture;
 
 		/** First face of the texture to bind (array index in texture arrays, or Z slice in 3D textures). */
 		UINT32 face = 0;

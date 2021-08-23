@@ -842,7 +842,7 @@ namespace bs { namespace ct
 
 			// Set up face render target
 			RENDER_TEXTURE_DESC cubeFaceRTDesc;
-			cubeFaceRTDesc.colorSurfaces[0].texture = cubemap;
+			cubeFaceRTDesc.colorSurfaces[0].pTexture = cubemap;
 			cubeFaceRTDesc.colorSurfaces[0].face = i;
 			cubeFaceRTDesc.colorSurfaces[0].numFaces = 1;
 			

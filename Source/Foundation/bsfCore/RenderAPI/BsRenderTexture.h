@@ -146,14 +146,14 @@ namespace bs
 		 *
 		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
 		 */
-		SPtr<Texture> getColorTexture(UINT32 idx) const { return mDesc.colorSurfaces[idx].texture; }
+		SPtr<Texture> getColorTexture(UINT32 idx) const { return mDesc.colorSurfaces[idx].pTexture; }
 
 		/**
 		 * Returns a depth/stencil surface texture you may bind as an input to an GPU program.
 		 *
 		 * @note	Be aware that you cannot bind a render texture for reading and writing at the same time.
 		 */
-		SPtr<Texture> getDepthStencilTexture() const { return mDesc.depthStencilSurface.texture; }
+		SPtr<Texture> getDepthStencilTexture() const { return mDesc.depthStencilSurface.pTexture; }
 
 		/**	Returns properties that describe the render texture. */
 		const RenderTextureProperties& getProperties() const;
