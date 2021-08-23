@@ -25,10 +25,10 @@ namespace bs
 		 * Triangle meshes are not supported as triggers, nor are they supported for colliders that are parts of a
 		 * non-kinematic rigidbody.
 		 */
-		void setMesh(const HPhysicsMesh& mesh) { mMesh = mesh; onMeshChanged(); markListenerResourcesDirty(); }
+		void setMesh(const PhysicsMeshResourceHandle& mesh) { mMesh = mesh; onMeshChanged(); markListenerResourcesDirty(); }
 
 		/** @copydoc setMesh() */
-		HPhysicsMesh getMesh() const { return mMesh; }
+		PhysicsMeshResourceHandle getMesh() const { return mMesh; }
 
 		/**
 		 * Creates a new mesh collider.
@@ -55,7 +55,7 @@ namespace bs
 		 */
 		virtual void onMeshChanged() { }
 
-		HPhysicsMesh mMesh;
+		PhysicsMeshResourceHandle mMesh;
 	};
 
 	/** @} */

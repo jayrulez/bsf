@@ -195,7 +195,7 @@ namespace bs
 		gCoreThread().submit(true);
 	}
 
-	HSpriteTexture BuiltinResources::getSkinTexture(const String& name) const
+	SpriteTextureResourceHandle BuiltinResources::getSkinTexture(const String& name) const
 	{
 		Path texturePath = mEngineSkinSpritesFolder;
 		texturePath.append(u8"sprite_" + name + u8".asset");

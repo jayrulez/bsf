@@ -37,11 +37,11 @@ namespace bs
 		 * modify their states individually.
 		 */
 		BS_SCRIPT_EXPORT(n:DefaultClip,pr:setter)
-		void setDefaultClip(const HAnimationClip& clip);
+		void setDefaultClip(const AnimationClipResourceHandle& clip);
 
 		/** @copydoc setDefaultClip */
 		BS_SCRIPT_EXPORT(n:DefaultClip,pr:getter)
-		HAnimationClip getDefaultClip() const { return mDefaultClip; }
+		AnimationClipResourceHandle getDefaultClip() const { return mDefaultClip; }
 
 		/** @copydoc Animation::setWrapMode */
 		BS_SCRIPT_EXPORT(n:WrapMode,pr:setter)
@@ -61,11 +61,11 @@ namespace bs
 
 		/** @copydoc Animation::play */
 		BS_SCRIPT_EXPORT(n:Play)
-		void play(const HAnimationClip& clip);
+		void play(const AnimationClipResourceHandle& clip);
 
 		/** @copydoc Animation::blendAdditive */
 		BS_SCRIPT_EXPORT(n:BlendAdditive)
-		void blendAdditive(const HAnimationClip& clip, float weight, float fadeLength = 0.0f, UINT32 layer = 0);
+		void blendAdditive(const AnimationClipResourceHandle& clip, float weight, float fadeLength = 0.0f, UINT32 layer = 0);
 
 		/** @copydoc Animation::blend1D */
 		BS_SCRIPT_EXPORT(n:Blend1D)
@@ -77,11 +77,11 @@ namespace bs
 
 		/** @copydoc Animation::crossFade */
 		BS_SCRIPT_EXPORT(n:CrossFade)
-		void crossFade(const HAnimationClip& clip, float fadeLength);
+		void crossFade(const AnimationClipResourceHandle& clip, float fadeLength);
 
 		/** @copydoc Animation::sample */
 		BS_SCRIPT_EXPORT(n:Sample)
-		void sample(const HAnimationClip& clip, float time);
+		void sample(const AnimationClipResourceHandle& clip, float time);
 
 		/** @copydoc Animation::stop */
 		BS_SCRIPT_EXPORT(n:Stop)
@@ -97,11 +97,11 @@ namespace bs
 
 		/** @copydoc Animation::getState */
 		BS_SCRIPT_EXPORT(n:GetState)
-		bool getState(const HAnimationClip& clip, AnimationClipState& state);
+		bool getState(const AnimationClipResourceHandle& clip, AnimationClipState& state);
 
 		/** @copydoc Animation::setState */
 		BS_SCRIPT_EXPORT(n:SetState)
-		void setState(const HAnimationClip& clip, AnimationClipState state);
+		void setState(const AnimationClipResourceHandle& clip, AnimationClipState state);
 
 		/**
 		 * Changes a weight of a single morph channel, determining how much of it to apply on top of the base mesh.
@@ -146,10 +146,10 @@ namespace bs
 
 		/** @copydoc Animation::getClip */
 		BS_SCRIPT_EXPORT(in:true)
-		HAnimationClip getClip(UINT32 idx) const;
+		AnimationClipResourceHandle getClip(UINT32 idx) const;
 
 		/** Triggered whenever an animation event is reached. */
-		Event<void(const HAnimationClip&, const String&)> onEventTriggered;
+		Event<void(const AnimationClipResourceHandle&, const String&)> onEventTriggered;
 
 		/** @name Internal
 		 *  @{
@@ -209,7 +209,7 @@ namespace bs
 
 		/** Triggered when the list of properties animated via generic animation curves needs to be recreated (script only). */
 		BS_SCRIPT_EXPORT(n:RebuildFloatProperties)
-		std::function<void(const HAnimationClip&)> _scriptRebuildFloatProperties;
+		std::function<void(const AnimationClipResourceHandle&)> _scriptRebuildFloatProperties;
 
 		/** Triggered when generic animation curves values need be applied to the properties they effect (script only). */
 		BS_SCRIPT_EXPORT(n:_UpdateFloatProperties)
@@ -217,7 +217,7 @@ namespace bs
 
 		/** Triggers a callback in script code when animation event is triggered (script only). */
 		BS_SCRIPT_EXPORT(n:EventTriggered)
-		std::function<void(const HAnimationClip&, const String&)> _scriptOnEventTriggered;
+		std::function<void(const AnimationClipResourceHandle&, const String&)> _scriptOnEventTriggered;
 
 		/** @} */
 
@@ -254,7 +254,7 @@ namespace bs
 		void destroyInternal();
 
 		/** Callback triggered whenever an animation event is triggered. */
-		void eventTriggered(const HAnimationClip& clip, const String& name);
+		void eventTriggered(const AnimationClipResourceHandle& clip, const String& name);
 
 		/**
 		 * Finds any scene objects that are mapped to bone transforms. Such object's transforms will be affected by
@@ -280,8 +280,8 @@ namespace bs
 		SPtr<Animation> mInternal;
 		HRenderable mAnimatedRenderable;
 
-		HAnimationClip mDefaultClip;
-		HAnimationClip mPrimaryPlayingClip;
+		AnimationClipResourceHandle mDefaultClip;
+		AnimationClipResourceHandle mPrimaryPlayingClip;
 		AnimWrapMode mWrapMode = AnimWrapMode::Loop;
 		float mSpeed = 1.0f;
 		bool mEnableCull = true;

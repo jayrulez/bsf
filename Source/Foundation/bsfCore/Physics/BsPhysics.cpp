@@ -86,7 +86,7 @@ namespace bs
 		return rawToComponent(_capsuleOverlap(capsule, rotation, layer));
 	}
 
-	Vector<HCollider> PhysicsScene::convexOverlap(const HPhysicsMesh& mesh, const Vector3& position,
+	Vector<HCollider> PhysicsScene::convexOverlap(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 		const Quaternion& rotation, UINT64 layer) const
 	{
 		return rawToComponent(_convexOverlap(mesh, position, rotation, layer));

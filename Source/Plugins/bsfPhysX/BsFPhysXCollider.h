@@ -54,7 +54,7 @@ namespace bs
 		float getRestOffset() const override;
 
 		/** @copydoc FCollider::setMaterial */
-		void setMaterial(const HPhysicsMaterial& material) override;
+		void setMaterial(const PhysicsMaterialResourceHandle& material) override;
 
 		/** @copydoc FCollider::getLayer */
 		UINT64 getLayer() const override;

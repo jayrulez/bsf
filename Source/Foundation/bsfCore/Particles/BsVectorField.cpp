@@ -95,7 +95,7 @@ namespace bs
 	/************************************************************************/
 	/* 								STATICS	                      			*/
 	/************************************************************************/
-	HVectorField VectorField::create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
+	VectorFieldResourceHandle VectorField::create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
 	{
 		SPtr<VectorField> vectorFieldPtr = _createPtr(desc, values);
 

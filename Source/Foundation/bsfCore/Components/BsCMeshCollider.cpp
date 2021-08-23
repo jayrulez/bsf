@@ -20,7 +20,7 @@ namespace bs
 		setName("MeshCollider");
 	}
 
-	void CMeshCollider::setMesh(const HPhysicsMesh& mesh)
+	void CMeshCollider::setMesh(const PhysicsMeshResourceHandle& mesh)
 	{
 		if (mMesh == mesh)
 			return;

@@ -32,7 +32,7 @@ namespace bs
 		 * @param[in]	position	Position in world space to play the clip at. Only relevant if the clip is 3D.
 		 * @param[in]	volume		Volume to play the clip at.
 		 */
-		void play(const HAudioClip& clip, const Vector3& position = Vector3::ZERO, float volume = 1.0f);
+		void play(const AudioClipResourceHandle& clip, const Vector3& position = Vector3::ZERO, float volume = 1.0f);
 
 		/** Determines global audio volume. In range [0, 1]. */
 		BS_SCRIPT_EXPORT(n:Volume,pr:setter)

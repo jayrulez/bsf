@@ -34,10 +34,10 @@ namespace bs
 		virtual ~AudioSource() = default;
 
 		/** Audio clip to play. */
-		virtual void setClip(const HAudioClip& clip);
+		virtual void setClip(const AudioClipResourceHandle& clip);
 
 		/** @copydoc setClip() */
-		HAudioClip getClip() const { return mAudioClip; }
+		AudioClipResourceHandle getClip() const { return mAudioClip; }
 
 		/**
 		 * Velocity of the source. Determines pitch in relation to AudioListener's position. Only relevant for spatial
@@ -129,7 +129,7 @@ namespace bs
 		/** Triggered by the resources system whenever the attached audio clip changed (e.g. was reimported.) */
 		virtual void onClipChanged() { }
 
-		HAudioClip mAudioClip;
+		AudioClipResourceHandle mAudioClip;
 		Vector3 mVelocity = BsZero;
 		float mVolume = 1.0f;
 		float mPitch = 1.0f;

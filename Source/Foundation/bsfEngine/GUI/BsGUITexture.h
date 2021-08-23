@@ -31,7 +31,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture, TextureScaleMode scale, bool transparent,
+		static GUITexture* create(const SpriteTextureResourceHandle& texture, TextureScaleMode scale, bool transparent,
 			const GUIOptions& options, const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -44,7 +44,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture, TextureScaleMode scale, bool transparent,
+		static GUITexture* create(const SpriteTextureResourceHandle& texture, TextureScaleMode scale, bool transparent,
 			const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -58,7 +58,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture, TextureScaleMode scale,
+		static GUITexture* create(const SpriteTextureResourceHandle& texture, TextureScaleMode scale,
 			const GUIOptions& options, const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -70,7 +70,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture, TextureScaleMode scale,
+		static GUITexture* create(const SpriteTextureResourceHandle& texture, TextureScaleMode scale,
 			const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -83,7 +83,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture,
+		static GUITexture* create(const SpriteTextureResourceHandle& texture,
 			const GUIOptions& options, const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -94,7 +94,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUITexture* create(const HSpriteTexture& texture, const String& styleName = StringUtil::BLANK);
+		static GUITexture* create(const SpriteTextureResourceHandle& texture, const String& styleName = StringUtil::BLANK);
 
 		/**
 		 * Creates a new GUI texture element. Uses the "normal" texture from the active GUI element style.
@@ -140,7 +140,7 @@ namespace bs
 		/**
 		 * Changes the active texture. If the provided texture is null then the texture specified by the style will be used.
 		 */
-		void setTexture(const HSpriteTexture& texture);
+		void setTexture(const SpriteTextureResourceHandle& texture);
 
 	public: // ***** INTERNAL ******
 		/** @name Internal
@@ -155,7 +155,7 @@ namespace bs
 
 		/** @} */
 	protected:
-		GUITexture(const String& styleName, const HSpriteTexture& texture, TextureScaleMode scale,
+		GUITexture(const String& styleName, const SpriteTextureResourceHandle& texture, TextureScaleMode scale,
 			bool transparent, const GUIDimensions& dimensions);
 		virtual ~GUITexture();
 
@@ -178,7 +178,7 @@ namespace bs
 
 		ImageSprite* mImageSprite;
 		Vector2I mImageSpriteOffset;
-		HSpriteTexture mActiveTexture;
+		SpriteTextureResourceHandle mActiveTexture;
 		UINT32 mActiveTextureWidth = 0;
 		UINT32 mActiveTextureHeight = 0;
 		IMAGE_SPRITE_DESC mDesc;

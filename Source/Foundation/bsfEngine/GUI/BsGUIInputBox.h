@@ -219,7 +219,7 @@ namespace bs
 		TEXT_SPRITE_DESC getTextDesc() const;
 
 		/**	Returns currently active input box texture, depending on active state. */
-		const HSpriteTexture& getActiveTexture() const;
+		const SpriteTextureResourceHandle& getActiveTexture() const;
 		
 		/**	Returns currently active input box text color, depending on active state. */
 		Color getActiveTextColor() const;

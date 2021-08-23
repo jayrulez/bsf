@@ -64,7 +64,7 @@ namespace bs
 		void update() override;
 
 		/** @copydoc Physics::createMaterial */
-		SPtr<PhysicsMaterial> createMaterial(float staticFriction, float dynamicFriction, float restitution) override;
+		SPtr<PhysicsMaterialResource> createMaterial(float staticFriction, float dynamicFriction, float restitution) override;
 
 		/** @copydoc Physics::createMesh */
 		SPtr<PhysicsMesh> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) override;
@@ -192,7 +192,7 @@ namespace bs
 			PhysicsQueryHit& hit, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const override;
 
 		/** @copydoc PhysicsScene::convexCast */
-		bool convexCast(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		bool convexCast(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			const Vector3& unitDir, PhysicsQueryHit& hit, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const override;
 
 		/** @copydoc PhysicsScene::rayCastAll(const Vector3&, const Vector3&, UINT64, float) const */
@@ -212,7 +212,7 @@ namespace bs
 			const Vector3& unitDir, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const override;
 
 		/** @copydoc PhysicsScene::convexCastAll */
-		Vector<PhysicsQueryHit> convexCastAll(const HPhysicsMesh& mesh, const Vector3& position,
+		Vector<PhysicsQueryHit> convexCastAll(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 			const Quaternion& rotation, const Vector3& unitDir, UINT64 layer = BS_ALL_LAYERS,
 			float max = FLT_MAX) const override;
 
@@ -233,7 +233,7 @@ namespace bs
 			UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const override;
 
 		/** @copydoc PhysicsScene::convexCastAny */
-		bool convexCastAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		bool convexCastAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			const Vector3& unitDir, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const override;
 
 		/** @copydoc PhysicsScene::boxOverlapAny */
@@ -247,7 +247,7 @@ namespace bs
 			UINT64 layer = BS_ALL_LAYERS) const override;
 
 		/** @copydoc PhysicsScene::convexOverlapAny */
-		bool convexOverlapAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		bool convexOverlapAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			UINT64 layer = BS_ALL_LAYERS) const override;
 
 		/** @copydoc PhysicsScene::getGravity */
@@ -286,7 +286,7 @@ namespace bs
 			UINT64 layer = BS_ALL_LAYERS) const override;
 
 		/** @copydoc PhysicsScene::_convexOverlap */
-		Vector<Collider*> _convexOverlap(const HPhysicsMesh& mesh, const Vector3& position,
+		Vector<Collider*> _convexOverlap(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 			const Quaternion& rotation, UINT64 layer = BS_ALL_LAYERS) const override;
 
 	private:

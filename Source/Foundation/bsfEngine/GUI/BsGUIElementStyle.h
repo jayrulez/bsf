@@ -24,7 +24,7 @@ namespace bs
 	/**	Specific texture and text color used in a particular GUI element style. */
 	struct BS_EXPORT BS_SCRIPT_EXPORT(m:GUI,pl:true) GUIElementStateStyle
 	{
-		BS_NORREF HSpriteTexture texture;
+		BS_NORREF SpriteTextureResourceHandle texture;
 		Color textColor;
 	};
 

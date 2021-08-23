@@ -33,19 +33,19 @@ namespace bs
 	{
 		GUIContentImages() = default;
 
-		GUIContentImages(const HSpriteTexture& image)
+		GUIContentImages(const SpriteTextureResourceHandle& image)
 			:normal(image), hover(image), active(image), focused(image),
 			normalOn(image), hoverOn(image), activeOn(image), focusedOn(image)
 		{ }
 
-		BS_NORREF HSpriteTexture normal;
-		BS_NORREF HSpriteTexture hover;
-		BS_NORREF HSpriteTexture active;
-		BS_NORREF HSpriteTexture focused;
-		BS_NORREF HSpriteTexture normalOn;
-		BS_NORREF HSpriteTexture hoverOn;
-		BS_NORREF HSpriteTexture activeOn;
-		BS_NORREF HSpriteTexture focusedOn;
+		BS_NORREF SpriteTextureResourceHandle normal;
+		BS_NORREF SpriteTextureResourceHandle hover;
+		BS_NORREF SpriteTextureResourceHandle active;
+		BS_NORREF SpriteTextureResourceHandle focused;
+		BS_NORREF SpriteTextureResourceHandle normalOn;
+		BS_NORREF SpriteTextureResourceHandle hoverOn;
+		BS_NORREF SpriteTextureResourceHandle activeOn;
+		BS_NORREF SpriteTextureResourceHandle focusedOn;
 	};
 
 	/**
@@ -89,7 +89,7 @@ namespace bs
 		{ }
 
 		/**	Returns image content (if any). */
-		const HSpriteTexture& getImage(GUIElementState state = GUIElementState::Normal) const;
+		const SpriteTextureResourceHandle& getImage(GUIElementState state = GUIElementState::Normal) const;
 
 		/**	Determines the spacing between text and image content in pixels. */
 		static const UINT32 IMAGE_TEXT_SPACING;

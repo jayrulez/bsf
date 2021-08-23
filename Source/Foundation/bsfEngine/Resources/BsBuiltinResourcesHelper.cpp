@@ -882,7 +882,7 @@ namespace bs
 	{ }
 
 
-	HSpriteTexture BuiltinResourceGUIElementStyleLoader::loadTexture(const String& name) const
+	SpriteTextureResourceHandle BuiltinResourceGUIElementStyleLoader::loadTexture(const String& name) const
 	{
 		Path texturePath = mTexturePath;
 		texturePath.append(u8"sprite_" + name + u8".asset");

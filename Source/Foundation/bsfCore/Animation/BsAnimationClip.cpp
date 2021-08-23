@@ -101,13 +101,13 @@ namespace bs
 		calculateLength();
 	}
 
-	HAnimationClip AnimationClip::create(bool isAdditive)
+	AnimationClipResourceHandle AnimationClip::create(bool isAdditive)
 	{
 		return static_resource_cast<AnimationClip>(gResources()._createResourceHandle(
 			_createPtr(bs_shared_ptr_new<AnimationCurves>(), isAdditive)));
 	}
 
-	HAnimationClip AnimationClip::create(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
+	AnimationClipResourceHandle AnimationClip::create(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
 		const SPtr<RootMotion>& rootMotion)
 	{
 		return static_resource_cast<AnimationClip>(gResources()._createResourceHandle(

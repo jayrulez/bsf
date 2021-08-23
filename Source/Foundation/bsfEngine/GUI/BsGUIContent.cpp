@@ -6,7 +6,7 @@ namespace bs
 {
 	const UINT32 GUIContent::IMAGE_TEXT_SPACING = 3;
 
-	const HSpriteTexture& GUIContent::getImage(GUIElementState state) const
+	const SpriteTextureResourceHandle& GUIContent::getImage(GUIElementState state) const
 	{
 		switch (state)
 		{

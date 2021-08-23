@@ -84,12 +84,12 @@ namespace bs
 		:TSpriteTexture(uvOffset, uvScale, texture)
 	{ }
 
-	const HSpriteTexture& SpriteTexture::dummy()
+	const SpriteTextureResourceHandle& SpriteTexture::dummy()
 	{
 		return BuiltinResources::instance().getDummySpriteTexture();
 	}
 
-	bool SpriteTexture::checkIsLoaded(const HSpriteTexture& tex)
+	bool SpriteTexture::checkIsLoaded(const SpriteTextureResourceHandle& tex)
 	{
 		return tex != nullptr && tex.isLoaded(false) && tex->getTexture() != nullptr && tex->getTexture().isLoaded(false);
 	}
@@ -172,14 +172,14 @@ namespace bs
 		return std::static_pointer_cast<ct::SpriteTexture>(mCoreSpecific);
 	}
 
-	HSpriteTexture SpriteTexture::create(const TextureResourceHandle& texture)
+	SpriteTextureResourceHandle SpriteTexture::create(const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = _createPtr(texture);
 
 		return static_resource_cast<SpriteTexture>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	HSpriteTexture SpriteTexture::create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
+	SpriteTextureResourceHandle SpriteTexture::create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 	{
 		SPtr<SpriteTexture> texturePtr = _createPtr(uvOffset, uvScale, texture);
 

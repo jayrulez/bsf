@@ -132,7 +132,7 @@ namespace bs
 		virtual FontResourceHandle loadFont(const String& name) const = 0;
 
 		/** Loads a sprite texture with the specified name. */
-		virtual HSpriteTexture loadTexture(const String& name) const = 0;
+		virtual SpriteTextureResourceHandle loadTexture(const String& name) const = 0;
 	};
 
 	/** Handles loading of GUIELementStyle resources by retrieving them from the builtin resources folder. */
@@ -145,7 +145,7 @@ namespace bs
 		FontResourceHandle loadFont(const String& name) const override;
 
 		/** Loads a sprite texture with the specified name. */
-		HSpriteTexture loadTexture(const String& name) const override;
+		SpriteTextureResourceHandle loadTexture(const String& name) const override;
 
 	private:
 		Path mFontPath;

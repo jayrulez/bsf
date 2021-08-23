@@ -447,7 +447,7 @@ namespace bs
 	{
 	public:
 		TextureResourceHandle texture;
-		HSpriteTexture spriteTexture;
+		SpriteTextureResourceHandle spriteTexture;
 		bool isLoadStore;
 		TextureSurface surface;
 
@@ -694,14 +694,14 @@ namespace bs
 						const TextureSurface& surface = TextureSurface::COMPLETE);
 
 		/**
-		 * Equivalent to getSpriteTexture(const String&, HSpriteTexture&) except it uses the internal parameter reference
+		 * Equivalent to getSpriteTexture(const String&, SpriteTextureResourceHandle&) except it uses the internal parameter reference
 		 * directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid and belongs to this
 		 * object.
 		 */
 		void getSpriteTexture(const ParamData& param, SpriteTextureType& value) const;
 
 		/**
-		 * Equivalent to setSpriteTexture(const String&, const HSpriteTexture&) except it uses the internal parameter
+		 * Equivalent to setSpriteTexture(const String&, const SpriteTextureResourceHandle&) except it uses the internal parameter
 		 * reference directly, avoiding the name lookup. Caller must guarantee the parameter reference is valid and belongs
 		 * to this object.
 		 */

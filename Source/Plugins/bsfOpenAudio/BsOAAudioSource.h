@@ -22,7 +22,7 @@ namespace bs
 		void setTransform(const Transform& transform) override;
 
 		/** @copydoc AudioSource::setClip */
-		void setClip(const HAudioClip& clip) override;
+		void setClip(const AudioClipResourceHandle& clip) override;
 
 		/** @copydoc AudioSource::setVelocity */
 		void setVelocity(const Vector3& velocity) override;

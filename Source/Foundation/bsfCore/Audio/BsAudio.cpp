@@ -5,7 +5,7 @@
 
 namespace bs
 {
-	void Audio::play(const HAudioClip& clip, const Vector3& position, float volume)
+	void Audio::play(const AudioClipResourceHandle& clip, const Vector3& position, float volume)
 	{
 		Transform transform;
 		transform.setPosition(position);

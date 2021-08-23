@@ -79,14 +79,14 @@ namespace bs
 			const ShaderResourceHandle& shader = material->getShader();
 			if(shader->hasTextureParam("gTexture"))
 			{
-				const HSpriteTexture& spriteTex = material->getSpriteTexture("gTexture");
+				const SpriteTextureResourceHandle& spriteTex = material->getSpriteTexture("gTexture");
 				if (spriteTex.isLoaded(true))
 					texture = spriteTex.get();
 			}
 
 			if(shader->hasTextureParam("gAlbedoTex"))
 			{
-				const HSpriteTexture& spriteTex = material->getSpriteTexture("gAlbedoTex");
+				const SpriteTextureResourceHandle& spriteTex = material->getSpriteTexture("gAlbedoTex");
 				if (spriteTex.isLoaded(true))
 					texture = spriteTex.get();
 			}

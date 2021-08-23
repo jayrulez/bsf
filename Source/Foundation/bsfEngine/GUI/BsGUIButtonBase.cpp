@@ -68,7 +68,7 @@ namespace bs
 		mImageDesc.width = mLayoutData.area.width;
 		mImageDesc.height = mLayoutData.area.height;
 
-		const HSpriteTexture& activeTex = getActiveTexture();
+		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
 		if (SpriteTexture::checkIsLoaded(activeTex))
 			mImageDesc.texture = activeTex;
 		else
@@ -87,7 +87,7 @@ namespace bs
 		{
 			Rect2I contentBounds = getCachedContentBounds();
 
-			HSpriteTexture image = mContent.getImage(mActiveState);
+			SpriteTextureResourceHandle image = mContent.getImage(mActiveState);
 			UINT32 contentWidth = image->getWidth();
 			UINT32 contentHeight = image->getHeight();
 
@@ -132,7 +132,7 @@ namespace bs
 		UINT32 imageWidth = 0;
 		UINT32 imageHeight = 0;
 
-		const HSpriteTexture& activeTex = getActiveTexture();
+		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
 		if(SpriteTexture::checkIsLoaded(activeTex))
 		{
 			imageWidth = activeTex->getWidth();
@@ -352,7 +352,7 @@ namespace bs
 
 	void GUIButtonBase::refreshContentSprite()
 	{
-		HSpriteTexture contentTex = mContent.getImage(mActiveState);
+		SpriteTextureResourceHandle contentTex = mContent.getImage(mActiveState);
 		if (SpriteTexture::checkIsLoaded(contentTex))
 		{
 			if (mContentImageSprite == nullptr)
@@ -408,7 +408,7 @@ namespace bs
 			_markContentAsDirty();
 	}
 
-	const HSpriteTexture& GUIButtonBase::getActiveTexture() const
+	const SpriteTextureResourceHandle& GUIButtonBase::getActiveTexture() const
 	{
 		switch(mActiveState)
 		{

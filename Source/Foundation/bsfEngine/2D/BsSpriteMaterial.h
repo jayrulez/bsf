@@ -65,7 +65,7 @@ namespace bs
 
 		UINT64 groupId = 0;
 		TextureResourceHandle texture;
-		HSpriteTexture spriteTexture;
+		SpriteTextureResourceHandle spriteTexture;
 		Color tint;
 		float animationStartTime = 0.0f;
 		SPtr<SpriteMaterialExtraInfo> additionalData;

@@ -9,7 +9,7 @@
 
 namespace bs
 {
-	AnimationClipInfo::AnimationClipInfo(const HAnimationClip& clip)
+	AnimationClipInfo::AnimationClipInfo(const AnimationClipResourceHandle& clip)
 		: clip(clip)
 	{ }
 
@@ -737,7 +737,7 @@ namespace bs
 		mDirty |= AnimDirtyStateFlag::Culling;
 	}
 
-	void Animation::play(const HAnimationClip& clip)
+	void Animation::play(const AnimationClipResourceHandle& clip)
 	{
 		AnimationClipInfo* clipInfo = addClip(clip, (UINT32)-1);
 		if(clipInfo != nullptr)
@@ -753,7 +753,7 @@ namespace bs
 		mDirty |= AnimDirtyStateFlag::Value;
 	}
 
-	void Animation::blendAdditive(const HAnimationClip& clip, float weight, float fadeLength, UINT32 layer)
+	void Animation::blendAdditive(const AnimationClipResourceHandle& clip, float weight, float fadeLength, UINT32 layer)
 	{
 		if(clip != nullptr && !clip->isAdditive())
 		{
@@ -761,7 +761,7 @@ namespace bs
 				"blendAdditive() called with a clip that doesn't contain additive animation. Ignoring.");
 
 			// Stop any clips on this layer, even if invalid
-			HAnimationClip nullClip;
+			AnimationClipResourceHandle nullClip;
 			addClip(nullClip, layer);
 
 			mSampleStep = AnimSampleStep::None;
@@ -939,7 +939,7 @@ namespace bs
 		mDirty |= AnimDirtyStateFlag::Value;
 	}
 
-	void Animation::crossFade(const HAnimationClip& clip, float fadeLength)
+	void Animation::crossFade(const AnimationClipResourceHandle& clip, float fadeLength)
 	{
 		bool isFading = fadeLength > 0.0f;
 		if(!isFading)
@@ -988,7 +988,7 @@ namespace bs
 		mDirty |= AnimDirtyStateFlag::Value;
 	}
 
-	void Animation::sample(const HAnimationClip& clip, float time)
+	void Animation::sample(const AnimationClipResourceHandle& clip, float time)
 	{
 		AnimationClipInfo* clipInfo = addClip(clip, (UINT32)-1);
 		if (clipInfo != nullptr)
@@ -1032,7 +1032,7 @@ namespace bs
 		mDirty |= AnimDirtyStateFlag::Layout;
 	}
 
-	AnimationClipInfo* Animation::addClip(const HAnimationClip& clip, UINT32 layer, bool stopExisting)
+	AnimationClipInfo* Animation::addClip(const AnimationClipResourceHandle& clip, UINT32 layer, bool stopExisting)
 	{
 		AnimationClipInfo* output = nullptr;
 		bool hasExisting = false;
@@ -1100,7 +1100,7 @@ namespace bs
 		{
 			if (entry.clip.isLoaded())
 			{
-				HAnimationClip clip = entry.clip;
+				AnimationClipResourceHandle clip = entry.clip;
 				if(!clip->hasRootMotion())
 				{
 					AnimationCurveMapping mapping;
@@ -1151,7 +1151,7 @@ namespace bs
 		return false;
 	}
 
-	bool Animation::getState(const HAnimationClip& clip, AnimationClipState& state)
+	bool Animation::getState(const AnimationClipResourceHandle& clip, AnimationClipState& state)
 	{
 		if (clip == nullptr)
 			return false;
@@ -1182,7 +1182,7 @@ namespace bs
 		return false;
 	}
 
-	void Animation::setState(const HAnimationClip& clip, AnimationClipState state)
+	void Animation::setState(const AnimationClipResourceHandle& clip, AnimationClipState state)
 	{
 		if (state.layer == 0)
 			state.layer = (UINT32)-1;
@@ -1206,10 +1206,10 @@ namespace bs
 		return (UINT32)mClipInfos.size();
 	}
 
-	HAnimationClip Animation::getClip(UINT32 idx) const
+	AnimationClipResourceHandle Animation::getClip(UINT32 idx) const
 	{
 		if (idx >= (UINT32)mClipInfos.size())
-			return HAnimationClip();
+			return AnimationClipResourceHandle();
 
 		return mClipInfos[idx].clip;
 	}
@@ -1307,7 +1307,7 @@ namespace bs
 			float scaledTimeDelta = timeDelta * clipInfo.state.speed;
 			clipInfo.state.time += scaledTimeDelta;
 
-			HAnimationClip clip = clipInfo.clip;
+			AnimationClipResourceHandle clip = clipInfo.clip;
 			if (clip.isLoaded())
 			{
 				if (clipInfo.curveVersion != clip->getVersion())

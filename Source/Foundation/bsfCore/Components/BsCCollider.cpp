@@ -57,7 +57,7 @@ namespace bs
 		}
 	}
 
-	void CCollider::setMaterial(const HPhysicsMaterial& material)
+	void CCollider::setMaterial(const PhysicsMaterialResourceHandle& material)
 	{
 		mMaterial = material;
 

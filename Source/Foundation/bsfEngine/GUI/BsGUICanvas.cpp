@@ -79,7 +79,7 @@ namespace bs
 		_markContentAsDirty();
 	}
 
-	void GUICanvas::drawTexture(const HSpriteTexture& texture, const Rect2I& area, TextureScaleMode scaleMode,
+	void GUICanvas::drawTexture(const SpriteTextureResourceHandle& texture, const Rect2I& area, TextureScaleMode scaleMode,
 		const Color& color, UINT8 depth)
 	{
 		mElements.push_back(CanvasElement());

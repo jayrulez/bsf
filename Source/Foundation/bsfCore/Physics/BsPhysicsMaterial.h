@@ -15,10 +15,10 @@ namespace bs
 	 * Material that controls how two physical objects interact with each other. Materials of both objects are used during
 	 * their interaction and their combined values are used.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Physics) PhysicsMaterial : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Physics) PhysicsMaterialResource : public Resource
 	{
 	public:
-		virtual ~PhysicsMaterial() = default;
+		virtual ~PhysicsMaterialResource() = default;
 
 		/**
 		  * Controls friction when two in-contact objects are not moving lateral to each other (for example how difficult
@@ -67,7 +67,7 @@ namespace bs
 		 *								[0, 1] range.
 		 */
 		BS_SCRIPT_EXPORT(ec:PhysicsMaterial)
-		static HPhysicsMaterial create(float staticFriction = 0.0f, float dynamicFriction = 0.0f, float restitution = 0.0f);
+		static PhysicsMaterialResourceHandle create(float staticFriction = 0.0f, float dynamicFriction = 0.0f, float restitution = 0.0f);
 
 		/** @name Internal
 		 *  @{
@@ -78,7 +78,7 @@ namespace bs
 		 *
 		 * For internal use. Requires manual initialization after creation.
 		 */
-		static SPtr<PhysicsMaterial> _createPtr(float staticFriction = 0.0f, float dynamicFriction = 0.0f,
+		static SPtr<PhysicsMaterialResource> _createPtr(float staticFriction = 0.0f, float dynamicFriction = 0.0f,
 			float restitution = 0.0f);
 
 		/** @} */
@@ -87,7 +87,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class PhysicsMaterialRTTI;
+		friend class PhysicsMaterialResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

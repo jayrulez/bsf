@@ -62,10 +62,10 @@ namespace bs
 		float getMass() const;
 
 		/** @copydoc FCollider::setMaterial */
-		void setMaterial(const HPhysicsMaterial& material);
+		void setMaterial(const PhysicsMaterialResourceHandle& material);
 
 		/** @copydoc FCollider::getMaterial */
-		HPhysicsMaterial getMaterial() const;
+		PhysicsMaterialResourceHandle getMaterial() const;
 
 		/** @copydoc FCollider::setContactOffset */
 		void setContactOffset(float value);

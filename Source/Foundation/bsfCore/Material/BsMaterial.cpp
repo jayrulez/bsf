@@ -942,7 +942,7 @@ namespace bs
 			{
 				TMaterialParamSpriteTexture<false> curParam = getParamSpriteTexture(param.first);
 
-				HSpriteTexture texture;
+				SpriteTextureResourceHandle texture;
 				params->getSpriteTexture(*paramData, texture);
 				curParam.set(texture);
 			}

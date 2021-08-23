@@ -207,17 +207,17 @@ namespace bs
 
 		/**	Creates a new sprite texture that references the entire area of the provided texture. */
 		BS_SCRIPT_EXPORT(ec:SpriteTexture)
-		static HSpriteTexture create(const TextureResourceHandle& texture);
+		static SpriteTextureResourceHandle create(const TextureResourceHandle& texture);
 
 		/**	Creates a new sprite texture that references a sub-area of the provided	texture. */
 		BS_SCRIPT_EXPORT(ec:SpriteTexture)
-		static HSpriteTexture create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
+		static SpriteTextureResourceHandle create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/**	Checks if the sprite texture and its internal texture have been loaded. */
-		static bool checkIsLoaded(const HSpriteTexture& tex);
+		static bool checkIsLoaded(const SpriteTextureResourceHandle& tex);
 
 		/**	Returns a dummy sprite texture. */
-		static const HSpriteTexture& dummy();
+		static const SpriteTextureResourceHandle& dummy();
 
 		/** @name Internal
 		 *  @{

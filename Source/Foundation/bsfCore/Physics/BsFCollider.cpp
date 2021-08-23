@@ -5,7 +5,7 @@
 
 namespace bs
 {
-	void FCollider::setMaterial(const HPhysicsMaterial& material)
+	void FCollider::setMaterial(const PhysicsMaterialResourceHandle& material)
 	{
 		mMaterial = material;
 	}

@@ -23,7 +23,7 @@ namespace bs
 		return mInternal->getMeshData();
 	}
 
-	HPhysicsMesh PhysicsMesh::create(const SPtr<MeshData>& meshData, PhysicsMeshType type)
+	PhysicsMeshResourceHandle PhysicsMesh::create(const SPtr<MeshData>& meshData, PhysicsMeshType type)
 	{
 		SPtr<PhysicsMesh> newMesh = _createPtr(meshData, type);
 

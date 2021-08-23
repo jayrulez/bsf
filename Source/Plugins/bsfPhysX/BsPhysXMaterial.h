@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/** PhysX implementation of a PhysicsMaterial. */
-	class PhysXMaterial : public PhysicsMaterial
+	class PhysXMaterial : public PhysicsMaterialResource
 	{
 	public:
 		PhysXMaterial(physx::PxPhysics* physx, float staFric, float dynFriction, float restitution);

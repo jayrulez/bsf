@@ -37,7 +37,7 @@ namespace bs
 		 * @param[in]	type		Type of the mesh. If convex the provided mesh geometry will be converted into a convex
 		 *							mesh (that might not be the same as the provided mesh data).
 		 */
-		static HPhysicsMesh create(const SPtr<MeshData>& meshData, PhysicsMeshType type = PhysicsMeshType::Convex);
+		static PhysicsMeshResourceHandle create(const SPtr<MeshData>& meshData, PhysicsMeshType type = PhysicsMeshType::Convex);
 
 		/** @name Internal
 		 *  @{

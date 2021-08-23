@@ -450,7 +450,7 @@ namespace bs
 	class PhysicsManager;
 	class Physics;
 	class FCollider;
-	class PhysicsMaterial;
+	class PhysicsMaterialResource;
 	class ShaderDefines;
 	class ShaderImportOptions;
 	class AudioClipImportOptions;
@@ -481,7 +481,7 @@ namespace bs
 	class ResourceMetaData;
 	class DropTarget;
 	class StringTableResource;
-	class PhysicsMaterial;
+	class PhysicsMaterialResource;
 	class PhysicsMesh;
 	class AudioClip;
 	// Scene
@@ -756,12 +756,12 @@ namespace bs
 	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
 	typedef ResourceHandle<PrefabResource> PrefabResourceHandle;
 	typedef ResourceHandle<StringTableResource> StringTableResourceHandle;
-	typedef ResourceHandle<PhysicsMaterial> HPhysicsMaterial;
-	typedef ResourceHandle<PhysicsMesh> HPhysicsMesh;
-	typedef ResourceHandle<AudioClip> HAudioClip;
-	typedef ResourceHandle<AnimationClip> HAnimationClip;
-	typedef ResourceHandle<SpriteTexture> HSpriteTexture;
-	typedef ResourceHandle<VectorField> HVectorField;
+	typedef ResourceHandle<PhysicsMaterialResource> PhysicsMaterialResourceHandle;
+	typedef ResourceHandle<PhysicsMesh> PhysicsMeshResourceHandle;
+	typedef ResourceHandle<AudioClip> AudioClipResourceHandle;
+	typedef ResourceHandle<AnimationClip> AnimationClipResourceHandle;
+	typedef ResourceHandle<SpriteTexture> SpriteTextureResourceHandle;
+	typedef ResourceHandle<VectorField> VectorFieldResourceHandle;
 
 	/** @} */
 }

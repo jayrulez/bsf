@@ -66,10 +66,10 @@ namespace bs
 		const HGUISkin& getEmptyGUISkin() const { return mEmptySkin; }
 
 		/**	Returns a small entirely white texture. */
-		const HSpriteTexture& getWhiteSpriteTexture() const { return mWhiteSpriteTexture; }
+		const SpriteTextureResourceHandle& getWhiteSpriteTexture() const { return mWhiteSpriteTexture; }
 
 		/**	Returns a 2x2 sprite texture that can be used when no other is available. */
-		const HSpriteTexture& getDummySpriteTexture() const { return mDummySpriteTexture; }
+		const SpriteTextureResourceHandle& getDummySpriteTexture() const { return mDummySpriteTexture; }
 
 		/**	Returns a dummy 2x2 texture that may be used when no other is available. Don't modify the returned texture. */
 		const TextureResourceHandle& getDummyTexture() const { return mDummyTexture; }
@@ -181,7 +181,7 @@ namespace bs
 		static constexpr const char* GUI_SKIN_FILE = u8"GUISkin";
 	private:
 		/**	Loads a GUI skin texture with the specified filename. */
-		HSpriteTexture getSkinTexture(const String& name) const;
+		SpriteTextureResourceHandle getSkinTexture(const String& name) const;
 
 		/**	Loads a cursor texture with the specified filename. */
 		TextureResourceHandle getCursorTexture(const String& name) const;
@@ -202,8 +202,8 @@ namespace bs
 		SPtr<PixelData> mCursorSizeWE;
 		SPtr<PixelData> mFrameworkIcon;
 
-		HSpriteTexture mWhiteSpriteTexture;
-		HSpriteTexture mDummySpriteTexture;
+		SpriteTextureResourceHandle mWhiteSpriteTexture;
+		SpriteTextureResourceHandle mDummySpriteTexture;
 
 		TextureResourceHandle mDummyTexture;
 

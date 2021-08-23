@@ -25,7 +25,7 @@ namespace bs
 		Vector2 uvOffset = Vector2(0.0f, 0.0f); /**< Offset applied to UV coordinates when rendering the sprite. */
 		bool transparent = true; /**< Should the sprite be rendered with transparency. */
 
-		HSpriteTexture texture; /**< Texture to overlay on the sprite. */
+		SpriteTextureResourceHandle texture; /**< Texture to overlay on the sprite. */
 		Color color; /**< Color tint to apply to the sprite. */
 		/**
 		 * Time (since application start) at which the sprite texture's 0th frame is played. Used if the sprite texture

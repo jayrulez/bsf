@@ -698,7 +698,7 @@ namespace bs
 		mJointBreakEvents.clear();
 	}
 
-	SPtr<PhysicsMaterial> PhysX::createMaterial(float staticFriction, float dynamicFriction, float restitution)
+	SPtr<PhysicsMaterialResource> PhysX::createMaterial(float staticFriction, float dynamicFriction, float restitution)
 	{
 		return bs_core_ptr_new<PhysXMaterial>(mPhysics, staticFriction, dynamicFriction, restitution);
 	}
@@ -921,7 +921,7 @@ namespace bs
 		return sweep(geometry, transform, unitDir, hit, layer, max);
 	}
 
-	bool PhysXScene::convexCast(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+	bool PhysXScene::convexCast(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 		const Vector3& unitDir, PhysicsQueryHit& hit, UINT64 layer, float max) const
 	{
 		if (mesh == nullptr)
@@ -978,7 +978,7 @@ namespace bs
 		return sweepAll(geometry, transform, unitDir, layer, max);
 	}
 
-	Vector<PhysicsQueryHit> PhysXScene::convexCastAll(const HPhysicsMesh& mesh, const Vector3& position,
+	Vector<PhysicsQueryHit> PhysXScene::convexCastAll(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 		const Quaternion& rotation, const Vector3& unitDir, UINT64 layer, float max) const
 	{
 		if (mesh == nullptr)
@@ -1034,7 +1034,7 @@ namespace bs
 		return sweepAny(geometry, transform, unitDir, layer, max);
 	}
 
-	bool PhysXScene::convexCastAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+	bool PhysXScene::convexCastAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 		const Vector3& unitDir, UINT64 layer, float max) const
 	{
 		if (mesh == nullptr)
@@ -1076,7 +1076,7 @@ namespace bs
 		return overlap(geometry, transform, layer);
 	}
 
-	Vector<Collider*> PhysXScene::_convexOverlap(const HPhysicsMesh& mesh, const Vector3& position,
+	Vector<Collider*> PhysXScene::_convexOverlap(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 		const Quaternion& rotation, UINT64 layer) const
 	{
 		if (mesh == nullptr)
@@ -1117,7 +1117,7 @@ namespace bs
 		return overlapAny(geometry, transform, layer);
 	}
 
-	bool PhysXScene::convexOverlapAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+	bool PhysXScene::convexOverlapAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 		UINT64 layer) const
 	{
 		if (mesh == nullptr)

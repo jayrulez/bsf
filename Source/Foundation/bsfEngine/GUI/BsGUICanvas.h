@@ -79,7 +79,7 @@ namespace bs
 		 *							others. Additionally elements of the same type (triangle or line) will be drawn in order
 		 *							they are submitted if they share the same depth.
 		 */
-		void drawTexture(const HSpriteTexture& texture, const Rect2I& area,
+		void drawTexture(const SpriteTextureResourceHandle& texture, const Rect2I& area,
 			TextureScaleMode scaleMode = TextureScaleMode::StretchToFit, const Color& color = Color::White, UINT8 depth = 128);
 
 		/**
@@ -194,7 +194,7 @@ namespace bs
 		/** Information required for drawing an image canvas element. */
 		struct ImageElementData
 		{
-			HSpriteTexture texture;
+			SpriteTextureResourceHandle texture;
 			Rect2I area;
 		};
 

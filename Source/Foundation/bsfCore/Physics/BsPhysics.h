@@ -88,7 +88,7 @@ namespace bs
 		/******************************************************************************************************************/
 
 		/** @copydoc PhysicsMaterial::create */
-		virtual SPtr<PhysicsMaterial> createMaterial(float staticFriction, float dynamicFriction, float restitution) = 0;
+		virtual SPtr<PhysicsMaterialResource> createMaterial(float staticFriction, float dynamicFriction, float restitution) = 0;
 
 		/** @copydoc PhysicsMesh::create */
 		virtual SPtr<PhysicsMesh> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) = 0;
@@ -252,7 +252,7 @@ namespace bs
 		 * @return					True if something was hit, false otherwise.
 		 */
 		BS_SCRIPT_EXPORT(n:ConvexCast)
-		virtual bool convexCast(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		virtual bool convexCast(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			const Vector3& unitDir, PhysicsQueryHit& hit, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const = 0;
 
 		/**
@@ -338,7 +338,7 @@ namespace bs
 		 * @return					List of all detected hits.
 		 */
 		BS_SCRIPT_EXPORT(n:ConvexCastAll)
-		virtual Vector<PhysicsQueryHit> convexCastAll(const HPhysicsMesh& mesh, const Vector3& position,
+		virtual Vector<PhysicsQueryHit> convexCastAll(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 			const Quaternion& rotation, const Vector3& unitDir, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const = 0;
 
 		/**
@@ -430,7 +430,7 @@ namespace bs
 		 * @return					True if something was hit, false otherwise.
 		 */
 		BS_SCRIPT_EXPORT(n:ConvexCastAny)
-		virtual bool convexCastAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		virtual bool convexCastAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			const Vector3& unitDir, UINT64 layer = BS_ALL_LAYERS, float max = FLT_MAX) const = 0;
 
 		/**
@@ -477,7 +477,7 @@ namespace bs
 		 * @return					List of all colliders that overlap the mesh.
 		 */
 		BS_SCRIPT_EXPORT(n:ConvexOverlap)
-		virtual Vector<HCollider> convexOverlap(const HPhysicsMesh& mesh, const Vector3& position,
+		virtual Vector<HCollider> convexOverlap(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 			const Quaternion& rotation, UINT64 layer = BS_ALL_LAYERS) const;
 
 		/**
@@ -523,7 +523,7 @@ namespace bs
 		 * @return					True if there is overlap with another object, false otherwise.
 		 */
 		BS_SCRIPT_EXPORT(n:ConvexOverlapAny)
-		virtual bool convexOverlapAny(const HPhysicsMesh& mesh, const Vector3& position, const Quaternion& rotation,
+		virtual bool convexOverlapAny(const PhysicsMeshResourceHandle& mesh, const Vector3& position, const Quaternion& rotation,
 			UINT64 layer = BS_ALL_LAYERS) const = 0;
 
 		/******************************************************************************************************************/
@@ -694,7 +694,7 @@ namespace bs
 			UINT64 layer = BS_ALL_LAYERS) const = 0;
 
 		/** @copydoc PhysicsScene::convexOverlap() */
-		virtual Vector<Collider*> _convexOverlap(const HPhysicsMesh& mesh, const Vector3& position,
+		virtual Vector<Collider*> _convexOverlap(const PhysicsMeshResourceHandle& mesh, const Vector3& position,
 			const Quaternion& rotation, UINT64 layer = BS_ALL_LAYERS) const = 0;
 
 		/** @} */

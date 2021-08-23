@@ -7,28 +7,28 @@
 
 namespace bs
 {
-	HPhysicsMaterial PhysicsMaterial::create(float staticFriction, float dynamicFriction, float restitution)
+	PhysicsMaterialResourceHandle PhysicsMaterialResource::create(float staticFriction, float dynamicFriction, float restitution)
 	{
-		SPtr<PhysicsMaterial> newMaterial = _createPtr(staticFriction, dynamicFriction, restitution);
+		SPtr<PhysicsMaterialResource> newMaterial = _createPtr(staticFriction, dynamicFriction, restitution);
 
-		return static_resource_cast<PhysicsMaterial>(gResources()._createResourceHandle(newMaterial));
+		return static_resource_cast<PhysicsMaterialResource>(gResources()._createResourceHandle(newMaterial));
 	}
 
-	SPtr<PhysicsMaterial> PhysicsMaterial::_createPtr(float staticFriction, float dynamicFriction, float restitution)
+	SPtr<PhysicsMaterialResource> PhysicsMaterialResource::_createPtr(float staticFriction, float dynamicFriction, float restitution)
 	{
-		SPtr<PhysicsMaterial> newMaterial = gPhysics().createMaterial(staticFriction, dynamicFriction, restitution);
+		SPtr<PhysicsMaterialResource> newMaterial = gPhysics().createMaterial(staticFriction, dynamicFriction, restitution);
 		newMaterial->_setThisPtr(newMaterial);
 		newMaterial->initialize();
 
 		return newMaterial;
 	}
 
-	RTTITypeBase* PhysicsMaterial::getRTTIStatic()
+	RTTITypeBase* PhysicsMaterialResource::getRTTIStatic()
 	{
-		return PhysicsMaterialRTTI::instance();
+		return PhysicsMaterialResourceRTTI::instance();
 	}
 
-	RTTITypeBase* PhysicsMaterial::getRTTI() const
+	RTTITypeBase* PhysicsMaterialResource::getRTTI() const
 	{
 		return getRTTIStatic();
 	}

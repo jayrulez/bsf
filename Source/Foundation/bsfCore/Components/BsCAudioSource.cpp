@@ -24,7 +24,7 @@ namespace bs
 		mNotifyFlags = TCF_Transform;
 	}
 
-	void CAudioSource::setClip(const HAudioClip& clip)
+	void CAudioSource::setClip(const AudioClipResourceHandle& clip)
 	{
 		if (mAudioClip == clip)
 			return;

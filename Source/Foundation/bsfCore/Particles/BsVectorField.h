@@ -93,7 +93,7 @@ namespace bs
 		 *						countX * countY * countZ.
 		 */
 		BS_SCRIPT_EXPORT(ec:T)
-		static HVectorField create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
+		static VectorFieldResourceHandle create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
 
 		/** @name Internal
 		 *  @{

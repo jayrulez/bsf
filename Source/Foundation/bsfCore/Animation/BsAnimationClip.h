@@ -246,7 +246,7 @@ namespace bs
 		 * using it.
 		 */
 		BS_SCRIPT_EXPORT(ec:AnimationClip)
-		static HAnimationClip create(bool isAdditive = false);
+		static AnimationClipResourceHandle create(bool isAdditive = false);
 
 		/**
 		 * Creates an animation clip with specified curves.
@@ -260,7 +260,7 @@ namespace bs
 		 *							animation system directly but is instead provided to the user for manual evaluation.
 		 */
 		BS_SCRIPT_EXPORT(ec:AnimationClip)
-		static HAnimationClip create(const SPtr<AnimationCurves>& curves, bool isAdditive = false, UINT32 sampleRate = 1,
+		static AnimationClipResourceHandle create(const SPtr<AnimationCurves>& curves, bool isAdditive = false, UINT32 sampleRate = 1,
 			const SPtr<RootMotion>& rootMotion = nullptr);
 
 	public: // ***** INTERNAL ******

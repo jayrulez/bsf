@@ -41,11 +41,11 @@ namespace bs
 
 		/** @copydoc Collider::setMaterial */
 		BS_SCRIPT_EXPORT(n:Material,pr:setter)
-		void setMaterial(const HPhysicsMaterial& material);
+		void setMaterial(const PhysicsMaterialResourceHandle& material);
 
 		/** @copydoc Collider::getMaterial */
 		BS_SCRIPT_EXPORT(n:Material,pr:getter)
-		HPhysicsMaterial getMaterial() const { return mMaterial; }
+		PhysicsMaterialResourceHandle getMaterial() const { return mMaterial; }
 
 		/** @copydoc Collider::setContactOffset */
 		BS_SCRIPT_EXPORT(n:ContactOffset,pr:setter)
@@ -185,7 +185,7 @@ namespace bs
 		CollisionReportMode mCollisionReportMode = CollisionReportMode::None;
 		float mRestOffset = 0.0f;
 		float mContactOffset = 0.02f;
-		HPhysicsMaterial mMaterial;
+		PhysicsMaterialResourceHandle mMaterial;
 		float mMass = 1.0f;
 		bool mIsTrigger = false;
 		Vector3 mLocalPosition = Vector3::ZERO;

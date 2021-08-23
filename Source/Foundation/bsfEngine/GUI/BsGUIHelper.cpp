@@ -23,7 +23,7 @@ namespace bs
 	{
 		Vector2I contentBounds = calcOptimalContentsSize((const String&)content.text, style, dimensions);
 
-		const HSpriteTexture& image = content.getImage(state);
+		const SpriteTextureResourceHandle& image = content.getImage(state);
 		if (SpriteTexture::checkIsLoaded(image))
 		{
 			contentBounds.x += image->getWidth() + GUIContent::IMAGE_TEXT_SPACING;

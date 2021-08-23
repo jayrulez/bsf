@@ -113,7 +113,7 @@ namespace bs
 		mImageDesc.borderBottom = _getStyle()->border.bottom;
 		mImageDesc.color = getTint();
 
-		const HSpriteTexture& activeTex = getActiveTexture();
+		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
 		if(SpriteTexture::checkIsLoaded(activeTex))
 			mImageDesc.texture = activeTex;
 
@@ -315,7 +315,7 @@ namespace bs
 		UINT32 imageWidth = 0;
 		UINT32 imageHeight = 0;
 
-		const HSpriteTexture& activeTex = getActiveTexture();
+		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
 		if(SpriteTexture::checkIsLoaded(activeTex))
 		{
 			imageWidth = activeTex->getWidth();
@@ -1166,7 +1166,7 @@ namespace bs
 		return textDesc;
 	}
 
-	const HSpriteTexture& GUIInputBox::getActiveTexture() const
+	const SpriteTextureResourceHandle& GUIInputBox::getActiveTexture() const
 	{
 		switch(mState)
 		{

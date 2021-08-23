@@ -7,7 +7,7 @@
 
 namespace bs
 {
-	void AudioSource::setClip(const HAudioClip& clip)
+	void AudioSource::setClip(const AudioClipResourceHandle& clip)
 	{
 		mAudioClip = clip;
 

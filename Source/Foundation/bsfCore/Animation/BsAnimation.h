@@ -91,9 +91,9 @@ namespace bs
 	struct AnimationClipInfo
 	{
 		AnimationClipInfo() = default;
-		AnimationClipInfo(const HAnimationClip& clip);
+		AnimationClipInfo(const AnimationClipResourceHandle& clip);
 
-		HAnimationClip clip;
+		AnimationClipResourceHandle clip;
 		AnimationClipState state;
 		AnimPlaybackType playbackType = AnimPlaybackType::Normal;
 
@@ -115,7 +115,7 @@ namespace bs
 	{
 		BlendClipInfo() = default;
 
-		HAnimationClip clip;
+		AnimationClipResourceHandle clip;
 		float position = 0.0f;
 	};
 
@@ -128,10 +128,10 @@ namespace bs
 	/** Defines a 2D blend where two animation clips are blended between each other using bilinear interpolation. */
 	struct BS_SCRIPT_EXPORT(pl:true,m:Animation) Blend2DInfo
 	{
-		HAnimationClip topLeftClip;
-		HAnimationClip topRightClip;
-		HAnimationClip botLeftClip;
-		HAnimationClip botRightClip;
+		AnimationClipResourceHandle topLeftClip;
+		AnimationClipResourceHandle topRightClip;
+		AnimationClipResourceHandle botLeftClip;
+		AnimationClipResourceHandle botRightClip;
 	};
 
 	/** Contains a mapping between a scene object and an animation curve it is animated with. */
@@ -346,7 +346,7 @@ namespace bs
 		 *
 		 * @param[in]	clip		Clip to play.
 		 */
-		void play(const HAnimationClip& clip);
+		void play(const AnimationClipResourceHandle& clip);
 
 		/**
 		 * Plays the specified animation clip on top of the animation currently playing in the main layer. Multiple
@@ -361,7 +361,7 @@ namespace bs
 		 * @param[in]	layer		Layer to play the clip in. Multiple additive clips can be playing at once in separate
 		 *							layers and each layer has its own weight.
 		 */
-		void blendAdditive(const HAnimationClip& clip, float weight, float fadeLength = 0.0f, UINT32 layer = 0);
+		void blendAdditive(const AnimationClipResourceHandle& clip, float weight, float fadeLength = 0.0f, UINT32 layer = 0);
 
 		/**
 		 * Blend multiple animation clips between each other using linear interpolation. Unlike normal animations these
@@ -394,7 +394,7 @@ namespace bs
 		 * @param[in]	clip		Clip to fade in.
 		 * @param[in]	fadeLength	Determines the time period over which the fade occurs. In seconds.
 		 */
-		void crossFade(const HAnimationClip& clip, float fadeLength);
+		void crossFade(const AnimationClipResourceHandle& clip, float fadeLength);
 
 		/**
 		 * Samples an animation clip at the specified time, displaying only that particular frame without further playback.
@@ -402,7 +402,7 @@ namespace bs
 		 * @param[in] clip	Animation clip to sample.
 		 * @param[in] time	Time to sample the clip at.
 		 */
-		void sample(const HAnimationClip& clip, float time);
+		void sample(const AnimationClipResourceHandle& clip, float time);
 
 		/**
 		 * Stops playing all animations on the provided layer. Specify -1 to stop animation on the main layer
@@ -425,7 +425,7 @@ namespace bs
 		 * @param[in]	idx		Sequential index of the animation clip to retrieve. In range [0, getNumClips()].
 		 * @return				Animation clip at the specified index, or null if the index is out of range.
 		 */
-		HAnimationClip getClip(UINT32 idx) const;
+		AnimationClipResourceHandle getClip(UINT32 idx) const;
 
 		/**
 		 * Retrieves detailed information about a currently playing animation clip.
@@ -435,7 +435,7 @@ namespace bs
 		 *						true.
 		 * @return				True if the state was found (animation clip is playing), false otherwise.
 		 */
-		bool getState(const HAnimationClip& clip, AnimationClipState& state);
+		bool getState(const AnimationClipResourceHandle& clip, AnimationClipState& state);
 
 		/**
 		 * Changes the state of a playing animation clip. If animation clip is not currently playing the playback is started
@@ -444,7 +444,7 @@ namespace bs
 		 * @param[in]	clip	Clip to change the state for.
 		 * @param[in]	state	New state of the animation (e.g. changing the time for seeking).
 		 */
-		void setState(const HAnimationClip& clip, AnimationClipState state);
+		void setState(const AnimationClipResourceHandle& clip, AnimationClipState state);
 
 		/**
 		 * Ensures that any position/rotation/scale animation of a specific animation curve is transfered to the
@@ -477,7 +477,7 @@ namespace bs
 		static SPtr<Animation> create();
 
 		/** Triggered whenever an animation event is reached. */
-		Event<void(const HAnimationClip&, const String&)> onEventTriggered;
+		Event<void(const AnimationClipResourceHandle&, const String&)> onEventTriggered;
 
 		/** @name Internal
 		 *  @{
@@ -521,7 +521,7 @@ namespace bs
 		 * already registered. If @p stopExisting is true any existing animations in the layer will be stopped. Layout
 		 * will be marked as dirty if any changes were made.
 		 */
-		AnimationClipInfo* addClip(const HAnimationClip& clip, UINT32 layer, bool stopExisting = true);
+		AnimationClipInfo* addClip(const AnimationClipResourceHandle& clip, UINT32 layer, bool stopExisting = true);
 
 		/** @copydoc IResourceListener::getListenerResources */
 		void getListenerResources(Vector<HResource>& resources) override;

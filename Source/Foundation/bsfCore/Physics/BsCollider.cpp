@@ -60,12 +60,12 @@ namespace bs
 		return mInternal->getMass();
 	}
 
-	void Collider::setMaterial(const HPhysicsMaterial& material)
+	void Collider::setMaterial(const PhysicsMaterialResourceHandle& material)
 	{
 		mInternal->setMaterial(material);
 	}
 
-	HPhysicsMaterial Collider::getMaterial() const
+	PhysicsMaterialResourceHandle Collider::getMaterial() const
 	{
 		return mInternal->getMaterial();
 	}

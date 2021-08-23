@@ -130,7 +130,7 @@ namespace bs
 		 *
 		 * @note	If the provided samples are in PCM format, they should be signed integers of provided bit depth.
 		 */
-		static HAudioClip create(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
+		static AudioClipResourceHandle create(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
 			const AUDIO_CLIP_DESC& desc);
 
 	public: // ***** INTERNAL ******

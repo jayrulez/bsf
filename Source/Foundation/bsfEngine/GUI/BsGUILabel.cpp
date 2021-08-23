@@ -30,7 +30,7 @@ namespace bs
 
 	void GUILabel::updateRenderElementsInternal()
 	{		
-		const HSpriteTexture& activeTex = _getStyle()->normal.texture;
+		const SpriteTextureResourceHandle& activeTex = _getStyle()->normal.texture;
 		if (SpriteTexture::checkIsLoaded(activeTex))
 		{
 			mImageDesc.texture = activeTex;

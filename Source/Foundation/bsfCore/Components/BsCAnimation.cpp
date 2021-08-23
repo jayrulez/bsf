@@ -31,7 +31,7 @@ namespace bs
 		setName("Animation");
 	}
 
-	void CAnimation::setDefaultClip(const HAnimationClip& clip)
+	void CAnimation::setDefaultClip(const AnimationClipResourceHandle& clip)
 	{
 		mDefaultClip = clip;
 
@@ -55,13 +55,13 @@ namespace bs
 			mInternal->setSpeed(speed);
 	}
 
-	void CAnimation::play(const HAnimationClip& clip)
+	void CAnimation::play(const AnimationClipResourceHandle& clip)
 	{
 		if (mInternal != nullptr && !mPreviewMode)
 			mInternal->play(clip);
 	}
 
-	void CAnimation::blendAdditive(const HAnimationClip& clip, float weight, float fadeLength, UINT32 layer)
+	void CAnimation::blendAdditive(const AnimationClipResourceHandle& clip, float weight, float fadeLength, UINT32 layer)
 	{
 		if (mInternal != nullptr && !mPreviewMode)
 			mInternal->blendAdditive(clip, weight, fadeLength, layer);
@@ -79,13 +79,13 @@ namespace bs
 			mInternal->blend2D(info, t);
 	}
 
-	void CAnimation::crossFade(const HAnimationClip& clip, float fadeLength)
+	void CAnimation::crossFade(const AnimationClipResourceHandle& clip, float fadeLength)
 	{
 		if (mInternal != nullptr && !mPreviewMode)
 			mInternal->crossFade(clip, fadeLength);
 	}
 
-	void CAnimation::sample(const HAnimationClip& clip, float time)
+	void CAnimation::sample(const AnimationClipResourceHandle& clip, float time)
 	{
 		if (mInternal != nullptr)
 			mInternal->sample(clip, time);
@@ -111,7 +111,7 @@ namespace bs
 		return false;
 	}
 
-	bool CAnimation::getState(const HAnimationClip& clip, AnimationClipState& state)
+	bool CAnimation::getState(const AnimationClipResourceHandle& clip, AnimationClipState& state)
 	{
 		if (mInternal != nullptr)
 			return mInternal->getState(clip, state);
@@ -119,7 +119,7 @@ namespace bs
 		return false;
 	}
 
-	void CAnimation::setState(const HAnimationClip& clip, AnimationClipState state)
+	void CAnimation::setState(const AnimationClipResourceHandle& clip, AnimationClipState state)
 	{
 		if (mInternal != nullptr)
 			return mInternal->setState(clip, state);
@@ -198,12 +198,12 @@ namespace bs
 		return 0;
 	}
 
-	HAnimationClip CAnimation::getClip(UINT32 idx) const
+	AnimationClipResourceHandle CAnimation::getClip(UINT32 idx) const
 	{
 		if (mInternal != nullptr)
 			return mInternal->getClip(idx);
 
-		return HAnimationClip();
+		return AnimationClipResourceHandle();
 	}
 
 	void CAnimation::onInitialized()
@@ -284,7 +284,7 @@ namespace bs
 		if (mInternal == nullptr || !isRunning)
 			return;
 
-		HAnimationClip newPrimaryClip = mInternal->getClip(0);
+		AnimationClipResourceHandle newPrimaryClip = mInternal->getClip(0);
 		if (newPrimaryClip != mPrimaryPlayingClip)
 			_refreshClipMappings();
 
@@ -623,7 +623,7 @@ namespace bs
 		return bones;
 	}
 
-	void CAnimation::eventTriggered(const HAnimationClip& clip, const String& name)
+	void CAnimation::eventTriggered(const AnimationClipResourceHandle& clip, const String& name)
 	{
 		onEventTriggered(clip, name);
 

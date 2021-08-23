@@ -60,10 +60,10 @@ namespace bs
 		 * Determines the physical material of the collider. The material determines how objects hitting the collider
 		 * behave.
 		 */
-		virtual void setMaterial(const HPhysicsMaterial& material);
+		virtual void setMaterial(const PhysicsMaterialResourceHandle& material);
 
 		/** @copydoc setMaterial() */
-		virtual HPhysicsMaterial getMaterial() const { return mMaterial; }
+		virtual PhysicsMaterialResourceHandle getMaterial() const { return mMaterial; }
 
 		/**
 		 * Determines how far apart do two shapes need to be away from each other before the physics runtime starts
@@ -108,7 +108,7 @@ namespace bs
 	protected:
 		float mMass = 1.0f;
 		
-		HPhysicsMaterial mMaterial;
+		PhysicsMaterialResourceHandle mMaterial;
 	};
 
 	/** @} */

@@ -25,11 +25,11 @@ namespace bs
 		
 		/** @copydoc AudioSource::setClip */
 		BS_SCRIPT_EXPORT(n:Clip,pr:setter)
-		void setClip(const HAudioClip& clip);
+		void setClip(const AudioClipResourceHandle& clip);
 
 		/** @copydoc AudioSource::getClip */
 		BS_SCRIPT_EXPORT(n:Clip,pr:getter)
-		HAudioClip getClip() const { return mAudioClip; }
+		AudioClipResourceHandle getClip() const { return mAudioClip; }
 
 		/** @copydoc AudioSource::setVolume */
 		BS_SCRIPT_EXPORT(n:Volume,pr:setter,range:[0,1],slider)
@@ -162,7 +162,7 @@ namespace bs
 		Vector3 mLastPosition = Vector3::ZERO;
 		Vector3 mVelocity = Vector3::ZERO;
 
-		HAudioClip mAudioClip;
+		AudioClipResourceHandle mAudioClip;
 		float mVolume = 1.0f;
 		float mPitch = 1.0f;
 		bool mLoop = false;

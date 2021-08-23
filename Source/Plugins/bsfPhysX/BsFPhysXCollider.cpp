@@ -154,7 +154,7 @@ namespace bs
 		return mShape->getRestOffset();
 	}
 
-	void FPhysXCollider::setMaterial(const HPhysicsMaterial& material)
+	void FPhysXCollider::setMaterial(const PhysicsMaterialResourceHandle& material)
 	{
 		FCollider::setMaterial(material);
 

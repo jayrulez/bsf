@@ -165,7 +165,7 @@ namespace bs
 		UINT32 getHandleSize() const;
 
 		/**	Gets the currently active texture, depending on handle state. */
-		const HSpriteTexture& getActiveTexture() const;
+		const SpriteTextureResourceHandle& getActiveTexture() const;
 
 		/** @copydoc GUIElement::styleUpdated */
 		void styleUpdated() override;

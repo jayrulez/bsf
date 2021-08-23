@@ -102,7 +102,7 @@ namespace bs
 		GUIElementState getState() const { return mActiveState; }
 
 		/**	Returns the active sprite texture, depending on the current state. */
-		const HSpriteTexture& getActiveTexture() const;
+		const SpriteTextureResourceHandle& getActiveTexture() const;
 
 		/**	Returns the active text color, depending on the current state. */
 		Color getActiveTextColor() const;

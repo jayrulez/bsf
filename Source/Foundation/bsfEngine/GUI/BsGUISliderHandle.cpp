@@ -84,7 +84,7 @@ namespace bs
 	{		
 		IMAGE_SPRITE_DESC desc;
 
-		HSpriteTexture activeTex = getActiveTexture();
+		SpriteTextureResourceHandle activeTex = getActiveTexture();
 		if(SpriteTexture::checkIsLoaded(activeTex))
 			desc.texture = activeTex;
 
@@ -136,7 +136,7 @@ namespace bs
 
 	Vector2I GUISliderHandle::_getOptimalSize() const
 	{
-		HSpriteTexture activeTex = getActiveTexture();
+		SpriteTextureResourceHandle activeTex = getActiveTexture();
 
 		if(SpriteTexture::checkIsLoaded(activeTex))
 			return Vector2I(activeTex->getWidth(), activeTex->getHeight());
@@ -517,7 +517,7 @@ namespace bs
 		return maxSize;
 	}
 
-	const HSpriteTexture& GUISliderHandle::getActiveTexture() const
+	const SpriteTextureResourceHandle& GUISliderHandle::getActiveTexture() const
 	{
 		switch(mState)
 		{

@@ -20,7 +20,7 @@ namespace bs
 		gOAAudio()._unregisterSource(this);
 	}
 
-	void OAAudioSource::setClip(const HAudioClip& clip)
+	void OAAudioSource::setClip(const AudioClipResourceHandle& clip)
 	{
 		stop();
 

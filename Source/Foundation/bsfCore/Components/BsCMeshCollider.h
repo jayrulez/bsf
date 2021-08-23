@@ -24,11 +24,11 @@ namespace bs
 
 		/** @copydoc MeshCollider::setMesh */
 		BS_SCRIPT_EXPORT(n:Mesh,pr:setter)
-		void setMesh(const HPhysicsMesh& mesh);
+		void setMesh(const PhysicsMeshResourceHandle& mesh);
 
 		/** @copydoc MeshCollider::getMesh */
 		BS_SCRIPT_EXPORT(n:Mesh,pr:getter)
-		HPhysicsMesh getMesh() const { return mMesh; }
+		PhysicsMeshResourceHandle getMesh() const { return mMesh; }
 
 		/** @name Internal
 		 *  @{
@@ -52,7 +52,7 @@ namespace bs
 		bool isValidParent(const HRigidbody& parent) const override;
 
 	protected:
-		HPhysicsMesh mMesh;
+		PhysicsMeshResourceHandle mMesh;
 
 		/************************************************************************/
 		/* 								RTTI		                     		*/
