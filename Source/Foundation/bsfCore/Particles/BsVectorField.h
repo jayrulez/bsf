@@ -75,7 +75,7 @@ namespace bs
 	 * Represents a three dimensional field of vectors. It is represented by spatial bounds which are split into a grid
 	 * of values with user-defined density, where each grid cell is assigned a vector.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Particles) VectorField : public Resource, public detail::TVectorField<false>
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Particles) VectorFieldResource : public Resource, public detail::TVectorField<false>
 	{
 	public:
 		/**	Retrieves a core implementation of a vector field usable only from the core thread. */
@@ -100,15 +100,15 @@ namespace bs
 		 */
 
 		/** Same as create() excepts it creates a pointer to the vector field instead of a handle. */
-		static SPtr<VectorField> _createPtr(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
+		static SPtr<VectorFieldResource> _createPtr(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
 
 		/** Creates the resource without initializing it. */
-		static SPtr<VectorField> _createEmpty();
+		static SPtr<VectorFieldResource> _createEmpty();
 
 		/** @} */
 
 	protected:
-		VectorField(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
+		VectorFieldResource(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values);
 
 		/** @copydoc CoreObject::createCore */
 		SPtr<ct::CoreObject> createCore() const override;
@@ -117,9 +117,9 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		VectorField() = default; // Serialization only
+		VectorFieldResource() = default; // Serialization only
 
-		friend class VectorFieldRTTI;
+		friend class VectorFieldResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

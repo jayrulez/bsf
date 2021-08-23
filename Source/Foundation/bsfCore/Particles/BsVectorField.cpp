@@ -15,7 +15,7 @@ namespace bs
 		template class TVectorField <true>;
 	}
 
-	VectorField::VectorField(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
+	VectorFieldResource::VectorFieldResource(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
 		:TVectorField(desc)
 	{
 		if(mDesc.countX == 0 || mDesc.countY == 0 || mDesc.countZ == 0)
@@ -63,7 +63,7 @@ namespace bs
 		mTexture = TextureResource::_createPtr(pixelData);
 	}
 
-	SPtr<ct::CoreObject> VectorField::createCore() const
+	SPtr<ct::CoreObject> VectorFieldResource::createCore() const
 	{
 		ct::VectorField* vectorField = new (bs_alloc<ct::VectorField>()) ct::VectorField(mDesc, mTexture->getCore());
 
@@ -73,7 +73,7 @@ namespace bs
 		return vectorFieldPtr;
 	}
 
-	SPtr<ct::VectorField> VectorField::getCore() const
+	SPtr<ct::VectorField> VectorFieldResource::getCore() const
 	{
 		return std::static_pointer_cast<ct::VectorField>(mCoreSpecific);
 	}
@@ -82,42 +82,42 @@ namespace bs
 	/* 								SERIALIZATION                      		*/
 	/************************************************************************/
 
-	RTTITypeBase* VectorField::getRTTIStatic()
+	RTTITypeBase* VectorFieldResource::getRTTIStatic()
 	{
-		return VectorFieldRTTI::instance();
+		return VectorFieldResourceRTTI::instance();
 	}
 
-	RTTITypeBase* VectorField::getRTTI() const
+	RTTITypeBase* VectorFieldResource::getRTTI() const
 	{
-		return VectorField::getRTTIStatic();
+		return VectorFieldResource::getRTTIStatic();
 	}
 
 	/************************************************************************/
 	/* 								STATICS	                      			*/
 	/************************************************************************/
-	VectorFieldResourceHandle VectorField::create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
+	VectorFieldResourceHandle VectorFieldResource::create(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
 	{
-		SPtr<VectorField> vectorFieldPtr = _createPtr(desc, values);
+		SPtr<VectorFieldResource> vectorFieldPtr = _createPtr(desc, values);
 
-		return static_resource_cast<VectorField>(gResources()._createResourceHandle(vectorFieldPtr));
+		return static_resource_cast<VectorFieldResource>(gResources()._createResourceHandle(vectorFieldPtr));
 	}
 
-	SPtr<VectorField> VectorField::_createPtr(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
+	SPtr<VectorFieldResource> VectorFieldResource::_createPtr(const VECTOR_FIELD_DESC& desc, const Vector<Vector3>& values)
 	{
-		auto* vectorField = new (bs_alloc<VectorField>()) VectorField(desc, values);
+		auto* vectorField = new (bs_alloc<VectorFieldResource>()) VectorFieldResource(desc, values);
 
-		SPtr<VectorField> vectorFieldPtr = bs_shared_ptr<VectorField>(vectorField);
+		SPtr<VectorFieldResource> vectorFieldPtr = bs_shared_ptr<VectorFieldResource>(vectorField);
 		vectorFieldPtr->_setThisPtr(vectorFieldPtr);
 		vectorFieldPtr->initialize();
 
 		return vectorFieldPtr;
 	}
 
-	SPtr<VectorField> VectorField::_createEmpty()
+	SPtr<VectorFieldResource> VectorFieldResource::_createEmpty()
 	{
-		auto* vectorField = new (bs_alloc<VectorField>()) VectorField();
+		auto* vectorField = new (bs_alloc<VectorFieldResource>()) VectorFieldResource();
 
-		SPtr<VectorField> vectorFieldPtr = bs_shared_ptr<VectorField>(vectorField);
+		SPtr<VectorFieldResource> vectorFieldPtr = bs_shared_ptr<VectorFieldResource>(vectorField);
 		vectorFieldPtr->_setThisPtr(vectorFieldPtr);
 
 		return vectorFieldPtr;
@@ -262,7 +262,7 @@ namespace bs
 		}
 
 		const String fileName = filePath.getFilename(false);
-		SPtr<VectorField> vectorField = VectorField::_createPtr(desc, values);
+		SPtr<VectorFieldResource> vectorField = VectorFieldResource::_createPtr(desc, values);
 		vectorField->setName(fileName);
 
 		return vectorField;

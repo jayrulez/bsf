@@ -281,7 +281,7 @@ namespace bs
 	//CORE_OBJECT_FORWARD_DECLARE(Texture);
 	//CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
 	//CORE_OBJECT_FORWARD_DECLARE(Mesh);
-	CORE_OBJECT_FORWARD_DECLARE(VectorField);
+	//CORE_OBJECT_FORWARD_DECLARE(VectorField);
 	CORE_OBJECT_FORWARD_DECLARE(Skybox);
 	CORE_OBJECT_FORWARD_DECLARE(Decal);
 	CORE_OBJECT_FORWARD_DECLARE_STRUCT(DepthOfFieldSettings);
@@ -313,6 +313,11 @@ namespace bs
 	template<> struct CoreThreadType<SpriteTextureResource> { typedef ct::SpriteTexture Type; };
 
 
+	class VectorFieldResource;
+	namespace ct { class VectorField; }
+	template<> struct CoreThreadType<VectorFieldResource> { typedef ct::VectorField Type; };
+
+
 	//class IndexBuffer;
 	//class VertexBuffer;
 	//class GpuBuffer;
@@ -339,8 +344,6 @@ namespace bs
 	//class ComputePipelineState;
 	//class ReflectionProbe;
 	//class ParticleSystem;
-	//class SpriteTexture;
-	//class VectorField;
 	//class Skybox;
 	//class Decal;
 	//struct DepthOfFieldSettings;
@@ -767,7 +770,7 @@ namespace bs
 	typedef ResourceHandle<AudioClipResource> AudioClipResourceHandle;
 	typedef ResourceHandle<AnimationClipResource> AnimationClipResourceHandle;
 	typedef ResourceHandle<SpriteTextureResource> SpriteTextureResourceHandle;
-	typedef ResourceHandle<VectorField> VectorFieldResourceHandle;
+	typedef ResourceHandle<VectorFieldResource> VectorFieldResourceHandle;
 
 	/** @} */
 }

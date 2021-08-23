@@ -315,7 +315,7 @@ namespace bs
 	{
 		/** Vector field resource used for influencing the particles. */
 		BS_SCRIPT_EXPORT()
-		CoreVariantHandleType<VectorField, Core> vectorField;
+		CoreVariantHandleType<VectorFieldResource, Core> vectorField;
 
 		/** Enumerates all the fields in the type and executes the specified processor action for each field. */
 		template<class P>

@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT VectorFieldRTTI : public RTTIType<VectorField, Resource, VectorFieldRTTI>
+	class BS_CORE_EXPORT VectorFieldResourceRTTI : public RTTIType<VectorFieldResource, Resource, VectorFieldResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -28,7 +28,7 @@ namespace bs
 	public:
 		const String& getRTTIName() override
 		{
-			static String name = "VectorField";
+			static String name = "VectorFieldResource";
 			return name;
 		}
 
@@ -39,13 +39,13 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return VectorField::_createEmpty();
+			return VectorFieldResource::_createEmpty();
 		}
 
 	protected:
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			VectorField* vectorField = static_cast<VectorField*>(obj);
+			VectorFieldResource* vectorField = static_cast<VectorFieldResource*>(obj);
 			vectorField->initialize();
 		}
 	};
