@@ -129,7 +129,7 @@ namespace bs
 		mDummyTexture = TextureResource::createHandle(dummyPixelData);
 
 		mWhiteSpriteTexture = getSkinTexture(WhiteTex);
-		mDummySpriteTexture = SpriteTexture::create(mDummyTexture);
+		mDummySpriteTexture = SpriteTextureResource::create(mDummyTexture);
 
 		mFont = gResources().load<FontResource>(mBuiltinDataFolder + (String(DEFAULT_FONT_NAME) + u8".asset"));
 		mSkin = gResources().load<GUISkin>(mBuiltinDataFolder + (String(GUI_SKIN_FILE) + u8".json.asset"));
@@ -200,7 +200,7 @@ namespace bs
 		Path texturePath = mEngineSkinSpritesFolder;
 		texturePath.append(u8"sprite_" + name + u8".asset");
 
-		return gResources().load<SpriteTexture>(texturePath);
+		return gResources().load<SpriteTextureResource>(texturePath);
 	}
 
 	ShaderResourceHandle BuiltinResources::getShader(const Path& path) const

@@ -80,21 +80,21 @@ namespace bs
 		p(mAtlasTexture);
 	}
 
-	SpriteTexture::SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
+	SpriteTextureResource::SpriteTextureResource(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 		:TSpriteTexture(uvOffset, uvScale, texture)
 	{ }
 
-	const SpriteTextureResourceHandle& SpriteTexture::dummy()
+	const SpriteTextureResourceHandle& SpriteTextureResource::dummy()
 	{
 		return BuiltinResources::instance().getDummySpriteTexture();
 	}
 
-	bool SpriteTexture::checkIsLoaded(const SpriteTextureResourceHandle& tex)
+	bool SpriteTextureResource::checkIsLoaded(const SpriteTextureResourceHandle& tex)
 	{
 		return tex != nullptr && tex.isLoaded(false) && tex->getTexture() != nullptr && tex->getTexture().isLoaded(false);
 	}
 
-	void SpriteTexture::setTexture(const TextureResourceHandle& texture)
+	void SpriteTextureResource::setTexture(const TextureResourceHandle& texture)
 	{
 		removeResourceDependency(mAtlasTexture);
 		mAtlasTexture = texture;
@@ -103,39 +103,39 @@ namespace bs
 		markDependenciesDirty();
 	}
 
-	UINT32 SpriteTexture::getWidth() const
+	UINT32 SpriteTextureResource::getWidth() const
 	{
 		return Math::roundToInt(mAtlasTexture->getProperties().getWidth() * mUVScale.x);
 	}
 
-	UINT32 SpriteTexture::getHeight() const
+	UINT32 SpriteTextureResource::getHeight() const
 	{
 		return Math::roundToInt(mAtlasTexture->getProperties().getHeight() * mUVScale.y);
 	}
 
-	UINT32 SpriteTexture::getFrameWidth() const
+	UINT32 SpriteTextureResource::getFrameWidth() const
 	{
 		return getWidth() / std::max(1U, mAnimation.numColumns);
 	}
 
-	UINT32 SpriteTexture::getFrameHeight() const
+	UINT32 SpriteTextureResource::getFrameHeight() const
 	{
 		return getHeight() / std::max(1U, mAnimation.numRows);
 	}
 
-	void SpriteTexture::_markCoreDirty()
+	void SpriteTextureResource::_markCoreDirty()
 	{
 		markCoreDirty();
 	}
 
-	void SpriteTexture::initialize()
+	void SpriteTextureResource::initialize()
 	{
 		addResourceDependency(mAtlasTexture);
 
 		Resource::initialize();
 	}
 
-	SPtr<ct::CoreObject> SpriteTexture::createCore() const
+	SPtr<ct::CoreObject> SpriteTextureResource::createCore() const
 	{
 		SPtr<ct::Texture> texturePtr;
 		if(mAtlasTexture.isLoaded())
@@ -150,7 +150,7 @@ namespace bs
 		return spriteTexPtr;
 	}
 
-	CoreSyncData SpriteTexture::syncToCore(FrameAlloc* allocator)
+	CoreSyncData SpriteTextureResource::syncToCore(FrameAlloc* allocator)
 	{
 		UINT32 size = csync_size(*this);
 
@@ -161,35 +161,35 @@ namespace bs
 		return CoreSyncData(buffer, size);
 	}
 
-	void SpriteTexture::getCoreDependencies(Vector<CoreObject*>& dependencies)
+	void SpriteTextureResource::getCoreDependencies(Vector<CoreObject*>& dependencies)
 	{
 		if (mAtlasTexture.isLoaded())
 			dependencies.push_back(mAtlasTexture.get());
 	}
 
-	SPtr<ct::SpriteTexture> SpriteTexture::getCore() const
+	SPtr<ct::SpriteTexture> SpriteTextureResource::getCore() const
 	{
 		return std::static_pointer_cast<ct::SpriteTexture>(mCoreSpecific);
 	}
 
-	SpriteTextureResourceHandle SpriteTexture::create(const TextureResourceHandle& texture)
+	SpriteTextureResourceHandle SpriteTextureResource::create(const TextureResourceHandle& texture)
 	{
-		SPtr<SpriteTexture> texturePtr = _createPtr(texture);
+		SPtr<SpriteTextureResource> texturePtr = _createPtr(texture);
 
-		return static_resource_cast<SpriteTexture>(gResources()._createResourceHandle(texturePtr));
+		return static_resource_cast<SpriteTextureResource>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	SpriteTextureResourceHandle SpriteTexture::create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
+	SpriteTextureResourceHandle SpriteTextureResource::create(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 	{
-		SPtr<SpriteTexture> texturePtr = _createPtr(uvOffset, uvScale, texture);
+		SPtr<SpriteTextureResource> texturePtr = _createPtr(uvOffset, uvScale, texture);
 
-		return static_resource_cast<SpriteTexture>(gResources()._createResourceHandle(texturePtr));
+		return static_resource_cast<SpriteTextureResource>(gResources()._createResourceHandle(texturePtr));
 	}
 
-	SPtr<SpriteTexture> SpriteTexture::_createPtr(const TextureResourceHandle& texture)
+	SPtr<SpriteTextureResource> SpriteTextureResource::_createPtr(const TextureResourceHandle& texture)
 	{
-		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
-			(new (bs_alloc<SpriteTexture>()) SpriteTexture(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), texture));
+		SPtr<SpriteTextureResource> texturePtr = bs_core_ptr<SpriteTextureResource>
+			(new (bs_alloc<SpriteTextureResource>()) SpriteTextureResource(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), texture));
 
 		texturePtr->_setThisPtr(texturePtr);
 		texturePtr->initialize();
@@ -197,10 +197,10 @@ namespace bs
 		return texturePtr;
 	}
 
-	SPtr<SpriteTexture> SpriteTexture::_createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
+	SPtr<SpriteTextureResource> SpriteTextureResource::_createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture)
 	{
-		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
-			(new (bs_alloc<SpriteTexture>()) SpriteTexture(uvOffset, uvScale, texture));
+		SPtr<SpriteTextureResource> texturePtr = bs_core_ptr<SpriteTextureResource>
+			(new (bs_alloc<SpriteTextureResource>()) SpriteTextureResource(uvOffset, uvScale, texture));
 
 		texturePtr->_setThisPtr(texturePtr);
 		texturePtr->initialize();
@@ -208,24 +208,24 @@ namespace bs
 		return texturePtr;
 	}
 
-	SPtr<SpriteTexture> SpriteTexture::createEmpty()
+	SPtr<SpriteTextureResource> SpriteTextureResource::createEmpty()
 	{
-		SPtr<SpriteTexture> texturePtr = bs_core_ptr<SpriteTexture>
-			(new (bs_alloc<SpriteTexture>()) SpriteTexture(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), TextureResourceHandle()));
+		SPtr<SpriteTextureResource> texturePtr = bs_core_ptr<SpriteTextureResource>
+			(new (bs_alloc<SpriteTextureResource>()) SpriteTextureResource(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), TextureResourceHandle()));
 
 		texturePtr->_setThisPtr(texturePtr);
 
 		return texturePtr;
 	}
 
-	RTTITypeBase* SpriteTexture::getRTTIStatic()
+	RTTITypeBase* SpriteTextureResource::getRTTIStatic()
 	{
-		return SpriteTextureRTTI::instance();
+		return SpriteTextureResourceRTTI::instance();
 	}
 
-	RTTITypeBase* SpriteTexture::getRTTI() const
+	RTTITypeBase* SpriteTextureResource::getRTTI() const
 	{
-		return SpriteTexture::getRTTIStatic();
+		return SpriteTextureResource::getRTTIStatic();
 	}
 
 	namespace ct

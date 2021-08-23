@@ -442,7 +442,7 @@ namespace bs
 		desc.color = element.color;
 
 		Vector2I textureSize;
-		if (SpriteTexture::checkIsLoaded(imageData.texture))
+		if (SpriteTextureResource::checkIsLoaded(imageData.texture))
 		{
 			desc.texture = imageData.texture;
 			textureSize.x = desc.texture->getWidth();

@@ -169,7 +169,7 @@ namespace bs
 	 * for multiple sprites (texture atlasing). Sprite textures also allow you to specify sprite sheet animation by varying
 	 * which portion of the UV is selected over time.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) SpriteTexture : public Resource, public TSpriteTexture<false>
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) SpriteTextureResource : public Resource, public TSpriteTexture<false>
 	{
 	public:
 		/**	Determines the internal texture that the sprite texture references. */
@@ -224,20 +224,20 @@ namespace bs
 		 */
 
 		/** Creates a new SpriteTexture without a resource handle. Use create() for normal use. */
-		static SPtr<SpriteTexture> _createPtr(const TextureResourceHandle& texture);
+		static SPtr<SpriteTextureResource> _createPtr(const TextureResourceHandle& texture);
 
 		/** Creates a new SpriteTexture without a resource handle. Use create() for normal use. */
-		static SPtr<SpriteTexture> _createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
+		static SPtr<SpriteTextureResource> _createPtr(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/** @copydoc SpriteTextureBase::_markCoreDirty */
 		void _markCoreDirty() override;
 
 		/** @} */
 	private:
-		friend class SpriteTextureRTTI;
+		friend class SpriteTextureResourceRTTI;
 
 		/** @copydoc create(const Vector2&, const Vector2&, const TextureResourceHandle&) */
-		SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
+		SpriteTextureResource(const Vector2& uvOffset, const Vector2& uvScale, const TextureResourceHandle& texture);
 
 		/** @copydoc CoreObject::initialize */
 		void initialize() override;
@@ -256,9 +256,9 @@ namespace bs
 		/************************************************************************/
 
 		/**	Creates a new empty and uninitialized sprite texture. */
-		static SPtr<SpriteTexture> createEmpty();
+		static SPtr<SpriteTextureResource> createEmpty();
 	public:
-		friend class SpriteTextureRTTI;
+		friend class SpriteTextureResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
@@ -286,7 +286,7 @@ namespace bs
 			const SPtr<ct::Texture>& getTexture() const { return mAtlasTexture; }
 
 		private:
-			friend class bs::SpriteTexture;
+			friend class bs::SpriteTextureResource;
 
 			SpriteTexture(const Vector2& uvOffset, const Vector2& uvScale, SPtr<Texture> texture,
 				const SpriteSheetGridAnimation& anim, SpriteAnimationPlayback playback);

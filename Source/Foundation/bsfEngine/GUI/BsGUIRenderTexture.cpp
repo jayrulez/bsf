@@ -62,13 +62,13 @@ namespace bs
 				mDesc.uvScale = Vector2(1.0f, -1.0f);
 			}
 
-			setTexture(SpriteTexture::create(texture->getColorTexture(0)));
+			setTexture(SpriteTextureResource::create(texture->getColorTexture(0)));
 
 			GUIManager::instance().setInputBridge(mSourceTexture, this);
 		}
 		else
 		{
-			setTexture(SpriteTexture::create(TextureResourceHandle()));
+			setTexture(SpriteTextureResource::create(TextureResourceHandle()));
 		}
 
 		_markLayoutAsDirty();

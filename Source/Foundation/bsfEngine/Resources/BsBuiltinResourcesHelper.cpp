@@ -107,7 +107,7 @@ namespace bs
 
 			outputPath.setFilename("sprite_" + fileName + ".asset");
 
-			SPtr<SpriteTexture> spriteTexPtr = SpriteTexture::_createPtr(texture);
+			SPtr<SpriteTextureResource> spriteTexPtr = SpriteTextureResource::_createPtr(texture);
 			HResource spriteTex = gResources()._createResourceHandle(spriteTexPtr, UUID);
 
 			Resources::instance().save(spriteTex, outputPath, true, compress);
@@ -122,7 +122,7 @@ namespace bs
 
 			outputPath.setFilename("sprite_" + fileName + ".asset");
 
-			SPtr<SpriteTexture> spriteTexPtr = SpriteTexture::_createPtr(texture);
+			SPtr<SpriteTextureResource> spriteTexPtr = SpriteTextureResource::_createPtr(texture);
 			spriteTexPtr->setAnimation(animation);
 			spriteTexPtr->setAnimationPlayback(playback);
 
@@ -887,7 +887,7 @@ namespace bs
 		Path texturePath = mTexturePath;
 		texturePath.append(u8"sprite_" + name + u8".asset");
 
-		return gResources().load<SpriteTexture>(texturePath);
+		return gResources().load<SpriteTextureResource>(texturePath);
 	}
 
 	FontResourceHandle BuiltinResourceGUIElementStyleLoader::loadFont(const String& name) const

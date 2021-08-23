@@ -279,7 +279,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ReflectionProbe);
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem);
 	//CORE_OBJECT_FORWARD_DECLARE(Texture);
-	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
+	//CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
 	//CORE_OBJECT_FORWARD_DECLARE(Mesh);
 	CORE_OBJECT_FORWARD_DECLARE(VectorField);
 	CORE_OBJECT_FORWARD_DECLARE(Skybox);
@@ -306,6 +306,12 @@ namespace bs
 	class MeshResource;
 	namespace ct { class Mesh; }
 	template<> struct CoreThreadType<MeshResource> { typedef ct::Mesh Type; };
+
+
+	class SpriteTextureResource;
+	namespace ct { class SpriteTexture; }
+	template<> struct CoreThreadType<SpriteTextureResource> { typedef ct::SpriteTexture Type; };
+
 
 	//class IndexBuffer;
 	//class VertexBuffer;
@@ -760,7 +766,7 @@ namespace bs
 	typedef ResourceHandle<PhysicsMeshResource> PhysicsMeshResourceHandle;
 	typedef ResourceHandle<AudioClipResource> AudioClipResourceHandle;
 	typedef ResourceHandle<AnimationClipResource> AnimationClipResourceHandle;
-	typedef ResourceHandle<SpriteTexture> SpriteTextureResourceHandle;
+	typedef ResourceHandle<SpriteTextureResource> SpriteTextureResourceHandle;
 	typedef ResourceHandle<VectorField> VectorFieldResourceHandle;
 
 	/** @} */

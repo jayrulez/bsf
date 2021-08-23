@@ -32,7 +32,7 @@ namespace bs
 			mUsingStyleTexture = true;
 		}
 
-		bool isTexLoaded = SpriteTexture::checkIsLoaded(mActiveTexture);
+		bool isTexLoaded = SpriteTextureResource::checkIsLoaded(mActiveTexture);
 		mActiveTextureWidth = isTexLoaded ? mActiveTexture->getFrameWidth() : 0;
 		mActiveTextureHeight = isTexLoaded ? mActiveTexture->getFrameHeight() : 0;
 	}
@@ -113,7 +113,7 @@ namespace bs
 
 		mActiveTexture = texture;
 
-		bool isTexLoaded = SpriteTexture::checkIsLoaded(mActiveTexture);
+		bool isTexLoaded = SpriteTextureResource::checkIsLoaded(mActiveTexture);
 		mActiveTextureWidth = isTexLoaded ? mActiveTexture->getFrameWidth() : 0;
 		mActiveTextureHeight = isTexLoaded ? mActiveTexture->getFrameHeight() : 0;
 
@@ -130,7 +130,7 @@ namespace bs
 	void GUITexture::updateRenderElementsInternal()
 	{
 		Vector2I textureSize;
-		if (SpriteTexture::checkIsLoaded(mActiveTexture))
+		if (SpriteTextureResource::checkIsLoaded(mActiveTexture))
 		{
 			mDesc.texture = mActiveTexture;
 			textureSize.x = mDesc.texture->getFrameWidth();
@@ -200,7 +200,7 @@ namespace bs
 			mActiveTexture = _getStyle()->normal.texture;
 			mDesc.animationStartTime = gTime().getTime();
 
-			bool isTexLoaded = SpriteTexture::checkIsLoaded(mActiveTexture);
+			bool isTexLoaded = SpriteTextureResource::checkIsLoaded(mActiveTexture);
 			mActiveTextureWidth = isTexLoaded ? mActiveTexture->getFrameWidth() : 0;
 			mActiveTextureHeight = isTexLoaded ? mActiveTexture->getFrameHeight() : 0;
 		}
@@ -219,7 +219,7 @@ namespace bs
 			optimalSize.x = _getDimensions().minWidth;
 		else
 		{
-			if (SpriteTexture::checkIsLoaded(mActiveTexture))
+			if (SpriteTextureResource::checkIsLoaded(mActiveTexture))
 				optimalSize.x = mActiveTextureWidth;
 			else
 				optimalSize.x = _getDimensions().maxWidth;
@@ -229,7 +229,7 @@ namespace bs
 			optimalSize.y = _getDimensions().minHeight;
 		else
 		{
-			if (SpriteTexture::checkIsLoaded(mActiveTexture))
+			if (SpriteTextureResource::checkIsLoaded(mActiveTexture))
 				optimalSize.y = mActiveTextureHeight;
 			else
 				optimalSize.y = _getDimensions().maxHeight;

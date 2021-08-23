@@ -14,7 +14,7 @@ namespace bs
 
 	void ImageSprite::update(const IMAGE_SPRITE_DESC& desc, UINT64 groupId)
 	{
-		if(!SpriteTexture::checkIsLoaded(desc.texture))
+		if(!SpriteTextureResource::checkIsLoaded(desc.texture))
 		{
 			clearMesh();
 			return;

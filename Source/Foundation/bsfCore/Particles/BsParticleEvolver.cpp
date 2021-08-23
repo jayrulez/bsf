@@ -72,7 +72,7 @@ namespace bs
 		const UINT32 endIdx = startIdx + count;
 		ParticleSetData& particles = set.getParticles();
 
-		SpriteTexture* texture = nullptr;
+		SpriteTextureResource* texture = nullptr;
 		const MaterialResourceHandle& material = state.system->getSettings().material;
 		if (material.isLoaded(false))
 		{

@@ -85,7 +85,7 @@ namespace bs
 		IMAGE_SPRITE_DESC desc;
 
 		SpriteTextureResourceHandle activeTex = getActiveTexture();
-		if(SpriteTexture::checkIsLoaded(activeTex))
+		if(SpriteTextureResource::checkIsLoaded(activeTex))
 			desc.texture = activeTex;
 
 		UINT32 handleSize = getHandleSize();
@@ -138,7 +138,7 @@ namespace bs
 	{
 		SpriteTextureResourceHandle activeTex = getActiveTexture();
 
-		if(SpriteTexture::checkIsLoaded(activeTex))
+		if(SpriteTextureResource::checkIsLoaded(activeTex))
 			return Vector2I(activeTex->getWidth(), activeTex->getHeight());
 
 		return Vector2I();

@@ -158,7 +158,7 @@ namespace bs
 	{
 		using MaterialPtrType = SPtr<CoreVariantType<MaterialResource, Core>>;
 		using MaterialParamsType = CoreVariantType<MaterialParams, Core>;
-		using SpriteTextureType = CoreVariantHandleType<SpriteTexture, Core>;
+		using SpriteTextureType = CoreVariantHandleType<SpriteTextureResource, Core>;
 		using TextureType = CoreVariantHandleType<TextureResource, Core>;
 
 	public:

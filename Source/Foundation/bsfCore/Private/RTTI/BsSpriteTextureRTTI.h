@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT SpriteTextureRTTI : public RTTIType<SpriteTexture, Resource, SpriteTextureRTTI>
+	class BS_CORE_EXPORT SpriteTextureResourceRTTI : public RTTIType<SpriteTextureResource, Resource, SpriteTextureResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -39,13 +39,13 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return SpriteTexture::createEmpty();
+			return SpriteTextureResource::createEmpty();
 		}
 
 	private:
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			SpriteTexture* texture = static_cast<SpriteTexture*>(obj);
+			SpriteTextureResource* texture = static_cast<SpriteTextureResource*>(obj);
 			texture->initialize();
 		}
 	};

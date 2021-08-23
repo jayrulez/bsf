@@ -385,7 +385,7 @@ namespace bs
 			TEXTURE_DESC texDesc; // Default
 
 			TextureResourceHandle newTex = TextureResource::createHandle(texDesc);
-			mCaretTexture = SpriteTexture::create(newTex);
+			mCaretTexture = SpriteTextureResource::create(newTex);
 		}
 
 		const TextureResourceHandle& tex = mCaretTexture->getTexture();
@@ -402,7 +402,7 @@ namespace bs
 			TEXTURE_DESC texDesc; // Default
 
 			TextureResourceHandle newTex = TextureResource::createHandle(texDesc);
-			mTextSelectionTexture = SpriteTexture::create(newTex);
+			mTextSelectionTexture = SpriteTextureResource::create(newTex);
 		}
 
 		const TextureResourceHandle& tex = mTextSelectionTexture->getTexture();

@@ -69,7 +69,7 @@ namespace bs
 		mImageDesc.height = mLayoutData.area.height;
 
 		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
-		if (SpriteTexture::checkIsLoaded(activeTex))
+		if (SpriteTextureResource::checkIsLoaded(activeTex))
 			mImageDesc.texture = activeTex;
 		else
 			mImageDesc.texture = nullptr;
@@ -133,7 +133,7 @@ namespace bs
 		UINT32 imageHeight = 0;
 
 		const SpriteTextureResourceHandle& activeTex = getActiveTexture();
-		if(SpriteTexture::checkIsLoaded(activeTex))
+		if(SpriteTextureResource::checkIsLoaded(activeTex))
 		{
 			imageWidth = activeTex->getWidth();
 			imageHeight = activeTex->getHeight();
@@ -353,7 +353,7 @@ namespace bs
 	void GUIButtonBase::refreshContentSprite()
 	{
 		SpriteTextureResourceHandle contentTex = mContent.getImage(mActiveState);
-		if (SpriteTexture::checkIsLoaded(contentTex))
+		if (SpriteTextureResource::checkIsLoaded(contentTex))
 		{
 			if (mContentImageSprite == nullptr)
 				mContentImageSprite = bs_new<ImageSprite>();

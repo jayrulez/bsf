@@ -1047,7 +1047,7 @@ namespace bs
 					{
 						assert(paramSize == sizeof(Rect2));
 
-						CoreVariantHandleType<SpriteTexture, Core> spriteTexture =
+						CoreVariantHandleType<SpriteTextureResource, Core> spriteTexture =
 							params->getOwningSpriteTexture(*materialParamInfo);
 
 						UINT32 writeOffset = paramInfo.offset * sizeof(UINT32);
