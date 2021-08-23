@@ -19,10 +19,10 @@ namespace bs
 	 *
 	 * @note	Sim thread.
 	 */
-	class BS_CORE_EXPORT TransientMesh : public MeshResourceBase
+	class BS_CORE_EXPORT TransientMeshResource : public MeshResourceBase
 	{
 	public:
-		virtual ~TransientMesh();
+		virtual ~TransientMeshResource();
 
 		/** Retrieves a core implementation of a mesh usable only from the core thread. */
 		SPtr<ct::TransientMesh> getCore() const;
@@ -35,7 +35,7 @@ namespace bs
 		 *
 		 * @see		MeshHeap::alloc
 		 */
-		TransientMesh(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices,
+		TransientMeshResource(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices,
 			UINT32 numIndices, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
 		/** Marks the mesh as destroyed so we know that we don't need to destroy it ourselves. */
@@ -91,7 +91,7 @@ namespace bs
 		void _notifyUsedOnGPU() override;
 
 	protected:
-		friend class bs::TransientMesh;
+		friend class bs::TransientMeshResource;
 
 		SPtr<MeshHeap> mParentHeap;
 		UINT32 mId;

@@ -35,13 +35,13 @@ namespace bs
 		 * @note	
 		 * Offsets provided by MeshData are ignored. MeshHeap will determine where the data will be written internally.
 		 */
-		SPtr<TransientMesh> alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
+		SPtr<TransientMeshResource> alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
 		/**
 		 * Deallocates the provided mesh and makes that room on the heap re-usable as soon as the GPU is also done with the
 		 * mesh.
 		 */
-		void dealloc(const SPtr<TransientMesh>& mesh);
+		void dealloc(const SPtr<TransientMeshResource>& mesh);
 
 		/** Retrieves a core implementation of a mesh heap usable only from the core thread. */
 		SPtr<ct::MeshHeap> getCore() const;
@@ -72,7 +72,7 @@ namespace bs
 		SPtr<VertexDataDesc> mVertexDesc;
 		IndexType mIndexType;
 
-		Map<UINT32, SPtr<TransientMesh>> mMeshes;
+		Map<UINT32, SPtr<TransientMeshResource>> mMeshes;
 		UINT32 mNextFreeId;
 	};
 
@@ -129,7 +129,7 @@ namespace bs
 
 	private:
 		friend class bs::MeshHeap;
-		friend class bs::TransientMesh;
+		friend class bs::TransientMeshResource;
 		friend class TransientMesh;
 
 		MeshHeap(UINT32 numVertices, UINT32 numIndices,

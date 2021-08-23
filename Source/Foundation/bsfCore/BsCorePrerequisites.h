@@ -479,7 +479,7 @@ namespace bs
 	class Resources;
 	class ResourceManifest;
 	class MeshResourceBase;
-	class TransientMesh;
+	class TransientMeshResource;
 	class MeshHeap;
 	class Font;
 	class ResourceMetaData;

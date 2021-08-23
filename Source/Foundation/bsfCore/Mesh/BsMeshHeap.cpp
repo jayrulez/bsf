@@ -31,14 +31,14 @@ namespace bs
 		return meshHeapPtr;
 	}
 
-	SPtr<TransientMesh> MeshHeap::alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp)
+	SPtr<TransientMeshResource> MeshHeap::alloc(const SPtr<MeshData>& meshData, DrawOperationType drawOp)
 	{
 		UINT32 meshIdx = mNextFreeId++;
 
 		SPtr<MeshHeap> thisPtr = std::static_pointer_cast<MeshHeap>(getThisPtr());
-		TransientMesh* transientMesh = new (bs_alloc<TransientMesh>()) TransientMesh(thisPtr, meshIdx,
+		TransientMeshResource* transientMesh = new (bs_alloc<TransientMeshResource>()) TransientMeshResource(thisPtr, meshIdx,
 			meshData->getNumVertices(), meshData->getNumIndices(), drawOp);
-		SPtr<TransientMesh> transientMeshPtr = bs_core_ptr<TransientMesh>(transientMesh);
+		SPtr<TransientMeshResource> transientMeshPtr = bs_core_ptr<TransientMeshResource>(transientMesh);
 
 		transientMeshPtr->_setThisPtr(transientMeshPtr);
 		transientMeshPtr->initialize();
@@ -50,7 +50,7 @@ namespace bs
 		return transientMeshPtr;
 	}
 
-	void MeshHeap::dealloc(const SPtr<TransientMesh>& mesh)
+	void MeshHeap::dealloc(const SPtr<TransientMeshResource>& mesh)
 	{
 		auto iterFind = mMeshes.find(mesh->mId);
 		if(iterFind == mMeshes.end())

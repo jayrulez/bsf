@@ -62,7 +62,7 @@ namespace bs
 		friend class ct::MeshBase;
 		friend class MeshResource;
 		friend class ct::Mesh;
-		friend class TransientMesh;
+		friend class TransientMeshResource;
 		friend class ct::TransientMesh;
 		friend class MeshResourceBaseRTTI;
 
