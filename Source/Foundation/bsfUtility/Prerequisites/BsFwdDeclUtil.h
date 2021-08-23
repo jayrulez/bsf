@@ -146,7 +146,7 @@ namespace bs
 	class GpuResourceData;
 	class PixelData;
 	class HString;
-	class StringTable;
+	class StringTableResource;
 	struct LocalizedStringData;
 	class Path;
 	class HThread;

@@ -251,13 +251,13 @@ namespace bs
 	 */
 
 	/** Used for string localization. Stores strings and their translations in various languages. */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Localization) StringTable : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Localization) StringTableResource : public Resource
 	{
 		// TODO - When editing string table I will need to ensure that all languages of the same string have the same number of parameters
 
 	public:
-		StringTable();
-		~StringTable();
+		StringTableResource();
+		~StringTableResource();
 
 		/**
 		 * Checks does the string table contain the provided identifier.
@@ -313,7 +313,7 @@ namespace bs
 
 		/** Creates a new empty string table resource. */
 		BS_SCRIPT_EXPORT(ec:StringTable)
-		static HStringTable create();
+		static StringTableResourceHandle create();
 
 		static const Language DEFAULT_LANGUAGE;
 	public: // ***** INTERNAL ******
@@ -326,7 +326,7 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<StringTable> _createPtr();
+		static SPtr<StringTableResource> _createPtr();
 
 		/** @} */
 	private:
@@ -351,7 +351,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class StringTableRTTI;
+		friend class StringTableResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};

@@ -15,13 +15,13 @@ namespace bs
 		}
 	}
 
-	HStringTable StringTableManager::getTable(UINT32 id)
+	StringTableResourceHandle StringTableManager::getTable(UINT32 id)
 	{
 		auto iterFind = mTables.find(id);
 		if (iterFind != mTables.end())
 			return iterFind->second;
 
-		HStringTable newTable = StringTable::create();
+		StringTableResourceHandle newTable = StringTableResource::create();
 		setTable(id, newTable);
 
 		return newTable;
@@ -32,7 +32,7 @@ namespace bs
 		mTables.erase(id);
 	}
 
-	void StringTableManager::setTable(UINT32 id, const HStringTable& table)
+	void StringTableManager::setTable(UINT32 id, const StringTableResourceHandle& table)
 	{
 		mTables[id] = table;
 

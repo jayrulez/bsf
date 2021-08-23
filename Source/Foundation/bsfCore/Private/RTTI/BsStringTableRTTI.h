@@ -15,32 +15,32 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT StringTableRTTI : public RTTIType<StringTable, Resource, StringTableRTTI>
+	class BS_CORE_EXPORT StringTableResourceRTTI : public RTTIType<StringTableResource, Resource, StringTableResourceRTTI>
 	{
 	private:
-		Language& getActiveLanguage(StringTable* obj) { return obj->mActiveLanguage; }
-		void setActiveLanguage(StringTable* obj, Language& val) { obj->mActiveLanguage = val; }
+		Language& getActiveLanguage(StringTableResource* obj) { return obj->mActiveLanguage; }
+		void setActiveLanguage(StringTableResource* obj, Language& val) { obj->mActiveLanguage = val; }
 
-		LanguageData& getLanguageData(StringTable* obj, UINT32 idx) { return obj->mAllLanguages[idx]; }
-		void setLanguageData(StringTable* obj, UINT32 idx, LanguageData& val) { obj->mAllLanguages[idx] = val; }
-		UINT32 getNumLanguages(StringTable* obj) { return (UINT32)Language::Count; }
-		void setNumLanguages(StringTable* obj, UINT32 val) { /* Do nothing */ }
+		LanguageData& getLanguageData(StringTableResource* obj, UINT32 idx) { return obj->mAllLanguages[idx]; }
+		void setLanguageData(StringTableResource* obj, UINT32 idx, LanguageData& val) { obj->mAllLanguages[idx] = val; }
+		UINT32 getNumLanguages(StringTableResource* obj) { return (UINT32)Language::Count; }
+		void setNumLanguages(StringTableResource* obj, UINT32 val) { /* Do nothing */ }
 
-		UnorderedSet<String>& getIdentifiers(StringTable* obj) { return obj->mIdentifiers; }
-		void setIdentifiers(StringTable* obj, UnorderedSet<String>& val) { obj->mIdentifiers = val; }
+		UnorderedSet<String>& getIdentifiers(StringTableResource* obj) { return obj->mIdentifiers; }
+		void setIdentifiers(StringTableResource* obj, UnorderedSet<String>& val) { obj->mIdentifiers = val; }
 
 	public:
-		StringTableRTTI()
+		StringTableResourceRTTI()
 		{
-			addPlainField("mActiveLanguage", 0, &StringTableRTTI::getActiveLanguage, &StringTableRTTI::setActiveLanguage);
-			addPlainArrayField("mLanguageData", 1, &StringTableRTTI::getLanguageData, &StringTableRTTI::getNumLanguages,
-				&StringTableRTTI::setLanguageData, &StringTableRTTI::setNumLanguages);
-			addPlainField("mIdentifiers", 2, &StringTableRTTI::getIdentifiers, &StringTableRTTI::setIdentifiers);
+			addPlainField("mActiveLanguage", 0, &StringTableResourceRTTI::getActiveLanguage, &StringTableResourceRTTI::setActiveLanguage);
+			addPlainArrayField("mLanguageData", 1, &StringTableResourceRTTI::getLanguageData, &StringTableResourceRTTI::getNumLanguages,
+				&StringTableResourceRTTI::setLanguageData, &StringTableResourceRTTI::setNumLanguages);
+			addPlainField("mIdentifiers", 2, &StringTableResourceRTTI::getIdentifiers, &StringTableResourceRTTI::setIdentifiers);
 		}
 
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			StringTable* stringTable = static_cast<StringTable*>(obj);
+			StringTableResource* stringTable = static_cast<StringTableResource*>(obj);
 			stringTable->setActiveLanguage(stringTable->mActiveLanguage);
 		}
 
@@ -57,7 +57,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return StringTable::_createPtr();
+			return StringTableResource::_createPtr();
 		}
 	};
 

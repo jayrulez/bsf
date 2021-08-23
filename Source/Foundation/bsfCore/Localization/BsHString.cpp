@@ -32,8 +32,8 @@ namespace bs
 
 	HString::HString(const String& identifierString, const String& defaultString, UINT32 stringTableId)
 	{
-		HStringTable table = StringTableManager::instance().getTable(stringTableId);
-		table->setString(identifierString, StringTable::DEFAULT_LANGUAGE, defaultString);
+		StringTableResourceHandle table = StringTableManager::instance().getTable(stringTableId);
+		table->setString(identifierString, StringTableResource::DEFAULT_LANGUAGE, defaultString);
 
 		mStringData = table->getStringData(identifierString);
 

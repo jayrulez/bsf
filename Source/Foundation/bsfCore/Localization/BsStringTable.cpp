@@ -7,7 +7,7 @@
 
 namespace bs
 {
-	const Language StringTable::DEFAULT_LANGUAGE = Language::EnglishUS;
+	const Language StringTableResource::DEFAULT_LANGUAGE = Language::EnglishUS;
 
 	LocalizedStringData::~LocalizedStringData()
 	{
@@ -157,7 +157,7 @@ namespace bs
 			parameterOffsets[i] = paramOffsets[i];
 	}
 
-	StringTable::StringTable()
+	StringTableResource::StringTableResource()
 		:Resource(false), mActiveLanguageData(nullptr), mDefaultLanguageData(nullptr), mAllLanguages(nullptr)
 	{
 		mAllLanguages = bs_newN<LanguageData>((UINT32)Language::Count);
@@ -167,12 +167,12 @@ namespace bs
 		mActiveLanguage = DEFAULT_LANGUAGE;
 	}
 	
-	StringTable::~StringTable()
+	StringTableResource::~StringTableResource()
 	{
 		bs_deleteN(mAllLanguages, (UINT32)Language::Count);
 	}
 
-	void StringTable::setActiveLanguage(Language language)
+	void StringTableResource::setActiveLanguage(Language language)
 	{
 		if(language == mActiveLanguage)
 			return;
@@ -181,12 +181,12 @@ namespace bs
 		mActiveLanguage = language;
 	}
 
-	bool StringTable::contains(const String& identifier)
+	bool StringTableResource::contains(const String& identifier)
 	{
 		return mIdentifiers.find(identifier) == mIdentifiers.end();
 	}
 
-	Vector<String> StringTable::getIdentifiers() const
+	Vector<String> StringTableResource::getIdentifiers() const
 	{
 		Vector<String> output;
 		for (auto& entry : mIdentifiers)
@@ -195,7 +195,7 @@ namespace bs
 		return output;
 	}
 
-	void StringTable::setString(const String& identifier, Language language, const String& value)
+	void StringTableResource::setString(const String& identifier, Language language, const String& value)
 	{
 		LanguageData* curLanguage = &(mAllLanguages[(UINT32)language]);
 
@@ -216,7 +216,7 @@ namespace bs
 		stringData->updateString(value);
 	}
 
-	String StringTable::getString(const String& identifier, Language language)
+	String StringTableResource::getString(const String& identifier, Language language)
 	{
 		LanguageData* curLanguage = &(mAllLanguages[(UINT32)language]);
 
@@ -227,7 +227,7 @@ namespace bs
 		return identifier;
 	}
 
-	void StringTable::removeString(const String& identifier)
+	void StringTableResource::removeString(const String& identifier)
 	{
 		for(UINT32 i = 0; i < (UINT32)Language::Count; i++)
 		{
@@ -237,12 +237,12 @@ namespace bs
 		mIdentifiers.erase(identifier);
 	}
 
-	SPtr<LocalizedStringData> StringTable::getStringData(const String& identifier, bool insertIfNonExisting)
+	SPtr<LocalizedStringData> StringTableResource::getStringData(const String& identifier, bool insertIfNonExisting)
 	{
 		return getStringData(identifier, mActiveLanguage, insertIfNonExisting);
 	}
 
-	SPtr<LocalizedStringData> StringTable::getStringData(const String& identifier, Language language, bool insertIfNonExisting)
+	SPtr<LocalizedStringData> StringTableResource::getStringData(const String& identifier, Language language, bool insertIfNonExisting)
 	{
 		LanguageData* curLanguage = &(mAllLanguages[(UINT32)language]);
 
@@ -267,28 +267,28 @@ namespace bs
 		return nullptr;
 	}
 
-	HStringTable StringTable::create()
+	StringTableResourceHandle StringTableResource::create()
 	{
-		return static_resource_cast<StringTable>(gResources()._createResourceHandle(_createPtr()));
+		return static_resource_cast<StringTableResource>(gResources()._createResourceHandle(_createPtr()));
 	}
 
-	SPtr<StringTable> StringTable::_createPtr()
+	SPtr<StringTableResource> StringTableResource::_createPtr()
 	{
-		SPtr<StringTable> scriptCodePtr = bs_core_ptr<StringTable>(
-			new (bs_alloc<StringTable>()) StringTable());
+		SPtr<StringTableResource> scriptCodePtr = bs_core_ptr<StringTableResource>(
+			new (bs_alloc<StringTableResource>()) StringTableResource());
 		scriptCodePtr->_setThisPtr(scriptCodePtr);
 		scriptCodePtr->initialize();
 
 		return scriptCodePtr;
 	}
 
-	RTTITypeBase* StringTable::getRTTIStatic()
+	RTTITypeBase* StringTableResource::getRTTIStatic()
 	{
-		return StringTableRTTI::instance();
+		return StringTableResourceRTTI::instance();
 	}
 
-	RTTITypeBase* StringTable::getRTTI() const
+	RTTITypeBase* StringTableResource::getRTTI() const
 	{
-		return StringTable::getRTTIStatic();
+		return StringTableResource::getRTTIStatic();
 	}
 }

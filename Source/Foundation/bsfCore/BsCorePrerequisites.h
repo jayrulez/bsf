@@ -480,7 +480,7 @@ namespace bs
 	class FontResource;
 	class ResourceMetaData;
 	class DropTarget;
-	class StringTable;
+	class StringTableResource;
 	class PhysicsMaterial;
 	class PhysicsMesh;
 	class AudioClip;
@@ -755,7 +755,7 @@ namespace bs
 	typedef ResourceHandle<FontResource> FontResourceHandle;
 	typedef ResourceHandle<ShaderResource> ShaderResourceHandle;
 	typedef ResourceHandle<PrefabResource> PrefabResourceHandle;
-	typedef ResourceHandle<StringTable> HStringTable;
+	typedef ResourceHandle<StringTableResource> StringTableResourceHandle;
 	typedef ResourceHandle<PhysicsMaterial> HPhysicsMaterial;
 	typedef ResourceHandle<PhysicsMesh> HPhysicsMesh;
 	typedef ResourceHandle<AudioClip> HAudioClip;
