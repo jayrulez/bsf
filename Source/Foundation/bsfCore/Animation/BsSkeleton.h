@@ -135,7 +135,7 @@ namespace bs
 		 * @note	It is more efficient to use the other getPose overload as sequential calls can benefit from animation
 		 *			evaluator cache.
 		 */
-		void getPose(Matrix4* pose, LocalSkeletonPose& localPose, const SkeletonMask& mask, const AnimationClip& clip,
+		void getPose(Matrix4* pose, LocalSkeletonPose& localPose, const SkeletonMask& mask, const AnimationClipResource& clip,
 			float time, bool loop = true);
 
 		/**

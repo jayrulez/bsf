@@ -454,7 +454,7 @@ namespace bs
 	class ShaderDefines;
 	class ShaderImportOptions;
 	class AudioClipImportOptions;
-	class AnimationClip;
+	class AnimationClipResource;
 	class GpuPipelineParamInfo;
 	template <class T> class TAnimationCurve;
 	struct AnimationCurves;
@@ -759,7 +759,7 @@ namespace bs
 	typedef ResourceHandle<PhysicsMaterialResource> PhysicsMaterialResourceHandle;
 	typedef ResourceHandle<PhysicsMeshResource> PhysicsMeshResourceHandle;
 	typedef ResourceHandle<AudioClipResource> AudioClipResourceHandle;
-	typedef ResourceHandle<AnimationClip> AnimationClipResourceHandle;
+	typedef ResourceHandle<AnimationClipResource> AnimationClipResourceHandle;
 	typedef ResourceHandle<SpriteTexture> SpriteTextureResourceHandle;
 	typedef ResourceHandle<VectorField> VectorFieldResourceHandle;
 

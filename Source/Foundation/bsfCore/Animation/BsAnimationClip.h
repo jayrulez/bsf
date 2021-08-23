@@ -145,10 +145,10 @@ namespace bs
 	 * Contains animation curves for translation/rotation/scale of scene objects/skeleton bones, as well as curves for
 	 * generic property animation.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Animation) AnimationClip : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Animation) AnimationClipResource : public Resource
 	{
 	public:
-		virtual ~AnimationClip() = default;
+		virtual ~AnimationClipResource() = default;
 
 		/** @copydoc setCurves() */
 		BS_SCRIPT_EXPORT(n:Curves,pr:getter)
@@ -269,14 +269,14 @@ namespace bs
 		 */
 
 		/** Creates a new AnimationClip without initializing it. Use create() for normal use. */
-		static SPtr<AnimationClip> _createPtr(const SPtr<AnimationCurves>& curves, bool isAdditive = false,
+		static SPtr<AnimationClipResource> _createPtr(const SPtr<AnimationCurves>& curves, bool isAdditive = false,
 			UINT32 sampleRate = 1, const SPtr<RootMotion>& rootMotion = nullptr);
 
 		/** @} */
 
 	protected:
-		AnimationClip();
-		AnimationClip(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
+		AnimationClipResource();
+		AnimationClipResource(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
 			const SPtr<RootMotion>& rootMotion);
 
 		/** @copydoc Resource::initialize() */
@@ -318,7 +318,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class AnimationClipRTTI;
+		friend class AnimationClipResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 
@@ -327,7 +327,7 @@ namespace bs
 		 *
 		 * @note	For serialization use only.
 		 */
-		static SPtr<AnimationClip> createEmpty();
+		static SPtr<AnimationClipResource> createEmpty();
 	};
 
 	/** @} */

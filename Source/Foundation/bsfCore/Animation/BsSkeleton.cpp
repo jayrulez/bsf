@@ -105,7 +105,7 @@ namespace bs
 	}
 
 	void Skeleton::getPose(Matrix4* pose, LocalSkeletonPose& localPose, const SkeletonMask& mask,
-		const AnimationClip& clip, float time, bool loop)
+		const AnimationClipResource& clip, float time, bool loop)
 	{
 		bs_frame_mark();
 		{

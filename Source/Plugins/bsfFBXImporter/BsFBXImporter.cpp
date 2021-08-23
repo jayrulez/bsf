@@ -164,7 +164,7 @@ namespace bs
 			Vector<ImportedAnimationEvents> events = meshImportOptions->animationEvents;
 			for(auto& entry : animationClips)
 			{
-				SPtr<AnimationClip> clip = AnimationClip::_createPtr(entry.curves, entry.isAdditive, entry.sampleRate,
+				SPtr<AnimationClipResource> clip = AnimationClipResource::_createPtr(entry.curves, entry.isAdditive, entry.sampleRate,
 					entry.rootMotion);
 				clip->setName(entry.name);
 				

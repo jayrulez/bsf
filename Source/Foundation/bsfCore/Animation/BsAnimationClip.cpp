@@ -79,14 +79,14 @@ namespace bs
 			generic.erase(iterFind);
 	}
 
-	AnimationClip::AnimationClip()
+	AnimationClipResource::AnimationClipResource()
 		: Resource(false), mVersion(0), mCurves(bs_shared_ptr_new<AnimationCurves>())
 		, mRootMotion(bs_shared_ptr_new<RootMotion>()), mIsAdditive(false), mLength(0.0f), mSampleRate(1)
 	{
 
 	}
 
-	AnimationClip::AnimationClip(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
+	AnimationClipResource::AnimationClipResource(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
 		const SPtr<RootMotion>& rootMotion)
 		: Resource(false), mVersion(0), mCurves(curves), mRootMotion(rootMotion), mIsAdditive(isAdditive), mLength(0.0f)
 		, mSampleRate(sampleRate)
@@ -101,42 +101,42 @@ namespace bs
 		calculateLength();
 	}
 
-	AnimationClipResourceHandle AnimationClip::create(bool isAdditive)
+	AnimationClipResourceHandle AnimationClipResource::create(bool isAdditive)
 	{
-		return static_resource_cast<AnimationClip>(gResources()._createResourceHandle(
+		return static_resource_cast<AnimationClipResource>(gResources()._createResourceHandle(
 			_createPtr(bs_shared_ptr_new<AnimationCurves>(), isAdditive)));
 	}
 
-	AnimationClipResourceHandle AnimationClip::create(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
+	AnimationClipResourceHandle AnimationClipResource::create(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
 		const SPtr<RootMotion>& rootMotion)
 	{
-		return static_resource_cast<AnimationClip>(gResources()._createResourceHandle(
+		return static_resource_cast<AnimationClipResource>(gResources()._createResourceHandle(
 			_createPtr(curves, isAdditive, sampleRate, rootMotion)));
 	}
 
-	SPtr<AnimationClip> AnimationClip::createEmpty()
+	SPtr<AnimationClipResource> AnimationClipResource::createEmpty()
 	{
-		AnimationClip* rawPtr = new (bs_alloc<AnimationClip>()) AnimationClip();
+		AnimationClipResource* rawPtr = new (bs_alloc<AnimationClipResource>()) AnimationClipResource();
 
-		SPtr<AnimationClip> newClip = bs_core_ptr<AnimationClip>(rawPtr);
+		SPtr<AnimationClipResource> newClip = bs_core_ptr<AnimationClipResource>(rawPtr);
 		newClip->_setThisPtr(newClip);
 
 		return newClip;
 	}
 
-	SPtr<AnimationClip> AnimationClip::_createPtr(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
+	SPtr<AnimationClipResource> AnimationClipResource::_createPtr(const SPtr<AnimationCurves>& curves, bool isAdditive, UINT32 sampleRate,
 		const SPtr<RootMotion>& rootMotion)
 	{
-		AnimationClip* rawPtr = new (bs_alloc<AnimationClip>()) AnimationClip(curves, isAdditive, sampleRate, rootMotion);
+		AnimationClipResource* rawPtr = new (bs_alloc<AnimationClipResource>()) AnimationClipResource(curves, isAdditive, sampleRate, rootMotion);
 
-		SPtr<AnimationClip> newClip = bs_core_ptr<AnimationClip>(rawPtr);
+		SPtr<AnimationClipResource> newClip = bs_core_ptr<AnimationClipResource>(rawPtr);
 		newClip->_setThisPtr(newClip);
 		newClip->initialize();
 
 		return newClip;
 	}
 
-	void AnimationClip::setCurves(const AnimationCurves& curves)
+	void AnimationClipResource::setCurves(const AnimationCurves& curves)
 	{
 		*mCurves = curves;
 
@@ -145,13 +145,13 @@ namespace bs
 		mVersion++;
 	}
 
-	bool AnimationClip::hasRootMotion() const
+	bool AnimationClipResource::hasRootMotion() const
 	{
 		return mRootMotion != nullptr &&
 			(mRootMotion->position.getNumKeyFrames() > 0 || mRootMotion->rotation.getNumKeyFrames() > 0);
 	}
 
-	void AnimationClip::calculateLength()
+	void AnimationClipResource::calculateLength()
 	{
 		mLength = 0.0f;
 
@@ -168,7 +168,7 @@ namespace bs
 			mLength = std::max(mLength, entry.curve.getLength());
 	}
 
-	void AnimationClip::buildNameMapping()
+	void AnimationClipResource::buildNameMapping()
 	{
 		mNameMapping.clear();
 
@@ -226,14 +226,14 @@ namespace bs
 		}
 	}
 
-	void AnimationClip::initialize()
+	void AnimationClipResource::initialize()
 	{
 		buildNameMapping();
 
 		Resource::initialize();
 	}
 
-	void AnimationClip::getBoneMapping(const Skeleton& skeleton, AnimationCurveMapping* mapping) const
+	void AnimationClipResource::getBoneMapping(const Skeleton& skeleton, AnimationCurveMapping* mapping) const
 	{
 		UINT32 numBones = skeleton.getNumBones();
 		for(UINT32 i = 0; i < numBones; i++)
@@ -244,7 +244,7 @@ namespace bs
 		}
 	}
 
-	void AnimationClip::getCurveMapping(const String& name, AnimationCurveMapping& mapping) const
+	void AnimationClipResource::getCurveMapping(const String& name, AnimationCurveMapping& mapping) const
 	{
 		auto iterFind = mNameMapping.find(name);
 		if (iterFind != mNameMapping.end())
@@ -259,7 +259,7 @@ namespace bs
 			mapping = { (UINT32)-1, (UINT32)-1, (UINT32)-1 };
 	}
 
-	void AnimationClip::getMorphMapping(const String& name, UINT32& frameIdx, UINT32& weightIdx) const
+	void AnimationClipResource::getMorphMapping(const String& name, UINT32& frameIdx, UINT32& weightIdx) const
 	{
 		auto iterFind = mNameMapping.find(name);
 		if (iterFind != mNameMapping.end())
@@ -276,12 +276,12 @@ namespace bs
 		}
 	}
 
-	RTTITypeBase* AnimationClip::getRTTIStatic()
+	RTTITypeBase* AnimationClipResource::getRTTIStatic()
 	{
-		return AnimationClipRTTI::instance();
+		return AnimationClipResourceRTTI::instance();
 	}
 
-	RTTITypeBase* AnimationClip::getRTTI() const
+	RTTITypeBase* AnimationClipResource::getRTTI() const
 	{
 		return getRTTIStatic();
 	}

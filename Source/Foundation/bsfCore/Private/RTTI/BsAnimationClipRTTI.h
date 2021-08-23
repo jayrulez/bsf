@@ -66,7 +66,7 @@ namespace bs
 		}
 	};
 
-	class BS_CORE_EXPORT AnimationClipRTTI : public RTTIType <AnimationClip, Resource, AnimationClipRTTI>
+	class BS_CORE_EXPORT AnimationClipResourceRTTI : public RTTIType <AnimationClipResource, Resource, AnimationClipResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -84,13 +84,13 @@ namespace bs
 	public:
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			AnimationClip* clip = static_cast<AnimationClip*>(obj);
+			AnimationClipResource* clip = static_cast<AnimationClipResource*>(obj);
 			clip->initialize();
 		}
 
 		const String& getRTTIName() override
 		{
-			static String name = "AnimationClip";
+			static String name = "AnimationClipResource";
 			return name;
 		}
 
@@ -101,7 +101,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return AnimationClip::createEmpty();
+			return AnimationClipResource::createEmpty();
 		}
 	};
 
