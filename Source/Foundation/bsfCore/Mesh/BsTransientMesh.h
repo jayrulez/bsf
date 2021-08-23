@@ -19,7 +19,7 @@ namespace bs
 	 *
 	 * @note	Sim thread.
 	 */
-	class BS_CORE_EXPORT TransientMesh : public MeshBase
+	class BS_CORE_EXPORT TransientMesh : public MeshResourceBase
 	{
 	public:
 		virtual ~TransientMesh();

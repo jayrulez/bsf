@@ -35,7 +35,7 @@ namespace bs
 	template<bool Core>
 	class BS_CORE_EXPORT TRenderable : public SceneActor
 	{
-		using MeshType = CoreVariantHandleType<Mesh, Core>;
+		using MeshType = CoreVariantHandleType<MeshResource, Core>;
 		using MaterialType = CoreVariantHandleType<MaterialResource, Core>;
 
 	public:

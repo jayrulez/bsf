@@ -235,7 +235,7 @@ namespace bs
 	struct TParticleSystemSettings : ParticleSystemSettingsBase
 	{
 		using MaterialType = CoreVariantHandleType<MaterialResource, Core>;
-		using MeshType = CoreVariantHandleType<Mesh, Core>;
+		using MeshType = CoreVariantHandleType<MeshResource, Core>;
 
 		/** Material to render the particles with. */
 		BS_SCRIPT_EXPORT(loadOnAssign)

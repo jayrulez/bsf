@@ -74,7 +74,7 @@ namespace bs
 		static SPtr<VertexDataDesc> create();
 
 	private:
-		friend class Mesh;
+		friend class MeshResource;
 		friend class ct::Mesh;
 		friend class MeshHeap;
 		friend class ct::MeshHeap;

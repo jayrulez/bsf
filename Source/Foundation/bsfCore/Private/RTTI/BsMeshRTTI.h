@@ -18,7 +18,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class MeshRTTI : public RTTIType<Mesh, MeshBase, MeshRTTI>
+	class MeshResourceRTTI : public RTTIType<MeshResource, MeshResourceBase, MeshResourceRTTI>
 	{
 		BS_BEGIN_RTTI_MEMBERS
 			BS_RTTI_MEMBER_REFLPTR(mVertexDesc, 0)
@@ -28,7 +28,7 @@ namespace bs
 			BS_RTTI_MEMBER_REFLPTR(mMorphShapes, 5)
 		BS_END_RTTI_MEMBERS
 
-		SPtr<MeshData> getMeshData(Mesh* obj)
+		SPtr<MeshData> getMeshData(MeshResource* obj)
 		{
 			SPtr<MeshData> meshData = obj->allocBuffer();
 
@@ -38,26 +38,26 @@ namespace bs
 			return meshData;
 		}
 
-		void setMeshData(Mesh* obj, SPtr<MeshData> meshData)
+		void setMeshData(MeshResource* obj, SPtr<MeshData> meshData)
 		{
 			obj->mCPUData = meshData;
 		}
 
 	public:
-		MeshRTTI()
+		MeshResourceRTTI()
 		{
-			addReflectablePtrField("mMeshData", 3, &MeshRTTI::getMeshData, &MeshRTTI::setMeshData);
+			addReflectablePtrField("mMeshData", 3, &MeshResourceRTTI::getMeshData, &MeshResourceRTTI::setMeshData);
 		}
 
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			Mesh* mesh = static_cast<Mesh*>(obj);
+			MeshResource* mesh = static_cast<MeshResource*>(obj);
 			mesh->initialize();
 		}
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return Mesh::createEmpty();
+			return MeshResource::createEmpty();
 		}
 
 		const String& getRTTIName() override

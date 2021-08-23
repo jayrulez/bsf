@@ -175,7 +175,7 @@ namespace bs
 		AABox box(Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.5f, 0.5f, 0.5f));
 
 		ShapeMeshes3D::solidAABox(box, boxMeshData, 0, 0);
-		SPtr<Mesh> boxMesh = Mesh::_createPtr(RendererMeshData::convert(boxMeshData));
+		SPtr<MeshResource> boxMesh = MeshResource::_createPtr(RendererMeshData::convert(boxMeshData));
 
 		UINT32 sphereNumVertices = 0;
 		UINT32 sphereNumIndices = 0;
@@ -183,7 +183,7 @@ namespace bs
 		SPtr<MeshData> sphereMeshData = bs_shared_ptr_new<MeshData>(sphereNumVertices, sphereNumIndices, vertexDesc);
 
 		ShapeMeshes3D::solidSphere(Sphere(Vector3::ZERO, 1.0f), sphereMeshData, 0, 0, 3);
-		SPtr<Mesh> sphereMesh = Mesh::_createPtr(RendererMeshData::convert(sphereMeshData));
+		SPtr<MeshResource> sphereMesh = MeshResource::_createPtr(RendererMeshData::convert(sphereMeshData));
 
 		UINT32 coneNumVertices = 0;
 		UINT32 coneNumIndices = 0;
@@ -191,7 +191,7 @@ namespace bs
 		SPtr<MeshData> coneMeshData = bs_shared_ptr_new<MeshData>(coneNumVertices, coneNumIndices, vertexDesc);
 
 		ShapeMeshes3D::solidCone(Vector3::ZERO, Vector3::UNIT_Y, 1.0f, 1.0f, Vector2::ONE, coneMeshData, 0, 0);
-		SPtr<Mesh> coneMesh = Mesh::_createPtr(RendererMeshData::convert(coneMeshData));
+		SPtr<MeshResource> coneMesh = MeshResource::_createPtr(RendererMeshData::convert(coneMeshData));
 
 		UINT32 cylinderNumVertices = 0;
 		UINT32 cylinderNumIndices = 0;
@@ -199,7 +199,7 @@ namespace bs
 		SPtr<MeshData> cylinderMeshData = bs_shared_ptr_new<MeshData>(cylinderNumVertices, cylinderNumIndices, vertexDesc);
 
 		ShapeMeshes3D::solidCylinder(Vector3::ZERO, Vector3::UNIT_Y, 1.0f, 1.0f, Vector2::ONE, cylinderMeshData, 0, 0);
-		SPtr<Mesh> cylinderMesh = Mesh::_createPtr(RendererMeshData::convert(cylinderMeshData));
+		SPtr<MeshResource> cylinderMesh = MeshResource::_createPtr(RendererMeshData::convert(cylinderMeshData));
 
 		UINT32 quadNumVertices = 8;
 		UINT32 quadNumIndices = 12;
@@ -210,7 +210,7 @@ namespace bs
 		std::array<float, 2> sizes = {{ 1.0f, 1.0f }};
 		Rect3 rect(Vector3::ZERO, axes, sizes);
 		ShapeMeshes3D::solidQuad(rect, quadMeshData, 0, 0);
-		SPtr<Mesh> quadMesh = Mesh::_createPtr(RendererMeshData::convert(quadMeshData));
+		SPtr<MeshResource> quadMesh = MeshResource::_createPtr(RendererMeshData::convert(quadMeshData));
 
 		UINT32 discNumVertices = 0;
 		UINT32 discNumIndices = 0;
@@ -218,12 +218,12 @@ namespace bs
 		SPtr<MeshData> discMeshData = bs_shared_ptr_new<MeshData>(discNumVertices, discNumIndices, vertexDesc);
 
 		ShapeMeshes3D::solidDisc(Vector3::ZERO, 1.0f, Vector3::UNIT_Y, discMeshData, 0, 0);
-		SPtr<Mesh> discMesh = Mesh::_createPtr(RendererMeshData::convert(discMeshData));
+		SPtr<MeshResource> discMesh = MeshResource::_createPtr(RendererMeshData::convert(discMeshData));
 
 		// Save all meshes
 		const Path outputDir = sOutputFolder + BuiltinResources::MESH_FOLDER;
 
-		auto saveMesh = [&](const Path& path, const SPtr<Mesh>& mesh, const String& uuid)
+		auto saveMesh = [&](const Path& path, const SPtr<MeshResource>& mesh, const String& uuid)
 		{
 			HResource meshResource = gResources()._createResourceHandle(mesh, UUID(uuid));
 

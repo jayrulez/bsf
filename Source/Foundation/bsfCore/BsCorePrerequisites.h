@@ -280,7 +280,7 @@ namespace bs
 	CORE_OBJECT_FORWARD_DECLARE(ParticleSystem);
 	//CORE_OBJECT_FORWARD_DECLARE(Texture);
 	CORE_OBJECT_FORWARD_DECLARE(SpriteTexture);
-	CORE_OBJECT_FORWARD_DECLARE(Mesh);
+	//CORE_OBJECT_FORWARD_DECLARE(Mesh);
 	CORE_OBJECT_FORWARD_DECLARE(VectorField);
 	CORE_OBJECT_FORWARD_DECLARE(Skybox);
 	CORE_OBJECT_FORWARD_DECLARE(Decal);
@@ -301,6 +301,11 @@ namespace bs
 	class ShaderResource;
 	namespace ct { class Shader; }
 	template<> struct CoreThreadType<ShaderResource> { typedef ct::Shader Type; };
+
+
+	class MeshResource;
+	namespace ct { class Mesh; }
+	template<> struct CoreThreadType<MeshResource> { typedef ct::Mesh Type; };
 
 	//class IndexBuffer;
 	//class VertexBuffer;
@@ -473,7 +478,7 @@ namespace bs
 	class Resource;
 	class Resources;
 	class ResourceManifest;
-	class MeshBase;
+	class MeshResourceBase;
 	class TransientMesh;
 	class MeshHeap;
 	class Font;
@@ -748,7 +753,7 @@ namespace bs
 
 	typedef ResourceHandle<Resource> HResource;
 	typedef ResourceHandle<TextureResource> TextureResourceHandle;
-	typedef ResourceHandle<Mesh> MeshResourceHandle;
+	typedef ResourceHandle<MeshResource> MeshResourceHandle;
 	typedef ResourceHandle<MaterialResource> MaterialResourceHandle;
 	typedef ResourceHandle<ShaderIncludeResource> ShaderIncludeResourceHandle;
 	typedef ResourceHandle<Font> FontResourceHandle;

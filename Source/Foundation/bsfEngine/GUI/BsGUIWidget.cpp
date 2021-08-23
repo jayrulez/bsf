@@ -734,10 +734,10 @@ namespace bs
 			}
 
 			if (meshData[0])
-				mTriangleMesh = Mesh::_createPtr(meshData[0], MU_STATIC, DOT_TRIANGLE_LIST);
+				mTriangleMesh = MeshResource::_createPtr(meshData[0], MU_STATIC, DOT_TRIANGLE_LIST);
 
 			if (meshData[1])
-				mLineMesh = Mesh::_createPtr(meshData[1], MU_STATIC, DOT_LINE_LIST);
+				mLineMesh = MeshResource::_createPtr(meshData[1], MU_STATIC, DOT_LINE_LIST);
 		}
 
 		bs_frame_clear();

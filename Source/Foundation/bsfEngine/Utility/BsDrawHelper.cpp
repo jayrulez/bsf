@@ -1259,11 +1259,11 @@ namespace bs
 			}
 		}
 
-		SPtr<Mesh> meshes[4];
+		SPtr<MeshResource> meshes[4];
 		for(UINT32 i = 0; i < 4; i++)
 		{
 			if(meshData[i])
-				meshes[i] = Mesh::_createPtr(meshData[i]);
+				meshes[i] = MeshResource::_createPtr(meshData[i]);
 		}
 
 		for(auto& entry : meshInfos)

@@ -333,7 +333,7 @@ namespace bs
 			break;
 		}
 
-		return gResources().load<Mesh>(meshPath);
+		return gResources().load<MeshResource>(meshPath);
 	}
 
 	ShaderResourceHandle BuiltinResources::getBuiltinShader(BuiltinShader type) const

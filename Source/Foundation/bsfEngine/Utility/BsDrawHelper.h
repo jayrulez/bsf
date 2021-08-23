@@ -38,7 +38,7 @@ namespace bs
 		/**	Container for mesh of a specific type output by the DrawHelper. */
 		struct ShapeMeshData
 		{
-			SPtr<Mesh> mesh;
+			SPtr<MeshResource> mesh;
 			SubMesh subMesh;
 			MeshType type;
 			TextureResourceHandle texture;

@@ -61,10 +61,10 @@ namespace bs
 	 * Primary class for holding geometry. Stores data in the form of vertex buffers and optionally an index buffer, which
 	 * may be bound to the pipeline for drawing. May contain multiple sub-meshes.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) Mesh : public MeshBase
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Rendering) MeshResource : public MeshResourceBase
 	{
 	public:
-		virtual ~Mesh() = default;
+		virtual ~MeshResource() = default;
 
 		/** @copydoc MeshBase::initialize */
 		void initialize() override;
@@ -130,8 +130,8 @@ namespace bs
 	protected:
 		friend class MeshManager;
 
-		Mesh(const MESH_DESC& desc);
-		Mesh(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc);
+		MeshResource(const MESH_DESC& desc);
+		MeshResource(const SPtr<MeshData>& initialMeshData, const MESH_DESC& desc);
 
 		/**	Updates bounds by calculating them from the vertices in the provided mesh data object. */
 		void updateBounds(const MeshData& meshData);
@@ -161,10 +161,10 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	private:
-		Mesh(); // Serialization only
+		MeshResource(); // Serialization only
 
 	public:
-		friend class MeshRTTI;
+		friend class MeshResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 
@@ -230,21 +230,21 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<Mesh> _createPtr(const MESH_DESC& desc);
+		static SPtr<MeshResource> _createPtr(const MESH_DESC& desc);
 
 		/**
 		 * @copydoc	create(const SPtr<MeshData>&, const MESH_DESC&)
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<Mesh> _createPtr(const SPtr<MeshData>& initialData, const MESH_DESC& desc);
+		static SPtr<MeshResource> _createPtr(const SPtr<MeshData>& initialData, const MESH_DESC& desc);
 
 		/**
 		 * @copydoc	create(const SPtr<MeshData>&, int, DrawOperationType)
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<Mesh> _createPtr(const SPtr<MeshData>& initialData, int usage = MU_STATIC,
+		static SPtr<MeshResource> _createPtr(const SPtr<MeshData>& initialData, int usage = MU_STATIC,
 			DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
 		/**
@@ -252,7 +252,7 @@ namespace bs
 		 *	
 		 * @note	This should only be used for special cases like serialization and is not meant for normal use.
 		 */
-		static SPtr<Mesh> createEmpty();
+		static SPtr<MeshResource> createEmpty();
 
 		/** @} */
 	};
@@ -377,7 +377,7 @@ namespace bs
 			DrawOperationType drawOp = DOT_TRIANGLE_LIST, GpuDeviceFlags deviceMask = GDF_DEFAULT);
 
 	protected:
-		friend class bs::Mesh;
+		friend class bs::MeshResource;
 
 		/** Updates bounds by calculating them from the vertices in the provided mesh data object. */
 		void updateBounds(const MeshData& meshData);

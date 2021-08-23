@@ -281,7 +281,7 @@ namespace bs
 		void getDataForIterator(VertexElementSemantic semantic, UINT32 semanticIdx, UINT32 streamIdx, UINT8*& data, UINT32& stride) const;
 
 	private:
-		friend class Mesh;
+		friend class MeshResource;
 		friend class ct::Mesh;
 		friend class MeshHeap;
 		friend class ct::MeshHeap;

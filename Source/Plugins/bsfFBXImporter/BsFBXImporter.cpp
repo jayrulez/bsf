@@ -111,7 +111,7 @@ namespace bs
 		if (meshImportOptions->cpuCached)
 			desc.usage |= MU_CPUCACHED;
 
-		SPtr<Mesh> mesh = Mesh::_createPtr(rendererMeshData->getData(), desc);
+		SPtr<MeshResource> mesh = MeshResource::_createPtr(rendererMeshData->getData(), desc);
 
 		const String fileName = filePath.getFilename(false);
 		mesh->setName(fileName);
@@ -133,7 +133,7 @@ namespace bs
 		if (meshImportOptions->cpuCached)
 			desc.usage |= MU_CPUCACHED;
 
-		SPtr<Mesh> mesh = Mesh::_createPtr(rendererMeshData->getData(), desc);
+		SPtr<MeshResource> mesh = MeshResource::_createPtr(rendererMeshData->getData(), desc);
 
 		const String fileName = filePath.getFilename(false);
 		mesh->setName(fileName);

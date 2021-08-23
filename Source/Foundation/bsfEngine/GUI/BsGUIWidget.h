@@ -188,8 +188,8 @@ namespace bs
 		bool mGroupsCoreDirty = true;
 		GUIWidget* mWidget;
 		
-		SPtr<Mesh> mTriangleMesh;
-		SPtr<Mesh> mLineMesh;
+		SPtr<MeshResource> mTriangleMesh;
+		SPtr<MeshResource> mLineMesh;
 		mutable INT32 mNextDrawGroupId = 0;
 	};
 	

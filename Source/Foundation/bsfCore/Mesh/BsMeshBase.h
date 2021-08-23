@@ -58,13 +58,13 @@ namespace bs
 		const Bounds& getBounds() const { return mBounds; }
 
 	protected:
-		friend class MeshBase;
+		friend class MeshResourceBase;
 		friend class ct::MeshBase;
-		friend class Mesh;
+		friend class MeshResource;
 		friend class ct::Mesh;
 		friend class TransientMesh;
 		friend class ct::TransientMesh;
-		friend class MeshBaseRTTI;
+		friend class MeshResourceBaseRTTI;
 
 		Vector<SubMesh> mSubMeshes;
 		UINT32 mNumVertices;
@@ -84,7 +84,7 @@ namespace bs
 	 *
 	 * @note	Sim thread.
 	 */
-	class BS_CORE_EXPORT MeshBase : public Resource
+	class BS_CORE_EXPORT MeshResourceBase : public Resource
 	{
 	public:
 		/**
@@ -95,7 +95,7 @@ namespace bs
 		 * @param[in]	drawOp			Determines how should the provided indices be interpreted by the pipeline. Default
 		 *								option is triangles, where three indices represent a single triangle.
 		 */
-		MeshBase(UINT32 numVertices, UINT32 numIndices, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
+		MeshResourceBase(UINT32 numVertices, UINT32 numIndices, DrawOperationType drawOp = DOT_TRIANGLE_LIST);
 
 		/**
 		 * Constructs a new mesh with one or multiple sub-meshes. (When using just one sub-mesh it is equivalent to using
@@ -106,9 +106,9 @@ namespace bs
 		 * @param[in]	subMeshes		Defines how are indices separated into sub-meshes, and how are those sub-meshes
 		 *								rendered.
 		 */
-		MeshBase(UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes);
+		MeshResourceBase(UINT32 numVertices, UINT32 numIndices, const Vector<SubMesh>& subMeshes);
 
-		virtual ~MeshBase();
+		virtual ~MeshResourceBase();
 
 		/**	Returns properties that contain information about the mesh. */
 		const MeshProperties& getProperties() const { return mProperties; }
@@ -126,10 +126,10 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	private:
-		MeshBase() { } // Serialization only
+		MeshResourceBase() { } // Serialization only
 
 	public:
-		friend class MeshBaseRTTI;
+		friend class MeshResourceBaseRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
