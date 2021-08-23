@@ -703,7 +703,7 @@ namespace bs
 		return bs_core_ptr_new<PhysXMaterial>(mPhysics, staticFriction, dynamicFriction, restitution);
 	}
 
-	SPtr<PhysicsMesh> PhysX::createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type)
+	SPtr<PhysicsMeshResource> PhysX::createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type)
 	{
 		return bs_core_ptr_new<PhysXMesh>(meshData, type);
 	}

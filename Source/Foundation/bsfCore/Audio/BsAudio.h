@@ -75,7 +75,7 @@ namespace bs
 
 		/** @} */
 	protected:
-		friend class AudioClip;
+		friend class AudioClipResource;
 		friend class AudioListener;
 		friend class AudioSource;
 
@@ -88,7 +88,7 @@ namespace bs
 		 * @param[in]	desc		Descriptor describing the type of the audio stream (format, sample rate, etc.).
 		 * @return					Newly created AudioClip. Must be manually initialized.
 		 */
-		virtual SPtr<AudioClip> createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
+		virtual SPtr<AudioClipResource> createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
 			const AUDIO_CLIP_DESC& desc) = 0;
 
 		/** Creates a new AudioListener. */

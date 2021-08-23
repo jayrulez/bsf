@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/** PhysX implementation of a PhysicsMesh. */
-	class PhysXMesh : public PhysicsMesh
+	class PhysXMesh : public PhysicsMeshResource
 	{
 	public:
 		PhysXMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type);

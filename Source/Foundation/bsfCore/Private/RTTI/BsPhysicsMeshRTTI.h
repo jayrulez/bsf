@@ -15,7 +15,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_CORE_EXPORT PhysicsMeshRTTI : public RTTIType<PhysicsMesh, Resource, PhysicsMeshRTTI>
+	class BS_CORE_EXPORT PhysicsMeshResourceRTTI : public RTTIType<PhysicsMeshResource, Resource, PhysicsMeshResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -25,7 +25,7 @@ namespace bs
 	public:
 		void onDeserializationEnded(IReflectable* obj, SerializationContext* context) override
 		{
-			PhysicsMesh* mesh = static_cast<PhysicsMesh*>(obj);
+			PhysicsMeshResource* mesh = static_cast<PhysicsMeshResource*>(obj);
 			mesh->initialize();
 		}
 
@@ -42,7 +42,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			SPtr<PhysicsMesh> mesh = gPhysics().createMesh(nullptr, PhysicsMeshType::Convex);
+			SPtr<PhysicsMeshResource> mesh = gPhysics().createMesh(nullptr, PhysicsMeshType::Convex);
 			mesh->_setThisPtr(mesh);
 
 			return mesh;

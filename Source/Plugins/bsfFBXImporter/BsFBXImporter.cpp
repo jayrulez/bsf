@@ -151,7 +151,7 @@ namespace bs
 					PhysicsMeshType type = collisionMeshType == CollisionMeshType::Convex ?
 						PhysicsMeshType::Convex : PhysicsMeshType::Triangle;
 
-					SPtr<PhysicsMesh> physicsMesh = PhysicsMesh::_createPtr(rendererMeshData->getData(), type);
+					SPtr<PhysicsMeshResource> physicsMesh = PhysicsMeshResource::_createPtr(rendererMeshData->getData(), type);
 
 					output.push_back({ u8"collision", physicsMesh });
 				}

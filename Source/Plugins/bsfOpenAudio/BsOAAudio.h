@@ -103,7 +103,7 @@ namespace bs
 		};
 
 		/** @copydoc Audio::createClip */
-		SPtr<AudioClip> createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
+		SPtr<AudioClipResource> createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
 			const AUDIO_CLIP_DESC& desc) override;
 
 		/** @copydoc Audio::createListener */

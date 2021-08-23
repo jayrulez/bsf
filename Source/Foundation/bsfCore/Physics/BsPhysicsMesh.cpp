@@ -7,51 +7,51 @@
 
 namespace bs
 {
-	PhysicsMesh::PhysicsMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type)
+	PhysicsMeshResource::PhysicsMeshResource(const SPtr<MeshData>& meshData, PhysicsMeshType type)
 		:mInitMeshData(meshData), mType(type)
 	{
 		// Derived class is responsible for initializing mInternal
 	}
 
-	PhysicsMeshType PhysicsMesh::getType() const
+	PhysicsMeshType PhysicsMeshResource::getType() const
 	{
 		return mInternal->mType;
 	}
 
-	SPtr<MeshData> PhysicsMesh::getMeshData() const
+	SPtr<MeshData> PhysicsMeshResource::getMeshData() const
 	{
 		return mInternal->getMeshData();
 	}
 
-	PhysicsMeshResourceHandle PhysicsMesh::create(const SPtr<MeshData>& meshData, PhysicsMeshType type)
+	PhysicsMeshResourceHandle PhysicsMeshResource::create(const SPtr<MeshData>& meshData, PhysicsMeshType type)
 	{
-		SPtr<PhysicsMesh> newMesh = _createPtr(meshData, type);
+		SPtr<PhysicsMeshResource> newMesh = _createPtr(meshData, type);
 
-		return static_resource_cast<PhysicsMesh>(gResources()._createResourceHandle(newMesh));
+		return static_resource_cast<PhysicsMeshResource>(gResources()._createResourceHandle(newMesh));
 	}
 
-	SPtr<PhysicsMesh> PhysicsMesh::_createPtr(const SPtr<MeshData>& meshData, PhysicsMeshType type)
+	SPtr<PhysicsMeshResource> PhysicsMeshResource::_createPtr(const SPtr<MeshData>& meshData, PhysicsMeshType type)
 	{
-		SPtr<PhysicsMesh> newMesh = gPhysics().createMesh(meshData, type);
+		SPtr<PhysicsMeshResource> newMesh = gPhysics().createMesh(meshData, type);
 		newMesh->_setThisPtr(newMesh);
 		newMesh->initialize();
 
 		return newMesh;
 	}
 
-	void PhysicsMesh::initialize()
+	void PhysicsMeshResource::initialize()
 	{
 		mInitMeshData = nullptr;
 
 		Resource::initialize();
 	}
 
-	RTTITypeBase* PhysicsMesh::getRTTIStatic()
+	RTTITypeBase* PhysicsMeshResource::getRTTIStatic()
 	{
-		return PhysicsMeshRTTI::instance();
+		return PhysicsMeshResourceRTTI::instance();
 	}
 
-	RTTITypeBase* PhysicsMesh::getRTTI() const
+	RTTITypeBase* PhysicsMeshResource::getRTTI() const
 	{
 		return getRTTIStatic();
 	}

@@ -13,7 +13,7 @@ namespace bs
 	 */
 	
 	/** OpenAudio implementation of an AudioClip. */
-	class OAAudioClip : public AudioClip
+	class OAAudioClip : public AudioClipResource
 	{
 	public:
 		OAAudioClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc);

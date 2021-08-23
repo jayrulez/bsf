@@ -10,7 +10,7 @@
 namespace bs
 {
 	OAAudioClip::OAAudioClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
-		:AudioClip(samples, streamSize, numSamples, desc)
+		:AudioClipResource(samples, streamSize, numSamples, desc)
 	{ }
 
 	OAAudioClip::~OAAudioClip()
@@ -128,7 +128,7 @@ namespace bs
 			}
 		}
 
-		AudioClip::initialize();
+		AudioClipResource::initialize();
 	}
 
 	void OAAudioClip::getSamples(UINT8* samples, UINT32 offset, UINT32 count) const

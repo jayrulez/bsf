@@ -7,7 +7,7 @@
 
 namespace bs
 {
-	AudioClip::AudioClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
+	AudioClipResource::AudioClipResource(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
 		: Resource(false), mDesc(desc), mNumSamples(numSamples), mStreamSize(streamSize), mStreamData(samples)
 	{
 		if (samples != nullptr)
@@ -16,43 +16,43 @@ namespace bs
 		mKeepSourceData = desc.keepSourceData;
 	}
 
-	void AudioClip::initialize()
+	void AudioClipResource::initialize()
 	{
 		mLength = mNumSamples / mDesc.numChannels / (float)mDesc.frequency;
 
 		Resource::initialize();
 	}
 
-	AudioClipResourceHandle AudioClip::create(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
+	AudioClipResourceHandle AudioClipResource::create(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
 	{
-		return static_resource_cast<AudioClip>(gResources()._createResourceHandle(_createPtr(samples, streamSize, numSamples, desc)));
+		return static_resource_cast<AudioClipResource>(gResources()._createResourceHandle(_createPtr(samples, streamSize, numSamples, desc)));
 	}
 
-	SPtr<AudioClip> AudioClip::_createPtr(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
+	SPtr<AudioClipResource> AudioClipResource::_createPtr(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc)
 	{
-		SPtr<AudioClip> newClip = gAudio().createClip(samples, streamSize, numSamples, desc);
+		SPtr<AudioClipResource> newClip = gAudio().createClip(samples, streamSize, numSamples, desc);
 		newClip->_setThisPtr(newClip);
 		newClip->initialize();
 
 		return newClip;
 	}
 
-	SPtr<AudioClip> AudioClip::createEmpty()
+	SPtr<AudioClipResource> AudioClipResource::createEmpty()
 	{
 		AUDIO_CLIP_DESC desc;
 
-		SPtr<AudioClip> newClip = gAudio().createClip(nullptr, 0, 0, desc);
+		SPtr<AudioClipResource> newClip = gAudio().createClip(nullptr, 0, 0, desc);
 		newClip->_setThisPtr(newClip);
 
 		return newClip;
 	}
 
-	RTTITypeBase* AudioClip::getRTTIStatic()
+	RTTITypeBase* AudioClipResource::getRTTIStatic()
 	{
-		return AudioClipRTTI::instance();
+		return AudioClipResourceRTTI::instance();
 	}
 
-	RTTITypeBase* AudioClip::getRTTI() const
+	RTTITypeBase* AudioClipResource::getRTTI() const
 	{
 		return getRTTIStatic();
 	}

@@ -482,8 +482,8 @@ namespace bs
 	class DropTarget;
 	class StringTableResource;
 	class PhysicsMaterialResource;
-	class PhysicsMesh;
-	class AudioClip;
+	class PhysicsMeshResource;
+	class AudioClipResource;
 	// Scene
 	class SceneObject;
 	class Component;
@@ -757,8 +757,8 @@ namespace bs
 	typedef ResourceHandle<PrefabResource> PrefabResourceHandle;
 	typedef ResourceHandle<StringTableResource> StringTableResourceHandle;
 	typedef ResourceHandle<PhysicsMaterialResource> PhysicsMaterialResourceHandle;
-	typedef ResourceHandle<PhysicsMesh> PhysicsMeshResourceHandle;
-	typedef ResourceHandle<AudioClip> AudioClipResourceHandle;
+	typedef ResourceHandle<PhysicsMeshResource> PhysicsMeshResourceHandle;
+	typedef ResourceHandle<AudioClipResource> AudioClipResourceHandle;
 	typedef ResourceHandle<AnimationClip> AnimationClipResourceHandle;
 	typedef ResourceHandle<SpriteTexture> SpriteTextureResourceHandle;
 	typedef ResourceHandle<VectorField> VectorFieldResourceHandle;

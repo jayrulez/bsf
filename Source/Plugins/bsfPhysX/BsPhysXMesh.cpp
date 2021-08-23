@@ -163,7 +163,7 @@ namespace bs
 	}
 
 	PhysXMesh::PhysXMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type)
-		:PhysicsMesh(meshData, type)
+		:PhysicsMeshResource(meshData, type)
 	{ }
 
 	void PhysXMesh::initialize()
@@ -171,14 +171,14 @@ namespace bs
 		if(mInternal == nullptr) // Could be not-null if we're deserializing
 			mInternal = bs_shared_ptr_new<FPhysXMesh>(mInitMeshData, mType);
 
-		PhysicsMesh::initialize();
+		PhysicsMeshResource::initialize();
 	}
 
 	void PhysXMesh::destroy()
 	{
 		mInternal = nullptr;
 
-		PhysicsMesh::destroy();
+		PhysicsMeshResource::destroy();
 	}
 
 	FPhysXMesh::FPhysXMesh()

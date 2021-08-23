@@ -17,11 +17,11 @@ namespace bs
 	 * Represents a physics mesh that can be used with a MeshCollider. Physics mesh can be a generic triangle mesh
 	 * or a convex mesh. Convex meshes are limited to 255 faces.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Physics) PhysicsMesh : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Physics) PhysicsMeshResource : public Resource
 	{
 	public:
-		PhysicsMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type);
-		virtual ~PhysicsMesh() = default;
+		PhysicsMeshResource(const SPtr<MeshData>& meshData, PhysicsMeshType type);
+		virtual ~PhysicsMeshResource() = default;
 
 		/** Returns the type of the physics mesh. */
 		BS_SCRIPT_EXPORT(n:Type,pr:getter)
@@ -51,7 +51,7 @@ namespace bs
 		 *
 		 * For internal use. Requires manual initialization after creation.
 		 */
-		static SPtr<PhysicsMesh> _createPtr(const SPtr<MeshData>& meshData, PhysicsMeshType type);
+		static SPtr<PhysicsMeshResource> _createPtr(const SPtr<MeshData>& meshData, PhysicsMeshType type);
 
 		/** @} */
 
@@ -67,7 +67,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class PhysicsMeshRTTI;
+		friend class PhysicsMeshResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 	};
@@ -88,7 +88,7 @@ namespace bs
 		virtual SPtr<MeshData> getMeshData() const = 0;
 
 	protected:
-		friend class PhysicsMesh;
+		friend class PhysicsMeshResource;
 
 		PhysicsMeshType mType;
 		

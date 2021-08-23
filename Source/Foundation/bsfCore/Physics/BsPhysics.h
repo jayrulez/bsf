@@ -91,7 +91,7 @@ namespace bs
 		virtual SPtr<PhysicsMaterialResource> createMaterial(float staticFriction, float dynamicFriction, float restitution) = 0;
 
 		/** @copydoc PhysicsMesh::create */
-		virtual SPtr<PhysicsMesh> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) = 0;
+		virtual SPtr<PhysicsMeshResource> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) = 0;
 
 		/** Creates an object representing the physics scene. Must be manually released via destroyPhysicsScene(). */
 		virtual SPtr<PhysicsScene> createPhysicsScene() = 0;

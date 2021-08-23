@@ -72,10 +72,10 @@ namespace bs
 	 * Audio clip stores audio data in a compressed or uncompressed format. Clips can be provided to audio sources or
 	 * other audio methods to be played.
 	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Audio) AudioClip : public Resource
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Audio) AudioClipResource : public Resource
 	{
 	public:
-		virtual ~AudioClip() = default;
+		virtual ~AudioClipResource() = default;
 
 		/** Returns the size of a single sample, in bits. */
 		BS_SCRIPT_EXPORT(n:BitDepth,pr:getter)
@@ -139,12 +139,12 @@ namespace bs
 		 */
 
 		/** Creates a new AudioClip without initializing it. Use create() for normal use. */
-		static SPtr<AudioClip> _createPtr(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
+		static SPtr<AudioClipResource> _createPtr(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
 			const AUDIO_CLIP_DESC& desc);
 
 		/** @} */
 	protected:
-		AudioClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc);
+		AudioClipResource(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples, const AUDIO_CLIP_DESC& desc);
 
 		/** @copydoc Resource::initialize */
 		void initialize() override;
@@ -167,7 +167,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class AudioClipRTTI;
+		friend class AudioClipResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		RTTITypeBase* getRTTI() const override;
 
@@ -176,7 +176,7 @@ namespace bs
 		 *
 		 * @note	For serialization use only.
 		 */
-		static SPtr<AudioClip> createEmpty();
+		static SPtr<AudioClipResource> createEmpty();
 	};
 
 	/** @} */

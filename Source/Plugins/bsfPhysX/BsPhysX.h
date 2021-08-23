@@ -67,7 +67,7 @@ namespace bs
 		SPtr<PhysicsMaterialResource> createMaterial(float staticFriction, float dynamicFriction, float restitution) override;
 
 		/** @copydoc Physics::createMesh */
-		SPtr<PhysicsMesh> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) override;
+		SPtr<PhysicsMeshResource> createMesh(const SPtr<MeshData>& meshData, PhysicsMeshType type) override;
 
 		/** @copydoc Physics::createPhysicsScene */
 		SPtr<PhysicsScene> createPhysicsScene() override;

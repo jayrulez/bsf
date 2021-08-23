@@ -208,7 +208,7 @@ namespace bs
 		return nullptr;
 	}
 
-	SPtr<AudioClip> OAAudio::createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
+	SPtr<AudioClipResource> OAAudio::createClip(const SPtr<DataStream>& samples, UINT32 streamSize, UINT32 numSamples,
 		const AUDIO_CLIP_DESC& desc)
 	{
 		return bs_core_ptr_new<OAAudioClip>(samples, streamSize, numSamples, desc);
