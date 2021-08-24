@@ -1,0 +1,41 @@
+//************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
+//*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
+#include "Mesh/BsTransientMesh.h"
+#include "Mesh/BsTransientMeshResource.h"
+#include "RenderAPI/BsVertexData.h"
+#include "Math/BsBounds.h"
+#include "Mesh/BsMeshHeap.h"
+
+namespace bs
+{
+	TransientMeshResource::TransientMeshResource(const SPtr<MeshHeap>& parentHeap, UINT32 id, UINT32 numVertices, UINT32 numIndices, DrawOperationType drawOp)
+		:MeshResourceBase(numVertices, numIndices, drawOp), mIsDestroyed(false), mParentHeap(parentHeap), mId(id)
+	{
+
+	}
+
+	TransientMeshResource::~TransientMeshResource()
+	{
+		if (!mIsDestroyed)
+		{
+			SPtr<TransientMeshResource> meshPtr = std::static_pointer_cast<TransientMeshResource>(getThisPtr());
+			mParentHeap->dealloc(meshPtr);
+		}
+	}
+
+	SPtr<ct::TransientMesh> TransientMeshResource::getCore() const
+	{
+		return std::static_pointer_cast<ct::TransientMesh>(mCoreSpecific);
+	}
+
+	SPtr<ct::CoreObject> TransientMeshResource::createCore() const
+	{
+		ct::TransientMesh* core = new (bs_alloc<ct::TransientMesh>()) ct::TransientMesh(
+			mParentHeap->getCore(), mId, mProperties.mNumVertices, mProperties.mNumIndices, mProperties.mSubMeshes);
+
+		SPtr<ct::CoreObject> meshCore = bs_shared_ptr<ct::TransientMesh>(core);
+		meshCore->_setThisPtr(meshCore);
+
+		return meshCore;
+	}
+}

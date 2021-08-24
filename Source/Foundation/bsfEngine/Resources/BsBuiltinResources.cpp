@@ -3,7 +3,7 @@
 #include "Resources/BsBuiltinResources.h"
 #include "GUI/BsGUILabel.h"
 #include "Image/BsSpriteTexture.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 #include "Image/BsTexture.h"
 #include "Importer/BsImporter.h"
 #include "Resources/BsResources.h"

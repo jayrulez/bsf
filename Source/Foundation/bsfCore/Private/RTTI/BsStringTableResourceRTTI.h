@@ -46,7 +46,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "StringTable";
+			static String name = "StringTableResource";
 			return name;
 		}
 

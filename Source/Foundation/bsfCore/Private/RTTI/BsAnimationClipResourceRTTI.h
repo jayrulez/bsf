@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
 #include "RTTI/BsStdRTTI.h"
-#include "Animation/BsAnimationClip.h"
+#include "Animation/BsAnimationClipResource.h"
 #include "Private/RTTI/BsAnimationCurveRTTI.h"
 
 namespace bs

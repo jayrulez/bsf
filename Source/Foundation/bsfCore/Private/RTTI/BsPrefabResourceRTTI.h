@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsUUIDRTTI.h"
-#include "Scene/BsPrefab.h"
+#include "Scene/BsPrefabResource.h"
 #include "Scene/BsSceneObject.h"
 #include "Utility/BsUtility.h"
 
@@ -49,7 +49,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "Prefab";
+			static String name = "PrefabResource";
 			return name;
 		}
 

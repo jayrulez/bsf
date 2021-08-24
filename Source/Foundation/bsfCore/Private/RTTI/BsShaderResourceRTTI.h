@@ -350,7 +350,7 @@ namespace bs
 		}
 	};
 
-	class BS_CORE_EXPORT SubShaderResourceRTTI : public RTTIType<SubShader, IReflectable, SubShaderResourceRTTI>
+	class BS_CORE_EXPORT SubShaderRTTI : public RTTIType<SubShader, IReflectable, SubShaderRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -481,7 +481,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "Shader";
+			static String name = "ShaderResource";
 			return name;
 		}
 

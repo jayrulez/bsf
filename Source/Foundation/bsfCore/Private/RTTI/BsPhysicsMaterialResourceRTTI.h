@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "Reflection/BsRTTIPlain.h"
-#include "Physics/BsPhysicsMaterial.h"
+#include "Physics/BsPhysicsMaterialResource.h"
 
 namespace bs
 {

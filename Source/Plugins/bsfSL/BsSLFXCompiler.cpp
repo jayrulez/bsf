@@ -10,7 +10,7 @@
 #include "RenderAPI/BsRenderAPI.h"
 #include "Debug/BsDebug.h"
 #include "Material/BsShaderManager.h"
-#include "Material/BsShaderInclude.h"
+#include "Material/BsShaderIncludeResource.h"
 #include "Math/BsMatrix4.h"
 #include "Resources/BsBuiltinResources.h"
 #include "Material/BsShaderVariation.h"

@@ -10,7 +10,7 @@
 #include "Renderer/BsLightProbeVolume.h"
 #include "Renderer/BsRenderer.h"
 #include "CoreThread/BsCoreThread.h"
-#include "Private/RTTI/BsTextureRTTI.h"
+#include "Private/RTTI/BsTextureResourceRTTI.h"
 
 namespace bs
 {

@@ -1,9 +1,9 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Audio/BsAudioClip.h"
+#include "Audio/BsAudioClipResource.h"
 #include "Resources/BsResources.h"
 #include "Audio/BsAudio.h"
-#include "Private/RTTI/BsAudioClipRTTI.h"
+#include "Private/RTTI/BsAudioClipResourceRTTI.h"
 
 namespace bs
 {

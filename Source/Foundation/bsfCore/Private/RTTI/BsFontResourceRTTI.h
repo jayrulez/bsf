@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "Private/RTTI/BsCharDescRTTI.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 #include "Image/BsTexture.h"
 
 namespace bs
@@ -85,7 +85,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "Font";
+			static String name = "FontResource";
 			return name;
 		}
 

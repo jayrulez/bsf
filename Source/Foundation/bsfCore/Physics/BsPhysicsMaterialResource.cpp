@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Physics/BsPhysicsMaterial.h"
-#include "Private/RTTI/BsPhysicsMaterialRTTI.h"
+#include "Physics/BsPhysicsMaterialResource.h"
+#include "Private/RTTI/BsPhysicsMaterialResourceRTTI.h"
 #include "Resources/BsResources.h"
 #include "Physics/BsPhysics.h"
 

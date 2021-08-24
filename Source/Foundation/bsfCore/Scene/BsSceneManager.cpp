@@ -11,7 +11,7 @@
 #include "RenderAPI/BsRenderTarget.h"
 #include "Renderer/BsLightProbeVolume.h"
 #include "Scene/BsSceneActor.h"
-#include "Scene/BsPrefab.h"
+#include "Scene/BsPrefabResource.h"
 #include "Physics/BsPhysics.h"
 
 namespace bs

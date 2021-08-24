@@ -127,7 +127,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "Texture";
+			static String name = "TextureResource";
 			return name;
 		}
 

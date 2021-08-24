@@ -7,7 +7,7 @@
 #include "RTTI/BsStringRTTI.h"
 #include "RTTI/BsStdRTTI.h"
 #include "Importer/BsMeshImportOptions.h"
-#include "Private/RTTI/BsAnimationClipRTTI.h"
+#include "Private/RTTI/BsAnimationClipResourceRTTI.h"
 
 namespace bs
 {

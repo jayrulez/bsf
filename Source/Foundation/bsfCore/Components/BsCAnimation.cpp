@@ -6,7 +6,7 @@
 #include "Components/BsCBone.h"
 #include "Mesh/BsMesh.h"
 #include "Animation/BsMorphShapes.h"
-#include "Animation/BsAnimationClip.h"
+#include "Animation/BsAnimationClipResource.h"
 #include "Private/RTTI/BsCAnimationRTTI.h"
 #include "Scene/BsSceneManager.h"
 

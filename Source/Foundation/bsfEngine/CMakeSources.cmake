@@ -1,7 +1,7 @@
 set(BS_ENGINE_SRC_RESOURCES
 	"bsfEngine/Resources/BsScriptCodeImportOptions.cpp"
 	"bsfEngine/Resources/BsScriptCodeImporter.cpp"
-	"bsfEngine/Resources/BsScriptCode.cpp"
+	"bsfEngine/Resources/BsScriptCodeResource.cpp"
 	"bsfEngine/Resources/BsPlainTextImporter.cpp"
 	"bsfEngine/Resources/BsPlainText.cpp"
 	"bsfEngine/Resources/BsBuiltinResources.cpp"
@@ -129,7 +129,7 @@ set(BS_ENGINE_INC_2D
 
 set(BS_ENGINE_INC_RTTI
 	"bsfEngine/Private/RTTI/BsPlainTextRTTI.h"
-	"bsfEngine/Private/RTTI/BsScriptCodeRTTI.h"
+	"bsfEngine/Private/RTTI/BsScriptCodeResourceRTTI.h"
 	"bsfEngine/Private/RTTI/BsScriptCodeImportOptionsRTTI.h"
 	"bsfEngine/Private/RTTI/BsGUIElementStyleRTTI.h"
 	"bsfEngine/Private/RTTI/BsGUISkinRTTI.h"
@@ -147,7 +147,7 @@ set(BS_ENGINE_INC_NOFILTER
 set(BS_ENGINE_INC_RESOURCES
 	"bsfEngine/Resources/BsPlainText.h"
 	"bsfEngine/Resources/BsPlainTextImporter.h"
-	"bsfEngine/Resources/BsScriptCode.h"
+	"bsfEngine/Resources/BsScriptCodeResource.h"
 	"bsfEngine/Resources/BsScriptCodeImporter.h"
 	"bsfEngine/Resources/BsScriptCodeImportOptions.h"
 	"bsfEngine/Resources/BsBuiltinResources.h"

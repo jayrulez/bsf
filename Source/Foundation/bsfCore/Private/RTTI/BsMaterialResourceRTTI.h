@@ -33,7 +33,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "Material";
+			static String name = "MaterialResource";
 			return name;
 		}
 

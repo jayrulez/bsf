@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "Reflection/BsRTTIPlain.h"
-#include "Physics/BsPhysicsMesh.h"
+#include "Physics/BsPhysicsMeshResource.h"
 #include "Physics/BsPhysics.h"
 
 namespace bs
@@ -31,7 +31,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "PhysicsMesh";
+			static String name = "PhysicsMeshResource";
 			return name;
 		}
 

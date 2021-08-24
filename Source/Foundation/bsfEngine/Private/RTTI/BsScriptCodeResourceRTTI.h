@@ -5,7 +5,7 @@
 #include "BsPrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
-#include "Resources/BsScriptCode.h"
+#include "Resources/BsScriptCodeResource.h"
 
 namespace bs
 {
@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_EXPORT ScriptCodeRTTI : public RTTIType <ScriptCode, Resource, ScriptCodeRTTI>
+	class BS_EXPORT ScriptCodeResourceRTTI : public RTTIType <ScriptCodeResource, Resource, ScriptCodeResourceRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS
@@ -25,7 +25,7 @@ namespace bs
 	public:
 		const String& getRTTIName() override
 		{
-			static String name = "ScriptCode";
+			static String name = "ScriptCodeResource";
 			return name;
 		}
 
@@ -36,7 +36,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return ScriptCode::_createPtr(L""); // Initial string doesn't matter, it'll get overwritten
+			return ScriptCodeResource::_createPtr(L""); // Initial string doesn't matter, it'll get overwritten
 		}
 	};
 

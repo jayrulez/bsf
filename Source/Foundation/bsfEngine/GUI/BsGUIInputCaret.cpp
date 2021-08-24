@@ -5,7 +5,7 @@
 #include "GUI/BsGUIManager.h"
 #include "2D/BsImageSprite.h"
 #include "GUI/BsGUIElement.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 
 namespace bs
 {

@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Animation/BsAnimationManager.h"
 #include "Animation/BsAnimation.h"
-#include "Animation/BsAnimationClip.h"
+#include "Animation/BsAnimationClipResource.h"
 #include "Threading/BsTaskScheduler.h"
 #include "Utility/BsTime.h"
 #include "Scene/BsSceneManager.h"

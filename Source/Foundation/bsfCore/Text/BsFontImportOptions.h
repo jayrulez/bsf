@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Importer/BsImportOptions.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 
 namespace bs
 {

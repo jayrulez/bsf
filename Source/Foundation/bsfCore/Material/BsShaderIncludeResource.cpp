@@ -1,8 +1,8 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Material/BsShaderInclude.h"
+#include "Material/BsShaderIncludeResource.h"
 #include "Resources/BsResources.h"
-#include "Private/RTTI/BsShaderIncludeRTTI.h"
+#include "Private/RTTI/BsShaderIncludeResourceRTTI.h"
 
 namespace bs
 {

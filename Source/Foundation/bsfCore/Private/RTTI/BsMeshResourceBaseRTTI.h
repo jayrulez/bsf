@@ -48,7 +48,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "MeshBase";
+			static String name = "MeshResourceBase";
 			return name;
 		}
 

@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Importer/BsImportOptions.h"
-#include "Animation/BsAnimationClip.h"
+#include "Animation/BsAnimationClipResource.h"
 
 namespace bs
 {

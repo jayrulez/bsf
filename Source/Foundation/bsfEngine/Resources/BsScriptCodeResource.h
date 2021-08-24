@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	Resource containing script source code. */
-	class BS_EXPORT ScriptCode : public Resource
+	class BS_EXPORT ScriptCodeResource : public Resource
 	{
 	public:
 		/**	Gets the source code contained in the resource. */
@@ -28,7 +28,7 @@ namespace bs
 		void setIsEditorScript(bool editorScript) { mEditorScript = editorScript; }
 
 		/**	Creates a new script code resource with the specified source code. */
-		static HScriptCode create(const WString& data, bool editorScript = false);
+		static ScriptCodeResourceHandle create(const WString& data, bool editorScript = false);
 
 		/** @name Internal
 		 *  @{
@@ -39,11 +39,11 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<ScriptCode> _createPtr(const WString& data, bool editorScript = false);
+		static SPtr<ScriptCodeResource> _createPtr(const WString& data, bool editorScript = false);
 
 		/** @} */
 	private:
-		ScriptCode(const WString& data, bool editorScript);
+		ScriptCodeResource(const WString& data, bool editorScript);
 
 		WString mString;
 		bool mEditorScript;
@@ -52,7 +52,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class ScriptCodeRTTI;
+		friend class ScriptCodeResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		virtual RTTITypeBase* getRTTI() const override;
 	};

@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Scene/BsPrefab.h"
-#include "Private/RTTI/BsPrefabRTTI.h"
+#include "Scene/BsPrefabResource.h"
+#include "Private/RTTI/BsPrefabResourceRTTI.h"
 #include "Resources/BsResources.h"
 #include "Scene/BsSceneObject.h"
 #include "Scene/BsPrefabUtility.h"

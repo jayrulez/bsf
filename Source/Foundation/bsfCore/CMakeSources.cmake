@@ -31,14 +31,14 @@ set(BS_CORE_INC_COMPONENTS
 set(BS_CORE_INC_PHYSICS
 	"bsfCore/Physics/BsPhysicsManager.h"
 	"bsfCore/Physics/BsPhysics.h"
-	"bsfCore/Physics/BsPhysicsMaterial.h"
+	"bsfCore/Physics/BsPhysicsMaterialResource.h"
 	"bsfCore/Physics/BsRigidbody.h"
 	"bsfCore/Physics/BsBoxCollider.h"
 	"bsfCore/Physics/BsSphereCollider.h"
 	"bsfCore/Physics/BsCapsuleCollider.h"
 	"bsfCore/Physics/BsPlaneCollider.h"
 	"bsfCore/Physics/BsFCollider.h"
-	"bsfCore/Physics/BsPhysicsMesh.h"
+	"bsfCore/Physics/BsPhysicsMeshResource.h"
 	"bsfCore/Physics/BsMeshCollider.h"
 	"bsfCore/Physics/BsFJoint.h"
 	"bsfCore/Physics/BsJoint.h"
@@ -82,7 +82,7 @@ set(BS_CORE_INC_SCENE
 	"bsfCore/Scene/BsGameObjectManager.h"
 	"bsfCore/Scene/BsSceneObject.h"
 	"bsfCore/Scene/BsSceneManager.h"
-	"bsfCore/Scene/BsPrefab.h"
+	"bsfCore/Scene/BsPrefabResource.h"
 	"bsfCore/Scene/BsPrefabDiff.h"
 	"bsfCore/Scene/BsPrefabUtility.h"
 	"bsfCore/Scene/BsTransform.h"
@@ -123,7 +123,7 @@ set(BS_CORE_SRC_LOCALIZATION
 )
 
 set(BS_CORE_SRC_RTTI
-	"bsfCore/Private/RTTI/BsMaterialRTTI.cpp"
+	"bsfCore/Private/RTTI/BsMaterialResourceRTTI.cpp"
 )
 
 set(BS_CORE_INC_PROFILING
@@ -245,13 +245,15 @@ set(BS_CORE_INC_NOFILTER
 set(BS_CORE_INC_MATERIAL
 	"bsfCore/Material/BsTechnique.h"
 	"bsfCore/Material/BsShader.h"
+	"bsfCore/Material/BsShaderResource.h"
 	"bsfCore/Material/BsPass.h"
 	"bsfCore/Material/BsMaterial.h"
+	"bsfCore/Material/BsMaterialResource.h"
 	"bsfCore/Material/BsMaterialParam.h"
 	"bsfCore/Material/BsShaderManager.h"
 	"bsfCore/Material/BsMaterialParams.h"
 	"bsfCore/Material/BsGpuParamsSet.h"
-	"bsfCore/Material/BsShaderInclude.h"
+	"bsfCore/Material/BsShaderIncludeResource.h"
 	"bsfCore/Material/BsShaderVariation.h"
 )
 
@@ -268,19 +270,24 @@ set(BS_CORE_INC_RESOURCES
 
 set(BS_CORE_INC_MESH
 	"bsfCore/Mesh/BsTransientMesh.h"
+	"bsfCore/Mesh/BsTransientMeshResource.h"
 	"bsfCore/Mesh/BsMeshHeap.h"
 	"bsfCore/Mesh/BsMeshData.h"
 	"bsfCore/Mesh/BsMeshBase.h"
+	"bsfCore/Mesh/BsMeshResourceBase.h"
 	"bsfCore/Mesh/BsMesh.h"
+	"bsfCore/Mesh/BsMeshResource.h"
 	"bsfCore/Mesh/BsMeshUtility.h"
 )
 
 set(BS_CORE_INC_IMAGE
 	"bsfCore/Image/BsTexture.h"
+	"bsfCore/Image/BsTextureResource.h"
 	"bsfCore/Image/BsPixelData.h"
 	"bsfCore/Image/BsPixelUtil.h"
 	"bsfCore/Image/BsPixelVolume.h"
 	"bsfCore/Image/BsSpriteTexture.h"
+	"bsfCore/Image/BsSpriteTextureResource.h"
 )
 
 set(BS_CORE_SRC_UTILITY
@@ -293,7 +300,7 @@ set(BS_CORE_INC_TEXT
 	"bsfCore/Text/BsTextData.h"
 	"bsfCore/Text/BsFontImportOptions.h"
 	"bsfCore/Text/BsFontDesc.h"
-	"bsfCore/Text/BsFont.h"
+	"bsfCore/Text/BsFontResource.h"
 )
 
 set(BS_CORE_SRC_PROFILING
@@ -354,14 +361,14 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsComponentRTTI.h"
 	"bsfCore/Private/RTTI/BsDepthStencilStateRTTI.h"
 	"bsfCore/Private/RTTI/BsFontImportOptionsRTTI.h"
-	"bsfCore/Private/RTTI/BsFontRTTI.h"
+	"bsfCore/Private/RTTI/BsFontResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsGameObjectHandleRTTI.h"
 	"bsfCore/Private/RTTI/BsGameObjectRTTI.h"
 	"bsfCore/Private/RTTI/BsGpuProgramRTTI.h"
 	"bsfCore/Private/RTTI/BsGpuResourceDataRTTI.h"
 	"bsfCore/Private/RTTI/BsImportOptionsRTTI.h"
-	"bsfCore/Private/RTTI/BsMaterialRTTI.h"
-	"bsfCore/Private/RTTI/BsMeshBaseRTTI.h"
+	"bsfCore/Private/RTTI/BsMaterialResourceRTTI.h"
+	"bsfCore/Private/RTTI/BsMeshResourceBaseRTTI.h"
 	"bsfCore/Private/RTTI/BsMeshDataRTTI.h"
 	"bsfCore/Private/RTTI/BsPassRTTI.h"
 	"bsfCore/Private/RTTI/BsPixelDataRTTI.h"
@@ -371,23 +378,23 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsSamplerStateRTTI.h"
 	"bsfCore/Private/RTTI/BsSceneObjectRTTI.h"
-	"bsfCore/Private/RTTI/BsShaderRTTI.h"
+	"bsfCore/Private/RTTI/BsShaderResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsTechniqueRTTI.h"
-	"bsfCore/Private/RTTI/BsTextureRTTI.h"
+	"bsfCore/Private/RTTI/BsTextureResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsVertexDataDescRTTI.h"
 	"bsfCore/Private/RTTI/BsVertexDeclarationRTTI.h"
 	"bsfCore/Private/RTTI/BsTextureImportOptionsRTTI.h"
 	"bsfCore/Private/RTTI/BsResourceMetaDataRTTI.h"
 	"bsfCore/Private/RTTI/BsViewportRTTI.h"
 	"bsfCore/Private/RTTI/BsSavedResourceDataRTTI.h"
-	"bsfCore/Private/RTTI/BsShaderIncludeRTTI.h"
+	"bsfCore/Private/RTTI/BsShaderIncludeResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsMeshImportOptionsRTTI.h"
-	"bsfCore/Private/RTTI/BsPrefabRTTI.h"
+	"bsfCore/Private/RTTI/BsPrefabResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsPrefabDiffRTTI.h"
-	"bsfCore/Private/RTTI/BsStringTableRTTI.h"
+	"bsfCore/Private/RTTI/BsStringTableResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsMaterialParamsRTTI.h"
-	"bsfCore/Private/RTTI/BsMeshRTTI.h"
-	"bsfCore/Private/RTTI/BsPhysicsMaterialRTTI.h"
+	"bsfCore/Private/RTTI/BsMeshResourceRTTI.h"
+	"bsfCore/Private/RTTI/BsPhysicsMaterialResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsCBoxColliderRTTI.h"
 	"bsfCore/Private/RTTI/BsCColliderRTTI.h"
 	"bsfCore/Private/RTTI/BsCRigidbodyRTTI.h"
@@ -404,11 +411,11 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsCD6JointRTTI.h"
 	"bsfCore/Private/RTTI/BsCCharacterControllerRTTI.h"
 	"bsfCore/Private/RTTI/BsShaderImportOptionsRTTI.h"
-	"bsfCore/Private/RTTI/BsPhysicsMeshRTTI.h"
-	"bsfCore/Private/RTTI/BsAudioClipRTTI.h"
+	"bsfCore/Private/RTTI/BsPhysicsMeshResourceRTTI.h"
+	"bsfCore/Private/RTTI/BsAudioClipResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsCAudioSourceRTTI.h"
 	"bsfCore/Private/RTTI/BsCAudioListenerRTTI.h"
-	"bsfCore/Private/RTTI/BsAnimationClipRTTI.h"
+	"bsfCore/Private/RTTI/BsAnimationClipResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsAnimationCurveRTTI.h"
 	"bsfCore/Private/RTTI/BsSkeletonRTTI.h"
 	"bsfCore/Private/RTTI/BsCCameraRTTI.h"
@@ -433,9 +440,9 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsShaderVariationRTTI.h"
 	"bsfCore/Private/RTTI/BsParticleSystemRTTI.h"
 	"bsfCore/Private/RTTI/BsParticleDistributionRTTI.h"
-	"bsfCore/Private/RTTI/BsSpriteTextureRTTI.h"
+	"bsfCore/Private/RTTI/BsSpriteTextureResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsCParticleSystemRTTI.h"
-	"bsfCore/Private/RTTI/BsVectorFieldRTTI.h"
+	"bsfCore/Private/RTTI/BsVectorFieldResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsDecalRTTI.h"
 	"bsfCore/Private/RTTI/BsCDecalRTTI.h"
 	"bsfCore/Private/RTTI/BsRenderTargetRTTI.h"
@@ -473,30 +480,37 @@ set(BS_CORE_SRC_RESOURCES
 
 set(BS_CORE_SRC_MESH
 	"bsfCore/Mesh/BsMesh.cpp"
+	"bsfCore/Mesh/BsMeshResource.cpp"
 	"bsfCore/Mesh/BsMeshBase.cpp"
+	"bsfCore/Mesh/BsMeshResourceBase.cpp"
 	"bsfCore/Mesh/BsMeshData.cpp"
 	"bsfCore/Mesh/BsMeshHeap.cpp"
 	"bsfCore/Mesh/BsTransientMesh.cpp"
+	"bsfCore/Mesh/BsTransientMeshResource.cpp"
 	"bsfCore/Mesh/BsMeshUtility.cpp"
 )
 
 set(BS_CORE_SRC_IMAGE
 	"bsfCore/Image/BsPixelData.cpp"
 	"bsfCore/Image/BsTexture.cpp"
+	"bsfCore/Image/BsTextureResource.cpp"
 	"bsfCore/Image/BsPixelUtil.cpp"
 	"bsfCore/Image/BsSpriteTexture.cpp"
+	"bsfCore/Image/BsSpriteTextureResource.cpp"
 )
 
 set(BS_CORE_SRC_MATERIAL
 	"bsfCore/Material/BsMaterial.cpp"
+	"bsfCore/Material/BsMaterialResource.cpp"
 	"bsfCore/Material/BsPass.cpp"
 	"bsfCore/Material/BsShader.cpp"
+	"bsfCore/Material/BsShaderResource.cpp"
 	"bsfCore/Material/BsTechnique.cpp"
 	"bsfCore/Material/BsMaterialParam.cpp"
 	"bsfCore/Material/BsShaderManager.cpp"
 	"bsfCore/Material/BsMaterialParams.cpp"
 	"bsfCore/Material/BsGpuParamsSet.cpp"
-	"bsfCore/Material/BsShaderInclude.cpp"
+	"bsfCore/Material/BsShaderIncludeResource.cpp"
 	"bsfCore/Material/BsShaderVariation.cpp"
 )
 
@@ -511,7 +525,7 @@ set(BS_CORE_INC_LOCALIZATION
 )
 
 set(BS_CORE_SRC_TEXT
-	"bsfCore/Text/BsFont.cpp"
+	"bsfCore/Text/BsFontResource.cpp"
 	"bsfCore/Text/BsFontImportOptions.cpp"
 	"bsfCore/Text/BsTextData.cpp"
 )
@@ -610,7 +624,7 @@ set(BS_CORE_SRC_NOFILTER
 set(BS_CORE_SRC_PHYSICS
 	"bsfCore/Physics/BsPhysicsManager.cpp"
 	"bsfCore/Physics/BsPhysics.cpp"
-	"bsfCore/Physics/BsPhysicsMaterial.cpp"
+	"bsfCore/Physics/BsPhysicsMaterialResource.cpp"
 	"bsfCore/Physics/BsCollider.cpp"
 	"bsfCore/Physics/BsRigidbody.cpp"
 	"bsfCore/Physics/BsBoxCollider.cpp"
@@ -618,7 +632,7 @@ set(BS_CORE_SRC_PHYSICS
 	"bsfCore/Physics/BsPlaneCollider.cpp"
 	"bsfCore/Physics/BsCapsuleCollider.cpp"
 	"bsfCore/Physics/BsFCollider.cpp"
-	"bsfCore/Physics/BsPhysicsMesh.cpp"
+	"bsfCore/Physics/BsPhysicsMeshResource.cpp"
 	"bsfCore/Physics/BsMeshCollider.cpp"
 	"bsfCore/Physics/BsFJoint.cpp"
 	"bsfCore/Physics/BsJoint.cpp"
@@ -638,7 +652,7 @@ set(BS_CORE_SRC_SCENE
 	"bsfCore/Scene/BsGameObjectManager.cpp"
 	"bsfCore/Scene/BsSceneObject.cpp"
 	"bsfCore/Scene/BsSceneManager.cpp"
-	"bsfCore/Scene/BsPrefab.cpp"
+	"bsfCore/Scene/BsPrefabResource.cpp"
 	"bsfCore/Scene/BsPrefabDiff.cpp"
 	"bsfCore/Scene/BsPrefabUtility.cpp"
 	"bsfCore/Scene/BsTransform.cpp"
@@ -647,7 +661,7 @@ set(BS_CORE_SRC_SCENE
 
 set(BS_CORE_INC_AUDIO
 	"bsfCore/Audio/BsAudio.h"
-	"bsfCore/Audio/BsAudioClip.h"
+	"bsfCore/Audio/BsAudioClipResource.h"
 	"bsfCore/Audio/BsAudioListener.h"
 	"bsfCore/Audio/BsAudioSource.h"
 	"bsfCore/Audio/BsAudioClipImportOptions.h"
@@ -657,7 +671,7 @@ set(BS_CORE_INC_AUDIO
 
 set(BS_CORE_SRC_AUDIO
 	"bsfCore/Audio/BsAudio.cpp"
-	"bsfCore/Audio/BsAudioClip.cpp"
+	"bsfCore/Audio/BsAudioClipResource.cpp"
 	"bsfCore/Audio/BsAudioListener.cpp"
 	"bsfCore/Audio/BsAudioSource.cpp"
 	"bsfCore/Audio/BsAudioClipImportOptions.cpp"
@@ -667,7 +681,7 @@ set(BS_CORE_SRC_AUDIO
 
 set(BS_CORE_INC_ANIMATION
 	"bsfCore/Animation/BsAnimationCurve.h"
-	"bsfCore/Animation/BsAnimationClip.h"
+	"bsfCore/Animation/BsAnimationClipResource.h"
 	"bsfCore/Animation/BsSkeleton.h"
 	"bsfCore/Animation/BsAnimation.h"
 	"bsfCore/Animation/BsAnimationManager.h"
@@ -679,7 +693,7 @@ set(BS_CORE_INC_ANIMATION
 
 set(BS_CORE_SRC_ANIMATION
 	"bsfCore/Animation/BsAnimationCurve.cpp"
-	"bsfCore/Animation/BsAnimationClip.cpp"
+	"bsfCore/Animation/BsAnimationClipResource.cpp"
 	"bsfCore/Animation/BsSkeleton.cpp"
 	"bsfCore/Animation/BsAnimation.cpp"
 	"bsfCore/Animation/BsAnimationManager.cpp"

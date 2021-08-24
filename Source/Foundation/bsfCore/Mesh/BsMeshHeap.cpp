@@ -3,6 +3,7 @@
 #include "Mesh/BsMeshHeap.h"
 #include "CoreThread/BsCoreThread.h"
 #include "Mesh/BsTransientMesh.h"
+#include "Mesh/BsTransientMeshResource.h"
 #include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "RenderAPI/BsVertexData.h"

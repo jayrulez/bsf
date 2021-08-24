@@ -28,7 +28,7 @@ namespace bs
 	public:
 		const String& getRTTIName() override
 		{
-			static String name = "SpriteTexture";
+			static String name = "SpriteTextureResource";
 			return name;
 		}
 

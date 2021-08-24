@@ -186,7 +186,7 @@ namespace bs
 	class ProfilerOverlay;
 	class DrawHelper;
 	class PlainText;
-	class ScriptCode;
+	class ScriptCodeResource;
 	class ScriptCodeImportOptions;
 	class RendererMeshData;
 
@@ -200,7 +200,7 @@ namespace bs
 	typedef GameObjectHandle<CProfilerOverlay> HProfilerOverlay;
 
 	typedef ResourceHandle<PlainText> HPlainText;
-	typedef ResourceHandle<ScriptCode> HScriptCode;
+	typedef ResourceHandle<ScriptCodeResource> ScriptCodeResourceHandle;
 	typedef ResourceHandle<GUISkin> HGUISkin;
 
 	/**	RTTI types. */

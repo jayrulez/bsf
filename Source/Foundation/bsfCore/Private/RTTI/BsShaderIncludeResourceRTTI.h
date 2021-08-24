@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
-#include "Material/BsShaderInclude.h"
+#include "Material/BsShaderIncludeResource.h"
 
 namespace bs
 {
@@ -27,7 +27,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "ShaderInclude";
+			static String name = "ShaderIncludeResource";
 			return name;
 		}
 
