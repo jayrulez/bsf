@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "BsSLPrerequisites.h"
 #include "Material/BsShaderManager.h"
-#include "Material/BsShaderInclude.h"
+#include "Material/BsShaderIncludeResource.h"
 
 extern "C" {
 #include "BsIncludeHandler.h"

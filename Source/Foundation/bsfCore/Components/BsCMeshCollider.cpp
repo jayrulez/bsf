@@ -3,7 +3,7 @@
 #include "Components/BsCMeshCollider.h"
 #include "Scene/BsSceneObject.h"
 #include "Components/BsCRigidbody.h"
-#include "Physics/BsPhysicsMesh.h"
+#include "Physics/BsPhysicsMeshResource.h"
 #include "Private/RTTI/BsCMeshColliderRTTI.h"
 #include "Scene/BsSceneManager.h"
 

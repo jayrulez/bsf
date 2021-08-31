@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Importer/BsImportOptions.h"
-#include "Audio/BsAudioClip.h"
+#include "Audio/BsAudioClipResource.h"
 
 namespace bs
 {

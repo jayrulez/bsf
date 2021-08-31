@@ -2,6 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Image/BsSpriteTexture.h"
 #include "Image/BsTexture.h"
+#include "Private/RTTI/BsSpriteTextureResourceRTTI.h"
 #include "Resources/BsResources.h"
 #include "Resources/BsBuiltinResources.h"
 #include "CoreThread/BsCoreObjectSync.h"
@@ -13,11 +14,11 @@ namespace bs
 	template <class P>
 	void TSpriteTexture<Core>::rttiEnumFields(P p)
 	{
-		//p(mUVOffset);
-		//p(mUVScale);
-		//p(mAnimation);
-		//p(mPlayback);
-		//p(mAtlasTexture);
+		p(mUVOffset);
+		p(mUVScale);
+		p(mAnimation);
+		p(mPlayback);
+		p(mAtlasTexture);
 	}
 
 	namespace ct

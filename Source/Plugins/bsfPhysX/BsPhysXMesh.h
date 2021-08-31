@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsPhysXPrerequisites.h"
-#include "Physics/BsPhysicsMesh.h"
+#include "Physics/BsPhysicsMeshResource.h"
 #include "PxMaterial.h"
 
 namespace bs

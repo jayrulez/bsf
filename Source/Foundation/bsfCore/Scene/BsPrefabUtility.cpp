@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Scene/BsPrefabUtility.h"
 #include "Scene/BsPrefabDiff.h"
-#include "Scene/BsPrefab.h"
+#include "Scene/BsPrefabResource.h"
 #include "Scene/BsSceneObject.h"
 #include "Resources/BsResources.h"
 

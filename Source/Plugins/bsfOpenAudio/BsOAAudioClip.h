@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsOAPrerequisites.h"
-#include "Audio/BsAudioClip.h"
+#include "Audio/BsAudioClipResource.h"
 #include "BsOggVorbisDecoder.h"
 
 namespace bs

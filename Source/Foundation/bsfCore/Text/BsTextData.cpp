@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Text/BsTextData.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 #include "Math/BsVector2.h"
 #include "Debug/BsDebug.h"
 
