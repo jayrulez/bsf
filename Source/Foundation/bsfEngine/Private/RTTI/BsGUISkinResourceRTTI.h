@@ -5,7 +5,7 @@
 #include "BsPrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 
 namespace bs
 {
@@ -62,28 +62,28 @@ namespace bs
 		}
 	};
 
-	class BS_EXPORT GUISkinRTTI : public RTTIType <GUISkin, Resource, GUISkinRTTI>
+	class BS_EXPORT GUISkinResourceRTTI : public RTTIType <GUISkinResource, Resource, GUISkinResourceRTTI>
 	{
 	private:
-		GUISkinEntry& getStyle(GUISkin* obj, UINT32 idx)
+		GUISkinEntry& getStyle(GUISkinResource* obj, UINT32 idx)
 		{
 			return mStyles[idx];
 		}
 
-		void setStyle(GUISkin* obj, UINT32 idx, GUISkinEntry& val) { obj->mStyles[val.name] = val.style; }
-		UINT32 getStyleArraySize(GUISkin* obj) { return (UINT32)obj->mStyles.size(); }
-		void setStyleArraySize(GUISkin* obj, UINT32 size) { /* Do nothing */ }
+		void setStyle(GUISkinResource* obj, UINT32 idx, GUISkinEntry& val) { obj->mStyles[val.name] = val.style; }
+		UINT32 getStyleArraySize(GUISkinResource* obj) { return (UINT32)obj->mStyles.size(); }
+		void setStyleArraySize(GUISkinResource* obj, UINT32 size) { /* Do nothing */ }
 
 	public:
-		GUISkinRTTI()
+		GUISkinResourceRTTI()
 		{
-			addReflectableArrayField("mStyles", 0, &GUISkinRTTI::getStyle, &GUISkinRTTI::getStyleArraySize,
-				&GUISkinRTTI::setStyle, &GUISkinRTTI::setStyleArraySize);
+			addReflectableArrayField("mStyles", 0, &GUISkinResourceRTTI::getStyle, &GUISkinResourceRTTI::getStyleArraySize,
+				&GUISkinResourceRTTI::setStyle, &GUISkinResourceRTTI::setStyleArraySize);
 		}
 
 		void onSerializationStarted(IReflectable* obj, SerializationContext* context) override
 		{
-			GUISkin* skin = static_cast<GUISkin*>(obj);
+			GUISkinResource* skin = static_cast<GUISkinResource*>(obj);
 
 			for (auto& style : skin->mStyles)
 				mStyles.push_back(GUISkinEntry(style.first, style.second));
@@ -91,7 +91,7 @@ namespace bs
 
 		const String& getRTTIName() override
 		{
-			static String name = "GUISkin";
+			static String name = "GUISkinResource";
 			return name;
 		}
 
@@ -102,7 +102,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return GUISkin::_createPtr();
+			return GUISkinResource::_createPtr();
 		}
 
 	private:

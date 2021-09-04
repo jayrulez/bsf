@@ -27,7 +27,7 @@
 		</Expand>
 	</Type>
 
-	<Type Name="bs::HString">
+	<Type Name="bs::StringHandle">
 		<DisplayString Condition="mStringData._Ptr == 0">Empty</DisplayString>
 		<DisplayString>Value = {mStringData._Ptr->string}</DisplayString>
 	</Type>

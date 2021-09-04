@@ -117,8 +117,8 @@ set(BS_CORE_INC_RENDERER
 )
 
 set(BS_CORE_SRC_LOCALIZATION
-	"bsfCore/Localization/BsHString.cpp"
-	"bsfCore/Localization/BsStringTable.cpp"
+	"bsfCore/Localization/BsStringHandle.cpp"
+	"bsfCore/Localization/BsStringTableResource.cpp"
 	"bsfCore/Localization/BsStringTableManager.cpp"
 )
 
@@ -519,8 +519,8 @@ set(BS_CORE_SRC_INPUT
 )
 
 set(BS_CORE_INC_LOCALIZATION
-	"bsfCore/Localization/BsHString.h"
-	"bsfCore/Localization/BsStringTable.h"
+	"bsfCore/Localization/BsStringHandle.h"
+	"bsfCore/Localization/BsStringTableResource.h"
 	"bsfCore/Localization/BsStringTableManager.h"
 )
 
@@ -709,7 +709,7 @@ set(BS_CORE_INC_PARTICLES
 	"bsfCore/Particles/BsParticleManager.h"
 	"bsfCore/Particles/BsParticleDistribution.h"
 	"bsfCore/Particles/BsParticleModule.h"
-	"bsfCore/Particles/BsVectorField.h"
+	"bsfCore/Particles/BsVectorFieldResource.h"
 	"bsfCore/Private/Particles/BsParticleSet.h"
 )
 
@@ -719,7 +719,7 @@ set(BS_CORE_SRC_PARTICLES
 	"bsfCore/Particles/BsParticleEvolver.cpp"
 	"bsfCore/Particles/BsParticleManager.cpp"
 	"bsfCore/Particles/BsParticleDistribution.cpp"
-	"bsfCore/Particles/BsVectorField.cpp"
+	"bsfCore/Particles/BsVectorFieldResource.cpp"
 )
 
 set(BS_CORE_INC_NETWORK

@@ -7,14 +7,14 @@
 #include "BsD3D11Device.h"
 #include "BsD3D11RenderTexture.h"
 #include "BsD3D11TextureView.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 #include "BsD3D11DriverList.h"
 #include "BsD3D11Driver.h"
 #include "BsD3D11VideoModeInfo.h"
 #include "Profiling/BsRenderStats.h"
 #include "Input/BsInput.h"
 #include "Error/BsException.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "Math/BsMath.h"
 #include "Private/Win32/BsWin32Window.h"
 
@@ -748,7 +748,7 @@ namespace bs
 			texDesc.usage = TU_DEPTHSTENCIL;
 			texDesc.numSamples = getProperties().multisampleCount;
 
-			mDepthStencilBuffer = Texture::create(texDesc);
+			mDepthStencilBuffer = Texture::createPtr(texDesc);
 			mDepthStencilView = mDepthStencilBuffer->requestView(0, 1, 0, 1, GVU_DEPTHSTENCIL);
 		}
 		else

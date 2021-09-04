@@ -9,7 +9,7 @@
 #include "GUI/BsGUITexture.h"
 #include "GUI/BsGUILabel.h"
 #include "GUI/BsGUIHelper.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "Resources/BsBuiltinResources.h"
 #include "GUI/BsDropDownAreaPlacement.h"
 
@@ -37,7 +37,7 @@ namespace bs
 
 		Rect2I availableBounds = viewport->getPixelArea();
 		
-		const GUISkin& skin = getSkin();
+		const GUISkinResource& skin = getSkin();
 		const GUIElementStyle* multiLineLabelStyle = skin.getStyle(BuiltinResources::MultiLineLabelStyle);
 		const GUIElementStyle* backgroundStyle = skin.getStyle(getFrameStyleName());
 
@@ -77,7 +77,7 @@ namespace bs
 		backgroundLayout->addElement(backgroundFrame);
 
 		GUILayout* contentLayout = contentPanel->addNewElement<GUILayoutY>();
-		contentLayout->addNewElement<GUILabel>(HString(text),
+		contentLayout->addNewElement<GUILabel>(StringHandle(text),
 			GUIOptions(GUIOption::fixedWidth(TOOLTIP_WIDTH), GUIOption::flexibleHeight()),
 			BuiltinResources::MultiLineLabelStyle);
 

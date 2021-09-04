@@ -6,8 +6,8 @@
 #include "Debug/BsDebug.h"
 #include "RenderAPI/BsGpuParams.h"
 #include "BsD3D11RenderAPI.h"
-#include "Managers/BsGpuProgramManager.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsGpuProgramManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "BsD3D11HLSLParamParser.h"
 #include "Profiling/BsRenderStats.h"
 #include <regex>

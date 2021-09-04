@@ -16,12 +16,12 @@ namespace bs
 		:GUIButtonBase(styleName, content, dimensions)
 	{ }
 
-	GUIButton* GUIButton::create(const HString& text, const String& styleName)
+	GUIButton* GUIButton::create(const StringHandle& text, const String& styleName)
 	{
 		return create(GUIContent(text), styleName);
 	}
 
-	GUIButton* GUIButton::create(const HString& text, const GUIOptions& options, const String& styleName)
+	GUIButton* GUIButton::create(const StringHandle& text, const GUIOptions& options, const String& styleName)
 	{
 		return create(GUIContent(text), options, styleName);
 	}

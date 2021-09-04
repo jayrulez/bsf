@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "GUI/BsGUIElement.h"
 #include "GUI/BsGUIWidget.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "GUI/BsGUIManager.h"
 #include "BsGUINavGroup.h"
 
@@ -11,14 +11,14 @@ namespace bs
 	const Color GUIElement::DISABLED_COLOR = Color(0.5f, 0.5f, 0.5f, 1.0f);
 
 	GUIElement::GUIElement(String styleName, const GUIDimensions& dimensions, GUIElementOptions options)
-		:GUIElementBase(dimensions), mOptionFlags(options), mStyle(&GUISkin::DefaultStyle), mStyleName(std::move(styleName))
+		:GUIElementBase(dimensions), mOptionFlags(options), mStyle(&GUISkinResource::DefaultStyle), mStyleName(std::move(styleName))
 	{
 		// Style is set to default here, and the proper one is assigned once GUI element
 		// is assigned to a parent (that's when the active GUI skin becomes known)
 	}
 
 	GUIElement::GUIElement(const char* styleName, const GUIDimensions& dimensions, GUIElementOptions options)
-		: GUIElementBase(dimensions), mOptionFlags(options), mStyle(&GUISkin::DefaultStyle)
+		: GUIElementBase(dimensions), mOptionFlags(options), mStyle(&GUISkinResource::DefaultStyle)
 		, mStyleName(styleName ? styleName : StringUtil::BLANK)
 	{
 		// Style is set to default here, and the proper one is assigned once GUI element
@@ -270,7 +270,7 @@ namespace bs
 		if(_getParentWidget() != nullptr && !mStyleName.empty())
 			newStyle = _getParentWidget()->getSkin().getStyle(mStyleName);
 		else
-			newStyle = &GUISkin::DefaultStyle;
+			newStyle = &GUISkinResource::DefaultStyle;
 
 		if(newStyle != mStyle)
 		{

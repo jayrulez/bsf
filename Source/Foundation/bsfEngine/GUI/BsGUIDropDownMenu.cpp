@@ -9,7 +9,7 @@
 #include "GUI/BsGUIButton.h"
 #include "GUI/BsGUISpace.h"
 #include "GUI/BsGUIContent.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "RenderAPI/BsViewport.h"
 #include "GUI/BsGUIListBox.h"
 #include "GUI/BsGUIDropDownBoxManager.h"
@@ -355,7 +355,7 @@ namespace bs
 			{
 				mSidebarPanel = mOwner->getPanel()->addNewElement<GUIPanel>();
 
-				mScrollUpBtn = GUIButton::create(HString(""), mOwner->mScrollUpStyle);
+				mScrollUpBtn = GUIButton::create(StringHandle(""), mOwner->mScrollUpStyle);
 				mScrollUpBtn->onClick.connect(std::bind(&DropDownSubMenu::scrollUp, this));
 
 				GUIElementOptions scrollUpBtnOptions = mScrollUpBtn->getOptionFlags();
@@ -363,7 +363,7 @@ namespace bs
 
 				mScrollUpBtn->setOptionFlags(scrollUpBtnOptions);
 
-				mScrollDownBtn = GUIButton::create(HString(""), mOwner->mScrollDownStyle);
+				mScrollDownBtn = GUIButton::create(StringHandle(""), mOwner->mScrollDownStyle);
 				mScrollDownBtn->onClick.connect(std::bind(&DropDownSubMenu::scrollDown, this));
 
 				GUIElementOptions scrollDownBtnOptions = mScrollDownBtn->getOptionFlags();

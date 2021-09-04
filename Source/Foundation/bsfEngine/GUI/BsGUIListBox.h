@@ -29,7 +29,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUIListBox* create(const Vector<HString>& elements, bool multiselect = false,
+		static GUIListBox* create(const Vector<StringHandle>& elements, bool multiselect = false,
 			const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -42,7 +42,7 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUIListBox* create(const Vector<HString>& elements, bool multiselect,
+		static GUIListBox* create(const Vector<StringHandle>& elements, bool multiselect,
 			const GUIOptions& options, const String& styleName = StringUtil::BLANK);
 
 		/**
@@ -54,14 +54,14 @@ namespace bs
 		 * @param[in]	styleName		Optional style to use for the element. Style will be retrieved from GUISkin of the
 		 *								GUIWidget the element is used on. If not specified default style is used.
 		 */
-		static GUIListBox* create(const Vector<HString>& elements, const GUIOptions& options,
+		static GUIListBox* create(const Vector<StringHandle>& elements, const GUIOptions& options,
 			const String& styleName = StringUtil::BLANK);
 
 		/**	Checks whether the listbox supports multiple selected elements at once. */
 		bool isMultiselect() const { return mIsMultiselect; }
 
 		/**	Changes the list box elements. */
-		void setElements(const Vector<HString>& elements);
+		void setElements(const Vector<StringHandle>& elements);
 
 		/**	Makes the element with the specified index selected. */
 		void selectElement(UINT32 idx);
@@ -97,7 +97,7 @@ namespace bs
 		~GUIListBox();
 
 	private:
-		GUIListBox(const String& styleName, const Vector<HString>& elements, bool isMultiselect,
+		GUIListBox(const String& styleName, const Vector<StringHandle>& elements, bool isMultiselect,
 			const GUIDimensions& dimensions);
 
 		/** @copydoc GUIButtonBase::_mouseEvent */
@@ -122,7 +122,7 @@ namespace bs
 		void updateContents();
 
 	private:
-		Vector<HString> mElements;
+		Vector<StringHandle> mElements;
 		Vector<bool> mElementStates;
 		GameObjectHandle<GUIDropDownMenu> mDropDownBox;
 

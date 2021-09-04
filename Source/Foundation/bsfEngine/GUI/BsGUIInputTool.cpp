@@ -4,7 +4,7 @@
 #include "GUI/BsGUIElement.h"
 #include "Math/BsMath.h"
 #include "Math/BsVector2.h"
-#include "Text/BsFont.h"
+#include "Text/BsFontResource.h"
 #include "String/BsUnicode.h"
 
 namespace bs

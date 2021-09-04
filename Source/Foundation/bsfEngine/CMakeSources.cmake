@@ -3,7 +3,7 @@ set(BS_ENGINE_SRC_RESOURCES
 	"bsfEngine/Resources/BsScriptCodeImporter.cpp"
 	"bsfEngine/Resources/BsScriptCodeResource.cpp"
 	"bsfEngine/Resources/BsPlainTextImporter.cpp"
-	"bsfEngine/Resources/BsPlainText.cpp"
+	"bsfEngine/Resources/BsPlainTextResource.cpp"
 	"bsfEngine/Resources/BsBuiltinResources.cpp"
 	"bsfEngine/Resources/BsEngineShaderIncludeHandler.cpp"
 	"bsfEngine/Resources/BsGameResourceManager.cpp"
@@ -23,7 +23,7 @@ set(BS_ENGINE_SRC_GUI
 	"bsfEngine/GUI/BsGUIElement.cpp"
 	"bsfEngine/GUI/BsGUILabel.cpp"
 	"bsfEngine/GUI/BsGUIManager.cpp"
-	"bsfEngine/GUI/BsGUISkin.cpp"
+	"bsfEngine/GUI/BsGUISkinResource.cpp"
 	"bsfEngine/GUI/BsGUILayout.cpp"
 	"bsfEngine/GUI/BsGUILayoutX.cpp"
 	"bsfEngine/GUI/BsGUILayoutY.cpp"
@@ -90,7 +90,7 @@ set(BS_ENGINE_INC_RENDERER
 )
 
 set(BS_ENGINE_SRC_RTTI
-	"bsfEngine/Private/RTTI/BsGUISkinRTTI.cpp"
+	"bsfEngine/Private/RTTI/BsGUISkinResourceRTTI.cpp"
 )
 
 set(BS_ENGINE_SRC_2D
@@ -128,11 +128,11 @@ set(BS_ENGINE_INC_2D
 )
 
 set(BS_ENGINE_INC_RTTI
-	"bsfEngine/Private/RTTI/BsPlainTextRTTI.h"
+	"bsfEngine/Private/RTTI/BsPlainTextResourceRTTI.h"
 	"bsfEngine/Private/RTTI/BsScriptCodeResourceRTTI.h"
 	"bsfEngine/Private/RTTI/BsScriptCodeImportOptionsRTTI.h"
 	"bsfEngine/Private/RTTI/BsGUIElementStyleRTTI.h"
-	"bsfEngine/Private/RTTI/BsGUISkinRTTI.h"
+	"bsfEngine/Private/RTTI/BsGUISkinResourceRTTI.h"
 	"bsfEngine/Private/RTTI/BsCGUIWidgetRTTI.h"
 	"bsfEngine/Private/RTTI/BsGameSettingsRTTI.h"
 	"bsfEngine/Private/RTTI/BsResourceMappingRTTI.h"
@@ -145,7 +145,7 @@ set(BS_ENGINE_INC_NOFILTER
 )
 
 set(BS_ENGINE_INC_RESOURCES
-	"bsfEngine/Resources/BsPlainText.h"
+	"bsfEngine/Resources/BsPlainTextResource.h"
 	"bsfEngine/Resources/BsPlainTextImporter.h"
 	"bsfEngine/Resources/BsScriptCodeResource.h"
 	"bsfEngine/Resources/BsScriptCodeImporter.h"
@@ -194,7 +194,7 @@ set(BS_ENGINE_INC_GUI
 	"bsfEngine/GUI/BsGUIElementStyle.h"
 	"bsfEngine/GUI/BsGUILabel.h"
 	"bsfEngine/GUI/BsGUIManager.h"
-	"bsfEngine/GUI/BsGUISkin.h"
+	"bsfEngine/GUI/BsGUISkinResource.h"
 	"bsfEngine/GUI/BsGUILayout.h"
 	"bsfEngine/GUI/BsGUILayoutX.h"
 	"bsfEngine/GUI/BsGUILayoutY.h"

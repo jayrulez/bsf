@@ -44,7 +44,7 @@
 #include "Animation/BsAnimationManager.h"
 #include "Renderer/BsParamBlocks.h"
 #include "Particles/BsParticleManager.h"
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 
 namespace bs
 {

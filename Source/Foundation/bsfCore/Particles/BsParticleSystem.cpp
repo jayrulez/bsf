@@ -11,7 +11,7 @@
 #include "Renderer/BsCamera.h"
 #include "Renderer/BsRenderer.h"
 #include "Physics/BsPhysics.h"
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 #include "Mesh/BsMesh.h"
 #include "CoreThread/BsCoreObjectSync.h"
 #include "Scene/BsSceneManager.h"

@@ -29,22 +29,22 @@ namespace bs
 		}
 	}
 
-	GUIToggle* GUIToggle::create(const HString& text, const String& styleName)
+	GUIToggle* GUIToggle::create(const StringHandle& text, const String& styleName)
 	{
 		return create(GUIContent(text), styleName);
 	}
 
-	GUIToggle* GUIToggle::create(const HString& text, const GUIOptions& options, const String& styleName)
+	GUIToggle* GUIToggle::create(const StringHandle& text, const GUIOptions& options, const String& styleName)
 	{
 		return create(GUIContent(text), options, styleName);
 	}
 
-	GUIToggle* GUIToggle::create(const HString& text, SPtr<GUIToggleGroup> toggleGroup, const String& styleName)
+	GUIToggle* GUIToggle::create(const StringHandle& text, SPtr<GUIToggleGroup> toggleGroup, const String& styleName)
 	{
 		return create(GUIContent(text), toggleGroup, styleName);
 	}
 
-	GUIToggle* GUIToggle::create(const HString& text, SPtr<GUIToggleGroup> toggleGroup,
+	GUIToggle* GUIToggle::create(const StringHandle& text, SPtr<GUIToggleGroup> toggleGroup,
 		const GUIOptions& options, const String& styleName)
 	{
 		return create(GUIContent(text), toggleGroup, options, styleName);

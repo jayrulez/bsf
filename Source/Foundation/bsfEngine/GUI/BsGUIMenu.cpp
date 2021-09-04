@@ -168,7 +168,7 @@ namespace bs
 		return getDropDownDataInternal(mRootElement);
 	}
 
-	void GUIMenu::setLocalizedName(const String& menuItemLabel, const HString& localizedName)
+	void GUIMenu::setLocalizedName(const String& menuItemLabel, const StringHandle& localizedName)
 	{
 		mLocalizedEntryNames[menuItemLabel] = localizedName;
 	}

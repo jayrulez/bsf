@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Resources/BsPlainTextImporter.h"
-#include "Resources/BsPlainText.h"
+#include "Resources/BsPlainTextResource.h"
 #include "FileSystem/BsDataStream.h"
 #include "FileSystem/BsFileSystem.h"
 
@@ -30,7 +30,7 @@ namespace bs
 			textData = stream->getAsWString();
 		}
 
-		SPtr<PlainText> plainText = PlainText::_createPtr(textData);
+		SPtr<PlainTextResource> plainText = PlainTextResource::_createPtr(textData);
 
 		String fileName = filePath.getFilename(false);
 		plainText->setName(fileName);

@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "GUI/BsGUISliderHandle.h"
 #include "2D/BsImageSprite.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "Image/BsSpriteTexture.h"
 #include "GUI/BsGUIDimensions.h"
 #include "GUI/BsGUIMouseEvent.h"

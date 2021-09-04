@@ -1,6 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 #include "Private/RTTI/BsVectorFieldResourceRTTI.h"
 #include "Image/BsTexture.h"
 #include "Resources/BsResources.h"

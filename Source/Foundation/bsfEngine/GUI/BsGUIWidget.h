@@ -211,13 +211,13 @@ namespace bs
 		virtual ~GUIWidget();
 
 		/** Sets the skin used for all GUI elements in the widget. This will update the look of all current elements. */
-		void setSkin(const HGUISkin& skin);
+		void setSkin(const GUISkinResourceHandle& skin);
 
 		/**	Returns the currently active GUI skin. */
-		const GUISkin& getSkin() const;
+		const GUISkinResource& getSkin() const;
 
 		/**	Returns the currently active GUI skin resource. */
-		const HGUISkin& getSkinResource() const { return mSkin; }
+		const GUISkinResourceHandle& getSkinResource() const { return mSkin; }
 
 		/** Returns the root GUI panel for the widget. */
 		GUIPanel* getPanel() const { return mPanel; }
@@ -403,7 +403,7 @@ namespace bs
 		mutable bool mWidgetIsDirty = false;
 		mutable Rect2I mBounds;
 
-		HGUISkin mSkin;
+		GUISkinResourceHandle mSkin;
 	};
 
 	/** @} */

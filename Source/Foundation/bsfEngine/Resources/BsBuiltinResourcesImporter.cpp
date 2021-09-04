@@ -250,7 +250,7 @@ namespace bs
 		saveMesh(discPath, discMesh, "6f496313-344a-495c-83e8-152e3053c52d");
 	}
 
-	SPtr<GUISkin> generateGUISkin()
+	SPtr<GUISkinResource> generateGUISkin()
 	{
 		using nlohmann::json;
 
@@ -261,7 +261,7 @@ namespace bs
 		SPtr<DataStream> guiSkinStream = FileSystem::openFile(guiSkinPath);
 		json guiSkinJSON = json::parse(guiSkinStream->getAsString().c_str());
 
-		SPtr<GUISkin> skin = GUISkin::_createPtr();
+		SPtr<GUISkinResource> skin = GUISkinResource::_createPtr();
 
 		for(auto& entry : guiSkinJSON)
 		{
@@ -739,7 +739,7 @@ namespace bs
 			String fileName(name.data(), name.size());
 			UUID UUID(String(uuidStr.data(), uuidStr.size()));
 
-			const SPtr<GUISkin> skin = generateGUISkin();
+			const SPtr<GUISkinResource> skin = generateGUISkin();
 			const Path outputPath = sOutputFolder + (fileName + u8".asset");
 
 			HResource skinResource = gResources()._createResourceHandle(skin, UUID);

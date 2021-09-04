@@ -330,7 +330,7 @@ namespace bs
 
 		/** @} */
 	private:
-		friend class HString;
+		friend class StringHandle;
 		friend class StringTableManager;
 
 		/** Gets the currently active language. */

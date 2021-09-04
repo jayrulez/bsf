@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsD3D11Prerequisites.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 
 namespace bs { namespace ct
 {

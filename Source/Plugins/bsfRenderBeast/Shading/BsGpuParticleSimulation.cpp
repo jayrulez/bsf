@@ -9,7 +9,7 @@
 #include "RenderAPI/BsGpuBuffer.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "RenderAPI/BsGpuPipelineParamInfo.h"
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 #include "Particles/BsParticleDistribution.h"
 #include "Math/BsVector3.h"
 #include "BsRendererParticles.h"

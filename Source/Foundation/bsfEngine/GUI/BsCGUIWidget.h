@@ -20,13 +20,13 @@ namespace bs
 		virtual ~CGUIWidget() = default;
 
 		/** @copydoc GUIWidget::setSkin */
-		void setSkin(const HGUISkin& skin);
+		void setSkin(const GUISkinResourceHandle& skin);
 
 		/** @copydoc GUIWidget::getSkin */
-		const GUISkin& getSkin() const;
+		const GUISkinResource& getSkin() const;
 
 		/** @copydoc GUIWidget::getSkinResource */
-		const HGUISkin& getSkinResource() const;
+		const GUISkinResourceHandle& getSkinResource() const;
 
 		/** @copydoc GUIWidget::getPanel */
 		GUIPanel* getPanel() const;

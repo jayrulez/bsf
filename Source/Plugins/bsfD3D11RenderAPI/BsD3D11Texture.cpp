@@ -91,7 +91,7 @@ namespace bs { namespace ct
 					tempDesc.format = mProperties.getFormat();
 					tempDesc.hwGamma = mProperties.isHardwareGammaEnabled();
 
-					SPtr<D3D11Texture> temporary = std::static_pointer_cast<D3D11Texture>(Texture::create(tempDesc));
+					SPtr<D3D11Texture> temporary = std::static_pointer_cast<D3D11Texture>(Texture::createPtr(tempDesc));
 					device.getImmediateContext()->ResolveSubresource(temporary->getDX11Resource(), 0, mTex, srcResIdx, mDXGIFormat);
 
 					TEXTURE_COPY_DESC tempCopyDesc;

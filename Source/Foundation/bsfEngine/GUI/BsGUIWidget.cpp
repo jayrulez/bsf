@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "GUI/BsGUIWidget.h"
 #include "GUI/BsGUIManager.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "GUI/BsGUILabel.h"
 #include "GUI/BsGUIPanel.h"
 #include "GUI/BsGUINavGroup.h"
@@ -1158,7 +1158,7 @@ namespace bs
 		}
 	}
 
-	void GUIWidget::setSkin(const HGUISkin& skin)
+	void GUIWidget::setSkin(const GUISkinResourceHandle& skin)
 	{
 		mSkin = skin;
 
@@ -1166,7 +1166,7 @@ namespace bs
 			element->_refreshStyle();
 	}
 
-	const GUISkin& GUIWidget::getSkin() const
+	const GUISkinResource& GUIWidget::getSkin() const
 	{
 		if(mSkin.isLoaded())
 			return *mSkin;

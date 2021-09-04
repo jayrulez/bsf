@@ -5,7 +5,7 @@
 #include "BsPrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
-#include "Resources/BsPlainText.h"
+#include "Resources/BsPlainTextResource.h"
 
 namespace bs
 {
@@ -14,20 +14,20 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_EXPORT PlainTextRTTI : public RTTIType <PlainText, Resource, PlainTextRTTI>
+	class BS_EXPORT PlainTextResourceRTTI : public RTTIType <PlainTextResource, Resource, PlainTextResourceRTTI>
 	{
 	private:
-		WString& getString(PlainText* obj) { return obj->mString; }
-		void setString(PlainText* obj, WString& val) { obj->mString = val; }
+		WString& getString(PlainTextResource* obj) { return obj->mString; }
+		void setString(PlainTextResource* obj, WString& val) { obj->mString = val; }
 	public:
-		PlainTextRTTI()
+		PlainTextResourceRTTI()
 		{
-			addPlainField("mString", 0, &PlainTextRTTI::getString, &PlainTextRTTI::setString);
+			addPlainField("mString", 0, &PlainTextResourceRTTI::getString, &PlainTextResourceRTTI::setString);
 		}
 
 		const String& getRTTIName() override
 		{
-			static String name = "PlainText";
+			static String name = "PlainTextResource";
 			return name;
 		}
 
@@ -38,7 +38,7 @@ namespace bs
 
 		SPtr<IReflectable> newRTTIObject() override
 		{
-			return PlainText::_createPtr(L""); // Initial string doesn't matter, it'll get overwritten
+			return PlainTextResource::_createPtr(L""); // Initial string doesn't matter, it'll get overwritten
 		}
 	};
 

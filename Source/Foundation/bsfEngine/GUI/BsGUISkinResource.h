@@ -16,7 +16,7 @@ namespace bs
 	 * Holds a set of styles that control how are GUI element types positioned and displayed in the GUI. Each element type
 	 * can be assigned a specific style.
 	 */
-	class BS_EXPORT BS_SCRIPT_EXPORT(m:GUI) GUISkin : public Resource
+	class BS_EXPORT BS_SCRIPT_EXPORT(m:GUI) GUISkinResource : public Resource
 	{
 	public:
 		/**	Checks if the style with the specified name exists. */
@@ -53,7 +53,7 @@ namespace bs
 
 		/**	Creates an empty GUI skin and returns a handle to it. */
 		BS_SCRIPT_EXPORT(ec:GUISkin)
-		static HGUISkin create();
+		static GUISkinResourceHandle create();
 
 		/**	Default style that may be used when no other is available. */
 		static GUIElementStyle DefaultStyle;
@@ -68,12 +68,12 @@ namespace bs
 		 *
 		 * @note	Internal method. Use "create" returning handle for normal use.
 		 */
-		static SPtr<GUISkin> _createPtr();
+		static SPtr<GUISkinResource> _createPtr();
 
 		/** @} */
 	private:
-		GUISkin();
-		GUISkin(const GUISkin& skin); // Disable copying
+		GUISkinResource();
+		GUISkinResource(const GUISkinResource & skin); // Disable copying
 
 		UnorderedMap<String, GUIElementStyle> mStyles;
 
@@ -81,7 +81,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class GUISkinRTTI;
+		friend class GUISkinResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		virtual RTTITypeBase* getRTTI() const override;
 	};

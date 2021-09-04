@@ -76,7 +76,7 @@ namespace bs
 			const String& style, const GUIDimensions& dimensions);
 
 		/**	Get localized name of a menu item element with the specified index. */
-		HString getElementLocalizedName(UINT32 idx) const;
+		StringHandle getElementLocalizedName(UINT32 idx) const;
 
 		/** @copydoc GUIElementContainer::_getOptimalSize */
 		Vector2I _getOptimalSize() const override;

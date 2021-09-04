@@ -156,7 +156,7 @@ namespace bs
 		 *								want to localize)
 		 * @param[in]	localizedName	Localized string with the name.
 		 */
-		void setLocalizedName(const String& menuItemLabel, const HString& localizedName);
+		void setLocalizedName(const String& menuItemLabel, const StringHandle& localizedName);
 
 		/**	Returns data used for initializing a drop down list, for all elements. */
 		GUIDropDownData getDropDownData() const;
@@ -169,7 +169,7 @@ namespace bs
 		GUIDropDownData getDropDownDataInternal(const GUIMenuItem& menu) const;
 
 		GUIMenuItem mRootElement;
-		UnorderedMap<String, HString> mLocalizedEntryNames;
+		UnorderedMap<String, StringHandle> mLocalizedEntryNames;
 		UINT32 mNextIdx;
 	};
 

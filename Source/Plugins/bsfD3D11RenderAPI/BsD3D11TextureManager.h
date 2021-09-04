@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsD3D11Prerequisites.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 
 namespace bs
 {

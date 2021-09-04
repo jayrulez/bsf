@@ -36,15 +36,15 @@ namespace bs
 			GUILabel* guiAvgTimeSelf;
 			GUILabel* guiTotalTimeSelf;
 
-			HString name;
-			HString pctOfParent;
-			HString numCalls;
-			HString numAllocs;
-			HString numFrees;
-			HString avgTime;
-			HString totalTime;
-			HString avgTimeSelf;
-			HString totalTimeSelf;
+			StringHandle name;
+			StringHandle pctOfParent;
+			StringHandle numCalls;
+			StringHandle numAllocs;
+			StringHandle numFrees;
+			StringHandle avgTime;
+			StringHandle totalTime;
+			StringHandle avgTimeSelf;
+			StringHandle totalTimeSelf;
 
 			bool disabled;
 		};
@@ -66,15 +66,15 @@ namespace bs
 			GUILabel* guiAvgCyclesSelf;
 			GUILabel* guiTotalCyclesSelf;
 
-			HString name;
-			HString pctOfParent;
-			HString numCalls;
-			HString numAllocs;
-			HString numFrees;
-			HString avgCycles;
-			HString totalCycles;
-			HString avgCyclesSelf;
-			HString totalCyclesSelf;
+			StringHandle name;
+			StringHandle pctOfParent;
+			StringHandle numCalls;
+			StringHandle numAllocs;
+			StringHandle numFrees;
+			StringHandle avgCycles;
+			StringHandle totalCycles;
+			StringHandle avgCyclesSelf;
+			StringHandle totalCyclesSelf;
 
 			bool disabled;
 		};
@@ -89,8 +89,8 @@ namespace bs
 			GUILabel* guiName;
 			GUILabel* guiTime;
 
-			HString name;
-			HString time;
+			StringHandle name;
+			StringHandle time;
 
 			bool disabled;
 		};
@@ -192,24 +192,24 @@ namespace bs
 		GUILabel* mGPUVertexBufferBindsLbl = nullptr;
 		GUILabel* mGPUIndexBufferBindsLbl = nullptr;
 
-		HString mGPUFrameNumStr;
-		HString mGPUTimeStr;
-		HString mGPUDrawCallsStr;
-		HString mGPURenTargetChangesStr;
-		HString mGPUPresentsStr;
-		HString mGPUClearsStr;
-		HString mGPUVerticesStr;
-		HString mGPUPrimitivesStr;
-		HString mGPUSamplesStr;
-		HString mGPUPipelineStateChangesStr;
+		StringHandle mGPUFrameNumStr;
+		StringHandle mGPUTimeStr;
+		StringHandle mGPUDrawCallsStr;
+		StringHandle mGPURenTargetChangesStr;
+		StringHandle mGPUPresentsStr;
+		StringHandle mGPUClearsStr;
+		StringHandle mGPUVerticesStr;
+		StringHandle mGPUPrimitivesStr;
+		StringHandle mGPUSamplesStr;
+		StringHandle mGPUPipelineStateChangesStr;
 
-		HString mGPUObjectsCreatedStr;
-		HString mGPUObjectsDestroyedStr;
-		HString mGPUResourceWritesStr;
-		HString mGPUResourceReadsStr;
-		HString mGPUParamBindsStr;
-		HString mGPUVertexBufferBindsStr;
-		HString mGPUIndexBufferBindsStr;
+		StringHandle mGPUObjectsCreatedStr;
+		StringHandle mGPUObjectsDestroyedStr;
+		StringHandle mGPUResourceWritesStr;
+		StringHandle mGPUResourceReadsStr;
+		StringHandle mGPUParamBindsStr;
+		StringHandle mGPUVertexBufferBindsStr;
+		StringHandle mGPUIndexBufferBindsStr;
 
 		Vector<BasicRow> mBasicRows;
 		Vector<PreciseRow> mPreciseRows;

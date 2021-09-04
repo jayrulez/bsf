@@ -18,7 +18,7 @@ namespace bs
 	{
 		Vector<GUIDropDownDataEntry> entries;
 		Vector<bool> states;
-		UnorderedMap<String, HString> localizedNames;
+		UnorderedMap<String, StringHandle> localizedNames;
 	};
 
 	/**	A set of parameters used for initializing a drop down box. */
@@ -27,7 +27,7 @@ namespace bs
 		SPtr<Camera> camera; /**< Camera on which to open the drop down box. */
 		DropDownAreaPlacement placement; /**< Determines how is the drop down box positioned in the visible area. */
 		GUIDropDownData dropDownData; /**< Data to use for initializing menu items of the drop down box. */
-		HGUISkin skin; /**< Skin to use for drop down box GUI elements. */
+		GUISkinResourceHandle skin; /**< Skin to use for drop down box GUI elements. */
 		/** Additional bounds that control what is considered the inside or the outside of the drop down box. */
 		Vector<Rect2I> additionalBounds;
 	};

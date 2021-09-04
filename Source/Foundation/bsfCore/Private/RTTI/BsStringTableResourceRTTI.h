@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStringRTTI.h"
 #include "RTTI/BsStdRTTI.h"
-#include "Localization/BsStringTable.h"
+#include "Localization/BsStringTableResource.h"
 
 namespace bs
 {

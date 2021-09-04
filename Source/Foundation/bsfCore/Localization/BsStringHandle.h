@@ -8,15 +8,15 @@ namespace bs
 	 *  @{
 	 */
 
-	/**
-	 * String handle. Provides a wrapper around an Unicode string, primarily for localization purposes.
-	 * 			
-	 * Actual value for this string is looked up in a global string table based on the provided identifier string and
-	 * currently active language. If such value doesn't exist then the identifier is used as is.
-	 *			
-	 * Use {0}, {1}, etc. in the string value for values that might change dynamically.
-	 */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(n:LocString,m:Localization) HString
+	 /**
+	  * String handle. Provides a wrapper around an Unicode string, primarily for localization purposes.
+	  *
+	  * Actual value for this string is looked up in a global string table based on the provided identifier string and
+	  * currently active language. If such value doesn't exist then the identifier is used as is.
+	  *
+	  * Use {0}, {1}, etc. in the string value for values that might change dynamically.
+	  */
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(n :LocString, m : Localization) StringHandle
 	{
 	public:
 		/**
@@ -27,7 +27,7 @@ namespace bs
 		 * @param[in]	stringTableId	Unique identifier of the string table to retrieve the string from.
 		 */
 		BS_SCRIPT_EXPORT()
-		explicit HString(const String& identifier, UINT32 stringTableId = 0);
+		explicit StringHandle(const String & identifier, UINT32 stringTableId = 0);
 
 		/**
 		 * Creates a new localized string with the specified identifier and sets the default language version of the
@@ -39,7 +39,7 @@ namespace bs
 		 * @param[in]	stringTableId	Unique identifier of the string table to retrieve the string from.
 		 */
 		BS_SCRIPT_EXPORT()
-		explicit HString(const String& identifier, const String& defaultString, UINT32 stringTableId = 0);
+			explicit StringHandle(const String & identifier, const String & defaultString, UINT32 stringTableId = 0);
 
 		/**
 		 * Creates a new empty localized string.
@@ -47,21 +47,21 @@ namespace bs
 		 * @param[in]	stringTableId	Unique identifier of the string table to retrieve the string from.
 		 */
 		BS_SCRIPT_EXPORT()
-		HString(UINT32 stringTableId);
+			StringHandle(UINT32 stringTableId);
 
 		/** Creates a new empty localized string. */
 		BS_SCRIPT_EXPORT()
-		HString();
+			StringHandle();
 
-		HString(const HString& copy);
-		~HString();
+		StringHandle(const StringHandle & copy);
+		~StringHandle();
 
-		HString& operator=(const HString& rhs);
+		StringHandle& operator=(const StringHandle & rhs);
 
 		operator const String& () const;
 
 		BS_SCRIPT_EXPORT(in:true)
-		const String& getValue() const;
+			const String& getValue() const;
 
 		/**
 		 * Sets a value of a string parameter. Parameters are specified as bracketed values within the string itself
@@ -70,10 +70,10 @@ namespace bs
 		 * @note	This is useful for strings that have dynamically changing values, like numbers, embedded in them.
 		 */
 		BS_SCRIPT_EXPORT()
-		void setParameter(UINT32 idx, const String& value);
-		
+			void setParameter(UINT32 idx, const String & value);
+
 		/** Returns an empty string. */
-		static const HString& dummy();
+		static const StringHandle& dummy();
 	private:
 		SPtr<LocalizedStringData> mStringData;
 		String* mParameters = nullptr;

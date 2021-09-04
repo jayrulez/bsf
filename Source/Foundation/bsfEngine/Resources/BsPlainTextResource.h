@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	A resource containing plain text data. */
-	class BS_EXPORT PlainText : public Resource
+	class BS_EXPORT PlainTextResource : public Resource
 	{
 	public:
 		/**	Returns the text contained in the resource. */
@@ -22,7 +22,7 @@ namespace bs
 		void setString(const WString& data) { mString = data; }
 
 		/**	Creates a new text file resource with the specified string. */
-		static HPlainText create(const WString& data);
+		static PlainTextResourceHandle create(const WString& data);
 
 		/** @name Internal
 		 *  @{
@@ -33,11 +33,11 @@ namespace bs
 		 *
 		 * @note	Internal method. Use create() for normal use.
 		 */
-		static SPtr<PlainText> _createPtr(const WString& data);
+		static SPtr<PlainTextResource> _createPtr(const WString& data);
 
 		/** @} */
 	private:
-		PlainText(const WString& data);
+		PlainTextResource(const WString& data);
 
 		WString mString;
 
@@ -45,7 +45,7 @@ namespace bs
 		/* 								SERIALIZATION                      		*/
 		/************************************************************************/
 	public:
-		friend class PlainTextRTTI;
+		friend class PlainTextResourceRTTI;
 		static RTTITypeBase* getRTTIStatic();
 		virtual RTTITypeBase* getRTTI() const override;
 	};

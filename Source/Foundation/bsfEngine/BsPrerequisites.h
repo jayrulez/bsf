@@ -146,7 +146,7 @@ namespace bs
 	class GUIScrollBarVert;
 	class GUIScrollBarHorz;
 	class GUIScrollArea;
-	class GUISkin;
+	class GUISkinResource;
 	class GUIRenderTexture;
 	struct GUIElementStyle;
 	class GUIMouseEvent;
@@ -185,7 +185,7 @@ namespace bs
 	class CProfilerOverlay;
 	class ProfilerOverlay;
 	class DrawHelper;
-	class PlainText;
+	class PlainTextResource;
 	class ScriptCodeResource;
 	class ScriptCodeImportOptions;
 	class RendererMeshData;
@@ -199,9 +199,9 @@ namespace bs
 	typedef GameObjectHandle<CGUIWidget> HGUIWidget;
 	typedef GameObjectHandle<CProfilerOverlay> HProfilerOverlay;
 
-	typedef ResourceHandle<PlainText> HPlainText;
+	typedef ResourceHandle<PlainTextResource> PlainTextResourceHandle;
 	typedef ResourceHandle<ScriptCodeResource> ScriptCodeResourceHandle;
-	typedef ResourceHandle<GUISkin> HGUISkin;
+	typedef ResourceHandle<GUISkinResource> GUISkinResourceHandle;
 
 	/**	RTTI types. */
 	enum TypeID_Engine

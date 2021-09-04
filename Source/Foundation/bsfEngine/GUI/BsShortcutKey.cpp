@@ -3,7 +3,7 @@
 #include "GUI/BsShortcutKey.h"
 #include "Platform/BsPlatform.h"
 #include "Localization/BsHEString.h"
-#include "Localization/BsHString.h"
+#include "Localization/BsStringHandle.h"
 
 namespace bs
 {
@@ -77,7 +77,7 @@ namespace bs
 		auto iterFind = FUNCTION_KEY_TO_NAME.find(button);
 		if (iterFind != FUNCTION_KEY_TO_NAME.end())
 		{
-			charStr = ((HString)iterFind->second);
+			charStr = ((StringHandle)iterFind->second);
 		}
 		else
 		{

@@ -42,8 +42,8 @@ namespace bs
 			mLayout = GUILayoutX::create();
 			_registerChildElement(mLayout);
 
-			mUpBtn = GUIButton::create(HString(""), "ScrollLeftBtn");
-			mDownBtn = GUIButton::create(HString(""), "ScrollRightBtn");
+			mUpBtn = GUIButton::create(StringHandle(""), "ScrollLeftBtn");
+			mDownBtn = GUIButton::create(StringHandle(""), "ScrollRightBtn");
 
 			mHandleBtn = GUISliderHandle::create(flags | GUISliderHandleFlag::Horizontal, getSubStyleName(getHScrollHandleType()));
 		}
@@ -52,8 +52,8 @@ namespace bs
 			mLayout = GUILayoutY::create();
 			_registerChildElement(mLayout);
 
-			mUpBtn = GUIButton::create(HString(""), "ScrollUpBtn");
-			mDownBtn = GUIButton::create(HString(""), "ScrollDownBtn");
+			mUpBtn = GUIButton::create(StringHandle(""), "ScrollUpBtn");
+			mDownBtn = GUIButton::create(StringHandle(""), "ScrollDownBtn");
 
 			mHandleBtn = GUISliderHandle::create(flags | GUISliderHandleFlag::Vertical, getSubStyleName(getVScrollHandleType()));
 		}

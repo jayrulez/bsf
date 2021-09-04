@@ -6,7 +6,7 @@
 #include "GUI/BsGUILabel.h"
 #include "GUI/BsGUIWidget.h"
 #include "GUI/BsGUIToggle.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "GUI/BsGUIMouseEvent.h"
 #include "GUI/BsGUICommandEvent.h"
 
@@ -147,7 +147,7 @@ namespace bs
 				const String& shortcutTag = element.getShortcutTag();
 				if (!shortcutTag.empty())
 				{
-					visElem.shortcutLabel = GUILabel::create(HString(shortcutTag), "RightAlignedLabel");
+					visElem.shortcutLabel = GUILabel::create(StringHandle(shortcutTag), "RightAlignedLabel");
 					_registerChildElement(visElem.shortcutLabel);
 				}
 			}
@@ -176,7 +176,7 @@ namespace bs
 		}
 	}
 
-	HString GUIDropDownContent::getElementLocalizedName(UINT32 idx) const
+	StringHandle GUIDropDownContent::getElementLocalizedName(UINT32 idx) const
 	{
 		const String& label = mDropDownData.entries[idx].getLabel();
 
@@ -184,7 +184,7 @@ namespace bs
 		if (findLocalizedName != mDropDownData.localizedNames.end())
 			return findLocalizedName->second;
 		else
-			return HString(label);
+			return StringHandle(label);
 	}
 
 	void GUIDropDownContent::setKeyboardFocus(bool focus)

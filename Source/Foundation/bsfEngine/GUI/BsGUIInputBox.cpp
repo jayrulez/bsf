@@ -3,7 +3,7 @@
 #include "GUI/BsGUIInputBox.h"
 #include "GUI/BsGUIManager.h"
 #include "2D/BsImageSprite.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "Image/BsSpriteTexture.h"
 #include "2D/BsTextSprite.h"
 #include "GUI/BsGUIDimensions.h"
@@ -1208,9 +1208,9 @@ namespace bs
 			contextMenu->addMenuItem("Copy", std::bind(&GUIInputBox::copyText, const_cast<GUIInputBox*>(this)), 0);
 			contextMenu->addMenuItem("Paste", std::bind(&GUIInputBox::pasteText, const_cast<GUIInputBox*>(this)), 0);
 
-			contextMenu->setLocalizedName("Cut", HString("Cut"));
-			contextMenu->setLocalizedName("Copy", HString("Copy"));
-			contextMenu->setLocalizedName("Paste", HString("Paste"));
+			contextMenu->setLocalizedName("Cut", StringHandle("Cut"));
+			contextMenu->setLocalizedName("Copy", StringHandle("Copy"));
+			contextMenu->setLocalizedName("Paste", StringHandle("Paste"));
 		}
 
 		if (!_isDisabled())

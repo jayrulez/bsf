@@ -3,7 +3,7 @@
 #include "Particles/BsParticleEvolver.h"
 #include "Private/Particles/BsParticleSet.h"
 #include "Private/RTTI/BsParticleSystemRTTI.h"
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 #include "Image/BsSpriteTexture.h"
 #include "BsParticleSystem.h"
 #include "Material/BsMaterial.h"

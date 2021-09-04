@@ -25,7 +25,7 @@ namespace bs
 		
 	}
 
-	HEString::operator HString() const
+	HEString::operator StringHandle() const
 	{
 		return mInternal;
 	}

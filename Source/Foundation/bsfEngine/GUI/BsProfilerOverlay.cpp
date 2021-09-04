@@ -400,7 +400,7 @@ namespace bs
 
 		mGPULayoutSamples = mWidget->getPanel()->addNewElement<GUIPanel>();
 
-		HString gpuSamplesStr(u8"__ProfOvGPUSamples", u8"Samples");
+		StringHandle gpuSamplesStr(u8"__ProfOvGPUSamples", u8"Samples");
 		mGPULayoutSamples->addNewElement<GUILabel>(gpuSamplesStr);
 
 		for(UINT32 i = 0; i < GPU_NUM_SAMPLE_COLUMNS; i++)
@@ -408,8 +408,8 @@ namespace bs
 			mGPULayoutSampleLabels[i] = mGPULayoutSamples->addNewElement<GUILayoutY>();
 			mGPULayoutSampleContents[i] = mGPULayoutSamples->addNewElement<GUILayoutY>();
 
-			HString gpuSamplesNameStr(u8"__ProfOvGPUSampName", u8"Name");
-			HString gpuSamplesTimeStr(u8"__ProfOvGPUSampTime", u8"Time");
+			StringHandle gpuSamplesNameStr(u8"__ProfOvGPUSampName", u8"Name");
+			StringHandle gpuSamplesTimeStr(u8"__ProfOvGPUSampTime", u8"Time");
 			mGPULayoutSampleLabels[i]->addElement(GUILabel::create(gpuSamplesNameStr, GUIOptions(GUIOption::fixedWidth(200))));
 			mGPULayoutSampleContents[i]->addElement(GUILabel::create(gpuSamplesTimeStr, GUIOptions(GUIOption::fixedWidth(100))));
 

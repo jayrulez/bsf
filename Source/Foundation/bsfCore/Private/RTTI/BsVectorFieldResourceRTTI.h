@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsMathRTTI.h"
-#include "Particles/BsVectorField.h"
+#include "Particles/BsVectorFieldResource.h"
 
 namespace bs
 {

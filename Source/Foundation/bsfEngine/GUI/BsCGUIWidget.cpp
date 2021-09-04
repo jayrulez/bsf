@@ -29,17 +29,17 @@ namespace bs
 		:CGUIWidget(parent, camera->_getCamera())
 	{ }
 
-	void CGUIWidget::setSkin(const HGUISkin& skin)
+	void CGUIWidget::setSkin(const GUISkinResourceHandle& skin)
 	{
 		mInternal->setSkin(skin);
 	}
 
-	const GUISkin& CGUIWidget::getSkin() const
+	const GUISkinResource& CGUIWidget::getSkin() const
 	{
 		return mInternal->getSkin();
 	}
 
-	const HGUISkin& CGUIWidget::getSkinResource() const
+	const GUISkinResourceHandle& CGUIWidget::getSkinResource() const
 	{
 		return mInternal->getSkinResource();
 	}

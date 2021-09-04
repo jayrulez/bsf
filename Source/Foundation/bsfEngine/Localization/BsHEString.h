@@ -9,7 +9,7 @@ namespace bs
 	 */
 
 	/**
-	 * Helper class used for constructing HString%s that references the engine string table. Engine string table is just
+	 * Helper class used for constructing StringHandle%s that references the engine string table. Engine string table is just
 	 * a separate string table so it doesn't conflict with the game string table.
 	 */
 	class BS_EXPORT HEString
@@ -39,12 +39,12 @@ namespace bs
 		HEString();
 
 		/**	Implicitly casts the editor string type to a generic string type. */
-		operator HString() const;
+		operator StringHandle() const;
 
 	private:
 		static const UINT32 ENGINE_STRING_TABLE_ID;
 
-		HString mInternal;
+		StringHandle mInternal;
 	};
 
 	/** @} */

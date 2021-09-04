@@ -59,12 +59,12 @@ namespace bs
 		GUIContent() = default;
 
 		/**	Constructs content with just a string. */
-		GUIContent(const HString& text)
+		GUIContent(const StringHandle & text)
 			: text(text)
 		{ }
 
 		/**	Constructs content with a string and a tooltip. */
-		GUIContent(const HString& text, const HString& tooltip)
+		GUIContent(const StringHandle& text, const StringHandle& tooltip)
 			: text(text), tooltip(tooltip)
 		{ }
 
@@ -74,17 +74,17 @@ namespace bs
 		{ }
 
 		/**	Constructs content with an image and a tooltip. */
-		GUIContent(const GUIContentImages& image, const HString& tooltip)
+		GUIContent(const GUIContentImages& image, const StringHandle& tooltip)
 			: images(image), tooltip(tooltip)
 		{ }
 
 		/**	Constructs content with a string and an image. */
-		GUIContent(const HString& text, const GUIContentImages& image)
+		GUIContent(const StringHandle& text, const GUIContentImages& image)
 			: text(text), images(image)
 		{ }
 
 		/**	Constructs content with a string, an image and a tooltip. */
-		GUIContent(const HString& text, const GUIContentImages& image, const HString& tooltip)
+		GUIContent(const StringHandle& text, const GUIContentImages& image, const StringHandle& tooltip)
 			: text(text), images(image), tooltip(tooltip)
 		{ }
 
@@ -94,9 +94,9 @@ namespace bs
 		/**	Determines the spacing between text and image content in pixels. */
 		static const UINT32 IMAGE_TEXT_SPACING;
 
-		HString text;
+		StringHandle text;
 		GUIContentImages images;
-		HString tooltip;
+		StringHandle tooltip;
 	};
 
 	/** @} */

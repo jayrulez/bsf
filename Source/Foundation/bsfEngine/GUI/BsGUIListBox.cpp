@@ -15,8 +15,8 @@ namespace bs
 		return name;
 	}
 
-	GUIListBox::GUIListBox(const String& styleName, const Vector<HString>& elements, bool isMultiselect, const GUIDimensions& dimensions)
-		:GUIButtonBase(styleName, GUIContent(HString("")), dimensions), mElements(elements), mIsMultiselect(isMultiselect)
+	GUIListBox::GUIListBox(const String& styleName, const Vector<StringHandle>& elements, bool isMultiselect, const GUIDimensions& dimensions)
+		:GUIButtonBase(styleName, GUIContent(StringHandle("")), dimensions), mElements(elements), mIsMultiselect(isMultiselect)
 	{
 		mElementStates.resize(elements.size(), false);
 		if (!mIsMultiselect && mElementStates.size() > 0)
@@ -30,22 +30,22 @@ namespace bs
 		closeListBox();
 	}
 
-	GUIListBox* GUIListBox::create(const Vector<HString>& elements, bool isMultiselect, const String& styleName)
+	GUIListBox* GUIListBox::create(const Vector<StringHandle>& elements, bool isMultiselect, const String& styleName)
 	{
 		return new (bs_alloc<GUIListBox>()) GUIListBox(getStyleName<GUIListBox>(styleName), elements, isMultiselect, GUIDimensions::create());
 	}
 
-	GUIListBox* GUIListBox::create(const Vector<HString>& elements, bool isMultiselect, const GUIOptions& options, const String& styleName)
+	GUIListBox* GUIListBox::create(const Vector<StringHandle>& elements, bool isMultiselect, const GUIOptions& options, const String& styleName)
 	{
 		return new (bs_alloc<GUIListBox>()) GUIListBox(getStyleName<GUIListBox>(styleName), elements, isMultiselect, GUIDimensions::create(options));
 	}
 
-	GUIListBox* GUIListBox::create(const Vector<HString>& elements, const GUIOptions& options, const String& styleName)
+	GUIListBox* GUIListBox::create(const Vector<StringHandle>& elements, const GUIOptions& options, const String& styleName)
 	{
 		return new (bs_alloc<GUIListBox>()) GUIListBox(getStyleName<GUIListBox>(styleName), elements, false, GUIDimensions::create(options));
 	}
 
-	void GUIListBox::setElements(const Vector<HString>& elements)
+	void GUIListBox::setElements(const Vector<StringHandle>& elements)
 	{
 		bool wasOpen = mDropDownBox != nullptr;
 

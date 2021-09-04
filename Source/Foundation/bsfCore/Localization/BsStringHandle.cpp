@@ -1,12 +1,12 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "BsCorePrerequisites.h"
-#include "Localization/BsHString.h"
+#include "Localization/BsStringHandle.h"
 #include "Localization/BsStringTableManager.h"
 
 namespace bs
 {
-	HString::HString()
+	StringHandle::StringHandle()
 	{
 		mStringData = StringTableManager::instance().getTable(0)->getStringData(u8"");
 
@@ -14,7 +14,7 @@ namespace bs
 			mParameters = bs_newN<String>(mStringData->numParameters);
 	}
 
-	HString::HString(UINT32 stringTableId)
+	StringHandle::StringHandle(UINT32 stringTableId)
 	{
 		mStringData = StringTableManager::instance().getTable(stringTableId)->getStringData(u8"");
 
@@ -22,7 +22,7 @@ namespace bs
 			mParameters = bs_newN<String>(mStringData->numParameters);
 	}
 
-	HString::HString(const String& identifierString, UINT32 stringTableId)
+	StringHandle::StringHandle(const String& identifierString, UINT32 stringTableId)
 	{
 		mStringData = StringTableManager::instance().getTable(stringTableId)->getStringData(identifierString);
 
@@ -30,7 +30,7 @@ namespace bs
 			mParameters = bs_newN<String>(mStringData->numParameters);
 	}
 
-	HString::HString(const String& identifierString, const String& defaultString, UINT32 stringTableId)
+	StringHandle::StringHandle(const String& identifierString, const String& defaultString, UINT32 stringTableId)
 	{
 		StringTableResourceHandle table = StringTableManager::instance().getTable(stringTableId);
 		table->setString(identifierString, StringTableResource::DEFAULT_LANGUAGE, defaultString);
@@ -41,7 +41,7 @@ namespace bs
 			mParameters = bs_newN<String>(mStringData->numParameters);
 	}
 
-	HString::HString(const HString& copy)
+	StringHandle::StringHandle(const StringHandle& copy)
 	{
 		mStringData = copy.mStringData;
 		mIsDirty = copy.mIsDirty;
@@ -65,18 +65,18 @@ namespace bs
 		}
 	}
 
-	HString::~HString()
+	StringHandle::~StringHandle()
 	{
 		if (mParameters != nullptr)
 			bs_deleteN(mParameters, mStringData->numParameters);
 	}
 
-	HString::operator const String& () const
+	StringHandle::operator const String& () const
 	{
 		return getValue();
 	}
 
-	HString& HString::operator=(const HString& rhs)
+	StringHandle& StringHandle::operator=(const StringHandle& rhs)
 	{
 		if (mParameters != nullptr)
 		{
@@ -108,7 +108,7 @@ namespace bs
 		return *this;
 	}
 
-	const String& HString::getValue() const
+	const String& StringHandle::getValue() const
 	{
 		if (mIsDirty)
 		{
@@ -128,7 +128,7 @@ namespace bs
 		return *mStringPtr;
 	}
 
-	void HString::setParameter(UINT32 idx, const String& value)
+	void StringHandle::setParameter(UINT32 idx, const String& value)
 	{
 		if (idx >= mStringData->numParameters)
 			return;
@@ -137,9 +137,9 @@ namespace bs
 		mIsDirty = true;
 	}
 
-	const HString& HString::dummy()
+	const StringHandle& StringHandle::dummy()
 	{
-		static HString dummyVal;
+		static StringHandle dummyVal;
 
 		return dummyVal;
 	}

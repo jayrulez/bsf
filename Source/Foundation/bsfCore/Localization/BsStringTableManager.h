@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Utility/BsModule.h"
-#include "Localization/BsStringTable.h"
+#include "Localization/BsStringTableResource.h"
 
 namespace bs
 {

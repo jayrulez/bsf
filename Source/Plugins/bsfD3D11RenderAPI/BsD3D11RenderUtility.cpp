@@ -8,7 +8,7 @@
 #include "BsD3D11BlendState.h"
 #include "BsD3D11RasterizerState.h"
 #include "BsD3D11DepthStencilState.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 
 namespace bs { namespace ct
 {

@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "GUI/BsGUIProgressBar.h"
 #include "GUI/BsGUIWidget.h"
-#include "GUI/BsGUISkin.h"
+#include "GUI/BsGUISkinResource.h"
 #include "GUI/BsGUITexture.h"
 #include "GUI/BsGUIDimensions.h"
 
