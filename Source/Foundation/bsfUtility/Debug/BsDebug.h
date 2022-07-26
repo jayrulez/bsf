@@ -123,10 +123,10 @@ namespace bs
  * Defines a new log category to use with BS_LOG. Each category must have a unique ID. A matching call to
  * BS_LOG_CATEGORY_IMPL must be done in the source file.
  */
-#define BS_LOG_CATEGORY(name, id) struct LogCategory##name { enum { _id = id }; static bool sRegistered; };
+#define BS_LOG_CATEGORY(name, id) struct LogCategory##name { enum { _id = id }; static bool sRegistered; }
 
 /** Registers the name of the category. Should be placed in the implementation file for each corresponding BS_LOG_CATEGORY call. */
-#define BS_LOG_CATEGORY_IMPL(name) bool LogCategory##name::sRegistered = Log::_registerCategory(LogCategory##name::_id, #name);
+#define BS_LOG_CATEGORY_IMPL(name) bool LogCategory##name::sRegistered = Log::_registerCategory(LogCategory##name::_id, #name)
 
 /** Get the ID of the log category based on its name. */
 #define BS_LOG_GET_CATEGORY_ID(category) LogCategory##category::_id
@@ -143,12 +143,12 @@ namespace bs
 	}																								\
   } while (0)
 
-  BS_LOG_CATEGORY(Uncategorized, 0)
-  BS_LOG_CATEGORY(FileSystem, 1)
-  BS_LOG_CATEGORY(RTTI, 2)
-  BS_LOG_CATEGORY(Generic, 3)
-  BS_LOG_CATEGORY(Platform, 4)
-  BS_LOG_CATEGORY(Serialization, 5)
+	BS_LOG_CATEGORY(Uncategorized, 0);
+	BS_LOG_CATEGORY(FileSystem, 1);
+	BS_LOG_CATEGORY(RTTI, 2);
+	BS_LOG_CATEGORY(Generic, 3);
+	BS_LOG_CATEGORY(Platform, 4);
+	BS_LOG_CATEGORY(Serialization, 5);
 
   /** @} */
 }

@@ -48,25 +48,25 @@
 
 namespace bs
 {
-	BS_LOG_CATEGORY_IMPL(CoreThread)
-	BS_LOG_CATEGORY_IMPL(Renderer)
-	BS_LOG_CATEGORY_IMPL(Scene)
-	BS_LOG_CATEGORY_IMPL(Physics)
-	BS_LOG_CATEGORY_IMPL(Audio)
-	BS_LOG_CATEGORY_IMPL(RenderBackend)
-	BS_LOG_CATEGORY_IMPL(BSLCompiler)
-	BS_LOG_CATEGORY_IMPL(Particles)
-	BS_LOG_CATEGORY_IMPL(Resources)
-	BS_LOG_CATEGORY_IMPL(FBXImporter)
-	BS_LOG_CATEGORY_IMPL(PixelUtility)
-	BS_LOG_CATEGORY_IMPL(Texture)
-	BS_LOG_CATEGORY_IMPL(Mesh)
-	BS_LOG_CATEGORY_IMPL(GUI)
-	BS_LOG_CATEGORY_IMPL(Profiler)
-	BS_LOG_CATEGORY_IMPL(Material)
-	BS_LOG_CATEGORY_IMPL(FreeImageImporter)
-	BS_LOG_CATEGORY_IMPL(Script)
-	BS_LOG_CATEGORY_IMPL(Importer)
+	BS_LOG_CATEGORY_IMPL(CoreThread);
+	BS_LOG_CATEGORY_IMPL(Renderer);
+	BS_LOG_CATEGORY_IMPL(Scene);
+	BS_LOG_CATEGORY_IMPL(Physics);
+	BS_LOG_CATEGORY_IMPL(Audio);
+	BS_LOG_CATEGORY_IMPL(RenderBackend);
+	BS_LOG_CATEGORY_IMPL(BSLCompiler);
+	BS_LOG_CATEGORY_IMPL(Particles);
+	BS_LOG_CATEGORY_IMPL(Resources);
+	BS_LOG_CATEGORY_IMPL(FBXImporter);
+	BS_LOG_CATEGORY_IMPL(PixelUtility);
+	BS_LOG_CATEGORY_IMPL(Texture);
+	BS_LOG_CATEGORY_IMPL(Mesh);
+	BS_LOG_CATEGORY_IMPL(GUI);
+	BS_LOG_CATEGORY_IMPL(Profiler);
+	BS_LOG_CATEGORY_IMPL(Material);
+	BS_LOG_CATEGORY_IMPL(FreeImageImporter);
+	BS_LOG_CATEGORY_IMPL(Script);
+	BS_LOG_CATEGORY_IMPL(Importer);
 
 	CoreApplication::CoreApplication(START_UP_DESC desc)
 		: mPrimaryWindow(nullptr), mStartUpDesc(desc), mRendererPlugin(nullptr), mIsFrameRenderingFinished(true)
