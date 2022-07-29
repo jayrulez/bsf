@@ -33,6 +33,8 @@ set_property(CACHE RENDERER_MODULE PROPERTY STRINGS RenderBeast Null)
 
 set(INCLUDE_ALL_IN_WORKFLOW OFF CACHE BOOL "If true, all libraries (even those not selected) will be included in the generated workflow (e.g. Visual Studio solution). This is useful when working on engine internals with a need for easy access to all parts of it. Only relevant for workflow generators like Visual Studio or XCode.")
 
+set(BUILD_SAMPLES ON CACHE BOOL "If true, build sample projects.")
+
 set(BUILD_TESTS OFF CACHE BOOL "If true, build targets for running unit tests will be included in the output.")
 
 set(BUILD_BSL OFF CACHE BOOL "If true, build lexer & parser for BSL. Requires flex & bison dependencies.")
@@ -211,6 +213,11 @@ add_subdirectory(Plugins/bsfFBXImporter)
 add_subdirectory(Plugins/bsfFontImporter)
 add_subdirectory(Plugins/bsfFreeImgImporter)
 add_subdirectory(Plugins/bsfSL)
+
+# Samples
+if(BUILD_SAMPLES)
+    add_subdirectory(Samples)
+endif()
 
 ## Tests
 if(BUILD_TESTS)
