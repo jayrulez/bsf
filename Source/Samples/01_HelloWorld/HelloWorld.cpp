@@ -47,8 +47,8 @@ int bs_main(int argc, char* argv[])
 	// Optionally position the renderable in the scene
 	renderableSO->setPosition(Vector3(20.0f, 0.0f, 15.0f));
 
-	// profiley
-	//gApplication().showProfilerOverlay(ProfilerOverlayType::CPUSamples);
+	// profiler
+	gApplication().showProfilerOverlay(ProfilerOverlayType::CPUSamples);
 
     // Runs the main loop that does most of the work. This method will exit when user closes the main
     // window or exits in some other way.
