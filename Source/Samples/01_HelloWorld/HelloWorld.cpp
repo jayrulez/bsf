@@ -4,8 +4,8 @@
 #include "Components/BsCCamera.h"
 #include "Components/BsCRenderable.h"
 
-#include "Resources/BsBuiltinResources.h"
-#include "Resources/BsBuiltinResourcesHelper.h"
+#include "Engine/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResourcesHelper.h"
 
 #include "Material/BsMaterial.h"
 

@@ -6,7 +6,7 @@
 #include "GUI/BsGUIWidget.h"
 #include "Scene/BsSceneObject.h"
 #include "Scene/BsSceneManager.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "Components/BsCCamera.h"
 
 #include "Generated/BsScriptCCamera.generated.h"

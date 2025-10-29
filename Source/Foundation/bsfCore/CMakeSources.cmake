@@ -299,13 +299,6 @@ set(BS_CORE_INC_RESOURCES
 	"bsfCore/Resources/BsResourceListenerManager.h"
 	"bsfCore/Resources/BsSavedResourceData.h"
 	"bsfCore/Resources/BsIResourceListener.h"
-    
-	"bsfCore/Resources/BsPlainText.h"
-	"bsfCore/Resources/BsPlainTextImporter.h"
-	"bsfCore/Resources/BsBuiltinResources.h"
-	"bsfCore/Resources/BsEngineShaderIncludeHandler.h"
-	"bsfCore/Resources/BsGameResourceManager.h"
-	"bsfCore/Resources/BsBuiltinResourcesHelper.h"
 )
 
 set(BS_CORE_INC_MESH
@@ -548,13 +541,24 @@ set(BS_CORE_SRC_RESOURCES
 	"bsfCore/Resources/BsResourceListenerManager.cpp"
 	"bsfCore/Resources/BsSavedResourceData.cpp"
 	"bsfCore/Resources/BsIResourceListener.cpp"
-    
-	"bsfCore/Resources/BsPlainTextImporter.cpp"
-	"bsfCore/Resources/BsPlainText.cpp"
-	"bsfCore/Resources/BsBuiltinResources.cpp"
-	"bsfCore/Resources/BsEngineShaderIncludeHandler.cpp"
-	"bsfCore/Resources/BsGameResourceManager.cpp"
-	"bsfCore/Resources/BsBuiltinResourcesHelper.cpp"
+)
+
+set(BS_CORE_INC_ENGINE
+	"bsfCore/Engine/BsPlainText.h"
+	"bsfCore/Engine/BsPlainTextImporter.h"
+	"bsfCore/Engine/BsBuiltinResources.h"
+	"bsfCore/Engine/BsEngineShaderIncludeHandler.h"
+	"bsfCore/Engine/BsGameResourceManager.h"
+	"bsfCore/Engine/BsBuiltinResourcesHelper.h"
+)
+
+set(BS_CORE_SRC_ENGINE    
+	"bsfCore/Engine/BsPlainTextImporter.cpp"
+	"bsfCore/Engine/BsPlainText.cpp"
+	"bsfCore/Engine/BsBuiltinResources.cpp"
+	"bsfCore/Engine/BsEngineShaderIncludeHandler.cpp"
+	"bsfCore/Engine/BsGameResourceManager.cpp"
+	"bsfCore/Engine/BsBuiltinResourcesHelper.cpp"
 )
 
 set(BS_CORE_INC_SCRIPT
@@ -950,6 +954,7 @@ source_group("RenderAPI" FILES ${BS_CORE_INC_RENDERAPI} ${BS_CORE_SRC_RENDERAPI}
 source_group("RenderAPI\\Managers" FILES ${BS_CORE_INC_RENDERAPI_MANAGERS} ${BS_CORE_SRC_RENDERAPI_MANAGERS})
 source_group("Material" FILES ${BS_CORE_INC_MATERIAL} ${BS_CORE_SRC_MATERIAL})
 source_group("Resources" FILES ${BS_CORE_INC_RESOURCES} ${BS_CORE_SRC_RESOURCES})
+source_group("Engine" FILES ${BS_CORE_INC_ENGINE} ${BS_CORE_SRC_ENGINE})
 source_group("Script" FILES ${BS_CORE_INC_SCRIPT} ${BS_CORE_SRC_SCRIPT})
 source_group("Text" FILES ${BS_CORE_INC_TEXT} ${BS_CORE_SRC_TEXT})
 source_group("Utility" FILES ${BS_CORE_INC_UTILITY} ${BS_CORE_SRC_UTILITY})
@@ -1025,6 +1030,8 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_DEBUG}
 	${BS_CORE_INC_SCRIPT}
 	${BS_CORE_SRC_SCRIPT}
+	${BS_CORE_INC_ENGINE}
+	${BS_CORE_SRC_ENGINE}
 )
 
 if(EXPERIMENTAL_ENABLE_NETWORKING)

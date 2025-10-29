@@ -3,7 +3,7 @@
 #include "Platform/BsCursor.h"
 #include "Platform/BsPlatform.h"
 #include "Error/BsException.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "Debug/BsDebug.h"
 
 namespace bs

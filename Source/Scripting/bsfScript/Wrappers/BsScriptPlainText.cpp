@@ -7,7 +7,7 @@
 #include "BsMonoClass.h"
 #include "BsMonoManager.h"
 #include "BsMonoUtil.h"
-#include "Resources/BsPlainText.h"
+#include "Engine/BsPlainText.h"
 
 using namespace std::placeholders;
 

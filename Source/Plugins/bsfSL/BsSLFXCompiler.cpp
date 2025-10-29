@@ -12,7 +12,7 @@
 #include "Material/BsShaderManager.h"
 #include "Material/BsShaderInclude.h"
 #include "Math/BsMatrix4.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "Material/BsShaderVariation.h"
 #include "Renderer/BsRenderer.h"
 #include "Renderer/BsRendererManager.h"

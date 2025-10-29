@@ -11,7 +11,7 @@
 #include "Components/BsCCamera.h"
 #include "RenderAPI/BsViewport.h"
 #include "Scene/BsSceneObject.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "Image/BsSpriteTexture.h"
 

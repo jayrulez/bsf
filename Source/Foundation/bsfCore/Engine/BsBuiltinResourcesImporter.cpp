@@ -1,7 +1,7 @@
 #include "BsApplication.h"
 #include "BsEngineConfig.h"
 #include "Resources/BsResources.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "BsBuiltinResourcesHelper.h"
 #include "FileSystem/BsFileSystem.h"
 #include "FileSystem/BsPath.h"

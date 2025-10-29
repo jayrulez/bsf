@@ -5,7 +5,7 @@
 #include "BsMonoClass.h"
 #include "BsMonoMethod.h"
 #include "BsMonoUtil.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "BsScriptResourceManager.h"
 
 #include "Generated/BsScriptFont.generated.h"

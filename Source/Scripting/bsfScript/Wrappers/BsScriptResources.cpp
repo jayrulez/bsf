@@ -5,7 +5,7 @@
 #include "BsMonoClass.h"
 #include "BsMonoMethod.h"
 #include "BsMonoUtil.h"
-#include "Resources/BsGameResourceManager.h"
+#include "Engine/BsGameResourceManager.h"
 #include "BsScriptResourceManager.h"
 #include "Wrappers/BsScriptResource.h"
 #include "BsApplication.h"

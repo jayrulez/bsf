@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "RTTI/BsStdRTTI.h"
 #include "RTTI/BsPathRTTI.h"
-#include "Resources/BsGameResourceManager.h"
+#include "Engine/BsGameResourceManager.h"
 
 namespace bs
 {

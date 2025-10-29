@@ -4,7 +4,7 @@
 #include "Private/RTTI/BsSpriteTextureRTTI.h"
 #include "RenderAPI/BsTexture.h"
 #include "Resources/BsResources.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "CoreThread/BsCoreObjectSync.h"
 
 namespace bs

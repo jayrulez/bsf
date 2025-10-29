@@ -33,7 +33,7 @@
 #include "BsRenderBeastIBLUtility.h"
 #include "BsRenderCompositor.h"
 #include "Shading/BsGpuParticleSimulation.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 
 using namespace std::placeholders;
 

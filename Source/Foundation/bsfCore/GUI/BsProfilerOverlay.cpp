@@ -12,7 +12,7 @@
 #include "GUI/BsGUISpace.h"
 #include "RenderAPI/BsViewport.h"
 #include "Utility/BsTime.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "Profiling/BsProfilingManager.h"
 #include "RenderAPI/BsRenderTarget.h"
 #include "Renderer/BsCamera.h"

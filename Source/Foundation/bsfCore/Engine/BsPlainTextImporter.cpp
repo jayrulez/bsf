@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Resources/BsPlainTextImporter.h"
-#include "Resources/BsPlainText.h"
+#include "Engine/BsPlainTextImporter.h"
+#include "Engine/BsPlainText.h"
 #include "FileSystem/BsDataStream.h"
 #include "FileSystem/BsFileSystem.h"
 

@@ -1,13 +1,13 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "GUI/BsGUILabel.h"
 #include "Image/BsSpriteTexture.h"
 #include "Text/BsFont.h"
 #include "RenderAPI/BsTexture.h"
 #include "Importer/BsImporter.h"
 #include "Resources/BsResources.h"
-#include "Resources/BsBuiltinResourcesHelper.h"
+#include "Engine/BsBuiltinResourcesHelper.h"
 #include "Resources/BsResourceManifest.h"
 #include "Material/BsShader.h"
 #include "Material/BsMaterial.h"

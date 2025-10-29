@@ -5,7 +5,7 @@
 #include "GUI/BsGUIWidget.h"
 #include "Scene/BsSceneManager.h"
 #include "BsScriptObjectManager.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "BsMonoMethod.h"
 
 #include "Generated/BsScriptGUISkin.generated.h"

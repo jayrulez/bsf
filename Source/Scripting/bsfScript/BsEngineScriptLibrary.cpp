@@ -11,7 +11,7 @@
 #include "Wrappers/BsScriptInput.h"
 #include "Wrappers/BsScriptVirtualInput.h"
 #include "BsScriptObjectManager.h"
-#include "Resources/BsGameResourceManager.h"
+#include "Engine/BsGameResourceManager.h"
 #include "BsApplication.h"
 #include "FileSystem/BsFileSystem.h"
 #include "Wrappers/BsScriptDebug.h"

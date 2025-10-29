@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Renderer/BsRendererMaterialManager.h"
 #include "Renderer/BsRendererMaterial.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "CoreThread/BsCoreThread.h"
 #include "Material/BsShader.h"
 

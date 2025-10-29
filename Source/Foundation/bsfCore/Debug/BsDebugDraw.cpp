@@ -14,7 +14,7 @@
 #include "Renderer/BsRendererUtility.h"
 #include "Utility/BsDrawHelper.h"
 #include "Renderer/BsRendererExtension.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "Renderer/BsCamera.h"
 #include "Profiling/BsProfilerGPU.h"
 

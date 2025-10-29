@@ -10,7 +10,7 @@
 #include "GUI/BsGUILabel.h"
 #include "GUI/BsGUIHelper.h"
 #include "GUI/BsGUISkin.h"
-#include "Resources/BsBuiltinResources.h"
+#include "Engine/BsBuiltinResources.h"
 #include "GUI/BsDropDownAreaPlacement.h"
 
 using namespace std::placeholders;

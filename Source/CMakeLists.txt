@@ -247,7 +247,7 @@ endif()
 
 ## Builtin resource preprocessing
 add_executable(bsfImportTool
-	Foundation/bsfCore/Resources/BsBuiltinResourcesImporter.cpp)
+	Foundation/bsfCore/Engine/BsBuiltinResourcesImporter.cpp)
 add_common_flags(bsfImportTool)
 target_compile_definitions(bsfImportTool PUBLIC -DBS_IS_ASSET_TOOL)
 
