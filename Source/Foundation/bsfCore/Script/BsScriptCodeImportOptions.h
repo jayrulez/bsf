@@ -4,7 +4,7 @@
 
 #include "BsPrerequisites.h"
 #include "Importer/BsImportOptions.h"
-#include "Resources/BsScriptCode.h"
+#include "Script/BsScriptCode.h"
 
 namespace bs
 {

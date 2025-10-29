@@ -15,7 +15,7 @@
 #include "BsScriptShaderImportOptions.generated.h"
 #include "Wrappers/BsScriptResource.h"
 #include "BsScriptImportOptions.generated.h"
-#include "../../../Foundation/bsfCore/Resources/BsScriptCodeImportOptions.h"
+#include "../../../Foundation/bsfCore/Script/BsScriptCodeImportOptions.h"
 #include "BsScriptScriptCodeImportOptions.generated.h"
 #include "../../../Foundation/bsfCore/Audio/BsAudioClipImportOptions.h"
 #include "BsScriptAudioClipImportOptions.generated.h"

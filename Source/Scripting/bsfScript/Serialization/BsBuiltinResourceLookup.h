@@ -16,7 +16,7 @@
 #include "Material/BsMaterial.h"
 #include "Scene/BsPrefab.h"
 #include "Resources/BsPlainText.h"
-#include "Resources/BsScriptCode.h"
+#include "Script/BsScriptCode.h"
 #include "Localization/BsStringTable.h"
 #include "GUI/BsGUISkin.h"
 #include "Physics/BsPhysicsMaterial.h"

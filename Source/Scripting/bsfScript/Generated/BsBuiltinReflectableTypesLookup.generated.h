@@ -59,7 +59,7 @@
 #include "../../../Foundation/bsfCore/Renderer/BsRenderSettings.h"
 #include "BsScriptColorGradingSettings.generated.h"
 #if !BS_IS_BANSHEE3D
-#include "../../../Foundation/bsfCore/Resources/BsScriptCodeImportOptions.h"
+#include "../../../Foundation/bsfCore/Script/BsScriptCodeImportOptions.h"
 #endif
 #include "BsScriptScriptCodeImportOptions.generated.h"
 #include "../../../Foundation/bsfCore/Renderer/BsRenderSettings.h"

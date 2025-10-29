@@ -302,9 +302,6 @@ set(BS_CORE_INC_RESOURCES
     
 	"bsfCore/Resources/BsPlainText.h"
 	"bsfCore/Resources/BsPlainTextImporter.h"
-	"bsfCore/Resources/BsScriptCode.h"
-	"bsfCore/Resources/BsScriptCodeImporter.h"
-	"bsfCore/Resources/BsScriptCodeImportOptions.h"
 	"bsfCore/Resources/BsBuiltinResources.h"
 	"bsfCore/Resources/BsEngineShaderIncludeHandler.h"
 	"bsfCore/Resources/BsGameResourceManager.h"
@@ -552,9 +549,6 @@ set(BS_CORE_SRC_RESOURCES
 	"bsfCore/Resources/BsSavedResourceData.cpp"
 	"bsfCore/Resources/BsIResourceListener.cpp"
     
-	"bsfCore/Resources/BsScriptCodeImportOptions.cpp"
-	"bsfCore/Resources/BsScriptCodeImporter.cpp"
-	"bsfCore/Resources/BsScriptCode.cpp"
 	"bsfCore/Resources/BsPlainTextImporter.cpp"
 	"bsfCore/Resources/BsPlainText.cpp"
 	"bsfCore/Resources/BsBuiltinResources.cpp"
@@ -565,10 +559,18 @@ set(BS_CORE_SRC_RESOURCES
 
 set(BS_CORE_INC_SCRIPT
 	"bsfCore/Script/BsScriptManager.h"
+    
+	"bsfCore/Script/BsScriptCode.h"
+	"bsfCore/Script/BsScriptCodeImporter.h"
+	"bsfCore/Script/BsScriptCodeImportOptions.h"
 )
 
 set(BS_CORE_SRC_SCRIPT
 	"bsfCore/Script/BsScriptManager.cpp"
+    
+	"bsfCore/Script/BsScriptCodeImportOptions.cpp"
+	"bsfCore/Script/BsScriptCodeImporter.cpp"
+	"bsfCore/Script/BsScriptCode.cpp"
 )
 
 set(BS_CORE_SRC_MESH
