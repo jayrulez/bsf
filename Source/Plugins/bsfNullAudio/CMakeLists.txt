@@ -12,7 +12,7 @@ target_include_directories(bsfNullAudio PRIVATE "./")
 
 # Libraries
 ## Local libs
-target_link_libraries(bsfNullAudio PRIVATE bsf)
+target_link_libraries(bsfNullAudio PRIVATE bsfCore)
 
 # IDE specific
 set_property(TARGET bsfNullAudio PROPERTY FOLDER Plugins)

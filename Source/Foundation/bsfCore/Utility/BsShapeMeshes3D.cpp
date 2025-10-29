@@ -13,9 +13,6 @@
 
 namespace bs
 {
-	const UINT32 ShapeMeshes3D::NUM_VERTICES_AA_LINE = 8;
-	const UINT32 ShapeMeshes3D::NUM_INDICES_AA_LINE = 30;
-
 	inline UINT8* writeVector3(UINT8* buffer, UINT32 stride, const Vector3& value)
 	{
 		*(Vector3*)buffer = value;

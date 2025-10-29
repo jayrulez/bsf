@@ -15,7 +15,7 @@ namespace bs
 	 * Describes a virtual button. Virtual buttons allow you to map custom actions without needing to know about what
 	 * physical buttons trigger those actions.
 	 */
-	struct BS_EXPORT VIRTUAL_BUTTON_DESC
+	struct BS_CORE_EXPORT VIRTUAL_BUTTON_DESC
 	{
 		VIRTUAL_BUTTON_DESC() = default;
 
@@ -38,7 +38,7 @@ namespace bs
 	 * Describes a virtual axis. Virtual axes allow you to map custom axes without needing to know the actual physical
 	 * device handling those axes.
 	 */
-	struct BS_EXPORT VIRTUAL_AXIS_DESC
+	struct BS_CORE_EXPORT VIRTUAL_AXIS_DESC
 	{
 		VIRTUAL_AXIS_DESC() = default;
 
@@ -80,7 +80,7 @@ namespace bs
 	 *
 	 * @see		VIRTUAL_BUTTON_DESC
 	 */
-	class BS_EXPORT VirtualButton
+	class BS_CORE_EXPORT VirtualButton
 	{
 	public:
 		VirtualButton() = default;
@@ -96,7 +96,7 @@ namespace bs
 		/** Returns a static map of all virtual button identifiers and their buttons. */
 		static Map<String, UINT32>& getUniqueButtonIds();
 
-		static UINT32 NextButtonId;
+		static inline UINT32 NextButtonId = 0;
 	};
 
 	/**
@@ -111,7 +111,7 @@ namespace bs
 	 *
 	 * @see		VIRTUAL_AXIS_DESC
 	 */
-	class BS_EXPORT VirtualAxis
+	class BS_CORE_EXPORT VirtualAxis
 	{
 	public:
 		VirtualAxis() = default;
@@ -125,12 +125,12 @@ namespace bs
 		}
 
 	private:
-		static Map<String, UINT32> UniqueAxisIds;
-		static UINT32 NextAxisId;
+		static inline Map<String, UINT32> UniqueAxisIds;
+		static inline UINT32 NextAxisId = 0;
 	};
 
 	/**	Contains virtual <-> physical key mappings. */
-	class BS_EXPORT InputConfiguration
+	class BS_CORE_EXPORT InputConfiguration
 	{
 		static const int MAX_NUM_DEVICES_PER_TYPE = 8;
 		static const int MAX_NUM_DEVICES = (UINT32)InputDevice::Count * MAX_NUM_DEVICES_PER_TYPE;

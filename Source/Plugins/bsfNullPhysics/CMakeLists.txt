@@ -12,7 +12,7 @@ target_include_directories(bsfNullPhysics PRIVATE "./")
 
 # Libraries
 ## Local libs
-target_link_libraries(bsfNullPhysics PRIVATE bsf)
+target_link_libraries(bsfNullPhysics PRIVATE bsfCore)
 
 # IDE specific
 set_property(TARGET bsfNullPhysics PROPERTY FOLDER Plugins)

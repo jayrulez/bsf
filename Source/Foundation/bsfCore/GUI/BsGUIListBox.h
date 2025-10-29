@@ -15,7 +15,7 @@ namespace bs
 	 */
 
 	/** List box GUI element which when active opens a drop down selection with provided elements. */
-	class BS_EXPORT GUIListBox : public GUIButtonBase
+	class BS_CORE_EXPORT GUIListBox : public GUIButtonBase
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles. */

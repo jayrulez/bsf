@@ -20,11 +20,6 @@
 
 namespace bs
 {
-	VirtualButton GUIInputBox::mCopyVB = VirtualButton("Copy");
-	VirtualButton GUIInputBox::mPasteVB = VirtualButton("Paste");
-	VirtualButton GUIInputBox::mCutVB = VirtualButton("Cut");
-	VirtualButton GUIInputBox::mSelectAllVB = VirtualButton("SelectAll");
-
 	const String& GUIInputBox::getGUITypeName()
 	{
 		static String name = "InputBox";

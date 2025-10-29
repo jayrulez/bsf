@@ -24,46 +24,6 @@ namespace bs
 	constexpr const char* BuiltinResources::IconTextureName;
 	constexpr const char* BuiltinResources::MultiLineLabelStyle;
 
-	/************************************************************************/
-	/* 								GUI TEXTURES                      		*/
-	/************************************************************************/
-
-	const String BuiltinResources::WhiteTex = u8"White.psd";
-
-	/************************************************************************/
-	/* 							CURSOR TEXTURES                      		*/
-	/************************************************************************/
-
-	const String BuiltinResources::CursorArrowTex = u8"Arrow.psd";
-	const String BuiltinResources::CursorArrowDragTex = u8"ArrowDrag.psd";
-	const String BuiltinResources::CursorArrowLeftRightTex = u8"ArrowLeftRight.psd";
-	const String BuiltinResources::CursorIBeamTex = u8"IBeam.psd";
-	const String BuiltinResources::CursorDenyTex = u8"Deny.psd";
-	const String BuiltinResources::CursorWaitTex = u8"Wait.psd";
-	const String BuiltinResources::CursorSizeNESWTex = u8"SizeNESW.psd";
-	const String BuiltinResources::CursorSizeNSTex = u8"SizeNS.psd";
-	const String BuiltinResources::CursorSizeNWSETex = u8"SizeNWSE.psd";
-	const String BuiltinResources::CursorSizeWETex = u8"SizeWE.psd";
-
-	const Vector2I BuiltinResources::CursorArrowHotspot = Vector2I(10, 8);
-	const Vector2I BuiltinResources::CursorArrowDragHotspot = Vector2I(8, 4);
-	const Vector2I BuiltinResources::CursorArrowLeftRightHotspot = Vector2I(13, 9);
-	const Vector2I BuiltinResources::CursorIBeamHotspot = Vector2I(16, 15);
-	const Vector2I BuiltinResources::CursorDenyHotspot = Vector2I(15, 15);
-	const Vector2I BuiltinResources::CursorWaitHotspot = Vector2I(15, 15);
-	const Vector2I BuiltinResources::CursorSizeNESWHotspot = Vector2I(16, 15);
-	const Vector2I BuiltinResources::CursorSizeNSHotspot = Vector2I(16, 15);
-	const Vector2I BuiltinResources::CursorSizeNWSEHotspot = Vector2I(16, 15);
-	const Vector2I BuiltinResources::CursorSizeWEHotspot = Vector2I(16, 15);
-
-	/************************************************************************/
-	/* 									SHADERS                      		*/
-	/************************************************************************/
-
-	const String BuiltinResources::ShaderSpriteTextFile = u8"SpriteText.bsl";
-	const String BuiltinResources::ShaderSpriteImageFile = u8"SpriteImage.bsl";
-	const String BuiltinResources::ShaderSpriteLineFile = u8"SpriteLine.bsl";
-
 	constexpr const char* ShaderDiffuseFile = u8"Diffuse.bsl";
 	constexpr const char* ShaderTransparentFile = u8"Transparent.bsl";
 	constexpr const char* ShaderParticlesUnlitFile = u8"ParticlesUnlit.bsl";

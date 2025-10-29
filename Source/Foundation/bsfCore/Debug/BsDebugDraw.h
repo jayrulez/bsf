@@ -24,7 +24,7 @@ namespace bs
 	};
 
 	/** Provides an easy access to draw basic 2D and 3D shapes, primarily meant for debugging purposes. */
-	class BS_EXPORT DebugDraw : public Module<DebugDraw>
+	class BS_CORE_EXPORT DebugDraw : public Module<DebugDraw>
 	{
 	public:
 		DebugDraw();

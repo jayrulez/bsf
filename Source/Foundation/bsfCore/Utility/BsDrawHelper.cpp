@@ -14,9 +14,6 @@
 
 namespace bs
 {
-	const UINT32 DrawHelper::VERTEX_BUFFER_GROWTH = 4096;
-	const UINT32 DrawHelper::INDEX_BUFFER_GROWTH = 4096 * 2;
-
 	DrawHelper::DrawHelper()
 		:mLayer(1)
 	{

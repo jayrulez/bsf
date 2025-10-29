@@ -20,7 +20,7 @@ namespace bs
 	};
 
 	/**	A GUI element container with support for vertical & horizontal scrolling. */
-	class BS_EXPORT GUIScrollArea : public GUIElementContainer
+	class BS_CORE_EXPORT GUIScrollArea : public GUIElementContainer
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles. */
@@ -132,7 +132,7 @@ namespace bs
 		 * Number of pixels the scroll bar will occupy when active. This is width for vertical scrollbar, and height for
 		 * horizontal scrollbar.
 		 */
-		static const UINT32 ScrollBarWidth;
+		static constexpr UINT32 ScrollBarWidth = 16;
 
 		/** @name Internal
 		 *  @{
@@ -215,7 +215,7 @@ namespace bs
 		LayoutSizeRange mSizeRange;
 
 		static const UINT32 MinHandleSize;
-		static const UINT32 WheelScrollAmount;
+		static constexpr UINT32 WheelScrollAmount = 50;
 	};
 
 	/** @} */

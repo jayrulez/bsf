@@ -39,7 +39,7 @@ elseif(APPLE) # MacOS
 endif()
 
 ## Local libs
-target_link_libraries(bsfGLRenderAPI PUBLIC bsf)
+target_link_libraries(bsfGLRenderAPI PUBLIC bsfCore)
 
 # IDE specific
 set_property(TARGET bsfGLRenderAPI PROPERTY FOLDER Plugins)

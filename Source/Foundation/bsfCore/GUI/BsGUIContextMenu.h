@@ -15,7 +15,7 @@ namespace bs
 	 * Manages display and logic for a context menu. Context menus can be opened anywhere within the GUI and can contain a
 	 * hierarchy of menu items.
 	 */
-	class BS_EXPORT GUIContextMenu : public GUIMenu
+	class BS_CORE_EXPORT GUIContextMenu : public GUIMenu
 	{
 	public:
 		GUIContextMenu() = default;

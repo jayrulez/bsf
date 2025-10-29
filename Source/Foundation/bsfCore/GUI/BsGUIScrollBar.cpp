@@ -14,8 +14,6 @@ using namespace std::placeholders;
 
 namespace bs
 {
-	const UINT32 GUIScrollBar::ButtonScrollAmount = 10;
-
 	const String& GUIScrollBar::getHScrollHandleType()
 	{
 		static String typeName = "UIScrollBarHHandle";

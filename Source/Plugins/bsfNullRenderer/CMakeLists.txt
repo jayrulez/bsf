@@ -12,7 +12,7 @@ target_include_directories(bsfNullRenderer PRIVATE "./")
 
 # Libraries
 ## Local libs
-target_link_libraries(bsfNullRenderer bsf)
+target_link_libraries(bsfNullRenderer bsfCore)
 
 # IDE specific
 set_property(TARGET bsfNullRenderer PROPERTY FOLDER Plugins)

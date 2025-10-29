@@ -11,7 +11,7 @@ namespace bs
 	 */
 
 	/** Object that allows you to group multiple GUI toggle buttons. Only one button among the grouped ones can be active. */
-	class BS_EXPORT GUIToggleGroup
+	class BS_CORE_EXPORT GUIToggleGroup
 	{
 	public:
 		~GUIToggleGroup();

@@ -48,7 +48,7 @@ namespace bs
 	 * Represents parent class for all visible GUI elements. Contains methods needed for positioning, rendering and
 	 * handling input.
 	 */
-	class BS_EXPORT GUIElement : public GUIElementBase
+	class BS_CORE_EXPORT GUIElement : public GUIElementBase
 	{
 	public:
 		/**	Different sub-types of GUI elements. */
@@ -329,7 +329,7 @@ namespace bs
 		SmallVector<GUIRenderElement, 4> mRenderElements;
 		
 	private:
-		static const Color DISABLED_COLOR;
+		static inline const Color DISABLED_COLOR = Color(0.5f, 0.5f, 0.5f, 1.0f);
 
 		const GUIElementStyle* mStyle;
 		String mStyleName;

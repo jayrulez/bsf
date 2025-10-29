@@ -53,7 +53,7 @@ namespace bs
 	};
 
 	/**	Holds references to built-in resources used by the core engine. */
-	class BS_EXPORT BuiltinResources : public bs::Module<BuiltinResources>
+	class BS_CORE_EXPORT BuiltinResources : public bs::Module<BuiltinResources>
 	{
 	public:
 		BuiltinResources();
@@ -228,37 +228,37 @@ namespace bs
 
 		Path ResourceManifestPath;
 
-		static const String WhiteTex;
+		static inline const String WhiteTex = u8"White.psd";
 
-		static const String CursorArrowTex;
-		static const String CursorArrowDragTex;
-		static const String CursorArrowLeftRightTex;
-		static const String CursorIBeamTex;
-		static const String CursorDenyTex;
-		static const String CursorWaitTex;
-		static const String CursorSizeNESWTex;
-		static const String CursorSizeNSTex;
-		static const String CursorSizeNWSETex;
-		static const String CursorSizeWETex;
+		static inline const String CursorArrowTex = u8"Arrow.psd";
+		static inline const String CursorArrowDragTex = u8"ArrowDrag.psd";
+		static inline const String CursorArrowLeftRightTex = u8"ArrowLeftRight.psd";
+		static inline const String CursorIBeamTex = u8"IBeam.psd";
+		static inline const String CursorDenyTex = u8"Deny.psd";
+		static inline const String CursorWaitTex = u8"Wait.psd";
+		static inline const String CursorSizeNESWTex = u8"SizeNESW.psd";
+		static inline const String CursorSizeNSTex = u8"SizeNS.psd";
+		static inline const String CursorSizeNWSETex = u8"SizeNWSE.psd";
+		static inline const String CursorSizeWETex = u8"SizeWE.psd";
 
-		static const Vector2I CursorArrowHotspot;
-		static const Vector2I CursorArrowDragHotspot;
-		static const Vector2I CursorArrowLeftRightHotspot;
-		static const Vector2I CursorIBeamHotspot;
-		static const Vector2I CursorDenyHotspot;
-		static const Vector2I CursorWaitHotspot;
-		static const Vector2I CursorSizeNESWHotspot;
-		static const Vector2I CursorSizeNSHotspot;
-		static const Vector2I CursorSizeNWSEHotspot;
-		static const Vector2I CursorSizeWEHotspot;
+		static inline const Vector2I CursorArrowHotspot = Vector2I(10, 8);
+		static inline const Vector2I CursorArrowDragHotspot = Vector2I(8, 4);
+		static inline const Vector2I CursorArrowLeftRightHotspot = Vector2I(13, 9);
+		static inline const Vector2I CursorIBeamHotspot = Vector2I(16, 15);
+		static inline const Vector2I CursorDenyHotspot = Vector2I(15, 15);
+		static inline const Vector2I CursorWaitHotspot = Vector2I(15, 15);
+		static inline const Vector2I CursorSizeNESWHotspot = Vector2I(16, 15);
+		static inline const Vector2I CursorSizeNSHotspot = Vector2I(16, 15);
+		static inline const Vector2I CursorSizeNWSEHotspot = Vector2I(16, 15);
+		static inline const Vector2I CursorSizeWEHotspot = Vector2I(16, 15);
 
-		static const String ShaderSpriteTextFile;
-		static const String ShaderSpriteImageFile;
-		static const String ShaderSpriteLineFile;
+		static inline const String ShaderSpriteTextFile = u8"SpriteText.bsl";
+		static inline const String ShaderSpriteImageFile = u8"SpriteImage.bsl";
+		static inline const String ShaderSpriteLineFile = u8"SpriteLine.bsl";
 	};
 
 	/**	Provides easy access to BuiltinResources. */
-	BS_EXPORT BuiltinResources& gBuiltinResources();
+	BS_CORE_EXPORT BuiltinResources& gBuiltinResources();
 
 	/** @} */
 }

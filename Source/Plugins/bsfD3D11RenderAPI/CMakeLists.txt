@@ -24,7 +24,7 @@ endif()
 target_link_libraries(bsfD3D11RenderAPI d3d11 dxgi dxguid D3DCompiler)	
 	
 ## Local libs
-target_link_libraries(bsfD3D11RenderAPI bsf)
+target_link_libraries(bsfD3D11RenderAPI bsfCore)
 
 # IDE specific
 set_property(TARGET bsfD3D11RenderAPI PROPERTY FOLDER Plugins)

@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/**	Helper class for easily creating common 2D shapes. */
-	class BS_EXPORT ShapeMeshes2D
+	class BS_CORE_EXPORT ShapeMeshes2D
 	{
 	public:
 		/**
@@ -144,8 +144,8 @@ namespace bs
 		static void quadLineList(const Vector2* linePoints, UINT32 numPoints, float width, float border, UINT8* outVertices,
 			UINT32 vertexStride, bool indexed);
 
-		static const UINT32 NUM_VERTICES_AA_LINE;
-		static const UINT32 NUM_INDICES_AA_LINE;
+		static constexpr UINT32 NUM_VERTICES_AA_LINE = 4;
+		static constexpr UINT32 NUM_INDICES_AA_LINE = 6;
 	protected:
 		/**
 		 * Fills the provided buffers with vertices representing a per-pixel line.

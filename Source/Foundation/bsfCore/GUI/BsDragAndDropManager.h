@@ -15,7 +15,7 @@ namespace bs
 	 */
 
 	/**	Holds data returned by DragAndDropManager callbacks. */
-	struct BS_EXPORT DragCallbackInfo
+	struct BS_CORE_EXPORT DragCallbackInfo
 	{
 		bool processed = false;
 	};
@@ -26,7 +26,7 @@ namespace bs
 	 *
 	 * @note	Sim thread only.
 	 */
-	class BS_EXPORT DragAndDropManager : public Module<DragAndDropManager>
+	class BS_CORE_EXPORT DragAndDropManager : public Module<DragAndDropManager>
 	{
 	public:
 		DragAndDropManager();

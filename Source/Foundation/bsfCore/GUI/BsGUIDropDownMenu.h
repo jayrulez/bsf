@@ -14,7 +14,7 @@ namespace bs
 	 */
 
 	/**	Contains items used for initializing one level in a drop down box hierarchy. */
-	struct BS_EXPORT GUIDropDownData
+	struct BS_CORE_EXPORT GUIDropDownData
 	{
 		Vector<GUIDropDownDataEntry> entries;
 		Vector<bool> states;
@@ -33,7 +33,7 @@ namespace bs
 	};
 
 	/**	Represents a single entry in a drop down box. */
-	class BS_EXPORT GUIDropDownDataEntry
+	class BS_CORE_EXPORT GUIDropDownDataEntry
 	{
 		enum class Type
 		{
@@ -90,7 +90,7 @@ namespace bs
 	};
 
 	/**	This is a generic GUI drop down box class that can be used for: list boxes, menu bars or context menus. */
-	class BS_EXPORT GUIDropDownMenu : public CGUIWidget
+	class BS_CORE_EXPORT GUIDropDownMenu : public CGUIWidget
 	{
 	public:
 		/**
@@ -227,7 +227,7 @@ namespace bs
 		void onDestroyed() override;
 
 	private:
-		static const UINT32 DROP_DOWN_BOX_WIDTH;
+		static constexpr UINT32 DROP_DOWN_BOX_WIDTH = 250;
 
 		String mScrollUpStyle;
 		String mScrollDownStyle;

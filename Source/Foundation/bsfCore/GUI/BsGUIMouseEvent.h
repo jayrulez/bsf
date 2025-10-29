@@ -39,7 +39,7 @@ namespace bs
 	 * Contains data about a GUI mouse input event. This class may store data for many types of events, and some data might
 	 * not be initialized for some event types. Caller must check event type before relying on the data inside.
 	 */
-	class BS_EXPORT GUIMouseEvent
+	class BS_CORE_EXPORT GUIMouseEvent
 	{
 	public:
 		GUIMouseEvent() = default;

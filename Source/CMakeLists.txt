@@ -227,16 +227,16 @@ if(BUILD_TESTS)
 		Foundation/bsfUtility/Private/UnitTests/BsUtilityTest.cpp
 		Foundation/bsfUtility/Private/UnitTests/BsUtilityTestSuite.cpp
 		Foundation/bsfUtility/Private/UnitTests/BsFileSystemTestSuite.cpp)
-		
-	target_link_libraries(UtilityTest bsf)
+
+	target_link_libraries(UtilityTest bsfUtility)
 	target_include_directories(UtilityTest PRIVATE
 		"Foundation/bsfUtility"
 		"Foundation/bsfUtility/ThirdParty")
 
 	add_executable(CoreTest
 		Foundation/bsfCore/Private/UnitTests/BsCoreTest.cpp)
-		
-	target_link_libraries(CoreTest bsf)
+
+	target_link_libraries(CoreTest bsfCore)
 	
 	set_property(TARGET UtilityTest PROPERTY FOLDER Tests)
 	set_property(TARGET CoreTest PROPERTY FOLDER Tests)	
@@ -251,7 +251,7 @@ add_executable(bsfImportTool
 add_common_flags(bsfImportTool)
 target_compile_definitions(bsfImportTool PUBLIC -DBS_IS_ASSET_TOOL)
 
-target_link_libraries(bsfImportTool bsf)
+target_link_libraries(bsfImportTool bsfCore)
 	
 add_engine_dependencies(bsfImportTool)
 add_importer_dependencies(bsfImportTool)

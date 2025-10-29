@@ -7,15 +7,6 @@
 
 namespace bs
 {
-	const Path Paths::RELEASE_ASSEMBLY_PATH = "bin/Assemblies/Release/";
-	const Path Paths::DEBUG_ASSEMBLY_PATH = "bin/Assemblies/Debug/";
-
-	const Path Paths::FRAMEWORK_DATA_PATH = "Data/";
-
-#if BS_INCLUDE_B3D_PATHS
-	const Path Paths::EDITOR_DATA_PATH = "EditorData/";
-#endif
-
 	const Path& Paths::getDataPath()
 	{
 		static bool initialized = false;

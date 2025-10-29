@@ -29,7 +29,7 @@ target_link_libraries(bsfFMOD PRIVATE ${ogg_LIBRARIES})
 target_link_libraries(bsfFMOD PRIVATE ${vorbis_LIBRARIES})
 
 ## Local libs
-target_link_libraries(bsfFMOD PUBLIC bsf)
+target_link_libraries(bsfFMOD PUBLIC bsfCore)
 
 # IDE specific
 set_property(TARGET bsfFMOD PROPERTY FOLDER Plugins)

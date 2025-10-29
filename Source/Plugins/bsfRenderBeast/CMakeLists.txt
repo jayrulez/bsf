@@ -15,7 +15,7 @@ target_compile_definitions(bsfRenderBeast PRIVATE -DBS_BSRND_EXPORTS)
 
 # Libraries
 ## Local libs
-target_link_libraries(bsfRenderBeast bsf)
+target_link_libraries(bsfRenderBeast bsfCore)
 
 # IDE specific
 set_property(TARGET bsfRenderBeast PROPERTY FOLDER Plugins)

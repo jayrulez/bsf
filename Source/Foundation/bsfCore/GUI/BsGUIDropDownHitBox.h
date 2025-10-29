@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/** Helper class used for detecting when a certain area is in focus, and getting notified when that state changes. */
-	class BS_EXPORT GUIDropDownHitBox : public GUIElementContainer
+	class BS_CORE_EXPORT GUIDropDownHitBox : public GUIElementContainer
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

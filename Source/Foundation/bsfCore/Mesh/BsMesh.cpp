@@ -14,7 +14,7 @@
 
 namespace bs
 {
-	MESH_DESC MESH_DESC::DEFAULT = MESH_DESC();
+	MESH_DESC MESH_DESC::DEFAULT;
 
 	Mesh::Mesh(const MESH_DESC& desc)
 		:MeshBase(desc.numVertices, desc.numIndices, desc.subMeshes), mVertexDesc(desc.vertexDesc), mUsage(desc.usage),

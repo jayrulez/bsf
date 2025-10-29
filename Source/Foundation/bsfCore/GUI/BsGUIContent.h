@@ -29,7 +29,7 @@ namespace bs
 	};
 
 	/**	Contains separate GUI content images for every possible GUI element state. */
-	struct BS_EXPORT BS_SCRIPT_EXPORT(pl:true,m:GUI) GUIContentImages
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(pl:true,m:GUI) GUIContentImages
 	{
 		GUIContentImages() = default;
 
@@ -52,7 +52,7 @@ namespace bs
 	 * Holds data used for displaying content in a GUIElement. Content can consist of a string, image, a tooltip or none
 	 * of those.
 	 */
-	class BS_EXPORT BS_SCRIPT_EXPORT(pl:true,m:GUI) GUIContent
+	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(pl:true,m:GUI) GUIContent
 	{
 	public:
 		/**	Constructs an empty content. */
@@ -92,7 +92,7 @@ namespace bs
 		const HSpriteTexture& getImage(GUIElementState state = GUIElementState::Normal) const;
 
 		/**	Determines the spacing between text and image content in pixels. */
-		static const UINT32 IMAGE_TEXT_SPACING;
+		static constexpr UINT32 IMAGE_TEXT_SPACING = 3;
 
 		HString text;
 		GUIContentImages images;

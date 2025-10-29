@@ -23,8 +23,6 @@ using namespace std::placeholders;
 
 namespace bs
 {
-	const UINT32 GUIDropDownMenu::DROP_DOWN_BOX_WIDTH = 250;
-
 	GUIDropDownDataEntry GUIDropDownDataEntry::separator()
 	{
 		GUIDropDownDataEntry data;

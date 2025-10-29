@@ -16,7 +16,7 @@ namespace bs
 	 * Base class for layout GUI element. Layout element positions and sizes any child elements according to element styles
 	 * and layout options.
 	 */
-	class BS_EXPORT GUILayout : public GUIElementBase
+	class BS_CORE_EXPORT GUILayout : public GUIElementBase
 	{
 	public:
 		GUILayout(const GUIDimensions& dimensions);

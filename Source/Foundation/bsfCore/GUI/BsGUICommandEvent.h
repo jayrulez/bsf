@@ -35,7 +35,7 @@ namespace bs
 	 * Holds data about a GUI command event. Command events are special events with a more specific purpose than general
 	 * input events.
 	 */
-	class BS_EXPORT GUICommandEvent
+	class BS_CORE_EXPORT GUICommandEvent
 	{
 	public:
 		GUICommandEvent() = default;

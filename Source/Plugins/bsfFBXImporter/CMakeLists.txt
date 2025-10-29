@@ -21,7 +21,7 @@ target_compile_definitions(bsfFBXImporter PRIVATE -DBS_FBX_EXPORTS)
 target_link_libraries(bsfFBXImporter PRIVATE ${FBXSDK_LIBRARIES})
 
 ## Local libs
-target_link_libraries(bsfFBXImporter PRIVATE bsf)
+target_link_libraries(bsfFBXImporter PRIVATE bsfCore)
 
 ## OS libs
 if(APPLE) # MacOS

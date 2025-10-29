@@ -36,7 +36,7 @@ if(APPLE) # MacOS
 endif()
 
 ## Local libs
-target_link_libraries(bsfOpenAudio PRIVATE bsf)
+target_link_libraries(bsfOpenAudio PRIVATE bsfCore)
 
 # IDE specific
 set_property(TARGET bsfOpenAudio PROPERTY FOLDER Plugins)

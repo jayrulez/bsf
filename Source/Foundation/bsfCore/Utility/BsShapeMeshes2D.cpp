@@ -10,9 +10,6 @@
 
 namespace bs
 {
-	const UINT32 ShapeMeshes2D::NUM_VERTICES_AA_LINE = 4;
-	const UINT32 ShapeMeshes2D::NUM_INDICES_AA_LINE = 6;
-
 	void ShapeMeshes2D::solidQuad(const Rect2& area, const SPtr<MeshData>& meshData, UINT32 vertexOffset, UINT32 indexOffset)
 	{
 		UINT32* indexData = meshData->getIndices32();

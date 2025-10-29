@@ -63,7 +63,7 @@ if(APPLE) # MacOS
 endif()
 
 ## Local libs
-target_link_libraries(bsfVulkanRenderAPI PRIVATE bsf)
+target_link_libraries(bsfVulkanRenderAPI PRIVATE bsfCore)
 
 # IDE specific
 set_property(TARGET bsfVulkanRenderAPI PROPERTY FOLDER Plugins)

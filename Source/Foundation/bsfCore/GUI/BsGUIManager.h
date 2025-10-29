@@ -39,7 +39,7 @@ namespace bs
 	 * modified immediately since that setFocus() call could have originated in sendCommandEvent and elements in focus array
 	 * would be modified while still being iterated upon.
 	 */
-	class BS_EXPORT GUIManager : public Module<GUIManager>
+	class BS_CORE_EXPORT GUIManager : public Module<GUIManager>
 	{
 		/**	Valid states of a drag and drop operation. */
 		enum class DragState
@@ -320,8 +320,8 @@ namespace bs
 		 */
 		bool sendVirtualButtonEvent(GUIElement* element, const GUIVirtualButtonEvent& event);
 
-		static const UINT32 DRAG_DISTANCE;
-		static const float TOOLTIP_HOVER_TIME;
+		static constexpr UINT32 DRAG_DISTANCE = 3;
+		static constexpr float TOOLTIP_HOVER_TIME = 1.0f;
 
 		static const UINT32 MESH_HEAP_INITIAL_NUM_VERTS;
 		static const UINT32 MESH_HEAP_INITIAL_NUM_INDICES;
@@ -408,7 +408,7 @@ namespace bs
 	extern GUISpriteParamBlockDef gGUISpriteParamBlockDef;
 
 	/**	Handles GUI rendering on the core thread. */
-	class BS_EXPORT GUIRenderer : public RendererExtension
+	class BS_CORE_EXPORT GUIRenderer : public RendererExtension
 	{
 		friend class bs::GUIManager;
 
@@ -460,7 +460,7 @@ namespace bs
 	}
 
 	/** Provides easier access to GUIManager. */
-	BS_EXPORT GUIManager& gGUIManager();
+	BS_CORE_EXPORT GUIManager& gGUIManager();
 
 	/** @} */
 }

@@ -21,7 +21,7 @@ target_compile_definitions(bsfFontImporter PRIVATE -DBS_FONT_EXPORTS -DUSE_FREET
 target_link_libraries(bsfFontImporter ${freetype_LIBRARIES})
 
 ## Local libs
-target_link_libraries(bsfFontImporter bsf)
+target_link_libraries(bsfFontImporter bsfCore)
 
 # IDE specific
 set_property(TARGET bsfFontImporter PROPERTY FOLDER Plugins)

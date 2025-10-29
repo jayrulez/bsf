@@ -16,7 +16,7 @@ namespace bs
 	 */
 
 	/**	Base class for a clickable GUI button element. */	
-	class BS_EXPORT GUIButtonBase : public GUIElement
+	class BS_CORE_EXPORT GUIButtonBase : public GUIElement
 	{
 	public:
 		/**	Change content displayed by the button. */

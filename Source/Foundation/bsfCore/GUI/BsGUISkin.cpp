@@ -8,8 +8,6 @@
 
 namespace bs
 {
-	GUIElementStyle GUISkin::DefaultStyle;
-
 	GUISkin::GUISkin()
 		:Resource(false)
 	{ }

@@ -16,7 +16,7 @@ namespace bs
 	 * Provides a way to map one resource path to another path. Useful if the resources are being referenced using a path
 	 * that is not the path to their physical location.
 	 */
-	class BS_EXPORT ResourceMapping : public IReflectable
+	class BS_CORE_EXPORT ResourceMapping : public IReflectable
 	{
 	public:
 		/** Returns the resource path map. */
@@ -40,7 +40,7 @@ namespace bs
 	};
 
 	/** Interface that can be implemented by the resource loaders required by GameResourceManager. */
-	class BS_EXPORT IGameResourceLoader
+	class BS_CORE_EXPORT IGameResourceLoader
 	{
 	public:
 		virtual ~IGameResourceLoader() = default;
@@ -53,7 +53,7 @@ namespace bs
 	};
 
 	/**	Handles loading of game resources when the standalone game is running. */
-	class BS_EXPORT StandaloneResourceLoader : public IGameResourceLoader
+	class BS_CORE_EXPORT StandaloneResourceLoader : public IGameResourceLoader
 	{
 	public:
 		/** @copydoc IGameResourceLoader::load */
@@ -72,7 +72,7 @@ namespace bs
 	 *
 	 * Internal resource handle can be overridden so that editor or other systems can handle resource loading more directly.
 	 */
-	class BS_EXPORT GameResourceManager : public Module<GameResourceManager>
+	class BS_CORE_EXPORT GameResourceManager : public Module<GameResourceManager>
 	{
 	public:
 		GameResourceManager();

@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/** GUI element representing an element with a draggable handle of a variable size. */
-	class BS_EXPORT GUIScrollBar : public GUIElement
+	class BS_CORE_EXPORT GUIScrollBar : public GUIElement
 	{
 	public:
 		/** Style type name for the horizontal scroll handle. */
@@ -146,7 +146,7 @@ namespace bs
 		GUISliderHandle* mHandleBtn;
 		bool mHorizontal;
 
-		static const UINT32 ButtonScrollAmount;
+		static constexpr UINT32 ButtonScrollAmount = 10;
 	};
 
 	/** @} */

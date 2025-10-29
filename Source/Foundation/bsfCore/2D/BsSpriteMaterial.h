@@ -72,7 +72,7 @@ namespace bs
 	};
 
 	/** Interfaced implemented by materials used for rendering sprites. This is expected to be used as a singleton. */
-	class BS_EXPORT SpriteMaterial
+	class BS_CORE_EXPORT SpriteMaterial
 	{
 	public:
 		SpriteMaterial(UINT32 id, const HMaterial& material, ShaderVariation variation = ShaderVariation::EMPTY,

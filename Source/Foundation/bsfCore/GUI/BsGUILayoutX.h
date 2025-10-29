@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/** Represents a horizontal layout that will layout out its child elements left to right. */
-	class BS_EXPORT GUILayoutX final : public GUILayout
+	class BS_CORE_EXPORT GUILayoutX final : public GUILayout
 	{
 	public:
 		GUILayoutX() = default;

@@ -33,7 +33,7 @@ namespace bs
 	BS_FLAGS_OPERATORS(GUISliderHandleFlag);
 
 	/** A handle that can be dragged from its predefined minimum and maximum position, either horizontally or vertically. */
-	class BS_EXPORT GUISliderHandle : public GUIElement
+	class BS_CORE_EXPORT GUISliderHandle : public GUIElement
 	{
 		/**	Visual state of the handle. */
 		enum class State
@@ -170,7 +170,7 @@ namespace bs
 		/** @copydoc GUIElement::styleUpdated */
 		void styleUpdated() override;
 
-		static const UINT32 RESIZE_HANDLE_SIZE;
+		static constexpr UINT32 RESIZE_HANDLE_SIZE = 7;
 
 		ImageSprite* mImageSprite;
 

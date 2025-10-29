@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/**	Helper class for dealing with text selection for text input boxes and similar controls. */
-	class BS_EXPORT GUIInputSelection : public GUIInputTool
+	class BS_CORE_EXPORT GUIInputSelection : public GUIInputTool
 	{
 	public:
 		GUIInputSelection() = default;

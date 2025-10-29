@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	GUI widget that renders a tooltip overlaid over other GUI elements. */
-	class BS_EXPORT GUITooltip : public CGUIWidget
+	class BS_CORE_EXPORT GUITooltip : public CGUIWidget
 	{
 	public:
 		/**	Name of the style used for tooltip's background frame. */
@@ -30,8 +30,8 @@ namespace bs
 		~GUITooltip() = default;
 
 	private:
-		static const UINT32 TOOLTIP_WIDTH;
-		static const UINT32 CURSOR_SIZE;
+		static constexpr UINT32 TOOLTIP_WIDTH = 200;
+		static constexpr UINT32 CURSOR_SIZE = 16;
 	};
 
 	/** @} */

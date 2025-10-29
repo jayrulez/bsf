@@ -15,7 +15,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_EXPORT ResourceMappingRTTI : public RTTIType<ResourceMapping, IReflectable, ResourceMappingRTTI>
+	class BS_CORE_EXPORT ResourceMappingRTTI : public RTTIType<ResourceMapping, IReflectable, ResourceMappingRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS

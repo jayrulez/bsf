@@ -22,7 +22,7 @@ namespace bs
 	};
 
 	/**	Specific texture and text color used in a particular GUI element style. */
-	struct BS_EXPORT BS_SCRIPT_EXPORT(m:GUI,pl:true) GUIElementStateStyle
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:GUI,pl:true) GUIElementStateStyle
 	{
 		BS_NORREF HSpriteTexture texture;
 		Color textColor;
@@ -32,7 +32,7 @@ namespace bs
 	 * GUI element style that determines the look of a GUI element, as well as the element's default layout options.
 	 * Different looks can be provided for different element states.
 	 */
-	struct BS_EXPORT BS_SCRIPT_EXPORT(m:GUI) GUIElementStyle : public IReflectable
+	struct BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:GUI) GUIElementStyle : public IReflectable
 	{
 		BS_SCRIPT_EXPORT()
 		GUIElementStyle() = default;

@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/** Base for GUI elements that combine multiple GUI elements into one more complex element. */
-	class BS_EXPORT GUIElementContainer : public GUIElement
+	class BS_CORE_EXPORT GUIElementContainer : public GUIElement
 	{
 	public:
 		/** @copydoc GUIElement::setFocus */

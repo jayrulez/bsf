@@ -17,7 +17,7 @@ namespace bs
 	 */
 
 	/**	GUI element representing a toggle (on/off) button. */
-	class BS_EXPORT GUIToggle : public GUIButtonBase
+	class BS_CORE_EXPORT GUIToggle : public GUIButtonBase
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

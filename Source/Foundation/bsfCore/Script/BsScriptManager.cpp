@@ -4,8 +4,6 @@
 
 namespace bs
 {
-	SPtr<ScriptLibrary> ScriptManager::sScriptLibrary;
-
 	ScriptManager::ScriptManager()
 	{
 		if (sScriptLibrary)

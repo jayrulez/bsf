@@ -18,7 +18,7 @@ namespace bs
 	 * Input box is a GUI element that accepts Unicode textual input. It can be single or multi-line and handles various
 	 * types of text manipulation.
 	 */
-	class BS_EXPORT GUIInputBox : public GUIElement
+	class BS_CORE_EXPORT GUIInputBox : public GUIElement
 	{
 		/**	Possible visual states the input box can be in. */
 		enum class State
@@ -234,10 +234,10 @@ namespace bs
 		void pasteText();
 
 	private:
-		static VirtualButton mCopyVB;
-		static VirtualButton mPasteVB;
-		static VirtualButton mCutVB;
-		static VirtualButton mSelectAllVB;
+		static inline VirtualButton mCopyVB = VirtualButton("Copy");
+		static inline VirtualButton mPasteVB = VirtualButton("Paste");
+		static inline VirtualButton mCutVB = VirtualButton("Cut");
+		static inline VirtualButton mSelectAllVB = VirtualButton("SelectAll");
 
 		// Sprites
 		ImageSprite* mImageSprite;

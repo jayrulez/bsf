@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_EXPORT ScriptCodeRTTI : public RTTIType <ScriptCode, Resource, ScriptCodeRTTI>
+	class BS_CORE_EXPORT ScriptCodeRTTI : public RTTIType <ScriptCode, Resource, ScriptCodeRTTI>
 	{
 	private:
 		BS_BEGIN_RTTI_MEMBERS

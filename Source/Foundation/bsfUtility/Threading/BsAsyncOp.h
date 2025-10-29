@@ -118,7 +118,7 @@ namespace bs
 	 * You are allowed (and meant to) to copy this by value.
 	 */
 	template<class ReturnType>
-	class BS_UTILITY_EXPORT TAsyncOp : public AsyncOpBase
+	class TAsyncOp : public AsyncOpBase
 	{
 	public:
 		using ReturnValueType = ReturnType;

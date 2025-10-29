@@ -21,7 +21,7 @@ target_compile_definitions(bsfFreeImgImporter PRIVATE -DBS_FREEIMG_EXPORTS -D_MB
 target_link_libraries(bsfFreeImgImporter ${freeimg_LIBRARIES})
 
 ## Local libs
-target_link_libraries(bsfFreeImgImporter bsf)
+target_link_libraries(bsfFreeImgImporter bsfCore)
 
 # IDE specific
 set_property(TARGET bsfFreeImgImporter PROPERTY FOLDER Plugins)

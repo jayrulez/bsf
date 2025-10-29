@@ -17,9 +17,6 @@ using namespace std::placeholders;
 
 namespace bs
 {
-	const UINT32 GUITooltip::TOOLTIP_WIDTH = 200;
-	const UINT32 GUITooltip::CURSOR_SIZE = 16;
-
 	String GUITooltip::getFrameStyleName()
 	{
 		return "TooltipFrame";

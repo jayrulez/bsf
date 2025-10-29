@@ -18,7 +18,7 @@ namespace bs
 	 */
 
 	/**	Helper class for immediate drawing of common geometric shapes. */
-	class BS_EXPORT DrawHelper
+	class BS_CORE_EXPORT DrawHelper
 	{
 	public:
 		/** Controls in what order will elements be rendered, depending on some reference point. */
@@ -225,8 +225,8 @@ namespace bs
 			SPtr<MeshData> meshData;
 		};
 
-		static const UINT32 VERTEX_BUFFER_GROWTH;
-		static const UINT32 INDEX_BUFFER_GROWTH;
+		static constexpr UINT32 VERTEX_BUFFER_GROWTH = 4096;
+		static constexpr UINT32 INDEX_BUFFER_GROWTH = 4096 * 2;
 
 		Color mColor;
 		Matrix4 mTransform;

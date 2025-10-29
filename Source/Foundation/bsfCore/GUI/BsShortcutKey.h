@@ -12,14 +12,14 @@ namespace bs
 	 */
 
 	/** A key combination that is used for triggering keyboard shortcuts. Contains a button code and an optional modifier. */
-	struct BS_EXPORT ShortcutKey
+	struct BS_CORE_EXPORT ShortcutKey
 	{
-		struct BS_EXPORT Hash
+		struct BS_CORE_EXPORT Hash
 		{
 			size_t operator()(const ShortcutKey& x) const;
 		};
 
-		struct BS_EXPORT Equals
+		struct BS_CORE_EXPORT Equals
 		{
 			bool operator()(const ShortcutKey& a, const ShortcutKey& b) const;
 		};
@@ -38,6 +38,8 @@ namespace bs
 
 		static const ShortcutKey NONE;
 	};
+
+	inline const ShortcutKey ShortcutKey::NONE{};
 
 	/** @} */
 }

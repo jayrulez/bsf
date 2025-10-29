@@ -77,7 +77,7 @@ namespace bs { namespace ct
 #define BS_RENMAT_PROFILE_BLOCK RendererMaterialProfileBlock __sampleBlock(mMetaData);
 
 	/**	Base class for all RendererMaterial instances, containing common data and methods. */
-	class BS_EXPORT RendererMaterialBase
+	class BS_CORE_EXPORT RendererMaterialBase
 	{
 	public:
 		virtual ~RendererMaterialBase() = default;

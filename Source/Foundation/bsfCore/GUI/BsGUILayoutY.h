@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	Represents a vertical layout that will layout out its child elements top to bottom. */
-	class BS_EXPORT GUILayoutY final : public GUILayout
+	class BS_CORE_EXPORT GUILayoutY final : public GUILayout
 	{
 	public:
 		GUILayoutY() = default;

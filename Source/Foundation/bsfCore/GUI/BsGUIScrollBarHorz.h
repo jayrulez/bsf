@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	Specialization of a GUIScrollBar for horizontal scrolling. */
-	class BS_EXPORT GUIScrollBarHorz : public GUIScrollBar
+	class BS_CORE_EXPORT GUIScrollBarHorz : public GUIScrollBar
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

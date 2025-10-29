@@ -14,7 +14,7 @@ namespace bs
 	 *  @{
 	 */
 
-	class BS_EXPORT CGUIWidgetRTTI : public RTTIType <CGUIWidget, Component, CGUIWidgetRTTI>
+	class BS_CORE_EXPORT CGUIWidgetRTTI : public RTTIType <CGUIWidget, Component, CGUIWidgetRTTI>
 	{
 	private:
 

@@ -16,7 +16,7 @@ namespace bs
 	 * GUI element containing a background image and a fill image that is scaled depending on the percentage set by the
 	 * caller.
 	 */
-	class BS_EXPORT GUIProgressBar : public GUIElementContainer
+	class BS_CORE_EXPORT GUIProgressBar : public GUIElementContainer
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

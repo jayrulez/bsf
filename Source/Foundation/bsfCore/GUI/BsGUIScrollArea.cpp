@@ -13,9 +13,6 @@ using namespace std::placeholders;
 
 namespace bs
 {
-	const UINT32 GUIScrollArea::ScrollBarWidth = 16;
-	const UINT32 GUIScrollArea::WheelScrollAmount = 50;
-
 	GUIScrollArea::GUIScrollArea(ScrollBarType vertBarType, ScrollBarType horzBarType,
 		const String& scrollBarStyle, const String& scrollAreaStyle, const GUIDimensions& dimensions)
 		: GUIElementContainer(dimensions), mVertBarType(vertBarType), mHorzBarType(horzBarType)

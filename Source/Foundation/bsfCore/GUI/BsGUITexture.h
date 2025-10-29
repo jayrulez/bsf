@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/**	A GUI element that displays a texture. */
-	class BS_EXPORT GUITexture : public GUIElement
+	class BS_CORE_EXPORT GUITexture : public GUIElement
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

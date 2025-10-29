@@ -9,8 +9,6 @@
 
 namespace bs
 {
-	const UINT32 GUISliderHandle::RESIZE_HANDLE_SIZE = 7;
-
 	const String& GUISliderHandle::getGUITypeName()
 	{
 		static String name = "SliderHandle";

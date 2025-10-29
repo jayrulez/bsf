@@ -52,7 +52,7 @@ namespace bs
 	};
 
 	/**	Generates geometry and contains information needed for rendering a two dimensional element. */
-	class BS_EXPORT Sprite
+	class BS_CORE_EXPORT Sprite
 	{
 	public:
 		Sprite() = default;

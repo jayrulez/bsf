@@ -19,7 +19,7 @@ namespace bs
 	 * @note	For example, list boxes usually want drop down boxes to be placed above or below them, while
 	 * 			context menus may want to have them placed around a single point in any direction.
 	 */
-	class BS_EXPORT DropDownAreaPlacement
+	class BS_CORE_EXPORT DropDownAreaPlacement
 	{
 	public:
 		/**	Determines how will the drop down box be positioned. */

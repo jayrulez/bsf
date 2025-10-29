@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	Imports plain text files (.txt, .xml, .json). */
-	class BS_EXPORT PlainTextImporter : public SpecificImporter
+	class BS_CORE_EXPORT PlainTextImporter : public SpecificImporter
 	{
 	public:
 		/** @copydoc SpecificImporter::isExtensionSupported */

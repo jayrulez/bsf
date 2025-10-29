@@ -13,7 +13,7 @@ namespace bs
 	/**
 	 * Contains a set of elements that can be navigated between using keyboard or gamepad buttons (i.e. the 'Tab' button)
 	 */
-	class BS_EXPORT GUINavGroup
+	class BS_CORE_EXPORT GUINavGroup
 	{
 	public:
 		/** Creates a new navigation group. */

@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/**	Primary entry point for the framework. Handles startup and shutdown. */
-	class BS_EXPORT Application : public CoreApplication
+	class BS_CORE_EXPORT Application : public CoreApplication
 	{
 	private:
 		/**
@@ -80,7 +80,7 @@ namespace bs
 	};
 
 	/** Easy way to access Application. */
-	BS_EXPORT Application& gApplication();
+	BS_CORE_EXPORT Application& gApplication();
 
 	/** @} */
 }

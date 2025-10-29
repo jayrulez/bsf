@@ -12,7 +12,7 @@ namespace bs
 	 * Helper class used for constructing HString%s that references the engine string table. Engine string table is just
 	 * a separate string table so it doesn't conflict with the game string table.
 	 */
-	class BS_EXPORT HEString
+	class BS_CORE_EXPORT HEString
 	{
 	public:
 		/**
@@ -42,7 +42,7 @@ namespace bs
 		operator HString() const;
 
 	private:
-		static const UINT32 ENGINE_STRING_TABLE_ID;
+		static constexpr UINT32 ENGINE_STRING_TABLE_ID = 30000;
 
 		HString mInternal;
 	};

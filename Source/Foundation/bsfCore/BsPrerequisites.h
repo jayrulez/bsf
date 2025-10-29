@@ -90,28 +90,28 @@
 #if BS_PLATFORM == BS_PLATFORM_WIN32 // Windows
 #  if BS_COMPILER == BS_COMPILER_MSVC
 #    if defined(BS_STATIC_LIB)
-#      define BS_EXPORT
+#      define BS_CORE_EXPORT
 #    else
-#      if defined(BS_EXPORTS)
-#        define BS_EXPORT __declspec(dllexport)
+#      if defined(BS_CORE_EXPORTS)
+#        define BS_CORE_EXPORT __declspec(dllexport)
 #      else
-#        define BS_EXPORT __declspec(dllimport)
+#        define BS_CORE_EXPORT __declspec(dllimport)
 #      endif
 #	 endif
 #  else
 #    if defined(BS_STATIC_LIB)
-#      define BS_EXPORT
+#      define BS_CORE_EXPORT
 #    else
-#      if defined(BS_EXPORTS)
-#        define BS_EXPORT __attribute__ ((dllexport))
+#      if defined(BS_CORE_EXPORTS)
+#        define BS_CORE_EXPORT __attribute__ ((dllexport))
 #      else
-#        define BS_EXPORT __attribute__ ((dllimport))
+#        define BS_CORE_EXPORT __attribute__ ((dllimport))
 #      endif
 #	 endif
 #  endif
 #  define BS_HIDDEN
 #else // Linux/Mac settings
-#  define BS_EXPORT __attribute__ ((visibility ("default")))
+#  define BS_CORE_EXPORT __attribute__ ((visibility ("default")))
 #  define BS_HIDDEN __attribute__ ((visibility ("hidden")))
 #endif
 

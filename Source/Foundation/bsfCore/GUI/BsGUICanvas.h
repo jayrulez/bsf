@@ -17,7 +17,7 @@ namespace bs
 	 * A GUI element that allows the user to draw custom graphics. All drawn elements relative to the canvas, to its origin
 	 * in the top left corner.
 	 */
-	class BS_EXPORT GUICanvas : public GUIElement
+	class BS_CORE_EXPORT GUICanvas : public GUIElement
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */
@@ -253,7 +253,7 @@ namespace bs
 		mutable Rect2I mLastClipRect;
 		mutable bool mForceTriangleBuild = false;
 
-		static const float LINE_SMOOTH_BORDER_WIDTH;
+		static constexpr float LINE_SMOOTH_BORDER_WIDTH = 3.0f;
 	};
 
 	/** @} */

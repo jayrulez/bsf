@@ -76,7 +76,7 @@ namespace bs
 	 * Organizes elements within a GUIWidget into groups that can be drawn together, as well as cached into the same
 	 * output texture.
 	 **/
-	class BS_EXPORT GUIDrawGroups
+	class BS_CORE_EXPORT GUIDrawGroups
 	{
 		/** Flags signaling which part of a GUIElement is dirty. */
 		enum DirtyFlags
@@ -205,7 +205,7 @@ namespace bs
 	 *
 	 * Widgets are the only GUI objects that may be arbitrarily transformed, allowing you to create 3D interfaces.
 	 */
-	class BS_EXPORT GUIWidget
+	class BS_CORE_EXPORT GUIWidget
 	{
 	public:
 		virtual ~GUIWidget();

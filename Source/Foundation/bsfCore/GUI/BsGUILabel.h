@@ -15,7 +15,7 @@ namespace bs
 	 */
 
 	/**	GUI element that displays text and optionally a content image. */
-	class BS_EXPORT GUILabel : public GUIElement
+	class BS_CORE_EXPORT GUILabel : public GUIElement
 	{
 	public:
 		/** Returns type name of the GUI element used for finding GUI element styles.  */

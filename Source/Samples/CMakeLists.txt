@@ -5,7 +5,7 @@ function(add_sample SAMPLE_NAME)
             "${CMAKE_CURRENT_SOURCE_DIR}/${SAMPLE_NAME}/*.cpp"
         )
         add_executable(${SAMPLE_NAME} WIN32 ${SOURCE_FILES})
-        target_link_libraries(${SAMPLE_NAME} bsf)
+        target_link_libraries(${SAMPLE_NAME} bsfCore)
         target_include_directories(${SAMPLE_NAME} PRIVATE ${BSF_SOURCE_DIR})
         
         install(

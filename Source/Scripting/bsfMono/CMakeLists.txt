@@ -27,7 +27,7 @@ target_compile_definitions(bsfMono PUBLIC -DBS_MONO_STATIC_LIB)
 target_link_libraries(bsfMono PUBLIC ${mono_LIBRARIES})
 
 ## Local libs
-target_link_libraries(bsfMono PUBLIC bsf)
+target_link_libraries(bsfMono PUBLIC bsfCore)
 
 # Runtime executable
 if(BS_IS_BANSHEE3D)

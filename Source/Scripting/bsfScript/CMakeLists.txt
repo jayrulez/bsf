@@ -27,13 +27,13 @@ target_compile_definitions(bsfScript PUBLIC -DBS_SCR_BE_STATIC_LIB)
 
 # Libraries
 ## Local libs
-target_link_libraries(bsfScript bsfMono bsf)
+target_link_libraries(bsfScript bsfMono bsfCore)
 
 # Runtime executable
 if(NOT BS_IS_BANSHEE3D)
 	# Target for running framework scripting assemblies
 	add_executable(bsfSharp WIN32 BsScriptExec.cpp BsScriptWin32Resource.rc)
-	target_link_libraries(bsfSharp bsfScript bsfMono bsf)
+	target_link_libraries(bsfSharp bsfScript bsfMono bsfCore)
 	
 	set_property(TARGET bsfSharp PROPERTY FOLDER Script)
 

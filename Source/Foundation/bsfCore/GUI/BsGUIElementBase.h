@@ -16,7 +16,7 @@ namespace bs
 	 */
 
 	/**	Base class for all GUI elements (visible or layout). */
-	class BS_EXPORT GUIElementBase
+	class BS_CORE_EXPORT GUIElementBase
 	{
 	public:
 		/**	Valid types of GUI base elements. */

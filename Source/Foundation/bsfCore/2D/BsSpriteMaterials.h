@@ -12,21 +12,21 @@ namespace bs
 	 */
 
 	/** Sprite material used for rendering images. */
-	class BS_EXPORT SpriteImageMaterial : public SpriteMaterial
+	class BS_CORE_EXPORT SpriteImageMaterial : public SpriteMaterial
 	{
 	public:
 		SpriteImageMaterial(SpriteMaterialTransparency transparency, bool animated = false);
 	};
 
 	/** Sprite material used for rendering text. */
-	class BS_EXPORT SpriteTextMaterial : public SpriteMaterial
+	class BS_CORE_EXPORT SpriteTextMaterial : public SpriteMaterial
 	{
 	public:
 		SpriteTextMaterial();
 	};
 
 	/** Sprite material used for antialiased lines. */
-	class BS_EXPORT SpriteLineMaterial : public SpriteMaterial
+	class BS_CORE_EXPORT SpriteLineMaterial : public SpriteMaterial
 	{
 	public:
 		SpriteLineMaterial();

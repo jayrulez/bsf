@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	A resource containing plain text data. */
-	class BS_EXPORT PlainText : public Resource
+	class BS_CORE_EXPORT PlainText : public Resource
 	{
 	public:
 		/**	Returns the text contained in the resource. */

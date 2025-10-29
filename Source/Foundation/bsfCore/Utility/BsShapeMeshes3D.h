@@ -14,7 +14,7 @@ namespace bs
 	 */
 
 	/**	Helper class for easily creating common 3D shapes. */
-	class BS_EXPORT ShapeMeshes3D
+	class BS_CORE_EXPORT ShapeMeshes3D
 	{
 	public:
 		/**
@@ -751,8 +751,8 @@ namespace bs
 		/**	Calculates number of vertices and indices required for geometry of a quadrirateral. */
 		static void getNumElementsQuad(UINT32& numVertices, UINT32& numIndices);
 
-		static const UINT32 NUM_VERTICES_AA_LINE;
-		static const UINT32 NUM_INDICES_AA_LINE;
+		static constexpr UINT32 NUM_VERTICES_AA_LINE = 8;
+		static constexpr UINT32 NUM_INDICES_AA_LINE = 30;
 
 	protected:
 		/**

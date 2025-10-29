@@ -4,12 +4,6 @@
 
 namespace bs
 {
-	
-	UINT32 VirtualButton::NextButtonId = 0;
-
-	Map<String, UINT32> VirtualAxis::UniqueAxisIds;
-	UINT32 VirtualAxis::NextAxisId = 0;
-
 	VIRTUAL_BUTTON_DESC::VIRTUAL_BUTTON_DESC(ButtonCode buttonCode, ButtonModifier modifiers, bool repeatable)
 		:buttonCode(buttonCode), modifiers(modifiers), repeatable(repeatable)
 	{ }

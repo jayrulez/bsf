@@ -8,8 +8,6 @@
 
 namespace bs
 {
-	const Color GUIElement::DISABLED_COLOR = Color(0.5f, 0.5f, 0.5f, 1.0f);
-
 	GUIElement::GUIElement(String styleName, const GUIDimensions& dimensions, GUIElementOptions options)
 		:GUIElementBase(dimensions), mOptionFlags(options), mStyle(&GUISkin::DefaultStyle), mStyleName(std::move(styleName))
 	{

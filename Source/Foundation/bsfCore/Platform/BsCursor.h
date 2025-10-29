@@ -18,7 +18,7 @@ namespace bs
 	 * 			
 	 * @note	Thread safe.
 	 */
-	class BS_EXPORT Cursor : public Module<Cursor>
+	class BS_CORE_EXPORT Cursor : public Module<Cursor>
 	{
 		/**	Internal container for data about a single cursor icon. */
 		struct CustomIcon
@@ -117,7 +117,7 @@ namespace bs
 	};
 
 	/** Easy way to access Cursor. */
-	BS_EXPORT Cursor& gCursor();
+	BS_CORE_EXPORT Cursor& gCursor();
 
 	/** @} */
 }

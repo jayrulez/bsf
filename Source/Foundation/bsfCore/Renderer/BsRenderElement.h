@@ -12,7 +12,7 @@ namespace bs { namespace ct
 	 */
 
 	/** Contains all information needed for rendering a single sub-mesh. Closely tied with Renderer. */
-	class BS_EXPORT RenderElement
+	class BS_CORE_EXPORT RenderElement
 	{
 	public:
 		/**	Reference to the mesh to render. */

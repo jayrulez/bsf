@@ -7,8 +7,6 @@
 
 namespace bs
 {
-	const ShortcutKey ShortcutKey::NONE = ShortcutKey();
-
 	size_t ShortcutKey::Hash::operator()(const ShortcutKey& x) const
 	{
 		size_t seed = 0;

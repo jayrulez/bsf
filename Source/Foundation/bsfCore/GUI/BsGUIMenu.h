@@ -21,7 +21,7 @@ namespace bs
 	};
 
 	/** Holds information about a single element in a GUI menu. */
-	class BS_EXPORT GUIMenuItem
+	class BS_CORE_EXPORT GUIMenuItem
 	{
 	public:
 		/**
@@ -108,7 +108,7 @@ namespace bs
 	 * @note
 	 * This is an abstract class and you should provide specialized implementations for specific menu types.
 	 */
-	class BS_EXPORT GUIMenu
+	class BS_CORE_EXPORT GUIMenu
 	{
 	public:
 		GUIMenu();

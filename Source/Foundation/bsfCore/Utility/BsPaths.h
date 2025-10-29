@@ -22,7 +22,7 @@ namespace bs
 #endif
 
 	/** Contains common engine paths and utility method for searching for paths. */
-	class BS_EXPORT Paths
+	class BS_CORE_EXPORT Paths
 	{
 	public:	
 		/**	Returns the absolute path where the builtin framework-specific assets are located. */
@@ -53,17 +53,17 @@ namespace bs
 		static Path findPath(const Path& path);
 
 		/** Path to the root data directory. Relative to working directory, or RAW_APP_ROOT. */
-		static const Path FRAMEWORK_DATA_PATH;
-		
+		static inline const Path FRAMEWORK_DATA_PATH = "Data/";
+
 		/** Path where the release configuration managed assemblies are located at, relative to the working directory. */
-		static const Path RELEASE_ASSEMBLY_PATH;
+		static inline const Path RELEASE_ASSEMBLY_PATH = "bin/Assemblies/Release/";
 
 		/** Path where the debug configuration managed assemblies are located at, relative to the working directory. */
-		static const Path DEBUG_ASSEMBLY_PATH;;
+		static inline const Path DEBUG_ASSEMBLY_PATH = "bin/Assemblies/Debug/";
 
 #if BS_INCLUDE_B3D_PATHS
 		/** Path to the root editor data directory. Relative to working directory, or RAW_APP_ROOT. */
-		static const Path EDITOR_DATA_PATH;
+		static inline const Path EDITOR_DATA_PATH = "EditorData/";
 #endif
 	};
 

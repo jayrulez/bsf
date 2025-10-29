@@ -13,7 +13,7 @@ namespace bs
 	 */
 
 	/** GUI button that can be clicked. Has normal, hover and active states with an optional label. */
-	class BS_EXPORT GUIButton : public GUIButtonBase
+	class BS_CORE_EXPORT GUIButton : public GUIButtonBase
 	{
 	public:
 		/**

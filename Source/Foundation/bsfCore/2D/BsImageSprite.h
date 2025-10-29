@@ -45,7 +45,7 @@ namespace bs
 	};
 
 	/**	A sprite consisting of a single image represented by a sprite texture. */
-	class BS_EXPORT ImageSprite : public Sprite
+	class BS_CORE_EXPORT ImageSprite : public Sprite
 	{
 	public:
 		ImageSprite() = default;

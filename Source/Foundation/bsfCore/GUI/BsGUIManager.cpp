@@ -42,9 +42,6 @@ using namespace std::placeholders;
 
 namespace bs
 {
-	const UINT32 GUIManager::DRAG_DISTANCE = 3;
-	const float GUIManager::TOOLTIP_HOVER_TIME = 1.0f;
-
 	GUIManager::GUIManager()
 	{
 		// Note: Hidden dependency. GUI must receive input events before other systems, in order so it can mark them as used

@@ -14,7 +14,7 @@ namespace bs
 	 * Controls GUI element layout options, possibly by overriding the default options specified in GUI element style.
 	 * These options control GUI element placement and size in a GUI layout.
 	 */
-	class BS_EXPORT GUIOption
+	class BS_CORE_EXPORT GUIOption
 	{
 		/**	Type of GUI element options. */
 		enum class Type
@@ -68,7 +68,7 @@ namespace bs
 	};
 
 	/**	Container for a list of options used for controlling GUI element properties. */
-	class BS_EXPORT GUIOptions
+	class BS_CORE_EXPORT GUIOptions
 	{
 	public:
 		GUIOptions() = default;

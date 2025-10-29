@@ -12,7 +12,7 @@ namespace bs
 	 */
 
 	/**	Imports C# script source code files (.cs). */
-	class BS_EXPORT ScriptCodeImporter : public SpecificImporter
+	class BS_CORE_EXPORT ScriptCodeImporter : public SpecificImporter
 	{
 	public:
 		/** @copydoc SpecificImporter::isExtensionSupported */

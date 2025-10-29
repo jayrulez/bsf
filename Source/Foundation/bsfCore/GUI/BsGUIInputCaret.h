@@ -20,7 +20,7 @@ namespace bs
 	};
 
 	/** Helper class for dealing with caret for text input boxes and similar controls. */
-	class BS_EXPORT GUIInputCaret : public GUIInputTool
+	class BS_CORE_EXPORT GUIInputCaret : public GUIInputTool
 	{
 	public:
 		GUIInputCaret();

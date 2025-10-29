@@ -13,8 +13,6 @@
 
 namespace bs
 {
-	const float GUICanvas::LINE_SMOOTH_BORDER_WIDTH = 3.0f;
-
 	const String& GUICanvas::getGUITypeName()
 	{
 		static String name = "Canvas";

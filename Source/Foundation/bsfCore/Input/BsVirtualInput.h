@@ -17,7 +17,7 @@ namespace bs
 	 * Handles virtual input that allows you to receive virtual input events that hide the actual physical input, allowing
 	 * you to easily change the input keys while being transparent to the external code.
 	 */
-	class BS_EXPORT VirtualInput : public Module<VirtualInput>
+	class BS_CORE_EXPORT VirtualInput : public Module<VirtualInput>
 	{
 		/**	Possible states of virtual buttons. */
 		enum class ButtonState
@@ -136,7 +136,7 @@ namespace bs
 	};
 
 	/** Provides easier access to VirtualInput. */
-	BS_EXPORT VirtualInput& gVirtualInput();
+	BS_CORE_EXPORT VirtualInput& gVirtualInput();
 
 	/** @} */
 }

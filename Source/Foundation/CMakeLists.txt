@@ -44,100 +44,135 @@ target_include_directories(ThirdParty INTERFACE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfUtility/ThirdParty>
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfUtility/ThirdParty>)
 
-# Target
-add_library(bsf SHARED ${BS_UTILITY_SRC} ${BS_CORE_SRC} ${BS_ENGINE_SRC})
-install_dll_on_build(bsf ${PROJECT_SOURCE_DIR})
+# bsfUtility Target
+add_library(bsfUtility SHARED ${BS_UTILITY_SRC})
+install_dll_on_build(bsfUtility ${PROJECT_SOURCE_DIR})
 
-add_common_flags(bsf)
+add_common_flags(bsfUtility)
 
-# Includes
-target_include_directories(bsf PUBLIC
+# bsfUtility Includes
+target_include_directories(bsfUtility PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfUtility>
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCore>
 	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfUtility>
-	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfCore>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfUtility>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>)
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfUtility>)
 
-# Defines
-target_compile_definitions(bsf PRIVATE
-	-DBS_EXPORTS
-	-DBS_CORE_EXPORTS
+# bsfUtility Defines
+target_compile_definitions(bsfUtility PRIVATE
 	-DBS_UTILITY_EXPORTS
 	$<$<CONFIG:Debug>:BS_CONFIG=BS_CONFIG_DEBUG>
 	$<$<CONFIG:RelWithDebInfo>:BS_CONFIG=BS_CONFIG_RELWITHDEBINFO>
 	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
 	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
 
+# bsfCore Target
+add_library(bsfCore SHARED ${BS_CORE_SRC} ${BS_ENGINE_SRC})
+install_dll_on_build(bsfCore ${PROJECT_SOURCE_DIR})
+
+add_common_flags(bsfCore)
+
+# bsfCore Includes
+target_include_directories(bsfCore PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCore>
+	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfCore>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>)
+
+# bsfCore Defines
+target_compile_definitions(bsfCore PRIVATE
+	-DBS_CORE_EXPORTS
+	$<$<CONFIG:Debug>:BS_CONFIG=BS_CONFIG_DEBUG>
+	$<$<CONFIG:RelWithDebInfo>:BS_CONFIG=BS_CONFIG_RELWITHDEBINFO>
+	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
+	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
+
+# bsfCore depends on bsfUtility
+target_link_libraries(bsfCore PUBLIC bsfUtility)
+
+# Compiler options for both libraries
 if(MSVC)
 	if(NOT BSF_ENABLE_RTTI)
-		target_compile_options(bsf PUBLIC
+		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
+		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
 	endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
 	if(NOT BSF_ENABLE_EXCEPTIONS)
-		target_compile_options(bsf PUBLIC
+		target_compile_options(bsfUtility PUBLIC
+			-fno-exceptions)
+		target_compile_options(bsfCore PUBLIC
 			-fno-exceptions)
 	endif()
 	if(NOT BSF_ENABLE_RTTI)
-		target_compile_options(bsf PUBLIC
+		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 	endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	if(NOT BSF_ENABLE_EXCEPTIONS)
-		target_compile_options(bsf PUBLIC
+		target_compile_options(bsfUtility PUBLIC
+			-fno-exceptions)
+		target_compile_options(bsfCore PUBLIC
 			-fno-exceptions)
 	endif()
 	if(NOT BSF_ENABLE_RTTI)
-		target_compile_options(bsf PUBLIC
+		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 	endif()
 else()
 # TODO_OTHER_COMPILERS_GO_HERE
 endif()
 
-# Libraries
-## External lib: NVTT
-target_link_libraries(bsf PRIVATE ${nvtt_LIBRARIES})	
+# bsfUtility Libraries
+## External lib: Snappy (used for serialization)
+target_link_libraries(bsfUtility PRIVATE ${snappy_LIBRARIES})
 
-## External lib: Snappy
-target_link_libraries(bsf PRIVATE ${snappy_LIBRARIES})
+## External libs: Header only libraries (ThirdParty is in bsfUtility)
+target_link_libraries(bsfUtility PUBLIC ThirdParty)
 
-## External lib: RakNet
-if(EXPERIMENTAL_ENABLE_NETWORKING)
-	target_link_libraries(bsf PRIVATE ${RakNet_LIBRARIES})
-endif()
-
-## External libs: Header only libraries
-target_link_libraries(bsf PUBLIC ThirdParty)
-
+## OS libs needed by bsfUtility
 if(LINUX)
-	## External lib: X11, LibUUID, LibICU
-	target_link_libraries(bsf PUBLIC ${X11_LIBRARIES} ${X11_Xcursor_LIB} ${X11_Xrandr_LIB} ${X11_Xi_LIB})
-	target_link_libraries(bsf PRIVATE ${LibUUID_LIBRARIES})
-	target_link_libraries(bsf PRIVATE ${LibICU_LIBRARIES})
+	target_link_libraries(bsfUtility PRIVATE dl pthread)
+	target_link_libraries(bsfUtility PRIVATE ${LibUUID_LIBRARIES})
+	target_link_libraries(bsfUtility PRIVATE ${LibICU_LIBRARIES})
+elseif(APPLE)
+	target_link_libraries(bsfUtility PRIVATE ${LibUUID_LIBRARIES})
+	target_link_framework(bsfUtility CoreServices)
+elseif(WIN32)
+	target_link_libraries(bsfUtility PRIVATE DbgHelp Rpcrt4)
 endif()
 
-if(APPLE)
-	## External lib: LibUUID
-	target_link_libraries(bsf PRIVATE ${LibUUID_LIBRARIES})
+# bsfCore Libraries
+## External lib: NVTT (used for texture compression)
+target_link_libraries(bsfCore PRIVATE ${nvtt_LIBRARIES})
+
+## External lib: RakNet (used for networking)
+if(EXPERIMENTAL_ENABLE_NETWORKING)
+	target_link_libraries(bsfCore PRIVATE ${RakNet_LIBRARIES})
+endif()
+
+## Platform libs
+if(LINUX)
+	## External lib: X11 (used for window management)
+	target_link_libraries(bsfCore PUBLIC ${X11_LIBRARIES} ${X11_Xcursor_LIB} ${X11_Xrandr_LIB} ${X11_Xi_LIB})
+	target_link_libraries(bsfCore PRIVATE pthread)
 endif()
 
 ## OS libs
 if(WIN32)
-	target_link_libraries(bsf PRIVATE Winmm dinput8 xinput9_1_0 dxguid.lib)
-	target_link_libraries(bsf PRIVATE DbgHelp IPHLPAPI Rpcrt4)
-elseif(LINUX)
-	target_link_libraries(bsf PRIVATE dl pthread)
+	target_link_libraries(bsfCore PRIVATE Winmm dinput8 xinput9_1_0 dxguid.lib)
+	target_link_libraries(bsfCore PRIVATE IPHLPAPI)
 elseif(APPLE) # MacOS
-	target_link_framework(bsf CoreServices)
-	target_link_framework(bsf IOKit)
-	target_link_framework(bsf AppKit)
-	target_link_framework(bsf Carbon)
+	target_link_framework(bsfCore IOKit)
+	target_link_framework(bsfCore AppKit)
+	target_link_framework(bsfCore Carbon)
 endif()
 
 # IDE specific
-set_property(TARGET bsf PROPERTY FOLDER Foundation)
+set_property(TARGET bsfUtility PROPERTY FOLDER Foundation)
+set_property(TARGET bsfCore PROPERTY FOLDER Foundation)
 
 # Install
 if(NOT BS_IS_BANSHEE3D)
@@ -174,13 +209,15 @@ if(NOT BS_IS_BANSHEE3D)
 	)
 endif()
 
-install_bsf_target(bsf)
+install_bsf_target(bsfUtility)
+install_bsf_target(bsfCore)
 
 if(NOT BS_IS_BANSHEE3D)
 	# This doesn't actually install anything as it is an imported library
-	# but it is required because it is a dependency of the bsf target
+	# but it is required because it is a dependency of the bsfUtility target
 	install(TARGETS ThirdParty EXPORT bsf)
 
+	# Install both libraries as part of the bsf package
 	install(
 		EXPORT bsf
 		NAMESPACE bsf::
@@ -202,4 +239,5 @@ endif()
 set_directory_properties(PROPERTIES
 	COTIRE_PREFIX_HEADER_IGNORE_PATH "${ignore_paths}")
 
-conditional_cotire(bsf)
+conditional_cotire(bsfUtility)
+conditional_cotire(bsfCore)
