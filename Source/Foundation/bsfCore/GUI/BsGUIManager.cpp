@@ -36,7 +36,6 @@
 #include "RenderAPI/BsRenderTexture.h"
 #include "RenderAPI/BsSamplerState.h"
 #include "RenderAPI/Managers/BsRenderStateManager.h"
-#include "Engine/BsBuiltinResources.h"
 #include "2D/BsSpriteManager.h"
 
 using namespace std::placeholders;
