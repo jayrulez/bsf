@@ -62,15 +62,6 @@ set(BS_CORE_INC_PHYSICS
 	"bsfCore/Physics/BsPhysicsCommon.h"
 )
 
-set(BS_CORE_INC_CORETHREAD
-	"bsfCore/CoreThread/BsCoreThread.h"
-	"bsfCore/CoreThread/BsCoreObjectManager.h"
-	"bsfCore/CoreThread/BsCoreObject.h"
-	"bsfCore/CoreThread/BsCommandQueue.h"
-	"bsfCore/CoreThread/BsCoreObjectCore.h"
-	"bsfCore/CoreThread/BsCoreObjectSync.h"
-)
-
 set(BS_CORE_INC_IMPORTER
 	"bsfCore/Importer/BsSpecificImporter.h"
 	"bsfCore/Importer/BsImportOptions.h"
@@ -259,14 +250,6 @@ set(BS_CORE_INC_RENDERAPI_MANAGERS
 	"bsfCore/RenderAPI/Managers/BsTextureManager.h"
 )
 
-set(BS_CORE_SRC_CORETHREAD
-	"bsfCore/CoreThread/BsCommandQueue.cpp"
-	"bsfCore/CoreThread/BsCoreObject.cpp"
-	"bsfCore/CoreThread/BsCoreObjectManager.cpp"
-	"bsfCore/CoreThread/BsCoreThread.cpp"
-	"bsfCore/CoreThread/BsCoreObjectCore.cpp"
-)
-
 set(BS_CORE_INC_NOFILTER
 	"bsfCore/BsCoreApplication.h"
 	"bsfCore/BsCorePrerequisites.h"
@@ -287,18 +270,6 @@ set(BS_CORE_INC_MATERIAL
 	"bsfCore/Material/BsGpuParamsSet.h"
 	"bsfCore/Material/BsShaderInclude.h"
 	"bsfCore/Material/BsShaderVariation.h"
-)
-
-set(BS_CORE_INC_RESOURCES
-	"bsfCore/Resources/BsResources.h"
-	"bsfCore/Resources/BsResourceManifest.h"
-	"bsfCore/Resources/BsResourceHandle.h"
-	"bsfCore/Resources/BsResource.h"
-	"bsfCore/Resources/BsGpuResourceData.h"
-	"bsfCore/Resources/BsResourceMetaData.h"
-	"bsfCore/Resources/BsResourceListenerManager.h"
-	"bsfCore/Resources/BsSavedResourceData.h"
-	"bsfCore/Resources/BsIResourceListener.h"
 )
 
 set(BS_CORE_INC_MESH
@@ -416,7 +387,6 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsGameObjectHandleRTTI.h"
 	"bsfCore/Private/RTTI/BsGameObjectRTTI.h"
 	"bsfCore/Private/RTTI/BsGpuProgramRTTI.h"
-	"bsfCore/Private/RTTI/BsGpuResourceDataRTTI.h"
 	"bsfCore/Private/RTTI/BsImportOptionsRTTI.h"
 	"bsfCore/Private/RTTI/BsMaterialRTTI.h"
 	"bsfCore/Private/RTTI/BsMeshBaseRTTI.h"
@@ -424,9 +394,6 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsPassRTTI.h"
 	"bsfCore/Private/RTTI/BsPixelDataRTTI.h"
 	"bsfCore/Private/RTTI/BsRasterizerStateRTTI.h"
-	"bsfCore/Private/RTTI/BsResourceHandleRTTI.h"
-	"bsfCore/Private/RTTI/BsResourceManifestRTTI.h"
-	"bsfCore/Private/RTTI/BsResourceRTTI.h"
 	"bsfCore/Private/RTTI/BsSamplerStateRTTI.h"
 	"bsfCore/Private/RTTI/BsSceneObjectRTTI.h"
 	"bsfCore/Private/RTTI/BsShaderRTTI.h"
@@ -435,9 +402,7 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsVertexDataDescRTTI.h"
 	"bsfCore/Private/RTTI/BsVertexDeclarationRTTI.h"
 	"bsfCore/Private/RTTI/BsTextureImportOptionsRTTI.h"
-	"bsfCore/Private/RTTI/BsResourceMetaDataRTTI.h"
 	"bsfCore/Private/RTTI/BsViewportRTTI.h"
-	"bsfCore/Private/RTTI/BsSavedResourceDataRTTI.h"
 	"bsfCore/Private/RTTI/BsShaderIncludeRTTI.h"
 	"bsfCore/Private/RTTI/BsMeshImportOptionsRTTI.h"
 	"bsfCore/Private/RTTI/BsPrefabRTTI.h"
@@ -529,18 +494,6 @@ set(BS_CORE_SRC_RENDERER
 	"bsfCore/Renderer/BsRendererMaterialManager.cpp"
 	"bsfCore/Renderer/BsRenderQueue.cpp"
 	"bsfCore/Renderer/BsRendererUtility.cpp"
-)
-
-set(BS_CORE_SRC_RESOURCES
-	"bsfCore/Resources/BsGpuResourceData.cpp"
-	"bsfCore/Resources/BsResource.cpp"
-	"bsfCore/Resources/BsResourceHandle.cpp"
-	"bsfCore/Resources/BsResourceManifest.cpp"
-	"bsfCore/Resources/BsResources.cpp"
-	"bsfCore/Resources/BsResourceMetaData.cpp"
-	"bsfCore/Resources/BsResourceListenerManager.cpp"
-	"bsfCore/Resources/BsSavedResourceData.cpp"
-	"bsfCore/Resources/BsIResourceListener.cpp"
 )
 
 set(BS_CORE_INC_ENGINE
@@ -941,7 +894,6 @@ endif()
 source_group("2D" FILES ${BS_CORE_INC_2D} ${BS_CORE_SRC_2D})
 source_group("Components" FILES ${BS_CORE_INC_COMPONENTS} ${BS_CORE_SRC_COMPONENTS})
 source_group("Physics" FILES ${BS_CORE_INC_PHYSICS} ${BS_CORE_SRC_PHYSICS})
-source_group("CoreThread" FILES ${BS_CORE_INC_CORETHREAD} ${BS_CORE_SRC_CORETHREAD})
 source_group("Importer" FILES ${BS_CORE_INC_IMPORTER} ${BS_CORE_SRC_IMPORTER})
 source_group("Scene" FILES ${BS_CORE_INC_SCENE} ${BS_CORE_SRC_SCENE})
 source_group("Input" FILES ${BS_CORE_INC_INPUT} ${BS_CORE_SRC_INPUT})
@@ -953,7 +905,6 @@ source_group("Profiling" FILES ${BS_CORE_INC_PROFILING} ${BS_CORE_SRC_PROFILING}
 source_group("RenderAPI" FILES ${BS_CORE_INC_RENDERAPI} ${BS_CORE_SRC_RENDERAPI})
 source_group("RenderAPI\\Managers" FILES ${BS_CORE_INC_RENDERAPI_MANAGERS} ${BS_CORE_SRC_RENDERAPI_MANAGERS})
 source_group("Material" FILES ${BS_CORE_INC_MATERIAL} ${BS_CORE_SRC_MATERIAL})
-source_group("Resources" FILES ${BS_CORE_INC_RESOURCES} ${BS_CORE_SRC_RESOURCES})
 source_group("Engine" FILES ${BS_CORE_INC_ENGINE} ${BS_CORE_SRC_ENGINE})
 source_group("Script" FILES ${BS_CORE_INC_SCRIPT} ${BS_CORE_SRC_SCRIPT})
 source_group("Text" FILES ${BS_CORE_INC_TEXT} ${BS_CORE_SRC_TEXT})
@@ -979,7 +930,6 @@ set(BS_CORE_SRC
 	${BS_CORE_INC_2D}
 	${BS_CORE_INC_COMPONENTS}
 	${BS_CORE_INC_PHYSICS}
-	${BS_CORE_INC_CORETHREAD}
 	${BS_CORE_INC_IMPORTER}
 	${BS_CORE_INC_SCENE}
 	${BS_CORE_INC_INPUT}
@@ -990,10 +940,8 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_RTTI}
 	${BS_CORE_INC_PROFILING}
 	${BS_CORE_INC_RENDERAPI}
-	${BS_CORE_SRC_CORETHREAD}
 	${BS_CORE_INC_NOFILTER}
 	${BS_CORE_INC_MATERIAL}
-	${BS_CORE_INC_RESOURCES}
 	${BS_CORE_SRC_UTILITY}
 	${BS_CORE_INC_TEXT}
 	${BS_CORE_SRC_PROFILING}
@@ -1004,7 +952,6 @@ set(BS_CORE_SRC
 	${BS_CORE_INC_UTILITY}
 	${BS_CORE_INC_RTTI}
 	${BS_CORE_SRC_RENDERER}
-	${BS_CORE_SRC_RESOURCES}
 	${BS_CORE_SRC_MATERIAL}
 	${BS_CORE_SRC_INPUT}
 	${BS_CORE_SRC_GUI}

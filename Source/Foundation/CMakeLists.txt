@@ -1,5 +1,7 @@
 # Source files and their filters
 include(bsfUtility/CMakeSources.cmake)
+include(bsfCoreObject/CMakeSources.cmake)
+include(bsfResources/CMakeSources.cmake)
 include(bsfCore/CMakeSources.cmake)
 
 # Ensure pre-built binary dependencies are up to date
@@ -64,6 +66,29 @@ target_compile_definitions(bsfUtility PRIVATE
 	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
 	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
 
+# bsfCoreObject Target
+add_library(bsfCoreObject SHARED ${BS_COREOBJECT_SRC})
+install_dll_on_build(bsfCoreObject ${PROJECT_SOURCE_DIR})
+
+add_common_flags(bsfCoreObject)
+
+# bsfCoreObject Includes
+target_include_directories(bsfCoreObject PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCoreObject>
+	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfCoreObject>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCoreObject>)
+
+# bsfCoreObject Defines
+target_compile_definitions(bsfCoreObject PRIVATE
+	-DBS_COREOBJECT_EXPORTS
+	$<$<CONFIG:Debug>:BS_CONFIG=BS_CONFIG_DEBUG>
+	$<$<CONFIG:RelWithDebInfo>:BS_CONFIG=BS_CONFIG_RELWITHDEBINFO>
+	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
+	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
+
+# bsfCoreObject depends on bsfUtility
+target_link_libraries(bsfCoreObject PUBLIC bsfUtility)
+
 # bsfCore Target
 add_library(bsfCore SHARED ${BS_CORE_SRC} ${BS_ENGINE_SRC})
 install_dll_on_build(bsfCore ${PROJECT_SOURCE_DIR})
@@ -73,8 +98,12 @@ add_common_flags(bsfCore)
 # bsfCore Includes
 target_include_directories(bsfCore PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCore>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCoreObject>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfResources>
 	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfCore>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>)
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCoreObject>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfResources>)
 
 # bsfCore Defines
 target_compile_definitions(bsfCore PRIVATE
@@ -84,13 +113,42 @@ target_compile_definitions(bsfCore PRIVATE
 	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
 	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
 
-# bsfCore depends on bsfUtility
-target_link_libraries(bsfCore PUBLIC bsfUtility)
+# bsfResources Target
+add_library(bsfResources SHARED ${BS_RESOURCES_SRC})
+install_dll_on_build(bsfResources ${PROJECT_SOURCE_DIR})
 
-# Compiler options for both libraries
+add_common_flags(bsfResources)
+
+# bsfResources Includes
+target_include_directories(bsfResources PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfResources>
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCoreObject>
+	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfResources>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfResources>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCoreObject>)
+
+# bsfResources Defines
+target_compile_definitions(bsfResources PRIVATE
+	-DBS_RESOURCES_EXPORTS
+	$<$<CONFIG:Debug>:BS_CONFIG=BS_CONFIG_DEBUG>
+	$<$<CONFIG:RelWithDebInfo>:BS_CONFIG=BS_CONFIG_RELWITHDEBINFO>
+	$<$<CONFIG:MinSizeRel>:BS_CONFIG=BS_CONFIG_MINSIZEREL>
+	$<$<CONFIG:Release>:BS_CONFIG=BS_CONFIG_RELEASE>)
+
+# bsfResources depends on bsfCoreObject
+target_link_libraries(bsfResources PUBLIC bsfCoreObject)
+
+# bsfCore depends on bsfResources (which depends on bsfCoreObject which depends on bsfUtility)
+target_link_libraries(bsfCore PUBLIC bsfResources)
+
+# Compiler options for all libraries
 if(MSVC)
 	if(NOT BSF_ENABLE_RTTI)
 		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
+		target_compile_options(bsfCoreObject PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
+		target_compile_options(bsfResources PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
 		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:/GR->)
@@ -99,11 +157,19 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "A
 	if(NOT BSF_ENABLE_EXCEPTIONS)
 		target_compile_options(bsfUtility PUBLIC
 			-fno-exceptions)
+		target_compile_options(bsfCoreObject PUBLIC
+			-fno-exceptions)
+		target_compile_options(bsfResources PUBLIC
+			-fno-exceptions)
 		target_compile_options(bsfCore PUBLIC
 			-fno-exceptions)
 	endif()
 	if(NOT BSF_ENABLE_RTTI)
 		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfCoreObject PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfResources PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
@@ -112,11 +178,19 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	if(NOT BSF_ENABLE_EXCEPTIONS)
 		target_compile_options(bsfUtility PUBLIC
 			-fno-exceptions)
+		target_compile_options(bsfCoreObject PUBLIC
+			-fno-exceptions)
+		target_compile_options(bsfResources PUBLIC
+			-fno-exceptions)
 		target_compile_options(bsfCore PUBLIC
 			-fno-exceptions)
 	endif()
 	if(NOT BSF_ENABLE_RTTI)
 		target_compile_options(bsfUtility PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfCoreObject PUBLIC
+			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
+		target_compile_options(bsfResources PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 		target_compile_options(bsfCore PUBLIC
 			$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
@@ -210,6 +284,8 @@ if(NOT BS_IS_BANSHEE3D)
 endif()
 
 install_bsf_target(bsfUtility)
+install_bsf_target(bsfCoreObject)
+install_bsf_target(bsfResources)
 install_bsf_target(bsfCore)
 
 if(NOT BS_IS_BANSHEE3D)

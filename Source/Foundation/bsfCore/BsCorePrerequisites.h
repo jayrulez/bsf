@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Prerequisites/BsPrerequisitesUtil.h"
+#include "BsCoreObjectPrerequisites.h"
 
 /** @addtogroup Layers
  *  @{
@@ -495,9 +496,7 @@ namespace bs
 		TID_VertexDeclaration = 1004,
 		TID_VertexElementData = 1005,
 		TID_Component = 1006,
-		TID_ResourceHandle = 1009,
 		TID_GpuProgram = 1010,
-		TID_ResourceHandleData = 1011,
 		TID_CgProgram = 1012,
 		TID_Pass = 1014,
 		TID_Technique = 1015,
@@ -520,18 +519,13 @@ namespace bs
 		TID_SceneObject = 1059,
 		TID_GameObject = 1060,
 		TID_PixelData = 1062,
-		TID_GpuResourceData = 1063,
 		TID_VertexDataDesc = 1064,
 		TID_MeshBase = 1065,
 		TID_GameObjectHandleBase = 1066,
-		TID_ResourceManifest = 1067,
-		TID_ResourceManifestEntry = 1068,
 		TID_EmulatedParamBlock = 1069,
 		TID_TextureImportOptions = 1070,
-		TID_ResourceMetaData = 1071,
 		TID_ShaderInclude = 1072,
 		TID_Viewport = 1073,
-		TID_ResourceDependencies = 1074,
 		TID_ShaderMetaData = 1075,
 		TID_MeshImportOptions = 1076,
 		TID_Prefab = 1077,
@@ -544,7 +538,6 @@ namespace bs
 		TID_LanguageData = 1084,
 		TID_LocalizedStringData = 1085,
 		TID_MaterialParamColor = 1086,
-		TID_WeakResourceHandle = 1087,
 		TID_TextureParamData = 1088,
 		TID_StructParamData = 1089,
 		TID_MaterialParams = 1090,
@@ -684,6 +677,7 @@ namespace bs
 /* 							Resource references                   		*/
 /************************************************************************/
 
+#include "BsResourcesPrerequisites.h"
 #include "Resources/BsResourceHandle.h"
 
 namespace bs
@@ -799,9 +793,6 @@ namespace bs
 
 	#define BS_ALL_LAYERS 0xFFFFFFFFFFFFFFFF
 
-	/** Used for marking a CoreObject dependency as dirty. */
-	static constexpr INT32 DIRTY_DEPENDENCY_MASK = 1 << 31;
-
 	template<class T, bool Core>
 	struct CoreVariant { };
 
@@ -832,19 +823,6 @@ namespace bs
 	 */
 	template<class T, bool Core>
 	using CoreVariantHandleType = typename CoreVariantHandle<T, Core>::Type;
-
-	/** Flags that are provided to the serialization system to control serialization/deserialization. */
-	enum SerializationFlags
-	{
-		/**
-		 * Used when deserializing resources. Lets the system know not to discard any intermediate resource data that might
-		 * be required if the resource needs to be serialized.
-		 */
-		SF_KeepResourceSourceData = 1 << 0,
-
-		/** Only serializes elements with network replication flag enabled. */
-		SF_ReplicableOnly = 1 << 1
-	};
 
 	/** Helper type that can contain either a component or scene actor version of an object. */
 	template<class T>
@@ -889,7 +867,6 @@ namespace bs
 		SPtr<T> mActor;
 	};
 
-	BS_LOG_CATEGORY(CoreThread, 20)
 	BS_LOG_CATEGORY(Renderer, 21)
 	BS_LOG_CATEGORY(Scene, 22)
 	BS_LOG_CATEGORY(Physics, 23)
@@ -897,7 +874,6 @@ namespace bs
 	BS_LOG_CATEGORY(RenderBackend, 25)
 	BS_LOG_CATEGORY(BSLCompiler, 26)
 	BS_LOG_CATEGORY(Particles, 27)
-	BS_LOG_CATEGORY(Resources, 28)
 	BS_LOG_CATEGORY(FBXImporter, 29)
 	BS_LOG_CATEGORY(PixelUtility, 30)
 	BS_LOG_CATEGORY(Texture, 31)

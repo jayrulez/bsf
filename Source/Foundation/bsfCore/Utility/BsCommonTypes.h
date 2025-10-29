@@ -641,37 +641,5 @@ namespace bs
 		UINT32 bitDepth; /**< Number of bits per sample. */
 	};
 
-	/** Helper class for syncing dirty data from sim CoreObject to core CoreObject and other way around. */
-	class CoreSyncData
-	{
-	public:
-		CoreSyncData()
-			:data(nullptr), size(0)
-		{ }
-
-		CoreSyncData(UINT8* data, UINT32 size)
-			:data(data), size(size)
-		{ }
-
-		/** Gets the internal data and checks the data is of valid size. */
-		template<class T>
-		const T& getData() const
-		{
-			assert(sizeof(T) == size);
-
-			return *(T*)data;
-		}
-
-		/**	Returns a pointer to internal data buffer. */
-		UINT8* getBuffer() const { return data; }
-
-		/**	Returns the size of the internal data buffer. */
-		UINT32 getBufferSize() const { return size; }
-
-	private:
-		UINT8* data;
-		UINT32 size;
-	};
-
 	/** @} */
 }
