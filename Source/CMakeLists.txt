@@ -121,7 +121,7 @@ else()
 endif()
 
 ## Generate config files
-configure_file("${BSF_SOURCE_DIR}/CMake/BsEngineConfig.h.in" "${PROJECT_BINARY_DIR}/Generated/bsfEngine/BsEngineConfig.h")
+configure_file("${BSF_SOURCE_DIR}/CMake/BsEngineConfig.h.in" "${PROJECT_BINARY_DIR}/Generated/bsfCore/BsEngineConfig.h")
 configure_file("${BSF_SOURCE_DIR}/CMake/BsFrameworkConfig.h.in" "${PROJECT_BINARY_DIR}/Generated/bsfUtility/BsFrameworkConfig.h")
 
 # Set files disallowed in precompiled headers
@@ -247,7 +247,7 @@ endif()
 
 ## Builtin resource preprocessing
 add_executable(bsfImportTool
-	Foundation/bsfEngine/Resources/BsBuiltinResourcesImporter.cpp)
+	Foundation/bsfCore/Resources/BsBuiltinResourcesImporter.cpp)
 add_common_flags(bsfImportTool)
 target_compile_definitions(bsfImportTool PUBLIC -DBS_IS_ASSET_TOOL)
 

@@ -4,7 +4,7 @@
 
 #include "BsScriptEnginePrerequisites.h"
 #include "Wrappers/BsScriptResource.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIElementStyle.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIElementStyle.h"
 
 namespace bs { class GUISkin; }
 namespace bs

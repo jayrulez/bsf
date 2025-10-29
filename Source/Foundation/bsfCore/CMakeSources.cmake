@@ -1,3 +1,12 @@
+set(BS_CORE_INC_2D
+	"bsfCore/2D/BsImageSprite.h"
+	"bsfCore/2D/BsSprite.h"
+	"bsfCore/2D/BsTextSprite.h"
+	"bsfCore/2D/BsSpriteMaterial.h"
+	"bsfCore/2D/BsSpriteMaterials.h"
+	"bsfCore/2D/BsSpriteManager.h"
+)
+
 set(BS_CORE_INC_COMPONENTS
 	"bsfCore/Components/BsCBoxCollider.h"
 	"bsfCore/Components/BsCCollider.h"
@@ -92,6 +101,70 @@ set(BS_CORE_INC_INPUT
 	"bsfCore/Input/BsMouse.h"
 	"bsfCore/Input/BsKeyboard.h"
 	"bsfCore/Input/BsGamepad.h"
+    
+	"bsfCore/Input/BsInputConfiguration.h"
+	"bsfCore/Input/BsVirtualInput.h"
+)
+
+set(BS_CORE_INC_GUI
+	"bsfCore/GUI/BsGUIElement.h"
+	"bsfCore/GUI/BsGUIElementStyle.h"
+	"bsfCore/GUI/BsGUILabel.h"
+	"bsfCore/GUI/BsGUIManager.h"
+	"bsfCore/GUI/BsGUISkin.h"
+	"bsfCore/GUI/BsGUILayout.h"
+	"bsfCore/GUI/BsGUILayoutX.h"
+	"bsfCore/GUI/BsGUILayoutY.h"
+	"bsfCore/GUI/BsGUISpace.h"
+	"bsfCore/GUI/BsGUIButton.h"
+	"bsfCore/GUI/BsGUITexture.h"
+	"bsfCore/GUI/BsGUIToggle.h"
+	"bsfCore/GUI/BsGUIInputBox.h"
+	"bsfCore/GUI/BsGUICommandEvent.h"
+	"bsfCore/GUI/BsGUIInputCaret.h"
+	"bsfCore/GUI/BsGUIInputSelection.h"
+	"bsfCore/GUI/BsGUIInputTool.h"
+	"bsfCore/GUI/BsGUIElementBase.h"
+	"bsfCore/GUI/BsGUIScrollBarVert.h"
+	"bsfCore/GUI/BsGUIScrollBarHorz.h"
+	"bsfCore/GUI/BsGUIScrollArea.h"
+	"bsfCore/GUI/BsGUIScrollBar.h"
+	"bsfCore/GUI/BsGUIToggleGroup.h"
+	"bsfCore/GUI/BsDragAndDropManager.h"
+	"bsfCore/GUI/BsGUIViewport.h"
+	"bsfCore/GUI/BsGUIContent.h"
+	"bsfCore/GUI/BsGUIListBox.h"
+	"bsfCore/GUI/BsGUIMenu.h"
+	"bsfCore/GUI/BsGUIContextMenu.h"
+	"bsfCore/GUI/BsGUIHelper.h"
+	"bsfCore/GUI/BsGUIDropDownBoxManager.h"
+	"bsfCore/GUI/BsGUIButtonBase.h"
+	"bsfCore/GUI/BsGUITextInputEvent.h"
+	"bsfCore/GUI/BsGUIMouseEvent.h"
+	"bsfCore/GUI/BsProfilerOverlay.h"
+	"bsfCore/GUI/BsGUIOptions.h"
+	"bsfCore/GUI/BsGUIRenderTexture.h"
+	"bsfCore/GUI/BsGUIElementContainer.h"
+	"bsfCore/GUI/BsGUIDropDownHitBox.h"
+	"bsfCore/GUI/BsGUIVirtualButtonEvent.h"
+	"bsfCore/GUI/BsGUILayoutUtility.h"
+	"bsfCore/GUI/BsGUISliderHandle.h"
+	"bsfCore/GUI/BsGUISlider.h"
+	"bsfCore/GUI/BsGUIProgressBar.h"
+	"bsfCore/GUI/BsGUIDropDownContent.h"
+	"bsfCore/GUI/BsGUIDimensions.h"
+	"bsfCore/GUI/BsGUIPanel.h"
+	"bsfCore/GUI/BsGUILayoutData.h"
+	"bsfCore/GUI/BsGUIDropDownMenu.h"
+	"bsfCore/GUI/BsDropDownAreaPlacement.h"
+	"bsfCore/GUI/BsGUITooltipManager.h"
+	"bsfCore/GUI/BsGUITooltip.h"
+	"bsfCore/GUI/BsGUIWidget.h"
+	"bsfCore/GUI/BsCGUIWidget.h"
+	"bsfCore/GUI/BsShortcutManager.h"
+	"bsfCore/GUI/BsShortcutKey.h"
+	"bsfCore/GUI/BsGUICanvas.h"
+	"bsfCore/GUI/BsGUINavGroup.h"
 )
 
 set(BS_CORE_INC_RENDERER
@@ -111,16 +184,25 @@ set(BS_CORE_INC_RENDERER
 	"bsfCore/Renderer/BsIBLUtility.h"
 	"bsfCore/Renderer/BsGpuResourcePool.h"
 	"bsfCore/Renderer/BsDecal.h"
+    
+	"bsfCore/Renderer/BsRendererMaterial.h"
+	"bsfCore/Renderer/BsRendererMaterialManager.h"
+	"bsfCore/Renderer/BsRenderElement.h"
+	"bsfCore/Renderer/BsRenderQueue.h"
+	"bsfCore/Renderer/BsRendererUtility.h"
 )
 
 set(BS_CORE_SRC_LOCALIZATION
 	"bsfCore/Localization/BsHString.cpp"
 	"bsfCore/Localization/BsStringTable.cpp"
 	"bsfCore/Localization/BsStringTableManager.cpp"
+    
+	"bsfCore/Localization/BsHEString.cpp"
 )
 
 set(BS_CORE_SRC_RTTI
 	"bsfCore/Private/RTTI/BsMaterialRTTI.cpp"
+	"bsfCore/Private/RTTI/BsGUISkinRTTI.cpp"
 )
 
 set(BS_CORE_INC_PROFILING
@@ -188,6 +270,10 @@ set(BS_CORE_SRC_CORETHREAD
 set(BS_CORE_INC_NOFILTER
 	"bsfCore/BsCoreApplication.h"
 	"bsfCore/BsCorePrerequisites.h"
+    
+	"bsfCore/BsApplication.h"
+	"bsfCore/BsPrerequisites.h"
+	"bsfCore/BsEntry.h"
 )
 
 set(BS_CORE_INC_MATERIAL
@@ -213,6 +299,16 @@ set(BS_CORE_INC_RESOURCES
 	"bsfCore/Resources/BsResourceListenerManager.h"
 	"bsfCore/Resources/BsSavedResourceData.h"
 	"bsfCore/Resources/BsIResourceListener.h"
+    
+	"bsfCore/Resources/BsPlainText.h"
+	"bsfCore/Resources/BsPlainTextImporter.h"
+	"bsfCore/Resources/BsScriptCode.h"
+	"bsfCore/Resources/BsScriptCodeImporter.h"
+	"bsfCore/Resources/BsScriptCodeImportOptions.h"
+	"bsfCore/Resources/BsBuiltinResources.h"
+	"bsfCore/Resources/BsEngineShaderIncludeHandler.h"
+	"bsfCore/Resources/BsGameResourceManager.h"
+	"bsfCore/Resources/BsBuiltinResourcesHelper.h"
 )
 
 set(BS_CORE_INC_MESH
@@ -236,6 +332,12 @@ set(BS_CORE_SRC_UTILITY
 	"bsfCore/Utility/BsUtility.cpp"
 	"bsfCore/Utility/BsDeferredCallManager.cpp"
 	"bsfCore/Utility/BsIconUtility.cpp"
+    
+	"bsfCore/Utility/BsDrawHelper.cpp"
+	"bsfCore/Utility/BsGameSettings.cpp"
+	"bsfCore/Utility/BsPaths.cpp"
+	"bsfCore/Utility/BsShapeMeshes2D.cpp"
+	"bsfCore/Utility/BsShapeMeshes3D.cpp"
 )
 
 set(BS_CORE_INC_TEXT
@@ -249,6 +351,15 @@ set(BS_CORE_SRC_PROFILING
 	"bsfCore/Profiling/BsProfilerCPU.cpp"
 	"bsfCore/Profiling/BsProfilerGPU.cpp"
 	"bsfCore/Profiling/BsProfilingManager.cpp"
+)
+
+set(BS_CORE_SRC_2D
+	"bsfCore/2D/BsImageSprite.cpp"
+	"bsfCore/2D/BsSprite.cpp"
+	"bsfCore/2D/BsTextSprite.cpp"
+	"bsfCore/2D/BsSpriteMaterial.cpp"
+	"bsfCore/2D/BsSpriteMaterials.cpp"
+	"bsfCore/2D/BsSpriteManager.cpp"
 )
 
 set(BS_CORE_SRC_COMPONENTS
@@ -296,6 +407,14 @@ set(BS_CORE_INC_UTILITY
 	"bsfCore/Utility/BsUtility.h"
 	"bsfCore/Utility/BsDeferredCallManager.h"
 	"bsfCore/Utility/BsIconUtility.h"
+    
+	"bsfCore/Utility/BsDrawHelper.h"
+	"bsfCore/Utility/BsEnums.h"
+	"bsfCore/Utility/BsGameSettings.h"
+	"bsfCore/Utility/BsPaths.h"
+	"bsfCore/Utility/BsRectOffset.h"
+	"bsfCore/Utility/BsShapeMeshes2D.h"
+	"bsfCore/Utility/BsShapeMeshes3D.h"
 )
 
 set(BS_CORE_INC_RTTI
@@ -389,6 +508,15 @@ set(BS_CORE_INC_RTTI
 	"bsfCore/Private/RTTI/BsCDecalRTTI.h"
 	"bsfCore/Private/RTTI/BsRenderTargetRTTI.h"
 	"bsfCore/Private/RTTI/BsCharDescRTTI.h"
+    
+	"bsfCore/Private/RTTI/BsPlainTextRTTI.h"
+	"bsfCore/Private/RTTI/BsScriptCodeRTTI.h"
+	"bsfCore/Private/RTTI/BsScriptCodeImportOptionsRTTI.h"
+	"bsfCore/Private/RTTI/BsGUIElementStyleRTTI.h"
+	"bsfCore/Private/RTTI/BsGUISkinRTTI.h"
+	"bsfCore/Private/RTTI/BsCGUIWidgetRTTI.h"
+	"bsfCore/Private/RTTI/BsGameSettingsRTTI.h"
+	"bsfCore/Private/RTTI/BsResourceMappingRTTI.h"
 )
 
 set(BS_CORE_SRC_RENDERER
@@ -407,6 +535,10 @@ set(BS_CORE_SRC_RENDERER
 	"bsfCore/Renderer/BsIBLUtility.cpp"
 	"bsfCore/Renderer/BsGpuResourcePool.cpp"
 	"bsfCore/Renderer/BsDecal.cpp"
+    
+	"bsfCore/Renderer/BsRendererMaterialManager.cpp"
+	"bsfCore/Renderer/BsRenderQueue.cpp"
+	"bsfCore/Renderer/BsRendererUtility.cpp"
 )
 
 set(BS_CORE_SRC_RESOURCES
@@ -419,6 +551,24 @@ set(BS_CORE_SRC_RESOURCES
 	"bsfCore/Resources/BsResourceListenerManager.cpp"
 	"bsfCore/Resources/BsSavedResourceData.cpp"
 	"bsfCore/Resources/BsIResourceListener.cpp"
+    
+	"bsfCore/Resources/BsScriptCodeImportOptions.cpp"
+	"bsfCore/Resources/BsScriptCodeImporter.cpp"
+	"bsfCore/Resources/BsScriptCode.cpp"
+	"bsfCore/Resources/BsPlainTextImporter.cpp"
+	"bsfCore/Resources/BsPlainText.cpp"
+	"bsfCore/Resources/BsBuiltinResources.cpp"
+	"bsfCore/Resources/BsEngineShaderIncludeHandler.cpp"
+	"bsfCore/Resources/BsGameResourceManager.cpp"
+	"bsfCore/Resources/BsBuiltinResourcesHelper.cpp"
+)
+
+set(BS_CORE_INC_SCRIPT
+	"bsfCore/Script/BsScriptManager.h"
+)
+
+set(BS_CORE_SRC_SCRIPT
+	"bsfCore/Script/BsScriptManager.cpp"
 )
 
 set(BS_CORE_SRC_MESH
@@ -452,12 +602,83 @@ set(BS_CORE_SRC_MATERIAL
 
 set(BS_CORE_SRC_INPUT
 	"bsfCore/Input/BsInput.cpp"
+    
+	"bsfCore/Input/BsInputConfiguration.cpp"
+	"bsfCore/Input/BsVirtualInput.cpp"
+)
+
+set(BS_CORE_SRC_GUI
+	"bsfCore/GUI/BsGUIElement.cpp"
+	"bsfCore/GUI/BsGUILabel.cpp"
+	"bsfCore/GUI/BsGUIManager.cpp"
+	"bsfCore/GUI/BsGUISkin.cpp"
+	"bsfCore/GUI/BsGUILayout.cpp"
+	"bsfCore/GUI/BsGUILayoutX.cpp"
+	"bsfCore/GUI/BsGUILayoutY.cpp"
+	"bsfCore/GUI/BsGUIButton.cpp"
+	"bsfCore/GUI/BsGUITexture.cpp"
+	"bsfCore/GUI/BsGUIToggle.cpp"
+	"bsfCore/GUI/BsGUIInputBox.cpp"
+	"bsfCore/GUI/BsGUIMouseEvent.cpp"
+	"bsfCore/GUI/BsGUIInputCaret.cpp"
+	"bsfCore/GUI/BsGUIInputSelection.cpp"
+	"bsfCore/GUI/BsGUIInputTool.cpp"
+	"bsfCore/GUI/BsGUIElementBase.cpp"
+	"bsfCore/GUI/BsGUIScrollBarVert.cpp"
+	"bsfCore/GUI/BsGUIScrollBarHorz.cpp"
+	"bsfCore/GUI/BsGUIScrollArea.cpp"
+	"bsfCore/GUI/BsGUIScrollBar.cpp"
+	"bsfCore/GUI/BsGUIToggleGroup.cpp"
+	"bsfCore/GUI/BsDragAndDropManager.cpp"
+	"bsfCore/GUI/BsGUIViewport.cpp"
+	"bsfCore/GUI/BsGUIContent.cpp"
+	"bsfCore/GUI/BsGUIListBox.cpp"
+	"bsfCore/GUI/BsGUIMenu.cpp"
+	"bsfCore/GUI/BsGUIHelper.cpp"
+	"bsfCore/GUI/BsGUIDropDownBoxManager.cpp"
+	"bsfCore/GUI/BsGUIContextMenu.cpp"
+	"bsfCore/GUI/BsGUIButtonBase.cpp"
+	"bsfCore/GUI/BsGUITextInputEvent.cpp"
+	"bsfCore/GUI/BsProfilerOverlay.cpp"
+	"bsfCore/GUI/BsGUIOptions.cpp"
+	"bsfCore/GUI/BsGUIRenderTexture.cpp"
+	"bsfCore/GUI/BsGUIElementContainer.cpp"
+	"bsfCore/GUI/BsGUIDropDownHitBox.cpp"
+	"bsfCore/GUI/BsGUILayoutUtility.cpp"
+	"bsfCore/GUI/BsGUISliderHandle.cpp"
+	"bsfCore/GUI/BsGUISlider.cpp"
+	"bsfCore/GUI/BsGUIProgressBar.cpp"
+	"bsfCore/GUI/BsGUISpace.cpp"
+	"bsfCore/GUI/BsGUIDropDownContent.cpp"
+	"bsfCore/GUI/BsGUIElementStyle.cpp"
+	"bsfCore/GUI/BsGUIDimensions.cpp"
+	"bsfCore/GUI/BsGUIPanel.cpp"
+	"bsfCore/GUI/BsGUIDropDownMenu.cpp"
+	"bsfCore/GUI/BsDropDownAreaPlacement.cpp"
+	"bsfCore/GUI/BsGUITooltipManager.cpp"
+	"bsfCore/GUI/BsGUITooltip.cpp"
+	"bsfCore/GUI/BsGUIWidget.cpp"
+	"bsfCore/GUI/BsShortcutKey.cpp"
+	"bsfCore/GUI/BsShortcutManager.cpp"
+	"bsfCore/GUI/BsCGUIWidget.cpp"
+	"bsfCore/GUI/BsGUICanvas.cpp"
+	"bsfCore/GUI/BsGUINavGroup.cpp"
+)
+
+set(BS_CORE_INC_DEBUG
+	"bsfCore/Debug/BsDebugDraw.h"
+)
+
+set(BS_CORE_SRC_DEBUG
+	"bsfCore/Debug/BsDebugDraw.cpp"
 )
 
 set(BS_CORE_INC_LOCALIZATION
 	"bsfCore/Localization/BsHString.h"
 	"bsfCore/Localization/BsStringTable.h"
 	"bsfCore/Localization/BsStringTableManager.h"
+    
+	"bsfCore/Localization/BsHEString.h"
 )
 
 set(BS_CORE_SRC_TEXT
@@ -512,6 +733,8 @@ set(BS_CORE_SRC_RENDERAPI_MANAGERS
 
 set(BS_CORE_SRC_NOFILTER
 	"bsfCore/BsCoreApplication.cpp"
+    
+	"bsfCore/BsApplication.cpp"
 )
 
 set(BS_CORE_SRC_PHYSICS
@@ -627,10 +850,14 @@ set(BS_CORE_INC_PLATFORM
 	"bsfCore/Platform/BsPlatform.h"
 	"bsfCore/Platform/BsFolderMonitor.h"
 	"bsfCore/Platform/BsDropTarget.h"
+    
+	"bsfCore/Platform/BsCursor.h"
 )
 
 set(BS_CORE_SRC_PLATFORM
 	"bsfCore/Platform/BsDropTarget.cpp"
+    
+	"bsfCore/Platform/BsCursor.cpp"
 )
 
 set(BS_CORE_INC_PLATFORM_WIN32
@@ -705,12 +932,15 @@ elseif(APPLE)
 	list(APPEND BS_CORE_SRC_PLATFORM ${BS_CORE_SRC_PLATFORM_MACOS})
 endif()
 
+source_group("2D" FILES ${BS_CORE_INC_2D} ${BS_CORE_SRC_2D})
 source_group("Components" FILES ${BS_CORE_INC_COMPONENTS} ${BS_CORE_SRC_COMPONENTS})
 source_group("Physics" FILES ${BS_CORE_INC_PHYSICS} ${BS_CORE_SRC_PHYSICS})
 source_group("CoreThread" FILES ${BS_CORE_INC_CORETHREAD} ${BS_CORE_SRC_CORETHREAD})
 source_group("Importer" FILES ${BS_CORE_INC_IMPORTER} ${BS_CORE_SRC_IMPORTER})
 source_group("Scene" FILES ${BS_CORE_INC_SCENE} ${BS_CORE_SRC_SCENE})
 source_group("Input" FILES ${BS_CORE_INC_INPUT} ${BS_CORE_SRC_INPUT})
+source_group("GUI" FILES ${BS_CORE_INC_GUI} ${BS_CORE_SRC_GUI})
+source_group("Debug" FILES ${BS_CORE_INC_DEBUG} ${BS_CORE_SRC_DEBUG})
 source_group("Platform" FILES ${BS_CORE_INC_PLATFORM} ${BS_CORE_SRC_PLATFORM})
 source_group("Renderer" FILES ${BS_CORE_INC_RENDERER} ${BS_CORE_SRC_RENDERER})
 source_group("Profiling" FILES ${BS_CORE_INC_PROFILING} ${BS_CORE_SRC_PROFILING})
@@ -718,6 +948,7 @@ source_group("RenderAPI" FILES ${BS_CORE_INC_RENDERAPI} ${BS_CORE_SRC_RENDERAPI}
 source_group("RenderAPI\\Managers" FILES ${BS_CORE_INC_RENDERAPI_MANAGERS} ${BS_CORE_SRC_RENDERAPI_MANAGERS})
 source_group("Material" FILES ${BS_CORE_INC_MATERIAL} ${BS_CORE_SRC_MATERIAL})
 source_group("Resources" FILES ${BS_CORE_INC_RESOURCES} ${BS_CORE_SRC_RESOURCES})
+source_group("Script" FILES ${BS_CORE_INC_SCRIPT} ${BS_CORE_SRC_SCRIPT})
 source_group("Text" FILES ${BS_CORE_INC_TEXT} ${BS_CORE_SRC_TEXT})
 source_group("Utility" FILES ${BS_CORE_INC_UTILITY} ${BS_CORE_SRC_UTILITY})
 source_group("RTTI" FILES ${BS_CORE_INC_RTTI} ${BS_CORE_SRC_RTTI})
@@ -738,12 +969,14 @@ if(APPLE)
 endif()
 
 set(BS_CORE_SRC
+	${BS_CORE_INC_2D}
 	${BS_CORE_INC_COMPONENTS}
 	${BS_CORE_INC_PHYSICS}
 	${BS_CORE_INC_CORETHREAD}
 	${BS_CORE_INC_IMPORTER}
 	${BS_CORE_INC_SCENE}
 	${BS_CORE_INC_INPUT}
+	${BS_CORE_INC_GUI}
 	${BS_CORE_INC_PLATFORM}
 	${BS_CORE_INC_RENDERER}
 	${BS_CORE_SRC_LOCALIZATION}
@@ -757,6 +990,7 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_UTILITY}
 	${BS_CORE_INC_TEXT}
 	${BS_CORE_SRC_PROFILING}
+	${BS_CORE_SRC_2D}
 	${BS_CORE_SRC_COMPONENTS}
 	${BS_CORE_SRC_PLATFORM}
 	${BS_CORE_SRC_IMPORTER}
@@ -766,6 +1000,7 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_RESOURCES}
 	${BS_CORE_SRC_MATERIAL}
 	${BS_CORE_SRC_INPUT}
+	${BS_CORE_SRC_GUI}
 	${BS_CORE_INC_LOCALIZATION}
 	${BS_CORE_SRC_TEXT}
 	${BS_CORE_SRC_RENDERAPI}
@@ -784,6 +1019,10 @@ set(BS_CORE_SRC
 	${BS_CORE_SRC_MESH}
 	${BS_CORE_INC_PARTICLES}
 	${BS_CORE_SRC_PARTICLES}
+	${BS_CORE_INC_DEBUG}
+	${BS_CORE_SRC_DEBUG}
+	${BS_CORE_INC_SCRIPT}
+	${BS_CORE_SRC_SCRIPT}
 )
 
 if(EXPERIMENTAL_ENABLE_NETWORKING)

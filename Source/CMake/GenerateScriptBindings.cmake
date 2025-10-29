@@ -22,7 +22,6 @@ function(add_generate_script_bindings_target)
 	if(BansheeSBGen_FOUND)
 		addForGeneration(${BSF_SOURCE_DIR}/Foundation/bsfUtility)
 		addForGeneration(${BSF_SOURCE_DIR}/Foundation/bsfCore)
-		addForGeneration(${BSF_SOURCE_DIR}/Foundation/bsfEngine)
 		addForGeneration(${BSF_SOURCE_DIR}/Scripting/bsfScript)
 		
 		if(BS_IS_BANSHEE3D)

@@ -4,11 +4,11 @@
 #include "BsMonoMethod.h"
 #include "BsMonoClass.h"
 #include "BsMonoUtil.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUISkin.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUISkin.h"
 #include "BsScriptResourceManager.h"
 #include "Wrappers/BsScriptRRefBase.h"
 #include "BsScriptGUIElementStyle.generated.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUISkin.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUISkin.h"
 
 namespace bs
 {

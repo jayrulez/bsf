@@ -5,7 +5,7 @@
 #include "BsScriptEnginePrerequisites.h"
 #include "Wrappers/BsScriptReflectable.h"
 #include "BsScriptImportOptions.generated.h"
-#include "../../../Foundation/bsfEngine/Resources/BsScriptCodeImportOptions.h"
+#include "../../../Foundation/bsfCore/Resources/BsScriptCodeImportOptions.h"
 
 namespace bs { class ScriptCodeImportOptions; }
 namespace bs

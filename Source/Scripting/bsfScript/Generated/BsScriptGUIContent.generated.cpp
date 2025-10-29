@@ -6,7 +6,7 @@
 #include "BsMonoUtil.h"
 #include "../../../Foundation/bsfCore/Localization/BsHString.h"
 #include "BsScriptHString.generated.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIContent.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIContent.h"
 #include "BsScriptGUIContentImages.generated.h"
 
 namespace bs

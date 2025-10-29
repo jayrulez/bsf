@@ -1,5 +1,5 @@
 //#include "BsEntry.h"
-#include "Foundation/bsfEngine/BsEntry.h"
+#include "Foundation/bsfCore/BsEntry.h"
 #include "Scene/BsSceneObject.h"
 #include "Components/BsCCamera.h"
 #include "Components/BsCRenderable.h"

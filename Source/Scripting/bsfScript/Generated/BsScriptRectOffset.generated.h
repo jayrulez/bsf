@@ -4,7 +4,7 @@
 
 #include "BsScriptEnginePrerequisites.h"
 #include "BsScriptObject.h"
-#include "../../../Foundation/bsfEngine/Utility/BsRectOffset.h"
+#include "../../../Foundation/bsfCore/Utility/BsRectOffset.h"
 
 namespace bs
 {

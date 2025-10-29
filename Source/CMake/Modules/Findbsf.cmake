@@ -75,7 +75,6 @@ if(NOT bsf_FOUND)
 else()
 	list(APPEND INCLUDE_DIRS "${bsf_INCLUDE_DIR}/bsfUtility")
 	list(APPEND INCLUDE_DIRS "${bsf_INCLUDE_DIR}/bsfCore")
-	list(APPEND INCLUDE_DIRS "${bsf_INCLUDE_DIR}/bsfEngine")
 	
 	set_target_properties(bsf PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${INCLUDE_DIRS}")
 	mark_as_advanced(bsf_INSTALL_DIR)

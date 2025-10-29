@@ -59,7 +59,7 @@
 #include "../../../Foundation/bsfCore/Renderer/BsRenderSettings.h"
 #include "BsScriptColorGradingSettings.generated.h"
 #if !BS_IS_BANSHEE3D
-#include "../../../Foundation/bsfEngine/Resources/BsScriptCodeImportOptions.h"
+#include "../../../Foundation/bsfCore/Resources/BsScriptCodeImportOptions.h"
 #endif
 #include "BsScriptScriptCodeImportOptions.generated.h"
 #include "../../../Foundation/bsfCore/Renderer/BsRenderSettings.h"
@@ -144,7 +144,7 @@
 #include "../../../Foundation/bsfCore/Text/BsFontImportOptions.h"
 #endif
 #include "BsScriptFontImportOptions.generated.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIElementStyle.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIElementStyle.h"
 #include "BsScriptGUIElementStyle.generated.h"
 
 namespace bs

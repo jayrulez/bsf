@@ -1,7 +1,6 @@
 # Source files and their filters
 include(bsfUtility/CMakeSources.cmake)
 include(bsfCore/CMakeSources.cmake)
-include(bsfEngine/CMakeSources.cmake)
 
 # Ensure pre-built binary dependencies are up to date
 if(USE_BUNDLED_LIBRARIES)
@@ -55,12 +54,10 @@ add_common_flags(bsf)
 target_include_directories(bsf PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfUtility>
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfCore>
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/bsfEngine>
 	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfUtility>
-	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfEngine>
+	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/Generated/bsfCore>
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfUtility>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>
-	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfEngine>)
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/bsfCore>)
 
 # Defines
 target_compile_definitions(bsf PRIVATE
@@ -163,16 +160,7 @@ if(NOT BS_IS_BANSHEE3D)
 	)
 
 	install(
-		DIRECTORY bsfEngine
-		DESTINATION include
-		FILES_MATCHING
-		PATTERN "*.h"
-		PATTERN "*.hpp"
-		PATTERN "Private" EXCLUDE
-	)
-
-	install(
-		DIRECTORY ${PROJECT_BINARY_DIR}/Generated/bsfEngine
+		DIRECTORY ${PROJECT_BINARY_DIR}/Generated/bsfCore
 		DESTINATION include
 		FILES_MATCHING
 		PATTERN "*.h"

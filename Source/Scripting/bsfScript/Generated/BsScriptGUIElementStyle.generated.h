@@ -4,12 +4,12 @@
 
 #include "BsScriptEnginePrerequisites.h"
 #include "Wrappers/BsScriptReflectable.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIElementStyle.h"
-#include "../../../Foundation/bsfEngine/Utility/BsRectOffset.h"
-#include "../../../Foundation/bsfEngine/2D/BsTextSprite.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIElementStyle.h"
-#include "../../../Foundation/bsfEngine/2D/BsTextSprite.h"
-#include "../../../Foundation/bsfEngine/GUI/BsGUIElementStyle.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIElementStyle.h"
+#include "../../../Foundation/bsfCore/Utility/BsRectOffset.h"
+#include "../../../Foundation/bsfCore/2D/BsTextSprite.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIElementStyle.h"
+#include "../../../Foundation/bsfCore/2D/BsTextSprite.h"
+#include "../../../Foundation/bsfCore/GUI/BsGUIElementStyle.h"
 
 namespace bs { struct GUIElementStyle; }
 namespace bs { struct __GUIElementStateStyleInterop; }
