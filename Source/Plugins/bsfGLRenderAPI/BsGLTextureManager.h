@@ -5,7 +5,7 @@
 #include "BsGLPrerequisites.h"
 #include "BsGLTexture.h"
 #include "BsGLSupport.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 
 namespace bs
 {

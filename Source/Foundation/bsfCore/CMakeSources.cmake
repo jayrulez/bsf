@@ -136,6 +136,7 @@ set(BS_CORE_INC_RENDERAPI
 	"bsfCore/RenderAPI/BsVertexData.h"
 	"bsfCore/RenderAPI/BsVertexBuffer.h"
 	"bsfCore/RenderAPI/BsTimerQuery.h"
+	"bsfCore/RenderAPI/BsTexture.h"
 	"bsfCore/RenderAPI/BsTextureView.h"
 	"bsfCore/RenderAPI/BsSubMesh.h"
 	"bsfCore/RenderAPI/BsSamplerState.h"
@@ -165,17 +166,15 @@ set(BS_CORE_INC_RENDERAPI
 )
 
 set(BS_CORE_INC_RENDERAPI_MANAGERS
-	"bsfCore/Managers/BsRenderWindowManager.h"
-	"bsfCore/Managers/BsRenderStateManager.h"
-	"bsfCore/Managers/BsQueryManager.h"
-	"bsfCore/Managers/BsMeshManager.h"
-	"bsfCore/Managers/BsHardwareBufferManager.h"
-	"bsfCore/Managers/BsGpuProgramManager.h"
-	"bsfCore/Managers/BsRenderAPIManager.h"
-	"bsfCore/Managers/BsRenderAPIFactory.h"
-	"bsfCore/Managers/BsCommandBufferManager.h"
-	"bsfCore/Managers/BsTextureManager.h"
-	"bsfCore/Managers/BsResourceListenerManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderWindowManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderStateManager.h"
+	"bsfCore/RenderAPI/Managers/BsQueryManager.h"
+	"bsfCore/RenderAPI/Managers/BsHardwareBufferManager.h"
+	"bsfCore/RenderAPI/Managers/BsGpuProgramManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIManager.h"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIFactory.h"
+	"bsfCore/RenderAPI/Managers/BsCommandBufferManager.h"
+	"bsfCore/RenderAPI/Managers/BsTextureManager.h"
 )
 
 set(BS_CORE_SRC_CORETHREAD
@@ -211,6 +210,7 @@ set(BS_CORE_INC_RESOURCES
 	"bsfCore/Resources/BsResource.h"
 	"bsfCore/Resources/BsGpuResourceData.h"
 	"bsfCore/Resources/BsResourceMetaData.h"
+	"bsfCore/Resources/BsResourceListenerManager.h"
 	"bsfCore/Resources/BsSavedResourceData.h"
 	"bsfCore/Resources/BsIResourceListener.h"
 )
@@ -221,11 +221,11 @@ set(BS_CORE_INC_MESH
 	"bsfCore/Mesh/BsMeshData.h"
 	"bsfCore/Mesh/BsMeshBase.h"
 	"bsfCore/Mesh/BsMesh.h"
+	"bsfCore/Mesh/BsMeshManager.h"
 	"bsfCore/Mesh/BsMeshUtility.h"
 )
 
 set(BS_CORE_INC_IMAGE
-	"bsfCore/Image/BsTexture.h"
 	"bsfCore/Image/BsPixelData.h"
 	"bsfCore/Image/BsPixelUtil.h"
 	"bsfCore/Image/BsPixelVolume.h"
@@ -416,6 +416,7 @@ set(BS_CORE_SRC_RESOURCES
 	"bsfCore/Resources/BsResourceManifest.cpp"
 	"bsfCore/Resources/BsResources.cpp"
 	"bsfCore/Resources/BsResourceMetaData.cpp"
+	"bsfCore/Resources/BsResourceListenerManager.cpp"
 	"bsfCore/Resources/BsSavedResourceData.cpp"
 	"bsfCore/Resources/BsIResourceListener.cpp"
 )
@@ -426,12 +427,12 @@ set(BS_CORE_SRC_MESH
 	"bsfCore/Mesh/BsMeshData.cpp"
 	"bsfCore/Mesh/BsMeshHeap.cpp"
 	"bsfCore/Mesh/BsTransientMesh.cpp"
+	"bsfCore/Mesh/BsMeshManager.cpp"
 	"bsfCore/Mesh/BsMeshUtility.cpp"
 )
 
 set(BS_CORE_SRC_IMAGE
 	"bsfCore/Image/BsPixelData.cpp"
-	"bsfCore/Image/BsTexture.cpp"
 	"bsfCore/Image/BsPixelUtil.cpp"
 	"bsfCore/Image/BsSpriteTexture.cpp"
 )
@@ -478,6 +479,7 @@ set(BS_CORE_SRC_RENDERAPI
 	"bsfCore/RenderAPI/BsOcclusionQuery.cpp"
 	"bsfCore/RenderAPI/BsRasterizerState.cpp"
 	"bsfCore/RenderAPI/BsRenderTarget.cpp"
+	"bsfCore/RenderAPI/BsTexture.cpp"
 	"bsfCore/RenderAPI/BsRenderTexture.cpp"
 	"bsfCore/RenderAPI/BsRenderWindow.cpp"
 	"bsfCore/RenderAPI/BsSamplerState.cpp"
@@ -498,16 +500,14 @@ set(BS_CORE_SRC_RENDERAPI
 )
 
 set(BS_CORE_SRC_RENDERAPI_MANAGERS
-	"bsfCore/Managers/BsGpuProgramManager.cpp"
-	"bsfCore/Managers/BsHardwareBufferManager.cpp"
-	"bsfCore/Managers/BsMeshManager.cpp"
-	"bsfCore/Managers/BsQueryManager.cpp"
-	"bsfCore/Managers/BsRenderStateManager.cpp"
-	"bsfCore/Managers/BsRenderWindowManager.cpp"
-	"bsfCore/Managers/BsRenderAPIManager.cpp"
-	"bsfCore/Managers/BsCommandBufferManager.cpp"
-	"bsfCore/Managers/BsTextureManager.cpp"
-	"bsfCore/Managers/BsResourceListenerManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsGpuProgramManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsHardwareBufferManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsQueryManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderStateManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderWindowManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsRenderAPIManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsCommandBufferManager.cpp"
+	"bsfCore/RenderAPI/Managers/BsTextureManager.cpp"
 )
 
 set(BS_CORE_SRC_NOFILTER

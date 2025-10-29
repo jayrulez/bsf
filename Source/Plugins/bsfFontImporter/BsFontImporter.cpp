@@ -3,7 +3,7 @@
 #include "BsFontImporter.h"
 #include "Text/BsFontImportOptions.h"
 #include "Image/BsPixelData.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Image/BsTextureAtlasLayout.h"
 #include "BsCoreApplication.h"
 #include "CoreThread/BsCoreThread.h"

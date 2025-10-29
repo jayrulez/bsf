@@ -6,7 +6,7 @@
 #include "RenderAPI/BsGpuPipelineParamInfo.h"
 #include "RenderAPI/BsGpuPipelineState.h"
 #include "Math/BsVector2.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "RenderAPI/BsGpuBuffer.h"
 #include "RenderAPI/BsSamplerState.h"
 #include "Debug/BsDebug.h"
@@ -14,7 +14,7 @@
 #include "Math/BsVector3I.h"
 #include "Math/BsVector4I.h"
 #include "Math/BsMatrixNxM.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 
 namespace bs
 {

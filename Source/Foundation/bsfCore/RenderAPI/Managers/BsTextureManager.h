@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsCorePrerequisites.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "RenderAPI/BsRenderTexture.h"
 #include "Utility/BsModule.h"
 

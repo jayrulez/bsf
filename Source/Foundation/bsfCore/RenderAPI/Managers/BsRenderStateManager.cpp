@@ -1,6 +1,6 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 #include "RenderAPI/BsSamplerState.h"
 #include "RenderAPI/BsDepthStencilState.h"
 #include "RenderAPI/BsRasterizerState.h"

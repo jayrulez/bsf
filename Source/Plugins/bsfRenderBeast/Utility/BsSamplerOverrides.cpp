@@ -8,7 +8,7 @@
 #include "RenderAPI/BsGpuParamDesc.h"
 #include "Material/BsMaterialParams.h"
 #include "RenderAPI/BsSamplerState.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 
 namespace bs { namespace ct
 {

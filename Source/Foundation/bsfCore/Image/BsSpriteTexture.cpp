@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "Image/BsSpriteTexture.h"
 #include "Private/RTTI/BsSpriteTextureRTTI.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Resources/BsResources.h"
 #include "Resources/BsBuiltinResources.h"
 #include "CoreThread/BsCoreObjectSync.h"

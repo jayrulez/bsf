@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "2D/BsSprite.h"
 #include "Material/BsMaterial.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Mesh/BsMesh.h"
 #include "Material/BsShader.h"
 #include "Renderer/BsRendererUtility.h"

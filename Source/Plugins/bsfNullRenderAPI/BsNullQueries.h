@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsNullPrerequisites.h"
-#include "Managers/BsQueryManager.h"
+#include "RenderAPI/Managers/BsQueryManager.h"
 #include "RenderAPI/BsEventQuery.h"
 #include "RenderAPI/BsTimerQuery.h"
 #include "RenderAPI/BsOcclusionQuery.h"

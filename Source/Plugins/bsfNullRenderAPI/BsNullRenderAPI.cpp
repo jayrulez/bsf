@@ -5,7 +5,7 @@
 #include "Math/BsMatrix4.h"
 #include "RenderAPI/BsGpuParamDesc.h"
 #include "RenderAPI/BsGpuParams.h"
-#include "Managers/BsGpuProgramManager.h"
+#include "RenderAPI/Managers/BsGpuProgramManager.h"
 #include "BsNullCommandBuffer.h"
 #include "BsNullTexture.h"
 #include "BsNullBuffers.h"
@@ -91,6 +91,11 @@ namespace bs { namespace ct
 		CommandBufferManager::shutDown();
 
 		RenderAPI::destroyCore();
+	}
+
+	SPtr<CommandBuffer> NullRenderAPI::getMainCommandBuffer() const
+	{
+		return SPtr<CommandBuffer>();
 	}
 
 	void NullRenderAPI::convertProjectionMatrix(const Matrix4& matrix, Matrix4& dest)

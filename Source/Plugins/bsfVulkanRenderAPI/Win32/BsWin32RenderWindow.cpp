@@ -6,7 +6,7 @@
 #include "Win32/BsWin32VideoModeInfo.h"
 #include "Corethread/BsCoreThread.h"
 #include "Profiling/BsRenderStats.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "BsVulkanRenderAPI.h"
 #include "BsVulkanDevice.h"
 #include "BsVulkanSwapChain.h"

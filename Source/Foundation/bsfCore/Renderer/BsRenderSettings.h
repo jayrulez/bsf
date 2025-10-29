@@ -6,7 +6,7 @@
 #include "Reflection/BsIReflectable.h"
 #include "Math/BsVector3.h"
 #include "Image/BsColor.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 
 namespace bs
 {

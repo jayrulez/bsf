@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsVulkanPrerequisites.h"
-#include "Managers/BsCommandBufferManager.h"
+#include "RenderAPI/Managers/BsCommandBufferManager.h"
 #include "BsVulkanCommandBuffer.h"
 
 namespace bs { namespace ct

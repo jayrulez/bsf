@@ -3,7 +3,7 @@
 #include "Material/BsMaterialParams.h"
 #include "Private/RTTI/BsMaterialParamsRTTI.h"
 #include "Material/BsShader.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Image/BsSpriteTexture.h"
 #include "RenderAPI/BsGpuBuffer.h"
 #include "RenderAPI/BsSamplerState.h"

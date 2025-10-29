@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsNullPrerequisites.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Allocators/BsPoolAlloc.h"
 #include "RenderAPI/BsGpuBuffer.h"
 #include "RenderAPI/BsGpuParamBlockBuffer.h"

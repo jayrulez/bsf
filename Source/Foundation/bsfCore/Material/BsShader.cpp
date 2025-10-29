@@ -9,7 +9,7 @@
 #include "RenderAPI/BsGpuParams.h"
 #include "Material/BsPass.h"
 #include "RenderAPI/BsSamplerState.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 
 namespace bs
 {

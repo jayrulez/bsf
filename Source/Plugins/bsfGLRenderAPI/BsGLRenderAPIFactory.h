@@ -3,8 +3,8 @@
 #pragma once
 
 #include <string>
-#include "Managers/BsRenderAPIFactory.h"
-#include "Managers/BsRenderAPIManager.h"
+#include "RenderAPI/Managers/BsRenderAPIFactory.h"
+#include "RenderAPI/Managers/BsRenderAPIManager.h"
 #include "BsGLRenderAPI.h"
 
 namespace bs { namespace ct

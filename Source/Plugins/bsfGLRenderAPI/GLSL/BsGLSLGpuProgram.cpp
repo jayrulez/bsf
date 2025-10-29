@@ -4,7 +4,7 @@
 #include "RenderAPI/BsRenderAPI.h"
 #include "Error/BsException.h"
 #include "GLSL/BsGLSLParamParser.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Profiling/BsRenderStats.h"
 #include "RenderAPI/BsGpuParams.h"
 

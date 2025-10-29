@@ -7,7 +7,7 @@
 #include "RenderAPI/BsGpuProgram.h"
 #include "RenderAPI/BsGpuParamDesc.h"
 #include "RenderAPI/BsGpuPipelineParamInfo.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 
 namespace bs
 {

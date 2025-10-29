@@ -2,8 +2,8 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #pragma once
 
-#include "Managers/BsRenderAPIFactory.h"
-#include "Managers/BsRenderAPIManager.h"
+#include "RenderAPI/Managers/BsRenderAPIFactory.h"
+#include "RenderAPI/Managers/BsRenderAPIManager.h"
 
 namespace bs { namespace ct
 {

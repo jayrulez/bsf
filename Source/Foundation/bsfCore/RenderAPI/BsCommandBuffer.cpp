@@ -1,7 +1,7 @@
 //************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "RenderAPI/BsCommandBuffer.h"
-#include "Managers/BsCommandBufferManager.h"
+#include "RenderAPI/Managers/BsCommandBufferManager.h"
 
 namespace bs { namespace ct
 {

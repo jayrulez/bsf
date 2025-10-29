@@ -11,7 +11,7 @@
 #include "Utility/BsShapeMeshes3D.h"
 #include "Mesh/BsMesh.h"
 #include "Renderer/BsRendererMeshData.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 #include "Serialization/BsFileSerializer.h"
 #include "Importer/BsImporter.h"

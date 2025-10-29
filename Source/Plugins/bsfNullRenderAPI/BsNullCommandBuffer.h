@@ -4,7 +4,7 @@
 
 #include "BsNullPrerequisites.h"
 #include "RenderAPI/BsCommandBuffer.h"
-#include "Managers/BsCommandBufferManager.h"
+#include "RenderAPI/Managers/BsCommandBufferManager.h"
 
 namespace bs { namespace ct
 {
@@ -30,6 +30,12 @@ namespace bs { namespace ct
 		NullCommandBuffer(GpuQueueType type, UINT32 deviceIdx, UINT32 queueIdx, bool secondary)
 			: CommandBuffer(type, deviceIdx, queueIdx, secondary)
 		{ }
+
+		/** @copydoc CommandBuffer::getState() */
+		CommandBufferState getState() const override;
+
+		/** @copydoc CommandBuffer::reset() */
+		void reset() override;
 	};
 
 	/** @} */

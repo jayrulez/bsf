@@ -11,7 +11,7 @@
 #include "Debug/BsDebug.h"
 #include "Utility/BsUtility.h"
 #include "Resources/BsSavedResourceData.h"
-#include "Managers/BsResourceListenerManager.h"
+#include "Resources/BsResourceListenerManager.h"
 #include "Utility/BsCompression.h"
 #include "FileSystem/BsDataStream.h"
 #include "Serialization/BsBinarySerializer.h"

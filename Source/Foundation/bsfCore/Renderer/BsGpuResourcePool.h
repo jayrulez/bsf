@@ -5,7 +5,7 @@
 #include "BsCorePrerequisites.h"
 #include "Utility/BsModule.h"
 #include "Image/BsPixelUtil.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Utility/BsDynArray.h"
 
 namespace bs { namespace ct

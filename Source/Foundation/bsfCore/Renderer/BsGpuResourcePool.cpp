@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #include "BsGpuResourcePool.h"
 #include "RenderAPI/BsRenderTexture.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "RenderAPI/BsGpuBuffer.h"
 
 namespace bs { namespace ct

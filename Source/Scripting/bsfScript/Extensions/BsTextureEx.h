@@ -5,7 +5,7 @@
 #include "BsScriptEnginePrerequisites.h"
 #include "Wrappers/BsScriptResource.h"
 #include "Image/BsPixelData.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 
 namespace bs
 {

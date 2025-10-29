@@ -4,7 +4,7 @@
 
 #include "BsCorePrerequisites.h"
 #include "Utility/BsModule.h"
-#include "Managers/BsRenderAPIFactory.h"
+#include "RenderAPI/Managers/BsRenderAPIFactory.h"
 
 namespace bs
 {

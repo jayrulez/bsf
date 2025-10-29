@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsVulkanPrerequisites.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "RenderAPI/BsRenderTexture.h"
 
 namespace bs

@@ -16,7 +16,7 @@
 #include "BsGLRenderWindowManager.h"
 #include "GLSL/BsGLSLProgramPipelineManager.h"
 #include "BsGLVertexArrayObjectManager.h"
-#include "Managers/BsRenderStateManager.h"
+#include "RenderAPI/Managers/BsRenderStateManager.h"
 #include "RenderAPI/BsGpuParams.h"
 #include "BsGLGpuParamBlockBuffer.h"
 #include "CoreThread/BsCoreThread.h"

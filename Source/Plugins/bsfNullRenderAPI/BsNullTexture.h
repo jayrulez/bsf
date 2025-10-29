@@ -3,8 +3,8 @@
 #pragma once
 
 #include "BsNullPrerequisites.h"
-#include "Image/BsTexture.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/BsTexture.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 
 namespace bs
 {

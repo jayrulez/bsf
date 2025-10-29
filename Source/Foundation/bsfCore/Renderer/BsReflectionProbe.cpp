@@ -4,7 +4,7 @@
 #include "Private/RTTI/BsReflectionProbeRTTI.h"
 #include "RTTI/BsMathRTTI.h"
 #include "Scene/BsSceneObject.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Renderer/BsRenderer.h"
 #include "Utility/BsUUID.h"
 #include "Renderer/BsIBLUtility.h"

@@ -6,7 +6,7 @@
 #include "Linux/BsLinuxRenderWindow.h"
 #include "Linux/BsLinuxVideoModeInfo.h"
 #include "Math/BsMath.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "Managers/BsVulkanCommandBufferManager.h"
 #include "BsVulkanRenderAPI.h"
 #include "BsVulkanDevice.h"

@@ -5,7 +5,7 @@
 #include "BsD3D11RenderAPI.h"
 #include "BsD3D11Device.h"
 #include "BsD3D11GpuProgram.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Profiling/BsRenderStats.h"
 #include "Debug/BsDebug.h"
 

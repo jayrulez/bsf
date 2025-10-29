@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsGLPrerequisites.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "BsGLSupport.h"
 
 namespace bs { namespace ct

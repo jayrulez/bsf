@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsD3D11Prerequisites.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Image/BsPixelData.h"
 #include "RenderAPI/BsIndexBuffer.h"
 #include "RenderAPI/BsVertexData.h"

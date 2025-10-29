@@ -9,7 +9,7 @@
 #include "Managers/BsVulkanRenderWindowManager.h"
 #include "Managers/BsVulkanHardwareBufferManager.h"
 #include "Managers/BsVulkanRenderStateManager.h"
-#include "Managers/BsGpuProgramManager.h"
+#include "RenderAPI/Managers/BsGpuProgramManager.h"
 #include "Managers/BsVulkanQueryManager.h"
 #include "Managers/BsVulkanGLSLProgramFactory.h"
 #include "Managers/BsVulkanCommandBufferManager.h"

@@ -3,7 +3,7 @@
 #include "Renderer/BsRenderSettings.h"
 #include "Private/RTTI/BsRenderSettingsRTTI.h"
 #include "CoreThread/BsCoreObjectSync.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 
 namespace bs
 {

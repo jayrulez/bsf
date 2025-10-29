@@ -4,7 +4,7 @@
 #include "Image/BsSpriteTexture.h"
 #include "GUI/BsGUIElementStyle.h"
 #include "GUI/BsGUIDimensions.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "String/BsUnicode.h"
 
 namespace bs

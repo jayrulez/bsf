@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BsNullPrerequisites.h"
-#include "Managers/BsRenderWindowManager.h"
+#include "RenderAPI/Managers/BsRenderWindowManager.h"
 #include "RenderAPI/BsRenderTexture.h"
 
 namespace bs

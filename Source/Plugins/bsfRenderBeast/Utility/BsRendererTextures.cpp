@@ -5,7 +5,7 @@
 #include "Math/BsVector3.h"
 #include "Image/BsColor.h"
 #include "Math/BsMath.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Image/BsPixelData.h"
 #include "Renderer/BsIBLUtility.h"
 #include "Image/BsColorGradient.h"

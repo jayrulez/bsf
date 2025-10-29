@@ -4,7 +4,7 @@
 #include "GUI/BsGUILabel.h"
 #include "Image/BsSpriteTexture.h"
 #include "Text/BsFont.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Importer/BsImporter.h"
 #include "Resources/BsResources.h"
 #include "Resources/BsBuiltinResourcesHelper.h"

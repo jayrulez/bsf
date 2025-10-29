@@ -5,7 +5,7 @@
 #include "Image/BsColor.h"
 #include "Math/BsMath.h"
 #include "Error/BsException.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include <nvtt.h>
 
 namespace bs

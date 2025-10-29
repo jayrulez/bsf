@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "Private/RTTI/BsCharDescRTTI.h"
 #include "Text/BsFont.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 
 namespace bs
 {

@@ -7,7 +7,7 @@
 #include "Error/BsException.h"
 #include "Utility/BsBitwise.h"
 #include "CoreThread/BsCoreThread.h"
-#include "Managers/BsTextureManager.h"
+#include "RenderAPI/Managers/BsTextureManager.h"
 #include "BsGLRenderTexture.h"
 #include "BsGLTextureView.h"
 #include "Profiling/BsRenderStats.h"

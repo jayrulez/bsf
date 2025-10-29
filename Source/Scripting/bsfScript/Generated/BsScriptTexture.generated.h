@@ -7,7 +7,7 @@
 #include "../../../Foundation/bsfCore/Utility/BsCommonTypes.h"
 #include "Image/BsColor.h"
 #include "../../../Foundation/bsfCore/Image/BsPixelData.h"
-#include "../../../Foundation/bsfCore/Image/BsTexture.h"
+#include "../../../Foundation/bsfCore/RenderAPI/BsTexture.h"
 
 namespace bs { class TextureEx; }
 namespace bs { class Texture; }

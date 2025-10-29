@@ -16,7 +16,7 @@
 #include "BsScriptColorGradientHDR.generated.h"
 #include "BsScriptTAnimationCurve.generated.h"
 #include "Wrappers/BsScriptVector.h"
-#include "../../../Foundation/bsfCore/Image/BsTexture.h"
+#include "../../../Foundation/bsfCore/RenderAPI/BsTexture.h"
 #include "../Extensions/BsMaterialEx.h"
 #include "../../../Foundation/bsfCore/Image/BsSpriteTexture.h"
 

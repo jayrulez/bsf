@@ -6,7 +6,7 @@
 #include "Reflection/BsRTTIType.h"
 #include "Reflection/BsRTTIPlain.h"
 #include "RenderAPI/BsVertexBuffer.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "RenderAPI/BsVertexDataDesc.h"
 
 namespace bs

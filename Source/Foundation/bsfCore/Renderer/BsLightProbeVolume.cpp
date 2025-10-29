@@ -4,7 +4,7 @@
 #include "Private/RTTI/BsLightProbeVolumeRTTI.h"
 #include "Renderer/BsRenderer.h"
 #include "Renderer/BsLight.h"
-#include "Image/BsTexture.h"
+#include "RenderAPI/BsTexture.h"
 #include "Renderer/BsIBLUtility.h"
 #include "Scene/BsSceneObject.h"
 #include "CoreThread/BsCoreObjectSync.h"

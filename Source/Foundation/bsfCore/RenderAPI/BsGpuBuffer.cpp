@@ -3,7 +3,7 @@
 #include "RenderAPI/BsGpuBuffer.h"
 #include "Error/BsException.h"
 #include "RenderAPI/BsRenderAPI.h"
-#include "Managers/BsHardwareBufferManager.h"
+#include "RenderAPI/Managers/BsHardwareBufferManager.h"
 #include "Profiling/BsRenderStats.h"
 
 namespace bs
