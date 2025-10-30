@@ -47,6 +47,7 @@ set(BS_UTILITY_SRC_UTILITY
 	"bsfUtility/Utility/BsTime.cpp"
 	"bsfUtility/Utility/BsUtil.cpp"
 	"bsfUtility/Utility/BsCompression.cpp"
+	"bsfUtility/Utility/BsDeferredCallManager.cpp"
 	"bsfUtility/Utility/BsTriangulation.cpp"
 	"bsfUtility/Utility/BsUUID.cpp"
 	"bsfUtility/Utility/BsLookupTable.cpp"
@@ -91,6 +92,7 @@ set(BS_UTILITY_INC_UTILITY
 	"bsfUtility/Utility/BsMessageHandlerFwd.h"
 	"bsfUtility/Utility/BsModule.h"
 	"bsfUtility/Utility/BsPlatformUtility.h"
+	"bsfUtility/Utility/BsRectOffset.h"
 	"bsfUtility/Utility/BsServiceLocator.h"
 	"bsfUtility/Utility/BsTime.h"
 	"bsfUtility/Utility/BsTimer.h"
@@ -102,6 +104,7 @@ set(BS_UTILITY_INC_UTILITY
 	"bsfUtility/Utility/BsUUID.h"
 	"bsfUtility/Utility/BsOctree.h"
 	"bsfUtility/Utility/BsDataBlob.h"
+	"bsfUtility/Utility/BsDeferredCallManager.h"
 	"bsfUtility/Utility/BsLookupTable.h"
 	"bsfUtility/Utility/BsSmallVector.h"
 	"bsfUtility/Utility/BsDynArray.h"
@@ -282,7 +285,6 @@ set(BS_UTILITY_INC_REFLECTION
 
 set(BS_UTILITY_INC_WIN32
 	"bsfUtility/Private/Win32/BsWin32PlatformUtility.h"
-	"bsfUtility/Private/Win32/BsWin32Window.h"
 	"bsfUtility/Private/Win32/BsWindows.h"
 )
 
@@ -290,7 +292,6 @@ set(BS_UTILITY_SRC_WIN32
 	"bsfUtility/Private/Win32/BsWin32FileSystem.cpp"
 	"bsfUtility/Private/Win32/BsWin32CrashHandler.cpp"
 	"bsfUtility/Private/Win32/BsWin32PlatformUtility.cpp"
-	"bsfUtility/Private/Win32/BsWin32Window.cpp"
 	"bsfUtility/Private/Win32/BsWin32Resource.rc"
 )
 

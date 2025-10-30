@@ -1,0 +1,120 @@
+set(BS_RENDERAPI_INC_RENDERAPI
+	"bsfRenderAPI/RenderAPI/BsVideoModeInfo.h"
+	"bsfRenderAPI/RenderAPI/BsVertexDeclaration.h"
+	"bsfRenderAPI/RenderAPI/BsVertexData.h"
+	"bsfRenderAPI/RenderAPI/BsVertexBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsTimerQuery.h"
+	"bsfRenderAPI/RenderAPI/BsTexture.h"
+	"bsfRenderAPI/RenderAPI/BsTextureView.h"
+	"bsfRenderAPI/RenderAPI/BsSubMesh.h"
+	"bsfRenderAPI/RenderAPI/BsSamplerState.h"
+	"bsfRenderAPI/RenderAPI/BsRenderWindow.h"
+	"bsfRenderAPI/RenderAPI/BsRenderTexture.h"
+	"bsfRenderAPI/RenderAPI/BsRenderTarget.h"
+	"bsfRenderAPI/RenderAPI/BsRasterizerState.h"
+	"bsfRenderAPI/RenderAPI/BsOcclusionQuery.h"
+	"bsfRenderAPI/RenderAPI/BsIndexBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsHardwareBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsGpuProgram.h"
+	"bsfRenderAPI/RenderAPI/BsGpuParams.h"
+	"bsfRenderAPI/RenderAPI/BsGpuParamDesc.h"
+	"bsfRenderAPI/RenderAPI/BsGpuParamBlockBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsGpuParam.h"
+	"bsfRenderAPI/RenderAPI/BsGpuBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsEventQuery.h"
+	"bsfRenderAPI/RenderAPI/BsDepthStencilState.h"
+	"bsfRenderAPI/RenderAPI/BsBlendState.h"
+	"bsfRenderAPI/RenderAPI/BsRenderAPI.h"
+	"bsfRenderAPI/RenderAPI/BsRenderAPICapabilities.h"
+	"bsfRenderAPI/RenderAPI/BsViewport.h"
+	"bsfRenderAPI/RenderAPI/BsCommandBuffer.h"
+	"bsfRenderAPI/RenderAPI/BsGpuPipelineState.h"
+	"bsfRenderAPI/RenderAPI/BsGpuPipelineParamInfo.h"
+	"bsfRenderAPI/RenderAPI/BsVertexDataDesc.h"
+)
+
+set(BS_RENDERAPI_INC_RENDERAPI_MANAGERS
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderWindowManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderStateManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsQueryManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsHardwareBufferManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsGpuProgramManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderAPIManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderAPIFactory.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsCommandBufferManager.h"
+	"bsfRenderAPI/RenderAPI/Managers/BsTextureManager.h"
+)
+
+set(BS_RENDERAPI_SRC_RENDERAPI
+	"bsfRenderAPI/RenderAPI/BsBlendState.cpp"
+	"bsfRenderAPI/RenderAPI/BsDepthStencilState.cpp"
+	"bsfRenderAPI/RenderAPI/BsEventQuery.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuBuffer.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuParam.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuParamBlockBuffer.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuParams.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuProgram.cpp"
+	"bsfRenderAPI/RenderAPI/BsIndexBuffer.cpp"
+	"bsfRenderAPI/RenderAPI/BsOcclusionQuery.cpp"
+	"bsfRenderAPI/RenderAPI/BsRasterizerState.cpp"
+	"bsfRenderAPI/RenderAPI/BsRenderTarget.cpp"
+	"bsfRenderAPI/RenderAPI/BsTexture.cpp"
+	"bsfRenderAPI/RenderAPI/BsRenderTexture.cpp"
+	"bsfRenderAPI/RenderAPI/BsRenderWindow.cpp"
+	"bsfRenderAPI/RenderAPI/BsSamplerState.cpp"
+	"bsfRenderAPI/RenderAPI/BsTextureView.cpp"
+	"bsfRenderAPI/RenderAPI/BsTimerQuery.cpp"
+	"bsfRenderAPI/RenderAPI/BsVertexBuffer.cpp"
+	"bsfRenderAPI/RenderAPI/BsVertexData.cpp"
+	"bsfRenderAPI/RenderAPI/BsVertexDeclaration.cpp"
+	"bsfRenderAPI/RenderAPI/BsVideoModeInfo.cpp"
+	"bsfRenderAPI/RenderAPI/BsRenderAPI.cpp"
+	"bsfRenderAPI/RenderAPI/BsRenderAPICapabilities.cpp"
+	"bsfRenderAPI/RenderAPI/BsViewport.cpp"
+	"bsfRenderAPI/RenderAPI/BsCommandBuffer.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuPipelineState.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuPipelineParamInfo.cpp"
+	"bsfRenderAPI/RenderAPI/BsVertexDataDesc.cpp"
+	"bsfRenderAPI/RenderAPI/BsGpuParamDesc.cpp"
+)
+
+set(BS_RENDERAPI_SRC_RENDERAPI_MANAGERS
+	"bsfRenderAPI/RenderAPI/Managers/BsGpuProgramManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsHardwareBufferManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsQueryManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderStateManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderWindowManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsRenderAPIManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsCommandBufferManager.cpp"
+	"bsfRenderAPI/RenderAPI/Managers/BsTextureManager.cpp"
+)
+
+set(BS_RENDERAPI_INC_RTTI
+	"bsfRenderAPI/Private/RTTI/BsBlendStateRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsDepthStencilStateRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsRasterizerStateRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsSamplerStateRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsGpuProgramRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsTextureRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsVertexDataDescRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsVertexDeclarationRTTI.h"
+	"bsfRenderAPI/Private/RTTI/BsViewportRTTI.h"
+)
+
+set(BS_RENDERAPI_INC_NOFILTER
+	"bsfRenderAPI/BsRenderAPIPrerequisites.h"
+)
+
+source_group("RenderAPI" FILES ${BS_RENDERAPI_INC_RENDERAPI} ${BS_RENDERAPI_SRC_RENDERAPI})
+source_group("Managers" FILES ${BS_RENDERAPI_INC_RENDERAPI_MANAGERS} ${BS_RENDERAPI_SRC_RENDERAPI_MANAGERS})
+source_group("RTTI" FILES ${BS_RENDERAPI_INC_RTTI})
+source_group("" FILES ${BS_RENDERAPI_INC_NOFILTER})
+
+set(BS_RENDERAPI_SRC
+	${BS_RENDERAPI_INC_RENDERAPI}
+	${BS_RENDERAPI_SRC_RENDERAPI}
+	${BS_RENDERAPI_INC_RENDERAPI_MANAGERS}
+	${BS_RENDERAPI_SRC_RENDERAPI_MANAGERS}
+	${BS_RENDERAPI_INC_RTTI}
+	${BS_RENDERAPI_INC_NOFILTER}
+)

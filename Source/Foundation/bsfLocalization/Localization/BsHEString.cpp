@@ -1,0 +1,30 @@
+//************************************ bs::framework - Copyright 2018 Marko Pintera **************************************//
+//*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
+#include "BsLocalizationPrerequisites.h"
+#include "Localization/BsHEString.h"
+
+namespace bs
+{
+	HEString::HEString(const String& identifier)
+		:mInternal(identifier, ENGINE_STRING_TABLE_ID)
+	{
+		
+	}
+
+	HEString::HEString(const String& identifier, const String& defaultString)
+		: mInternal(identifier, defaultString, ENGINE_STRING_TABLE_ID)
+	{
+		
+	}
+
+	HEString::HEString()
+		: mInternal(ENGINE_STRING_TABLE_ID)
+	{
+		
+	}
+
+	HEString::operator HString() const
+	{
+		return mInternal;
+	}
+}

@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #pragma once
 
-#include "BsCorePrerequisites.h"
+#include "BsImporterPrerequisites.h"
 #include "Utility/BsModule.h"
 #include "Importer/BsSpecificImporter.h"
 #include "Threading/BsAsyncOp.h"
@@ -39,7 +39,7 @@ namespace bs
 	};
 
 	/** Module responsible for importing various asset types and converting them to types usable by the engine. */
-	class BS_CORE_EXPORT BS_SCRIPT_EXPORT(m:Importer,api:bsf) Importer : public Module<Importer>
+	class BS_IMPORTER_EXPORT BS_SCRIPT_EXPORT(m:Importer,api:bsf) Importer : public Module<Importer>
 	{
 	public:
 		Importer();
@@ -223,7 +223,7 @@ namespace bs
 	};
 
 	/** Provides easier access to Importer. */
-	BS_CORE_EXPORT Importer& gImporter();
+	BS_IMPORTER_EXPORT Importer& gImporter();
 
 	/** @} */
 }

@@ -19,13 +19,13 @@ set(BSF_PLUGIN_IMGUI OFF CACHE BOOL "Add support for Imgui library through a plu
 
 if(WIN32)
 	set(RENDER_API_MODULE "DirectX 11" CACHE STRING "Render API to use.")
-	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "DirectX 11" "OpenGL" "Vulkan" "Null")
+	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "DirectX 11" "Vulkan" "Null")
 elseif(APPLE)
-	set(RENDER_API_MODULE "OpenGL" CACHE STRING "Render API to use.")
-	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "OpenGL" "Vulkan" "Null")
+	set(RENDER_API_MODULE "Null" CACHE STRING "Render API to use.")
+	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "Vulkan" "Null")
 else()
-	set(RENDER_API_MODULE "OpenGL" CACHE STRING "Render API to use.")
-	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "OpenGL" "Vulkan" "Null")
+	set(RENDER_API_MODULE "Vulkan" CACHE STRING "Render API to use.")
+	set_property(CACHE RENDER_API_MODULE PROPERTY STRINGS "Vulkan" "Null")
 endif()
 
 set(RENDERER_MODULE "RenderBeast" CACHE STRING "Renderer backend to use.")
@@ -88,8 +88,6 @@ if(RENDER_API_MODULE MATCHES "DirectX 11")
 	set(RENDER_API_MODULE_LIB bsfD3D11RenderAPI)
 elseif(RENDER_API_MODULE MATCHES "Vulkan")
 	set(RENDER_API_MODULE_LIB bsfVulkanRenderAPI)
-elseif(RENDER_API_MODULE MATCHES "OpenGL")
-	set(RENDER_API_MODULE_LIB bsfGLRenderAPI)
 else()
 	set(RENDER_API_MODULE_LIB bsfNullRenderAPI)
 endif()
@@ -114,12 +112,6 @@ else()
 	set(RENDERER_MODULE_LIB bsfNullRenderer)
 endif()
 
-if((SCRIPT_API AND (NOT SCRIPT_API MATCHES "None")) OR BS_IS_BANSHEE3D)
-	set(BS_SCRIPTING_ENABLED 1)
-else()
-	set(BS_SCRIPTING_ENABLED 0)
-endif()
-
 ## Generate config files
 configure_file("${BSF_SOURCE_DIR}/CMake/BsEngineConfig.h.in" "${PROJECT_BINARY_DIR}/Generated/bsfCore/BsEngineConfig.h")
 configure_file("${BSF_SOURCE_DIR}/CMake/BsFrameworkConfig.h.in" "${PROJECT_BINARY_DIR}/Generated/bsfUtility/BsFrameworkConfig.h")
@@ -136,7 +128,6 @@ add_subdirectory(Foundation)
 ### If using MSVC include all plugins in the solution (which ones actually build is controlled by dependencies)
 if(INCLUDE_ALL_IN_WORKFLOW AND MSVC)
 	add_subdirectory(Plugins/bsfD3D11RenderAPI)
-	add_subdirectory(Plugins/bsfGLRenderAPI)
 	add_subdirectory(Plugins/bsfVulkanRenderAPI)
 	add_subdirectory(Plugins/bsfNullRenderAPI)
 	add_subdirectory(Plugins/bsfFMOD)
@@ -147,29 +138,22 @@ if(INCLUDE_ALL_IN_WORKFLOW AND MSVC)
 	add_subdirectory(Plugins/bsfRenderBeast)
 	add_subdirectory(Plugins/bsfNullRenderer)
 	
-	## Scripting
-	add_subdirectory(Scripting/bsfMono)
-	add_subdirectory(Scripting/bsfScript)
-	add_subdirectory(Scripting/bsfSharp)
 else() # Otherwise include only chosen ones
 	if(BUILD_ALL_RENDER_API)
 		if(WIN32)
 			add_subdirectory(Plugins/bsfD3D11RenderAPI)
 		endif()
-		
+
 		if(NOT APPLE)
 			add_subdirectory(Plugins/bsfVulkanRenderAPI)
 		endif()
-		
-		add_subdirectory(Plugins/bsfGLRenderAPI)
+
 		add_subdirectory(Plugins/bsfNullRenderAPI)
 	else()
 		if(RENDER_API_MODULE MATCHES "DirectX 11")
 			add_subdirectory(Plugins/bsfD3D11RenderAPI)
 		elseif(RENDER_API_MODULE MATCHES "Vulkan")
 			add_subdirectory(Plugins/bsfVulkanRenderAPI)
-		elseif(RENDER_API_MODULE MATCHES "OpenGL")
-			add_subdirectory(Plugins/bsfGLRenderAPI)
 		else()
 			add_subdirectory(Plugins/bsfNullRenderAPI)
 		endif()
@@ -193,15 +177,6 @@ else() # Otherwise include only chosen ones
 		add_subdirectory(Plugins/bsfRenderBeast)
 	else()
 		add_subdirectory(Plugins/bsfNullRenderer)
-	endif()
-	
-	if((SCRIPT_API AND (NOT SCRIPT_API MATCHES "None")) OR BS_IS_BANSHEE3D)
-		add_subdirectory(Scripting/bsfScript)
-	endif()
-	
-	if((SCRIPT_API AND SCRIPT_API MATCHES "C#") OR BS_IS_BANSHEE3D)
-		add_subdirectory(Scripting/bsfMono)
-		add_subdirectory(Scripting/bsfSharp)
 	endif()
 endif()
 
@@ -247,11 +222,11 @@ endif()
 
 ## Builtin resource preprocessing
 add_executable(bsfImportTool
-	Foundation/bsfCore/Engine/BsBuiltinResourcesImporter.cpp)
+	Foundation/bsfRuntime/Engine/BsBuiltinResourcesImporter.cpp)
 add_common_flags(bsfImportTool)
 target_compile_definitions(bsfImportTool PUBLIC -DBS_IS_ASSET_TOOL)
 
-target_link_libraries(bsfImportTool bsfCore)
+target_link_libraries(bsfImportTool bsfRuntime)
 	
 add_engine_dependencies(bsfImportTool)
 add_importer_dependencies(bsfImportTool)
@@ -278,11 +253,6 @@ check_and_update_builtin_assets(bsfCompiled ${BSF_SOURCE_DIR}/../Data Data ${COM
 set(DOC_IMAGES_VERSION_FILE ${BSF_SOURCE_DIR}/../Documentation/.reqversion)
 file (STRINGS ${DOC_IMAGES_VERSION_FILE} DOC_IMAGES_VERSION)
 check_and_update_builtin_assets(bsfDocImages ${BSF_SOURCE_DIR}/../Documentation Documentation ${DOC_IMAGES_VERSION} NO)
-
-## Script binding generation
-if(((SCRIPT_API AND (NOT SCRIPT_API MATCHES "None")) OR BS_IS_BANSHEE3D) AND SCRIPT_BINDING_GENERATION)
-	include(${BSF_SOURCE_DIR}/CMake/GenerateScriptBindings.cmake)
-endif()
 
 if(NOT BS_IS_BANSHEE3D)
 	set(DATA_DST_DIR bin)

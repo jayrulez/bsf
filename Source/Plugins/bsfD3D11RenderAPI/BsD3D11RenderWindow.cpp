@@ -209,7 +209,7 @@ namespace bs
 		}
 
 		createSizeDependedD3DResources();
-		mDXGIFactory->MakeWindowAssociation(mWindow->getHWnd(), NULL);
+		mDXGIFactory->MakeWindowAssociation(static_cast<HWND>(mWindow->getNativeHandle()), NULL);
 
 		{
 			ScopedSpinLock lock(mLock);
@@ -287,7 +287,8 @@ namespace bs
 		THROW_IF_NOT_CORE_THREAD;
 
 		RenderWindowProperties& props = mProperties;
-		mWindow->setActive(state);
+		// setActive is a Win32-specific method for controlling window activation state
+		static_cast<Win32Window*>(mWindow)->setActive(state);
 
 		if (mSwapChain)
 		{
@@ -305,7 +306,10 @@ namespace bs
 		THROW_IF_NOT_CORE_THREAD;
 
 		mShowOnSwap = false;
-		mWindow->setHidden(hidden);
+		if (hidden)
+			mWindow->hide();
+		else
+			mWindow->show();
 
 		RenderWindow::setHidden(hidden);
 	}
@@ -477,7 +481,7 @@ namespace bs
 
 	HWND D3D11RenderWindow::_getWindowHandle() const
 	{
-		return mWindow->getHWnd();
+		return static_cast<HWND>(mWindow->getNativeHandle());
 	}
 
 	void D3D11RenderWindow::getCustomAttribute(const String& name, void* pData) const
@@ -485,7 +489,7 @@ namespace bs
 		if(name == "WINDOW")
 		{
 			UINT64 *pWnd = (UINT64*)pData;
-			*pWnd = (UINT64)mWindow->getHWnd();
+			*pWnd = reinterpret_cast<UINT64>(mWindow->getNativeHandle());
 			return;
 		}
 

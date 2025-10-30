@@ -17,11 +17,7 @@ namespace bs
 			if (FileSystem::exists(FRAMEWORK_DATA_PATH))
 				path = FileSystem::getWorkingDirectoryPath() + FRAMEWORK_DATA_PATH;
 			else
-#if BS_IS_BANSHEE3D
-				path = Path(RAW_APP_ROOT) + Path("Source/bsf") + FRAMEWORK_DATA_PATH;
-#else
 				path = Path(RAW_APP_ROOT) + FRAMEWORK_DATA_PATH;
-#endif
 
 			initialized = true;
 		}
@@ -54,53 +50,6 @@ namespace bs
 
 		return path;
 	}
-
-#if BS_INCLUDE_B3D_PATHS
-	const Path& Paths::getEditorDataPath()
-	{
-		static bool initialized = false;
-		static Path path;
-
-		if(!initialized)
-		{
-#ifdef BS_IS_ASSET_TOOL
-			// Asset tool always runs relative to the 'bsf' directory
-			Path editorDataPath = Path("../../") + FRAMEWORK_DATA_PATH;
-
-			if (FileSystem::exists(editorDataPath))
-				path = FileSystem::getWorkingDirectoryPath() + editorDataPath;
-#else
-			// Otherwise, look for the folder in the direct descendant of the working directory
-			if (FileSystem::exists(EDITOR_DATA_PATH))
-				path = FileSystem::getWorkingDirectoryPath() + EDITOR_DATA_PATH;
-#endif
-			// Then check the source distribution itself, in case we're running directly from the build directory
-			else
-			{
-				path = Path(RAW_APP_ROOT) + FRAMEWORK_DATA_PATH;
-
-				if (!FileSystem::exists(path))
-					BS_LOG(Error, FileSystem, "Cannot find builtin assets for the editor at path '{0}'.", path);
-			}
-
-			initialized = true;
-		}
-
-		return path;
-	}
-
-	const Path& Paths::getGameSettingsPath()
-	{
-		static Path path = findPath(GAME_SETTINGS_NAME);
-		return path;
-	}
-
-	const Path& Paths::getGameResourcesPath()
-	{
-		static Path path = findPath(GAME_RESOURCES_FOLDER_NAME);
-		return path;
-	}
-#endif
 
 	Path Paths::findPath(const Path& path)
 	{

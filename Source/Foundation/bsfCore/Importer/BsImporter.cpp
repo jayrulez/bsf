@@ -357,7 +357,7 @@ namespace bs
 		return nullptr;
 	}
 
-	BS_CORE_EXPORT Importer& gImporter()
+	BS_IMPORTER_EXPORT Importer& gImporter()
 	{
 		return Importer::instance();
 	}

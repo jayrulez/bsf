@@ -2,7 +2,7 @@
 //*********** Licensed under the MIT license. See LICENSE.md for full terms. This notice is not to be removed. ***********//
 #pragma once
 
-#include "BsCorePrerequisites.h"
+#include "BsImporterPrerequisites.h"
 
 namespace bs
 {
@@ -36,7 +36,7 @@ namespace bs
 	 * On initialization this class must register itself with the Importer module, which delegates asset import calls to a
 	 * specific importer.
 	 */
-	class BS_CORE_EXPORT SpecificImporter
+	class BS_IMPORTER_EXPORT SpecificImporter
 	{
 	public:
 		SpecificImporter() {}

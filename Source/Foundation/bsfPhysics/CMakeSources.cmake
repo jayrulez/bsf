@@ -1,0 +1,122 @@
+set(BS_PHYSICS_INC_PHYSICS
+	"bsfPhysics/Physics/BsPhysicsManager.h"
+	"bsfPhysics/Physics/BsPhysics.h"
+	"bsfPhysics/Physics/BsPhysicsMaterial.h"
+	"bsfPhysics/Physics/BsRigidbody.h"
+	"bsfPhysics/Physics/BsBoxCollider.h"
+	"bsfPhysics/Physics/BsSphereCollider.h"
+	"bsfPhysics/Physics/BsCapsuleCollider.h"
+	"bsfPhysics/Physics/BsPlaneCollider.h"
+	"bsfPhysics/Physics/BsFCollider.h"
+	"bsfPhysics/Physics/BsPhysicsMesh.h"
+	"bsfPhysics/Physics/BsMeshCollider.h"
+	"bsfPhysics/Physics/BsFJoint.h"
+	"bsfPhysics/Physics/BsJoint.h"
+	"bsfPhysics/Physics/BsFixedJoint.h"
+	"bsfPhysics/Physics/BsDistanceJoint.h"
+	"bsfPhysics/Physics/BsHingeJoint.h"
+	"bsfPhysics/Physics/BsSliderJoint.h"
+	"bsfPhysics/Physics/BsSphericalJoint.h"
+	"bsfPhysics/Physics/BsD6Joint.h"
+	"bsfPhysics/Physics/BsCharacterController.h"
+	"bsfPhysics/Physics/BsCollider.h"
+	"bsfPhysics/Physics/BsPhysicsCommon.h"
+)
+
+set(BS_PHYSICS_SRC_PHYSICS
+	"bsfPhysics/Physics/BsPhysicsManager.cpp"
+	"bsfPhysics/Physics/BsPhysics.cpp"
+	"bsfPhysics/Physics/BsPhysicsMaterial.cpp"
+	"bsfPhysics/Physics/BsCollider.cpp"
+	"bsfPhysics/Physics/BsRigidbody.cpp"
+	"bsfPhysics/Physics/BsBoxCollider.cpp"
+	"bsfPhysics/Physics/BsSphereCollider.cpp"
+	"bsfPhysics/Physics/BsPlaneCollider.cpp"
+	"bsfPhysics/Physics/BsCapsuleCollider.cpp"
+	"bsfPhysics/Physics/BsFCollider.cpp"
+	"bsfPhysics/Physics/BsPhysicsMesh.cpp"
+	"bsfPhysics/Physics/BsMeshCollider.cpp"
+	"bsfPhysics/Physics/BsFJoint.cpp"
+	"bsfPhysics/Physics/BsJoint.cpp"
+	"bsfPhysics/Physics/BsFixedJoint.cpp"
+	"bsfPhysics/Physics/BsDistanceJoint.cpp"
+	"bsfPhysics/Physics/BsHingeJoint.cpp"
+	"bsfPhysics/Physics/BsSliderJoint.cpp"
+	"bsfPhysics/Physics/BsSphericalJoint.cpp"
+	"bsfPhysics/Physics/BsD6Joint.cpp"
+	"bsfPhysics/Physics/BsCharacterController.cpp"
+)
+
+set(BS_PHYSICS_INC_COMPONENTS
+	"bsfPhysics/Components/BsCBoxCollider.h"
+	"bsfPhysics/Components/BsCCapsuleCollider.h"
+	"bsfPhysics/Components/BsCCharacterController.h"
+	"bsfPhysics/Components/BsCCollider.h"
+	"bsfPhysics/Components/BsCD6Joint.h"
+	"bsfPhysics/Components/BsCDistanceJoint.h"
+	"bsfPhysics/Components/BsCFixedJoint.h"
+	"bsfPhysics/Components/BsCHingeJoint.h"
+	"bsfPhysics/Components/BsCJoint.h"
+	"bsfPhysics/Components/BsCMeshCollider.h"
+	"bsfPhysics/Components/BsCPlaneCollider.h"
+	"bsfPhysics/Components/BsCRigidbody.h"
+	"bsfPhysics/Components/BsCSliderJoint.h"
+	"bsfPhysics/Components/BsCSphereCollider.h"
+	"bsfPhysics/Components/BsCSphericalJoint.h"
+)
+
+set(BS_PHYSICS_SRC_COMPONENTS
+	"bsfPhysics/Components/BsCBoxCollider.cpp"
+	"bsfPhysics/Components/BsCCapsuleCollider.cpp"
+	"bsfPhysics/Components/BsCCharacterController.cpp"
+	"bsfPhysics/Components/BsCCollider.cpp"
+	"bsfPhysics/Components/BsCD6Joint.cpp"
+	"bsfPhysics/Components/BsCDistanceJoint.cpp"
+	"bsfPhysics/Components/BsCFixedJoint.cpp"
+	"bsfPhysics/Components/BsCHingeJoint.cpp"
+	"bsfPhysics/Components/BsCJoint.cpp"
+	"bsfPhysics/Components/BsCMeshCollider.cpp"
+	"bsfPhysics/Components/BsCPlaneCollider.cpp"
+	"bsfPhysics/Components/BsCRigidbody.cpp"
+	"bsfPhysics/Components/BsCSliderJoint.cpp"
+	"bsfPhysics/Components/BsCSphereCollider.cpp"
+	"bsfPhysics/Components/BsCSphericalJoint.cpp"
+)
+
+set(BS_PHYSICS_INC_RTTI
+	"bsfPhysics/Private/RTTI/BsPhysicsMaterialRTTI.h"
+	"bsfPhysics/Private/RTTI/BsPhysicsMeshRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCBoxColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCRigidbodyRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCSphereColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCPlaneColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCCapsuleColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCMeshColliderRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCFixedJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCHingeJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCDistanceJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCSliderJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCSphericalJointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCD6JointRTTI.h"
+	"bsfPhysics/Private/RTTI/BsCCharacterControllerRTTI.h"
+)
+
+set(BS_PHYSICS_INC_NOFILTER
+	"bsfPhysics/BsPhysicsPrerequisites.h"
+)
+
+source_group("Physics" FILES ${BS_PHYSICS_INC_PHYSICS} ${BS_PHYSICS_SRC_PHYSICS})
+source_group("Components" FILES ${BS_PHYSICS_INC_COMPONENTS} ${BS_PHYSICS_SRC_COMPONENTS})
+source_group("RTTI" FILES ${BS_PHYSICS_INC_RTTI})
+source_group("" FILES ${BS_PHYSICS_INC_NOFILTER})
+
+set(BS_PHYSICS_SRC
+	${BS_PHYSICS_INC_PHYSICS}
+	${BS_PHYSICS_SRC_PHYSICS}
+	${BS_PHYSICS_INC_COMPONENTS}
+	${BS_PHYSICS_SRC_COMPONENTS}
+	${BS_PHYSICS_INC_RTTI}
+	${BS_PHYSICS_INC_NOFILTER}
+)

@@ -200,7 +200,6 @@ namespace bs
 	typedef GameObjectHandle<CProfilerOverlay> HProfilerOverlay;
 
 	typedef ResourceHandle<PlainText> HPlainText;
-	typedef ResourceHandle<ScriptCode> HScriptCode;
 	typedef ResourceHandle<GUISkin> HGUISkin;
 
 	/**	RTTI types. */

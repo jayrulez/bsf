@@ -1,0 +1,156 @@
+set(BS_GUI_INC_GUI
+	"bsfGUI/GUI/BsCGUIWidget.h"
+	"bsfGUI/GUI/BsDragAndDropManager.h"
+	"bsfGUI/GUI/BsDropDownAreaPlacement.h"
+	"bsfGUI/GUI/BsGUIButton.h"
+	"bsfGUI/GUI/BsGUIButtonBase.h"
+	"bsfGUI/GUI/BsGUICanvas.h"
+	"bsfGUI/GUI/BsGUICommandEvent.h"
+	"bsfGUI/GUI/BsGUIContent.h"
+	"bsfGUI/GUI/BsGUIContextMenu.h"
+	"bsfGUI/GUI/BsGUIDimensions.h"
+	"bsfGUI/GUI/BsGUIDropDownBoxManager.h"
+	"bsfGUI/GUI/BsGUIDropDownContent.h"
+	"bsfGUI/GUI/BsGUIDropDownHitBox.h"
+	"bsfGUI/GUI/BsGUIDropDownMenu.h"
+	"bsfGUI/GUI/BsGUIElement.h"
+	"bsfGUI/GUI/BsGUIElementBase.h"
+	"bsfGUI/GUI/BsGUIElementContainer.h"
+	"bsfGUI/GUI/BsGUIElementStyle.h"
+	"bsfGUI/GUI/BsGUIHelper.h"
+	"bsfGUI/GUI/BsGUIInputBox.h"
+	"bsfGUI/GUI/BsGUIInputCaret.h"
+	"bsfGUI/GUI/BsGUIInputSelection.h"
+	"bsfGUI/GUI/BsGUIInputTool.h"
+	"bsfGUI/GUI/BsGUILabel.h"
+	"bsfGUI/GUI/BsGUILayout.h"
+	"bsfGUI/GUI/BsGUILayoutData.h"
+	"bsfGUI/GUI/BsGUILayoutUtility.h"
+	"bsfGUI/GUI/BsGUILayoutX.h"
+	"bsfGUI/GUI/BsGUILayoutY.h"
+	"bsfGUI/GUI/BsGUIListBox.h"
+	"bsfGUI/GUI/BsGUIManager.h"
+	"bsfGUI/GUI/BsGUIMenu.h"
+	"bsfGUI/GUI/BsGUIMouseEvent.h"
+	"bsfGUI/GUI/BsGUINavGroup.h"
+	"bsfGUI/GUI/BsGUIOptions.h"
+	"bsfGUI/GUI/BsGUIPanel.h"
+	"bsfGUI/GUI/BsGUIProgressBar.h"
+	"bsfGUI/GUI/BsGUIRenderTexture.h"
+	"bsfGUI/GUI/BsGUIScrollArea.h"
+	"bsfGUI/GUI/BsGUIScrollBar.h"
+	"bsfGUI/GUI/BsGUIScrollBarHorz.h"
+	"bsfGUI/GUI/BsGUIScrollBarVert.h"
+	"bsfGUI/GUI/BsGUISkin.h"
+	"bsfGUI/GUI/BsGUISlider.h"
+	"bsfGUI/GUI/BsGUISliderHandle.h"
+	"bsfGUI/GUI/BsGUISpace.h"
+	"bsfGUI/GUI/BsGUITextInputEvent.h"
+	"bsfGUI/GUI/BsGUITexture.h"
+	"bsfGUI/GUI/BsGUIToggle.h"
+	"bsfGUI/GUI/BsGUIToggleGroup.h"
+	"bsfGUI/GUI/BsGUITooltip.h"
+	"bsfGUI/GUI/BsGUITooltipManager.h"
+	"bsfGUI/GUI/BsGUIViewport.h"
+	"bsfGUI/GUI/BsGUIVirtualButtonEvent.h"
+	"bsfGUI/GUI/BsGUIWidget.h"
+	"bsfGUI/GUI/BsProfilerOverlay.h"
+	"bsfGUI/GUI/BsShortcutKey.h"
+	"bsfGUI/GUI/BsShortcutManager.h"
+)
+
+set(BS_GUI_SRC_GUI
+	"bsfGUI/GUI/BsCGUIWidget.cpp"
+	"bsfGUI/GUI/BsDragAndDropManager.cpp"
+	"bsfGUI/GUI/BsDropDownAreaPlacement.cpp"
+	"bsfGUI/GUI/BsGUIButton.cpp"
+	"bsfGUI/GUI/BsGUIButtonBase.cpp"
+	"bsfGUI/GUI/BsGUICanvas.cpp"
+	"bsfGUI/GUI/BsGUIContent.cpp"
+	"bsfGUI/GUI/BsGUIContextMenu.cpp"
+	"bsfGUI/GUI/BsGUIDimensions.cpp"
+	"bsfGUI/GUI/BsGUIDropDownBoxManager.cpp"
+	"bsfGUI/GUI/BsGUIDropDownContent.cpp"
+	"bsfGUI/GUI/BsGUIDropDownHitBox.cpp"
+	"bsfGUI/GUI/BsGUIDropDownMenu.cpp"
+	"bsfGUI/GUI/BsGUIElement.cpp"
+	"bsfGUI/GUI/BsGUIElementBase.cpp"
+	"bsfGUI/GUI/BsGUIElementContainer.cpp"
+	"bsfGUI/GUI/BsGUIElementStyle.cpp"
+	"bsfGUI/GUI/BsGUIHelper.cpp"
+	"bsfGUI/GUI/BsGUIInputBox.cpp"
+	"bsfGUI/GUI/BsGUIInputCaret.cpp"
+	"bsfGUI/GUI/BsGUIInputSelection.cpp"
+	"bsfGUI/GUI/BsGUIInputTool.cpp"
+	"bsfGUI/GUI/BsGUILabel.cpp"
+	"bsfGUI/GUI/BsGUILayout.cpp"
+	"bsfGUI/GUI/BsGUILayoutUtility.cpp"
+	"bsfGUI/GUI/BsGUILayoutX.cpp"
+	"bsfGUI/GUI/BsGUILayoutY.cpp"
+	"bsfGUI/GUI/BsGUIListBox.cpp"
+	"bsfGUI/GUI/BsGUIManager.cpp"
+	"bsfGUI/GUI/BsGUIMenu.cpp"
+	"bsfGUI/GUI/BsGUIMouseEvent.cpp"
+	"bsfGUI/GUI/BsGUINavGroup.cpp"
+	"bsfGUI/GUI/BsGUIOptions.cpp"
+	"bsfGUI/GUI/BsGUIPanel.cpp"
+	"bsfGUI/GUI/BsGUIProgressBar.cpp"
+	"bsfGUI/GUI/BsGUIRenderTexture.cpp"
+	"bsfGUI/GUI/BsGUIScrollArea.cpp"
+	"bsfGUI/GUI/BsGUIScrollBar.cpp"
+	"bsfGUI/GUI/BsGUIScrollBarHorz.cpp"
+	"bsfGUI/GUI/BsGUIScrollBarVert.cpp"
+	"bsfGUI/GUI/BsGUISkin.cpp"
+	"bsfGUI/GUI/BsGUISlider.cpp"
+	"bsfGUI/GUI/BsGUISliderHandle.cpp"
+	"bsfGUI/GUI/BsGUISpace.cpp"
+	"bsfGUI/GUI/BsGUITextInputEvent.cpp"
+	"bsfGUI/GUI/BsGUITexture.cpp"
+	"bsfGUI/GUI/BsGUIToggle.cpp"
+	"bsfGUI/GUI/BsGUIToggleGroup.cpp"
+	"bsfGUI/GUI/BsGUITooltip.cpp"
+	"bsfGUI/GUI/BsGUITooltipManager.cpp"
+	"bsfGUI/GUI/BsGUIViewport.cpp"
+	"bsfGUI/GUI/BsGUIWidget.cpp"
+	"bsfGUI/GUI/BsProfilerOverlay.cpp"
+	"bsfGUI/GUI/BsShortcutKey.cpp"
+	"bsfGUI/GUI/BsShortcutManager.cpp"
+)
+
+set(BS_GUI_INC_UTILITY
+	"bsfGUI/Utility/BsGUIEnums.h"
+	"bsfGUI/Utility/BsGUIBuiltinResources.h"
+)
+
+set(BS_GUI_SRC_UTILITY
+	"bsfGUI/Utility/BsGUIBuiltinResources.cpp"
+)
+
+set(BS_GUI_SRC_RTTI
+	"bsfGUI/Private/RTTI/BsGUISkinRTTI.cpp"
+)
+
+set(BS_GUI_INC_RTTI
+	"bsfGUI/Private/RTTI/BsCGUIWidgetRTTI.h"
+	"bsfGUI/Private/RTTI/BsGUIElementStyleRTTI.h"
+	"bsfGUI/Private/RTTI/BsGUISkinRTTI.h"
+)
+
+set(BS_GUI_INC_NOFILTER
+	"bsfGUI/BsGUIPrerequisites.h"
+)
+
+source_group("GUI" FILES ${BS_GUI_INC_GUI} ${BS_GUI_SRC_GUI})
+source_group("Utility" FILES ${BS_GUI_INC_UTILITY} ${BS_GUI_SRC_UTILITY})
+source_group("RTTI" FILES ${BS_GUI_INC_RTTI} ${BS_GUI_SRC_RTTI})
+source_group("" FILES ${BS_GUI_INC_NOFILTER})
+
+set(BS_GUI_SRC
+	${BS_GUI_INC_GUI}
+	${BS_GUI_SRC_GUI}
+	${BS_GUI_INC_UTILITY}
+	${BS_GUI_SRC_UTILITY}
+	${BS_GUI_INC_RTTI}
+	${BS_GUI_SRC_RTTI}
+	${BS_GUI_INC_NOFILTER}
+)

@@ -5,7 +5,10 @@
 #include "BsD3D11Prerequisites.h"
 #include "RenderAPI/BsRenderWindow.h"
 
-namespace bs {
+namespace bs
+{
+	class PlatformWindow;
+
 	/** @addtogroup D3D11
 	 *  @{
 	 */
@@ -172,7 +175,7 @@ namespace bs {
 
 		IDXGISwapChain* mSwapChain = nullptr;
 		DXGI_SWAP_CHAIN_DESC mSwapChainDesc;
-		Win32Window* mWindow = nullptr;
+		PlatformWindow* mWindow = nullptr;
 
 		RenderWindowProperties mProperties;
 		RenderWindowProperties mSyncedProperties;
