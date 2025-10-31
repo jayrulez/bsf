@@ -34,3 +34,5 @@ Source/Scripting/bsfSharp/bsfSharpCore.csproj
 Source/Scripting/bsfSharp/MBansheeEngine.csproj
 Source/Scripting/bsfSharp/EngineVersion.cs
 Source/Scripting/bsfSharp/FrameworkVersion.cs
+.vscore/
+.claude/
